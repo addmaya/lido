@@ -34,5 +34,15 @@ Author URI: http://addmaya.com/
 
 /*objects*/
 html,body{width:100%; height:100%}
+body{font-family: 'Arial'; font-size: 1.25em;  text-align: center; color: #6b848a; line-height: 1.2}
+h1{font-size: 3em; padding-bottom: 0.5em; font-weight: bold}
+nav{ padding: 1em; width: 10%; text-align: left; background-color: #f9f9f9; line-height: 2; position: fixed; right:3%; top: 3%; z-index:100;
+  li{font-size: 80%; padding: 0 0.5em}
+  a{color: inherit; display: block;}
+}
+footer{font-size: 60%; opacity: 0.7; padding: 2em 0}
+strong{font-weight: bold; padding:0.5em 0; display: block;}
 
 /*components*/
+.c-box{background-color: #e8e8e8; padding:3%; margin: 3%; text-align: left}
+.is-active{font-weight: bold; color: black;}
