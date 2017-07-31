@@ -27,6 +27,11 @@ jQuery(document).ready(function($) {
 	    }
 	});
 
+	$('nav a').click(function() {
+		$('nav .is-active').removeClass('is-active');
+		$(this).addClass('is-active');
+	});
+
 	//page transitions
 	var page = Barba.BaseView.extend({
 	  namespace: 'page',
@@ -39,9 +44,9 @@ jQuery(document).ready(function($) {
 	Barba.Pjax.start();
 	var FadeTransition = Barba.BaseTransition.extend({
 	  start: function() {
-	    $("html, body").animate({ scrollTop: 0 }, "slow");
+	    $("html, body").animate({ scrollTop: 0 }, 'fast');
 	    Promise
-	      .all([this.newContainerLoading, this.fadeOut()])
+	      .all([this.newContainerLoading, this.fadeOut('fast')])
 	      .then(this.fadeIn.bind(this));
 	    $('.c-loader').show();
 	  },
@@ -61,7 +66,7 @@ jQuery(document).ready(function($) {
 	      opacity : 0
 	    });
 	    $('.c-loader').hide();
-	    $el.animate({ opacity: 1 }, 400, function() {
+	    $el.animate({ opacity: 1 }, 'fast', function() {
 	      _this.done();
 	    });
 	  }
