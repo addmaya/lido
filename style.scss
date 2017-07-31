@@ -1,0 +1,38 @@
+/*
+Theme Name: NIDO
+Author: Arthur Nakkaka
+Author URI: http://addmaya.com/
+*/
+
+@import 'reset';
+
+/*variables*/
+
+/*functions*/
+@mixin image($image){background-image: url('images/'+$image)}
+@mixin device($device){
+  @if $device == xs {@media only screen and (max-width: 767px){@content}}
+  @else if $device == xs-landscape{@media only screen and (max-width: $tablet - 1) and (orientation : landscape){@content}}
+  @else if $device == sm {@media only screen and (max-width: 959px){@content}}
+  @else if $device == md{@media only screen and (max-width: 1200px){@content}}
+  @else if $device == lg{@media only screen and (max-width: 1600px){@content}}
+  @else if $device == xlg{@media only screen and (min-width:1601px){@content}}
+}
+@mixin prefix($map, $vendors: webkit moz ms o) {
+  @each $prop, $value in $map {
+        @if $vendors {
+          @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $prop}: #{$value};
+          }
+        }
+        #{$prop}: #{$value};
+  }
+}
+
+/*utilities*/
+.clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}* html .clear{zoom:1}*:first-child+html .clear{zoom:1}
+
+/*objects*/
+html,body{width:100%; height:100%}
+
+/*components*/
