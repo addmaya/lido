@@ -34,7 +34,6 @@ var deleteCookie = function(name) {
 
 jQuery(document).ready(function($) {
 	//variables
-	var body = $('body');
 	var preloader = $('.c-preloader');
 	var menu = $('.c-page__menu');
 
@@ -132,6 +131,15 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	function setSpineHeight(){
+		var body = document.body,
+		    html = document.documentElement;
+		var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+		$('.c-spine').css({
+			height: height
+		});
+	}
+
 
 	//ELEMENTS
 
@@ -140,10 +148,6 @@ jQuery(document).ready(function($) {
 		$('nav .is-active').removeClass('is-active');
 		$(this).addClass('is-active');
 	});
-
-	//spine
-	var html = document.documentElement;
-	var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 
 	//page
 	var page = Barba.BaseView.extend({
@@ -186,8 +190,10 @@ jQuery(document).ready(function($) {
 		submitContactForm();
 		getStories();
 		popInit();
+		setSpineHeight();
 		AOS.init({duration: 700});
 	}
+	
 	pageLoad();
 });
 
