@@ -7,6 +7,17 @@ Author URI: http://addmaya.com/
 @import 'reset';
 
 /*variables*/
+$browser-context: 16;
+$placeholderColor: #3E526E;
+$easeOutExpo: cubic-bezier(0, 0.5, 0, 1);
+$easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
+$redA: #C6006F;
+$redB: #9C0058;
+$redC: #7A003C;
+$blackA: #231F20;
+$blackB: #58595B;
+$blackC: #A7A9AC;
+$white: #fff;
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -18,6 +29,9 @@ Author URI: http://addmaya.com/
   @else if $device == lg{@media only screen and (max-width: 1600px){@content}}
   @else if $device == xlg{@media only screen and (min-width:1601px){@content}}
 }
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
 @mixin prefix($map, $vendors: webkit moz ms o) {
   @each $prop, $value in $map {
         @if $vendors {
@@ -28,21 +42,173 @@ Author URI: http://addmaya.com/
         #{$prop}: #{$value};
   }
 }
+@mixin after($width:100%, $height: 100%, $bkg: '#fff'){content:"";position: absolute; width: $width; height: $height; top: 0; left: 0; background-color: $bkg}
+
+@mixin scale2D($x,$y){
+  @include prefix((transform:scale($x,$y)));
+}
+@mixin translateX($x){
+  @include prefix((transform:translateX($x)));
+}
+@mixin translateY($y){
+  @include prefix((transform:translateY($y)));
+}
+@mixin txnTransform($seconds, $function: 'ease'){
+  $t: $seconds * 1s;
+  @include prefix((transition: transform $t $function));
+}
+@mixin txnOpacity($seconds){
+  $t: $seconds * 1s;
+  @include prefix((transition: opacity $t ease));
+}
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {@content;}
+  @-moz-keyframes #{$animationName} {@content;}
+  @-o-keyframes #{$animationName} {@content;}
+  @keyframes #{$animationName} {@content;}
+}
+@mixin bkg($color: '#fff'){background-color: $color;}
+@mixin box($width: 0, $height: 0){width: $width; height: $height}
+
+@mixin clear{&:after {content: ""; display: table; clear: both}}
+@mixin center{display: block; margin-left: auto; margin-right: auto}
+@mixin cover{background-size: cover; background-position: center; background-repeat: no-repeat;}
+@mixin contain{background-size: contain; background-position: center; background-repeat: no-repeat;}
+@mixin resetPivot{@include prefix((transform-origin: 0 0))}
+@mixin relative{position: relative}
+@mixin absolute{position: absolute}
+@mixin superscript{vertical-align:super; font-size:75%}
+@mixin canvas{width:100%; height: 100%}
+
+@keyframes fadeIn {
+  from {opacity:0}
+  to {opacity:1}
+}
+@keyframes fadeInUp {
+  from {@include prefix((transform: translate3d(0, 100%, 0))); opacity: 0;}
+  to {@include prefix((transform: none)); opacity: 1}
+}
+@keyframes fadeInDown {
+  from {@include prefix((transform: translate3d(0, -100%, 0))); opacity: 0;}
+  to {@include prefix((transform: none)); opacity: 1}
+}
+@keyframes fadeInRight {
+  from {@include prefix((transform: translate3d(100%, 0, 0))); opacity: 0;}
+  to {@include prefix((transform: none)); opacity: 1}
+}
+@keyframes fadeOutUp {
+  from {opacity: 1}
+  to {@include prefix((transform: translate3d(0, -100%, 0))); opacity: 0;}
+}
+@keyframes fadeOutRight {
+  from {opacity: 1}
+  to {@include prefix((transform: translate3d(100%, 0, 0))); opacity: 0;}
+}
+@keyframes slideInUp {
+  from {@include prefix((transform: translate3d(0, 100%, 0)))}
+  to {@include prefix((transform: none))}
+}
+@keyframes slideOutUp {
+  from {@include prefix((transform: translate3d(0, 0, 0)))}
+  to {visibility: hidden; @include prefix((transform: translate3d(0, -100%, 0)))}
+}
+
+/*defaults*/
+html,body{width:100%; height:100%}
+body{font-family: "acumin-pro",sans-serif; color: #58595B; font-weight: 400}
+h1{font-size:em(42); font-weight:600; line-height: 1.2; color: $blackA; letter-spacing: -1px}
+h2{font-size:em(16); font-weight:500; line-height:1.5; letter-spacing:0.5px}
+h3{}
+a{color: inherit}
+p{line-height:1.5}
+blockquote{}
+strong{font-weight: 600}
+em{font-family: 'Georgia'; font-style: italic;}
+::-webkit-input-placeholder {color: $placeholderColor}
+::-moz-placeholder {color: $placeholderColor}
+:-ms-input-placeholder{color: $placeholderColor}
+:-moz-placeholder {color: $placeholderColor}
 
 /*utilities*/
-.clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}* html .clear{zoom:1}*:first-child+html .clear{zoom:1}
+.u-half{width: 50%; float: left;
+  &.s--right{float: right}
+  @include device(xs){width: auto; float: none}
+}
+.u-third{width: percentage(1/3); float: left;
+  @include device(xs){width: auto; float: none}
+}
+.u-fourth{width: percentage(1/4); float: left;
+  @include device(xs){width: auto; float: none}
+}
+.u-clear{@include clear}
+.u-oh{overflow: hidden}
+.u-superscript{@include superscript}
+.u-right{text-align:right}
+.u-center{text-align:center}
+.u-wrap{padding:em(24)}
+.u-pl-m{padding-left:1.5em}
 
 /*objects*/
-html,body{width:100%; height:100%}
-body{font-family: 'Arial'; font-size: 1.25em;  text-align: center; color: #6b848a; line-height: 1.2}
-h1{font-size: 3em; padding-bottom: 0.5em; font-weight: bold}
-nav{ padding: 1em; width: 10%; text-align: left; background-color: #f9f9f9; line-height: 2; position: fixed; right:3%; top: 3%; z-index:100;
-  li{font-size: 80%; padding: 0 0.5em}
-  a{color: inherit; display: block;}
+.o-box{width:90%; @include center; @include clear}
+.o-table{display: table; width: 100%; height: 100%}
+.o-table__cell{display: table-cell; vertical-align: middle}
+.o-box{}
+.o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center}
+.o-button{display: inline-block;padding: 0.75em; padding-left: 0; font-size:em(14); color: $redA;
+  i{border:solid 2px; border-radius: 50%; float: left; @include box(em(30), em(30))}
+  span{float: left; @include relative; top: em(9); margin-left:em(12)}
 }
-footer{font-size: 60%; opacity: 0.7; padding: 2em 0}
-strong{font-weight: bold; padding:0.5em 0; display: block;}
+.o-diamond{@include box(em(166), em(166)); @include bkg($blackA); @include prefix((transform: rotate(-45deg))); overflow:hidden; @include cover;
+}
+.o-div{position: absolute; width:50%; height:100%; background-color:#9C0059; z-index:-1;
+  &.s--right{background-color:#8B0150; left: 50%}
+}
+.o-section{padding:em(72) 0;
+  .o-crumb{margin-bottom:em(36)}
+  .o-button{margin-top:em(36)}
+  h1{margin-bottom: em(24)}
+}
+.o-crumb{@include clear; 
+  div{float: left; opacity:0.5}
+}
+.o-crumb__title{font-weight:600; font-size: em(12)}
+.o-crumb__line{@include box(50%, 1px); @include bkg(#cbcbcb); margin:0 12px; @include relative; top:8px}
+.o-crumb__circle{@include box(4px,4px); border:solid 1px; border-radius:50%; @include relative; top:6px}
+.o-author{@include clear; 
+  figure{@include box(56px, 56px); border-radius: 50%; @include bkg($blackA); float: left;}
+  section{float: left; padding-left: em(12); @include relative; top: 10px}
+  strong{display: block; padding-bottom: em(6)}
+  em{display: block; font-size: 75%}
+}
+
 
 /*components*/
-.c-box{background-color: #e8e8e8; padding:3%; margin: 3%; text-align: left}
-.is-active{font-weight: bold; color: black;}
+.c-spine{@include box(em(30), 100%); @include bkg(#fff); @include absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%}
+.c-page__header{padding-top: em(36); @include absolute; width:100%}
+.c-logo{@include box(170px, 66px); display:block; @include image('logo.svg'); @include contain }
+
+.c-deco{@include clear}
+.c-deco__circle{@include box(7px,7px); border:solid 2px #CBCBCB; border-radius:50%; float: left}
+.c-deco__dash{@include box(12px, 2px); @include bkg(#CBCBCB); float: left; @include relative; top: 5px; left: 20px}
+.c-deco__line{@include box(89%, 6px); @include image('line-1.png'); background-size:contain; float: right; @include relative; top: 3px; opacity:0.5}
+
+.c-menu{text-align:right; @include relative; top: em(-14); font-size:em(14);
+  li{display:inline-block}
+  a{display:block;padding:0.75em; color:$redA}
+  span{@include superscript; font-weight: bold; opacity:0.7; color: $blackC}
+}
+
+.c-splash{@include box(100%, 70%);
+  .o-button{margin-top: em(24)}
+  .o-table__cell{vertical-align: bottom; padding-bottom:6em}
+  .o-box{@include clear}
+}
+
+.c-highlights{height:30%; overflow:hidden; position: relative; color: #fff;
+  section{float:left; width:55%; padding-top:10%}
+  figure{float: right; width: 30%; transform:translateX(em(-36)) translateY(em(42))}
+  .o-button{color: #fff; font-weight: 300; margin-top:1.5em}
+}
+
+#barba-wrapper{@include box(100%, 100%)}
+.barba-container{@include box(100%, 100%)}
