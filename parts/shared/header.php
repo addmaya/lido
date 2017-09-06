@@ -31,7 +31,7 @@
 				</nav>
 			</div>
 		</section>
-		<a href="" class="c-logo"></a>
+		<a href="<?php echo home_url(); ?>" class="c-logo"></a>
 	</div>
 </header>
 <div id="barba-wrapper">

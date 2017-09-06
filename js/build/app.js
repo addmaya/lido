@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
 		    html = document.documentElement;
 		var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 		$('.c-spine').css({
-			height: height
+			height: height-20
 		});
 	}
 
@@ -148,6 +148,11 @@ jQuery(document).ready(function($) {
 		$('nav .is-active').removeClass('is-active');
 		$(this).addClass('is-active');
 	});
+
+	function matchHeights(){
+		$('.c-regions__col').matchHeight();
+		$('.o-slider-col').matchHeight();
+	}
 
 	//page
 	var page = Barba.BaseView.extend({
@@ -191,6 +196,7 @@ jQuery(document).ready(function($) {
 		getStories();
 		popInit();
 		setSpineHeight();
+		matchHeights();
 		AOS.init({duration: 700});
 	}
 	
