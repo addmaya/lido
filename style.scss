@@ -5,7 +5,6 @@ Author URI: http://addmaya.com/
 */
 
 @import 'reset';
-
 /*variables*/
 $browser-context: 16;
 $placeholderColor: #3E526E;
@@ -116,8 +115,10 @@ $white: lighten($blackC,15%);
 
 /*defaults*/
 html, body{width:100%; height:100%;}
-body{font-family: "acumin-pro",sans-serif; color: #58595B; font-weight: 400}
-h1{font-size:em(40); font-weight:600; line-height: 1.2; letter-spacing: -1px}
+body{font-family: "acumin-pro",sans-serif; color: #58595B; font-weight: 400;
+  &.single-partner{background-color: #eaeaea}
+}
+h1{font-size:em(36); font-weight:600; line-height: 1.2; letter-spacing: -1px}
 h2{font-size:em(20); font-weight:500; line-height:1.4; letter-spacing:0.5px}
 h3{font-weight: 600; font-size:em(16); line-height: 1.3}
 h4{font-weight: 600; font-size:em(14);}
@@ -162,6 +163,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-pl-l{padding-left:3em}
 .u-pt-l{padding-top: 3em}
 .u-pt-m{padding-top: 1.5em}
+.u-pb-m{padding-bottom: 1.5em}
 .u-pt-xl{padding-top: 6em}
 .u-block{display: block;}
 .u-white{color:$white}
@@ -205,11 +207,17 @@ em{font-family: 'Georgia'; font-style: italic;}
   h1{margin-bottom: em(24)}
   &:last-of-type{padding-bottom:12px; background-color: red}
   &.s--med{padding:em(72) 0}
+  &.s--bottom__clear{padding-bottom:0}
+  &.s--bottom__med{padding-bottom:4em}
+  &.c-docs{position: relative;
+    &:after{@include after(100%, 100%, #F7F7F7); z-index:-5}
+  }
 }
 .o-crumb{@include clear; 
   div{float: left; opacity:0.5}
-  &.s--med{font-size: em(24);
-    div{opacity: 0.6}
+  &.s--updates{font-size: em(24); color: $redA; margin-bottom: 2.5em;
+    div{opacity: 1}
+    .o-crumb__line{background-color: $redA}
   }
 }
 .o-crumb__title{font-weight:600; font-size: em(12);}
@@ -250,13 +258,14 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-statistic{position: relative; margin:56px 0 144px;
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
   p{padding-top: em(24); padding-right: em(12); }
-  figure{@include box(em(120), em(120)); @include bkg(grey)}
+  figure{@include box(em(120), em(120)); @include bkg(grey); margin-left:1em}
   &:after{@include after(200px, 200px, $redA); opacity: 0.1; z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
   .c-statistics &{
     &:after{@include bkg($blackC); opacity: 0.2}
   }
   &.s--doc{
-    span{font-size: em(18)}
+    span{font-size: em(18); padding-right:em(0)}
+    p{padding-top:em(12)}
     .o-icon{background-color: $blackA; margin-bottom: em(12)}
     &:after{@include bkg(#E8E8E8); opacity: 1}
   }
@@ -264,18 +273,49 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .o-networks{
   li{display: inline-block;}
-  a{display: block;margin:em(2);}
-  i{display: block; @include box(36px, 36px)}
-  .c-fb{@include image('social-white/facebook.svg')}
-  .c-tw{@include image('social-white/twitter.svg')}
-  .c-gplus{@include image('social-white/gplus.svg')}
-  .c-pin{@include image('social-white/pinterest.svg')}
-  .c-wa{@include image('social-white/whatsapp.svg')}
+  a{display: block;margin:em(2); @include clear}
+  i{display: inline-block; @include box(36px, 36px); float:left}
+  span{display: inline-block; margin-left:em(12); padding-top:9px; color:$redA}
+  .c-fb{@include image('social/facebook.svg')}
+  .c-tw{@include image('social/twitter.svg')}
+  .c-gplus{@include image('social/gplus.svg')}
+  .c-pin{@include image('social/pinterest.svg')}
+  .c-wa{@include image('social/whatsapp.svg')}
+
+  &.t--light{
+    .c-fb{@include image('social-white/facebook.svg')}
+    .c-tw{@include image('social-white/twitter.svg')}
+    .c-gplus{@include image('social-white/gplus.svg')}
+    .c-pin{@include image('social-white/pinterest.svg')}
+    .c-wa{@include image('social-white/whatsapp.svg')}
+  }
 }
 
+.o-story__header{background-color: $redC; color: $white;position: absolute; top:0; z-index: -2; float: left; height: 80%; width: 50%;
+  .o-table__cell{vertical-align: bottom; padding-bottom: 2em}
+  section{padding-left: 6em;}
+  &.s--partner{background-color: white}
+}
+.o-story__cover{float: right; height: 100%; position: relative; z-index: -4;
+  figure{background-color: $blackA; height: 100%}
+}
 .o-story{
+  .o-box{width: 50%}
   p{padding-bottom: em(24)}
   h3{padding-bottom: em(18); margin-top:em(20)}
+  ol,ul{font-size: em(14); line-height: 1.8; width: 70%; padding: em(20) em(12)}
+  ul{list-style:circle inside;}
+  ol{list-style: decimal inside}
+  &.s--single{padding:4em 0 4em; font-size: em(20); font-weight: 300;
+    p{line-height:1.8}
+  }
+  .o-imagelist{list-style: none; width: auto; padding: em(36) 0}
+  .o-button{
+    span{top: em(6)}
+  }
+}
+.o-imagelist{;
+  li{margin-bottom: em(24);}
 }
 .o-slider{@include clear; color: $white;
   .o-slider-col{padding:em(96) 0;}
@@ -285,6 +325,15 @@ em{font-family: 'Georgia'; font-style: italic;}
   em{font-size: em(14); line-height: 1.5}
   h2{padding-bottom: em(24)}
 }
+.o-quote{text-align: center; width: 70%; @include center; padding-top:em(72);
+  p{font-weight: 600; font-size: em(40); line-height: 1.3}
+  div{padding-top: em(24); font-size: em(14);
+    strong{display: block; padding-bottom: em(6)}
+    em{display: block;}
+  }
+  .o-line{margin-top:2em;}
+}
+
 .o-slider__image{padding-bottom:53%; background-color: $blackA; width: 90%; float: right}
 .o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
 .o-partners{@include clear;
@@ -295,6 +344,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 
+.o-input{position: relative; margin-bottom:em(36);
+  input,textarea,select{padding:0 0 em(18);font-family: "acumin-pro",sans-serif; width: 100%}
+  span{@include box(100%, 2px); @include bkg($redA); display: block; bottom: 0; position: absolute; left:0; z-index:2}
+}
+
 .o-olist{font-size: 0.875em;
   i{background-color: $redA; display: inline-block; @include box(em(24), em(24)); color: #fff; border-radius: 50%}
   strong{font-size: 0.875em; position: relative; left: 7px; top: 1px; font-weight: 400}
@@ -302,14 +356,15 @@ em{font-family: 'Georgia'; font-style: italic;}
   a{display: block; padding-bottom: 0.75em}
 }
 .o-article__grid{@include clear}
+.o-article__row{@include clear}
 .o-article{color: $white; margin-bottom:0; float: left; width:44em;
   a{display: block; @include clear}
   h2{font-weight: 600; font-size: 2em; padding-bottom: em(12)}
   figure{@include box(em(360), 100%); background-color: $blackA; float: left; padding-bottom: 65%;}
   .o-article__summary{@include bkg($redC); float: left; width:em(288); padding: em(14); position: relative; z-index: 2; left: em(-36);}
-  .o-button{color: $white}
+  .o-button{color: $white; padding-top:1.5em;}
   .o-line{margin: em(24) 0}
-  &.s--bottom-left{width: em(360);
+  &.s--bottom-left{width: em(360); float: right;
     .o-article__summary{float: none; left: auto; bottom: em(72);}
     figure{float: none; padding-bottom: 100%}
   }
@@ -317,7 +372,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-article__summary{float: right; left: auto; bottom: em(72);}
     figure{float: none; padding-bottom: 100%}
   }
-  &.s--right{
+  &.s--right{float: right;
     .o-article__summary{float: right; left: auto; right:em(-36);}
     figure{float: right;}
   }
@@ -328,16 +383,17 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.s--album{width: 50%;
     figure{width: 95%; padding-bottom: 50%;}
     .o-article__summary{@include bkg($blackB)}
+    .o-article__wrap{width: 95%}
   }
 }
-.o-article__meta{font-size: 0.75em; text-transform: uppercase;
-  a{display: block; padding: em(3) 0}
+.o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white;
+  a{display: block; padding: em(6) 0}
 }
 
 
 /*components*/
 .c-spine{@include box(em(30), 100%); @include bkg(#fff); @include absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%}
-.c-page__header{padding-top: em(36); @include absolute; width:100%}
+.c-page__header{padding-top: em(36); @include absolute; width:100%; z-index: 5}
 .c-logo{@include box(170px, 66px); display:block; @include image('logo.svg'); @include contain }
 
 .c-deco{@include clear}
@@ -362,7 +418,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{float: right; width: 30%; transform:translateX(em(-36)) translateY(em(42))}
   .o-button{color: #fff; font-weight: 300; margin-top:1.5em}
 }
-.c-paginator{overflow: hidden; padding: 42px 0; position: relative;}
+.c-paginator{overflow: hidden; padding: 42px 0; position: relative; margin:5em 0 6em}
 .c-paginator__button{display: inline-block; color: $redA; float:left; z-index: -1; position: relative;
   figure{@include box(200px, 200px); background: grey; @include prefix((transform: translateX(-40%) rotate(45deg))); float: left;}
   i{display: block; @include box(em(68), em(48)); float: left; background: $redA}
@@ -377,11 +433,10 @@ em{font-family: 'Georgia'; font-style: italic;}
   a{display: inline-block; font-family: "Times New Roman", Times, serif; font-style: italic; padding: 6em 3em;}
   span{left: 45%; display: block; position: absolute; @include prefix((transform: rotate(-45deg))); width: em(172); height: 1px; background-color: #dedede; top: 45%;}
 }
-.c-page__footer{margin-top:6em; position: relative; background-color: $redC; color:$white; font-weight: 300; padding: em(96) 0 em(96);
+.c-page__footer{position: relative; background-color: $redC; color:$white; font-weight: 300; padding: em(96) 0 em(96);
   .o-box{width:80%}
   h1{font-size: em(28); font-weight: 500; letter-spacing: 0; padding-bottom: em(54)}
   h3,h4{font-weight: 500}
-  .o-networks{text-align: center}
   form{@include clear;
     $color: #bd779a;
     ::-webkit-input-placeholder {color: $color}
@@ -389,14 +444,18 @@ em{font-family: 'Georgia'; font-style: italic;}
     :-ms-input-placeholder{color: $color}
     :-moz-placeholder {color: $color}
   }
-  input{border-radius: 24px; border: solid 2px #e081b0; padding: em(9) em(18); width: 78%; float: left; color: #fff;}
-  button{width: 36px; height: 36px; background-color: #fff; border-radius: 50%; border:none; float: left; position: relative; top:3px; left: 6px;}
-  .o-button{color: #e081b0; font-size: em(18); padding-top: 0;
+  input{color: #fff}
+  .o-button{color: #e081b0}
+  button{background-color: #fff}
+  .c-cta{ border-bottom:solid 2px #831c4f; padding-bottom: em(84); margin-bottom: em(72)}
+}
+.c-cta{@include clear; text-align: center;
+  h3{text-align: center; margin-bottom: em(24)}
+  input{border-radius: 24px; border: solid 2px #e081b0; padding: em(9) em(18); width: 75%; float: left}
+  button{width: 36px; height: 36px; background-color: $redA; border-radius: 50%; border:none; float: left; position: relative; top:3px; left: 6px;}
+  .o-button{font-size: em(18); padding-top: 0;
     i{border-width: 2px}
   }
-}
-.c-cta{@include clear; border-bottom:solid 2px #831c4f; padding-bottom: em(84); margin-bottom: em(72);
-  h3{text-align: center; margin-bottom: em(24)}
 }
 .c-globe{@include box(1722px, 1722px); position: absolute; top: 0; background-color: red; border-radius: 50%}
 .c-sitemap{
@@ -406,9 +465,10 @@ em{font-family: 'Georgia'; font-style: italic;}
   h4{margin-bottom: em(24);}
   strong{display: inline-block; margin-right: em(6)}
 }
-.c-cover{height: 100%;
+.c-cover{height: 100%; position: relative;
   h1{padding-bottom: em(16)}
   .u-half{height: 100%;}
+  &.s--story{height:70%}
 }
 .c-about{background-color: $redC; color: $white;
   .o-box{width: 60%; text-align: center;}
@@ -463,6 +523,15 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{position: absolute; right:-25%; @include box(em(240), em(360)); @include bkg(grey); top:0;}
 }
 .c-updates{background-color: #F7F7F7; padding:12em 0 5em}
-
+.c-contact{@include clear;
+  div{float: left; width: 50%}
+  .s--textarea{width:100%; margin-bottom:em(6)}
+  button{border:none; background:none}
+  .o-button{margin-top:em(16); font-size:em(16)}
+}
+.c-contact__section{padding-top:12em; padding-left:6em;
+  section{padding-bottom:em(36)}
+  h3{padding-bottom:em(16)}
+}
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}

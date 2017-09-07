@@ -1,64 +1,23 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <section class="o-section c-updates">
 	<div class="o-box">
-		<div class="o-crumb s--med">
+		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Updates</div>
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
 		<div class="o-article__grid s--updates">
-			<article class="o-article">
-				<section class="u-clear">
-					<figure></figure>
-					<section class="o-article__summary">
-						<h2>Mary Ling Nakilyowas</h2>
-						<ul class="o-article__meta">
-							<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-							<li><a href="#">/ Uganda</a></li>
-							<li><a href="#">/ June 29 2017</a></li>
-						</ul>
-						<span class="o-line"></span>
-						<a class="o-button s--block" href="#">
-							<div>
-								<i class="o-icon"></i>
-								<span>Read Story</span>
-							</div>
-						</a>
-					</section>
-				</section>
-			</article>
-			<article class="o-article s--bottom-left">
-				<section class="u-clear">
-					<figure></figure>
-					<section class="o-article__summary">
-						<h2>Langa Mark</h2>
-						<ul class="o-article__meta">
-							<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-							<li><a href="#">/ Uganda</a></li>
-							<li><a href="#">/ June 29 2017</a></li>
-						</ul>
-						<span class="o-line"></span>
-						<a class="o-button s--block" href="#">
-							<div>
-								<i class="o-icon"></i>
-								<span>Read Story</span>
-							</div>
-						</a>
-					</section>
-				</section>
-			</article>
-			<article class="o-article s--bottom-right">
-				<section class="u-clear">
-					<figure></figure>
-					<section class="o-article__wrap">
+			<div class="o-article__row">
+				<article class="o-article">
+					<section class="u-clear">
+						<figure></figure>
 						<section class="o-article__summary">
-							<h2>Langa Mark</h2>
+							<h2>Mary Ling Nakilyowas</h2>
 							<ul class="o-article__meta">
 								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
 								<li><a href="#">/ Uganda</a></li>
 								<li><a href="#">/ June 29 2017</a></li>
 							</ul>
-							<span class="o-line"></span>
 							<a class="o-button s--block" href="#">
 								<div>
 									<i class="o-icon"></i>
@@ -67,28 +26,69 @@
 							</a>
 						</section>
 					</section>
-				</section>
-			</article>
-			<article class="o-article s--right">
-				<section class="u-clear">
-					<figure></figure>
-					<section class="o-article__summary">
-						<h2>Langa Mark</h2>
-						<ul class="o-article__meta">
-							<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-							<li><a href="#">/ Uganda</a></li>
-							<li><a href="#">/ June 29 2017</a></li>
-						</ul>
-						<span class="o-line"></span>
-						<a class="o-button s--block" href="#">
-							<div>
-								<i class="o-icon"></i>
-								<span>Read Story</span>
-							</div>
-						</a>
+				</article>
+				<article class="o-article s--bottom-left" style="float:right">
+					<section class="u-clear">
+						<figure></figure>
+						<section class="o-article__summary">
+							<h2>Langa Mark</h2>
+							<ul class="o-article__meta">
+								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
+								<li><a href="#">/ Uganda</a></li>
+								<li><a href="#">/ June 29 2017</a></li>
+							</ul>
+							<a class="o-button s--block" href="#">
+								<div>
+									<i class="o-icon"></i>
+									<span>Read Story</span>
+								</div>
+							</a>
+						</section>
 					</section>
-				</section>
-			</article>
+				</article>
+			</div>
+			<div class="o-article__row">
+				<article class="o-article s--bottom-right">
+					<section class="u-clear">
+						<figure></figure>
+						<section class="o-article__wrap">
+							<section class="o-article__summary">
+								<h2>Langa Mark</h2>
+								<ul class="o-article__meta">
+									<li><a href="#">/ Bong Girls Empowerment Program</a></li>
+									<li><a href="#">/ Uganda</a></li>
+									<li><a href="#">/ June 29 2017</a></li>
+								</ul>
+								<a class="o-button s--block" href="#">
+									<div>
+										<i class="o-icon"></i>
+										<span>Read Story</span>
+									</div>
+								</a>
+							</section>
+						</section>
+					</section>
+				</article>
+				<article class="o-article s--right">
+					<section class="u-clear">
+						<figure></figure>
+						<section class="o-article__summary">
+							<h2>Langa Mark</h2>
+							<ul class="o-article__meta">
+								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
+								<li><a href="#">/ Uganda</a></li>
+								<li><a href="#">/ June 29 2017</a></li>
+							</ul>
+							<a class="o-button s--block" href="#">
+								<div>
+									<i class="o-icon"></i>
+									<span>Read Story</span>
+								</div>
+							</a>
+						</section>
+					</section>
+				</article>
+			</div>
 		</div>
 		<div class="u-center">
 			<a href="#" class="o-button s--multiline s--med">
@@ -98,10 +98,10 @@
 		</div>
 	</div>
 </section>
-<section class="o-section s--med">
+<section class="o-section s--med s--bottom__clear">
 	<div class="o-box">
-		<div class="o-crumb s--med">
-			<div class="o-crumb__title">Featured Videos</div>
+		<div class="o-crumb s--updates">
+			<div class="o-crumb__title">Videos</div>
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
@@ -119,7 +119,7 @@
 				</section>
 			</figure>
 		</section>
-		<div class="u-center u-pt-m">
+		<div class="u-center u-pt-m u-pb-m">
 			<a href="#" class="o-button s--multiline s--med">
 				<i class="o-icon"></i>
 				<span>More Videos</span>
@@ -129,7 +129,7 @@
 </section>
 <section class="o-section s--med">
 	<div class="o-box">
-		<div class="o-crumb s--med">
+		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Photo Galleries</div>
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
@@ -149,7 +149,7 @@
 			</div>
 		</section>
 		<div class="u-pt-l">
-			<div class="o-article__grid">
+			<div class="o-article__row">
 				<article class="o-article s--bottom-right s--album">
 					<section class="u-clear">
 						<figure></figure>
@@ -161,7 +161,6 @@
 									<li><a href="#">/ Uganda</a></li>
 									<li><a href="#">/ June 29 2017</a></li>
 								</ul>
-								<span class="o-line"></span>
 								<a class="o-button s--block" href="#">
 									<div>
 										<i class="o-icon"></i>
@@ -183,7 +182,6 @@
 									<li><a href="#">/ Uganda</a></li>
 									<li><a href="#">/ June 29 2017</a></li>
 								</ul>
-								<span class="o-line"></span>
 								<a class="o-button s--block" href="#">
 									<div>
 										<i class="o-icon"></i>
@@ -196,7 +194,7 @@
 				</article>
 			</div>
 		</div>
-		<div class="u-center u-pt-m">
+		<div class="u-center">
 			<a href="#" class="o-button s--multiline s--med">
 				<i class="o-icon"></i>
 				<span>More Albums</span>
@@ -204,9 +202,9 @@
 		</div>
 	</div>
 </section>
-<section class="o-section s--med">
+<section class="o-section s--med c-docs">
 	<div class="o-box">
-		<div class="o-crumb s--med">
+		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Documents</div>
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>

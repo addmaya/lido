@@ -13,19 +13,19 @@
 				<nav class="c-menu">
 					<ul>
 						<li>
-							<a href="#">Programs <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/programs">Programs <span>8</span></a>
 						</li>
 						<li>
-							<a href="#">Change Stories <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/impact-stories">Change Stories <span>8</span></a>
 						</li>
 						<li>
-							<a href="#">Partners <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/partners">Partners <span>8</span></a>
 						</li>
 						<li>
-							<a href="#">About</a>
+							<a href="<?php echo home_url(); ?>/about">About</a>
 						</li>
 						<li>
-							<a href="#">Newsroom</a>
+							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
 						</li>
 					</ul>
 				</nav>

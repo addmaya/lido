@@ -140,9 +140,6 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-
-	//ELEMENTS
-
 	//menu
 	$('nav a').click(function() {
 		$('nav .is-active').removeClass('is-active');

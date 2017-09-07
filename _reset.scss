@@ -13,3 +13,9 @@ input::-moz-placeholder{opacity: 1}
 textarea::-moz-placeholder{opacity: 1}
 input::-moz-focus-inner{border:0; padding:0}
 input{-webkit-appearance: none;}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
