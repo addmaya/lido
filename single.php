@@ -1,5 +1,5 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover s--story">
+<div class="c-cover s--story t-dark">
 	<div class="o-story__header">
 		<div class="o-table">
 			<div class="o-table__cell">

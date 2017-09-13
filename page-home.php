@@ -1,47 +1,50 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="c-splash">
+<section class="c-splash t-dark">
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="o-box">
 				<div class="u-half">
-					<h1>We are empowering East Africa to dream. We are the poverty busters.</h1>
-					<a href="#" class="o-button">
-						<i class="o-icon"></i>
-						<span>See Our Poverty Inverventions</span>
-					</a>
+					<h1><a href="#"><span>We are empowering East Africa to dream. We are the poverty busters.</span></a></h1>
+					<?php echo renderButton('#', 'See our Poverty Interventions'); ?>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="c-splash__image">
+		<div class="o-tint"></div>
+		<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+	</div>
 </section>
-<section class="c-highlights">
+<section class="c-highlights t-dark">
 	<div class="o-div s--left"></div>
 	<div class="o-div s--right"></div>
-	<div class="o-box">
-		<div class="u-clear">
-			<div class="u-half">
-				<section>
-					<h2>Designing Programs that  Vivamus pulvinar nulla accumsan erat laoreet malesuada</h2>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Discover the Stories</span>
+	<div class="o-table">
+		<div class="o-table__cell">
+			<div class="o-box">
+				<div class="u-clear">
+					<div class="u-half">
+						<section>
+							<h2><a href="#"><span>Designing Programs that  Vivamus pulvinar nulla accumsan erat laoreet malesuada</span></a></h2>
+							<?php echo renderButton('#', 'Discover the Stories'); ?>
+						</section>
+						<a href="#" class="o-rhombus s--small">
+							<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+						</a>
 					</div>
-				</section>
-				<figure>
-					<div class="o-diamond"></div>				
-				</figure>
-			</div>
-			<div class="u-half">
-				<section class="u-pl-m">
-					<h2>Designing Programs that  Vivamus pulvinar nulla accumsan erat laoreet malesuada </h2>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Read the Change Stories</span>
+					<div class="u-half">
+						<section>
+							<div class="u-pl-l">
+								<h2><a href="#"><span>Designing Programs that  Vivamus pulvinar nulla accumsan erat laoreet malesuada</span> </a></h2>
+								<?php echo renderButton('#', 'Read the Stories'); ?>
+							</div>
+						</section>
+						<a href="#" class="o-rhombus s--small">
+							<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')">
+								<div></div>
+							</figure>
+						</a>
 					</div>
-				</section>
-				<figure>
-					<div class="o-diamond"></div>				
-				</figure>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -54,7 +57,7 @@
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<h1>50% of East Africa sit amet consectur poverty elit. Morbi molestie.</h1>
+			<h1><a href="#"><span>50% of East Africa sit amet consectur poverty elit. Morbi molestie.</span></a></h1>
 			<section class="u-clear">
 				<div class="u-half">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
@@ -70,10 +73,7 @@
 				</div>
 			</section>
 			<div class="u-pt-l">
-				<a href="#" class="o-button">
-					<i class="o-icon"></i>
-					<span>Read About SFEA</span>
-				</a>
+				<?php echo renderButton('#', 'Read about SFEA'); ?>
 			</div>
 		</div>
 	</div>
@@ -103,25 +103,16 @@
 			</section>
 			<div class="u-pt-xl">
 				<a href="#" class="o-button s--circular">
-					<figure></figure>
-					<div>
-						<i class="o-icon"></i>
-						<span>Education</span>
-					</div>
+					<section><figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure></section>
+					<?php echo renderButton('','Education', 'div'); ?>
 				</a>
 				<a href="#" class="o-button s--circular">
-					<figure></figure>
-					<div>
-						<i class="o-icon"></i>
-						<span>Livelihoods</span>
-					</div>
+					<section><figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure></section>
+					<?php echo renderButton('','Livelihoods', 'div'); ?>
 				</a>
 				<a href="#" class="o-button s--circular">
-					<figure></figure>
-					<div>
-						<i class="o-icon"></i>
-						<span>Capacity Building</span>
-					</div>
+					<section><figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure></section>
+					<?php echo renderButton('','Capacity', 'div'); ?>
 				</a>
 			</div>
 		</div>
@@ -150,7 +141,7 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section">
+<section class="o-section u-pb-l">
 	<div class="o-box">
 		<div class="u-clear">
 			<div class="u-twothird">

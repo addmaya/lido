@@ -1,12 +1,12 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover">
+<div class="c-cover t-dark">
 	<div class="u-half">
 		<figure class="c-cover__image"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
-				<section>
+				<section class="c-cover__section">
 					<h1>Impact is fusce nec lacinia lorem. Vivamus pulvinar nulla accumsan erat laoreet.</h1>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					<div class="u-pt-l">
@@ -127,20 +127,17 @@
 			<div class="o-article__row">
 				<article class="o-article">
 					<section class="u-clear">
-						<figure></figure>
+						<figure>
+							<a href="#" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></a>
+						</figure>
 						<section class="o-article__summary">
-							<h2>Mary Ling Nakilyowas</h2>
+							<h2><a href="#"><span>Mary Ling Nakilyowas</span></a></h2>
 							<ul class="o-article__meta">
 								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
 								<li><a href="#">/ Uganda</a></li>
 								<li><a href="#">/ June 29 2017</a></li>
 							</ul>
-							<a class="o-button s--block" href="#">
-								<div>
-									<i class="o-icon"></i>
-									<span>Read Story</span>
-								</div>
-							</a>
+							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>
 						</section>
 					</section>
 				</article>
@@ -209,7 +206,7 @@
 		</div>
 		<div class="u-center">
 			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"></i>
+				<i class="o-icon"><strong>15</strong></i>
 				<span>More Change Stories</span>
 			</a>
 		</div>

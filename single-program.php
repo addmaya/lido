@@ -1,12 +1,13 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <section class="c-cover">
 	<div class="u-half">
+		<div class="o-tint"></div>
 		<figure class="c-cover__image"></figure>
 	</div>
 	<div class="u-half c-cover__profile s--single">
 		<div class="o-table">
 			<div class="o-table__cell">
-				<section>
+				<section class="c-cover__section">
 					<h1>Bonga Girl's Empowerment Program</h1>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					<div class="u-pt-l">
@@ -77,12 +78,29 @@
 </section>
 <section class="o-slider">
 	<div class="u-threefourth o-slider-col">
-		<figure class="o-slider__image"></figure>
+		<div class="o-slider__image">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+						<span>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
+					</div>
+					<div class="swiper-slide">
+						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-2.jpg')"></figure>
+						<span>Mary is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
+					</div>
+				</div>
+				<div class="o-slider__buttons t-dark">
+					<?php echo renderButton('#','','div','s--prev') ?>
+					<?php echo renderButton('#','','div','s--next') ?>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="u-fourth o-slider-col">
 		<div class="o-slider__caption">
 			<section class="u-wrap">
-				<em>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</em>
+				<em></em>
 				<span class="o-line"></span>
 			</section>
 		</div>
@@ -119,14 +137,6 @@
 								<a class="o-button s--block" href="#">
 									<i class="o-icon"></i>
 									<span>Change Story 3</span>
-								</a>
-								<a class="o-button s--block" href="#">
-									<i class="o-icon"></i>
-									<span>Change Story 4</span>
-								</a>
-								<a class="o-button s--block" href="#">
-									<i class="o-icon"></i>
-									<span>Change Story 5</span>
 								</a>
 							</section>
 						</div>
@@ -225,7 +235,7 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section">
+<section class="o-section u-pb-l">
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Program Partners</div>
@@ -234,35 +244,43 @@
 		</div>
 		<ul class="o-partners">
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 			<li>
-				<a href="#"></a>
+				<a href="#">
+					<figure></figure>
+				</a>
 			</li>
 		</ul>
 		<div class="c-program__cta">
-			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"></i>
-				<span>Change a Girl's Life. Become a Partner.</span>
-			</a>
-			<div>
-				<span class="o-line t-dark"></span>
-			</div>
+			<?php echo renderButton('#','Change a Girls Life. Become a Parnter','div','s--multiline s--med') ?>
 		</div>
 	</div>
 </section>

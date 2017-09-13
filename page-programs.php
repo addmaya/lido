@@ -1,36 +1,19 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover">
+<div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image"></figure>
+		<div class="o-tint"></div>
+		<figure class="c-cover__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
-				<section>
+				<section class="c-cover__section">
 					<h1>Programs designed to transform lives & communities out of poverty</h1>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					<div class="u-pt-l">
-						<a href="#" class="o-button s--circular">
-							<figure></figure>
-							<div>
-								<i class="o-icon"></i>
-								<span>Education</span>
-							</div>
-						</a>
-						<a href="#" class="o-button s--circular">
-							<figure></figure>
-							<div>
-								<i class="o-icon"></i>
-								<span>Livelihoods</span>
-							</div>
-						</a>
-						<a href="#" class="o-button s--circular">
-							<figure></figure>
-							<div>
-								<i class="o-icon"></i>
-								<span>Capacity Building</span>
-							</div>
-						</a>
+						<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+						<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+						<?php echo renderCircularButton('#', 'Capacity Building and Training', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 					</div>
 				</section>
 			</div>
@@ -65,40 +48,16 @@
 		</section>
 		<ul class="u-clear u-pt-l">
 			<li class="u-fourth">
-				<a href="#" class="o-button-rhombus">
-					<figure></figure>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Read the Change Stories</span>
-					</div>
-				</a>
+				<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 			</li>
 			<li class="u-fourth">
-				<a href="#" class="o-button-rhombus">
-					<figure></figure>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Read the Change Stories</span>
-					</div>
-				</a>
+				<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 			</li>
 			<li class="u-fourth">
-				<a href="#" class="o-button-rhombus">
-					<figure></figure>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Read the Change Stories</span>
-					</div>
-				</a>
+				<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 			</li>
 			<li class="u-fourth">
-				<a href="#" class="o-button-rhombus">
-					<figure></figure>
-					<div class="o-button">
-						<i class="o-icon"></i>
-						<span>Read the Change Stories</span>
-					</div>
-				</a>
+				<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 			</li>
 		</ul>
 		<span class="o-line s--divider"></span>
@@ -138,7 +97,7 @@
 		</section>
 	</div>
 </section>
-<section class="o-section u-white" style="background-color:#970055">
+<section class="o-section t-dark" style="background-color:#970055">
 	<div class="o-box">
 		<div class="u-half">
 			<div class="o-crumb">
@@ -163,22 +122,10 @@
 			</section>
 			<ul class="u-clear u-pt-l">
 				<li class="u-half">
-					<a href="#" class="o-button-rhombus">
-						<figure></figure>
-						<div class="o-button">
-							<i class="o-icon"></i>
-							<span>Read the Change Stories</span>
-						</div>
-					</a>
+					<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 				</li>
 				<li class="u-half">
-					<a href="#" class="o-button-rhombus">
-						<figure></figure>
-						<div class="o-button">
-							<i class="o-icon"></i>
-							<span>Read the Change Stories</span>
-						</div>
-					</a>
+					<?php echo renderRhombusButton('#', 'Early Childhood Development', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 				</li>
 			</ul>
 		</div>

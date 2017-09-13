@@ -1,5 +1,5 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="c-cover c-about">
+<section class="c-cover c-about t-dark">
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="o-box">
@@ -88,20 +88,8 @@
 			</section>
 		</div>
 		<div class="u-pt-xl u-center">
-			<a href="#" class="o-button s--circular">
-				<figure></figure>
-				<div>
-					<i class="o-icon"></i>
-					<span>Education</span>
-				</div>
-			</a>
-			<a href="#" class="o-button s--circular">
-				<figure></figure>
-				<div>
-					<i class="o-icon"></i>
-					<span>Livelihoods</span>
-				</div>
-			</a>
+			<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+			<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 		</div>
 	</div>
 </section>
@@ -138,20 +126,8 @@
 				<h1>Taking hope to hard to reach areas of East Africa.</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 				<div class="u-pt-l">
-					<a href="#" class="o-button s--circular">
-						<figure></figure>
-						<div>
-							<i class="o-icon"></i>
-							<span>See our Partners</span>
-						</div>
-					</a>
-					<a href="#" class="o-button s--circular">
-						<figure></figure>
-						<div>
-							<i class="o-icon"></i>
-							<span>Change Stories</span>
-						</div>
-					</a>
+					<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+					<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 				</div>
 			</section>
 		</div>
@@ -162,12 +138,29 @@
 </section>
 <section class="o-slider">
 	<div class="u-threefourth o-slider-col">
-		<figure class="o-slider__image"></figure>
+		<div class="o-slider__image">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+						<span>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
+					</div>
+					<div class="swiper-slide">
+						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-2.jpg')"></figure>
+						<span>Mary is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
+					</div>
+				</div>
+				<div class="o-slider__buttons t-dark">
+					<?php echo renderButton('#','','div','s--prev') ?>
+					<?php echo renderButton('#','','div','s--next') ?>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="u-fourth o-slider-col">
 		<div class="o-slider__caption">
 			<section class="u-wrap">
-				<em>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</em>
+				<em></em>
 				<span class="o-line"></span>
 			</section>
 		</div>

@@ -72,8 +72,8 @@
 				<h3>Get Inspired.<br/>Change Stories delivered to your inbox.</h3>
 				<form action="">
 					<input type="text" placeholder="Your E-mail">
-					<button>
-						<span></span>
+					<button class="o-button">
+						<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
 					</button>
 				</form>
 			</section>
@@ -81,10 +81,7 @@
 		<div class="u-third">
 			<section class="u-center">
 				<h3>Let’s get working.<br/>Partner with Us</h3>
-				<a href="#" class="o-button">
-					<i class="o-icon"></i>
-					<span>Become a Partner</span>
-				</a>
+				<?php echo renderButton('','Become a Partner'); ?>
 			</section>
 		</div>
 	</div>

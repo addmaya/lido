@@ -1,25 +1,37 @@
 		<section class="c-paginator">
 			<div class="c-paginator__labels">
-				<a href="#">Previous</a>
+				<a href="#" class="js-paginator__prev">Previous</a>
 				<span></span>
-				<a href="#">Next</a>
+				<a href="#" class="js-paginator__next">Next</a>
 			</div>
-			<a href="" class="c-paginator__button">
-				<figure></figure>
-				<div>
-					<i></i>
-					<span>Newsroom</span>
-				</div>
-			</a>
-			<a href="" class="c-paginator__button s--right">
-				<div>
-					<span>Programs</span>
-					<i></i>
-				</div>
-				<figure></figure>
-			</a>
+			<div class="u-clear">
+				<a href="" class="c-paginator__button s--left">
+					<section class="o-rhombus s--medium">
+						<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+					</section>
+					<div>
+						<svg class="o-arrow" viewBox="0 0 68 48">
+							<path class="o-arrow_head" d="M65.9,23.9H3.2"/>
+							<path class="o-arrow_tail" d="M25.3,46.4L2.6,23.7L25.3,1"/>
+						</svg>
+						<span>Impact</span>
+					</div>
+				</a>
+				<a href="" class="c-paginator__button s--right">
+					<div>
+						<span>Newsroom</span>
+						<svg class="o-arrow" viewBox="0 0 68 48">
+							<path class="o-arrow_head" d="M2.6,23.5l62.6,0"/>
+							<path class="o-arrow_tail" d="M43.2,1l22.7,22.7L43.2,46.4"/>
+						</svg>
+					</div>
+					<section class="o-rhombus s--medium">
+						<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+					</section>
+				</a>
+			</div>
 		</section>
-		<footer class="c-page__footer">
+		<footer class="c-page__footer t-dark">
 			<!-- <div class="c-globe"></div> -->
 			<div class="o-box">
 				<h1 class="u-center">Together we can <br/>eradicate povery from East Africa</h1>
@@ -41,8 +53,8 @@
 							<h3>Get Inspired.<br/>Our Change Stories to your inbox.</h3>
 							<form action="">
 								<input type="text" placeholder="Your E-mail">
-								<button>
-									<span></span>
+								<button class="o-button">
+									<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
 								</button>
 							</form>
 						</section>
@@ -50,10 +62,7 @@
 					<div class="u-third">
 						<section class="u-center">
 							<h3>Let’s get working.<br/>Partner with Us</h3>
-							<a href="#" class="o-button">
-								<i class="o-icon"></i>
-								<span>Become a Partner</span>
-							</a>
+							<?php echo renderButton('','Become a Partner'); ?>
 						</section>
 					</div>
 				</div>

@@ -83,6 +83,24 @@
 	  return 'wp-admin/edit.php?post_type=story';
 	}
 
+	function renderButton($link, $title, $style = 'anchor', $class=''){
+		$svg = '<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>';
+		if($style != 'div'){
+			return '<a href="'.$link.'" class="o-button '.$class.'">'.$svg .'<span>'.$title.'</span></a>';
+		}
+		else{
+			return '<div class="o-button '.$class.'">'.$svg.'<span>'.$title.'</span></div>';
+		}
+	}
+	function renderCircularButton($link, $title, $image){
+		$button = renderButton('',$title, 'div');
+		return '<a href="'.$link.'" class="o-button s--circular"><section><figure style="background-image:url('.$image.')"></figure></section>'.$button.'</a>';
+	}
+	function renderRhombusButton($link, $title, $image){
+		$button = renderButton('',$title, 'div');
+		return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div>'.$button.'</a>';
+	}
+
 	function submitContact(){
 		if(isset($_POST['form_nonce']) || wp_verify_nonce($_POST['form_nonce'], 'form_nonce_key')){
 			if(isset($_POST['userName'])){

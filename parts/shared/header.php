@@ -3,11 +3,12 @@
 	<div class="o-box">
 		<section class="u-clear">
 			<div class="u-half">
-				<div class="c-deco">
+				<!-- <div class="c-deco">
 					<div class="c-deco__circle"></div>
 					<div class="c-deco__dash"></div>
 					<div class="c-deco__line"></div>
-				</div>
+				</div> -->
+				<a href="<?php echo home_url(); ?>" class="c-logo"></a>
 			</div>
 			<div class="u-half">
 				<nav class="c-menu">
@@ -31,7 +32,7 @@
 				</nav>
 			</div>
 		</section>
-		<a href="<?php echo home_url(); ?>" class="c-logo"></a>
+		
 	</div>
 </header>
 <div id="barba-wrapper">

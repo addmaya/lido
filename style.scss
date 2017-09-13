@@ -16,7 +16,7 @@ $redC: #7A003C;
 $blackA: #231F20;
 $blackB: #58595B;
 $blackC: #A7A9AC;
-$white: lighten($blackC,15%);
+$white: lighten($blackC,18%);
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -118,6 +118,22 @@ html, body{width:100%; height:100%;}
 body{font-family: "acumin-pro",sans-serif; color: #58595B; font-weight: 400;
   &.single-partner{background-color: #eaeaea}
 }
+h1,h2,h3{color: #393637;
+  .t-dark &{color: $white;
+    a{
+      &:hover{color: $white}
+      &:after{background-color: $white}
+    }
+  }
+  a{display: block; position: relative;
+    span{display: block; @include txnTransform(0.4,'ease')}
+    &:after{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: -6px; left: 0; @include resetPivot; @include txnTransform(0.3,'ease'); @include scale2D(0,1)}
+    &:hover{color: $redB;
+      &:after{@include scale2D(1,1)}
+      span{@include translateY(-16px)}
+    } 
+  }
+}
 h1{font-size:em(36); font-weight:600; line-height: 1.2; letter-spacing: -1px}
 h2{font-size:em(20); font-weight:500; line-height:1.4; letter-spacing:0.5px}
 h3{font-weight: 600; font-size:em(16); line-height: 1.3}
@@ -153,6 +169,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(xs){width: auto; float: none}
 }
 
+.t-dark{color: $white}
+
 .u-clear{@include clear}
 .u-oh{overflow: hidden}
 .u-superscript{@include superscript}
@@ -170,32 +188,92 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-uppercase{text-transform: uppercase;}
 
 /*objects*/
-.o-box{width:85%; @include center; @include clear}
+.o-box{width:87%; @include center; @include clear}
 .o-table{display: table; width: 100%; height: 100%}
 .o-table__cell{display: table-cell; vertical-align: middle}
 .o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center}
-.o-button{display: inline-block;padding: 0.75em; padding-left: 0; font-size:em(14); color: $redA; @include clear;
+.o-circle{width:em(40); height:em(40); fill:transparent;  stroke-width: 1; stroke: $redA;
+  circle{stroke-dasharray:70}
+  .o-circle__outer{stroke-dashoffset: 70; transition:stroke-dashoffset 1s $easeOutExpo, stroke 0.5s; stroke-width:1.5; stroke:$blackA}
+  g{transition: transform 0.3s ease}
+  .o-circle__inner{stroke:$redA}
+}
+
+.o-button {display: inline-block;padding: 0.75em; padding-left: 0; font-size:em(14); color: $redA; @include clear;
   i{border:solid 1px; border-radius: 50%; float: left; @include box(em(30), em(30))}
-  span{float: left; @include relative; top: em(9); margin-left:em(12)}
-  figure{@include box(em(96), em(96)); float: left; border-radius: 50%; @include bkg(grey)}
+  span{float: left; @include relative; top: em(12); margin-left:em(12); position: relative; @include txnTransform(0.3);
+    &:after{content:""; position: absolute; left: em(-16); top: em(8); background-color:$redA; width:10px; height:1px; @include resetPivot; @include scale2D(0,1); @include txnTransform(0.3)}
+  }
+  strong{font-size: 0.75em; padding-top: 8px; display: inline-block}
+  section{@include box(em(96), em(96)); float: left; border-radius: 50%; @include bkg(grey); overflow: hidden;
+    figure{@include cover; @include canvas; @include txnTransform(0.5); @include prefix((transform: translate(0,0) scale(1.3, 1.3)))}
+  }
+  .o-circle{float:left}
+
   &.s--circular{
-    div{float: left;@include relative; top: em(36); margin-left: em(6);}
+    div{float: left;@include relative; top: em(36); margin-left: em(6); padding-top:0}
   }
   &.s--block{display: block; padding-top: 0; padding-bottom: 1em}
   &.s--multiline{
-    i{display: block; float: none; @include center; margin-bottom: em(12)}
-    span{display: block; float: none; margin:0;}
+    .o-icon{@include txnTransform(0.5, ease); margin-bottom: 0;}
+    svg,i{display: block; float: none; @include center; margin-bottom: em(12)}
+    span{display: block; float: none; margin:0;
+      &:after{top: -24px; left:50%; width: 18px; @include prefix((transform: scale(1,0) rotate(90deg)))}
+    }
+    &:hover{
+      .o-icon{@include translateY(em(12))}
+      span{@include translateY(em(12));
+        &:after{@include prefix((transform:scale(1,1) rotate(90deg)))}
+      }
+    }
   }
   &.s--med{font-size: 1.25em; line-height: 1.2;
     i{border-width: 2px}
+  }
+  &:hover{
+    figure{@include prefix((transform: translate(12px,0) scale(1.3, 1.3)))}
+    span{@include translateX(em(12));
+      &:after{@include scale2D(1,1)}
+    }
+    .o-circle{
+      g{@include translateX(em(12))}
+      .o-circle__outer{stroke-dashoffset: 0}
+    }
+  }
+  .t-dark &{color: $white; font-weight: 300;
+    .o-circle{stroke: $white}
+    span:after{background-color: $white}
+    &:hover{
+      .o-circle__outer{stroke: $white;}
+    }
   }
 }
 .o-button-rhombus{display: block;
   figure{@include box(em(240), em(240)); @include bkg(grey); @include rhombus;}
 }
-.o-rhombus{@include rhombus; background-color: $blackC;
+@mixin rhombusHover{
+  .o-rhombus__image{@include translateX(12px);
+    &:after{@include scale2D(1,1)}
+    &:before{@include prefix((transform: rotate(45deg) translate(-58%, 58%)))}
+  }
+}
+.o-rhombus{@include rhombus; background-color: $blackC; display: block; @include txnTransform(0.5, ease);
   &.s--large{@include box(em(360), em(360))}
   &.s--medium{@include box(em(240), em(240))}
+  &.s--small{@include box(em(150), em(150))}
+}
+.o-rhombus__image{height: 100%;background-position: center;background-size: cover; background-repeat: no-repeat; @include txnTransform(0.5, ease); position: relative;
+  &:before{opacity:0.8;content:""; @include canvas; top: 0; left:0; position: absolute; z-index:1; background-color:$redC; @include prefix((transform: rotate(45deg) translate(-85%, 85%))); @include txnTransform(0.3, ease)}
+  &:after{content: ""; position: absolute; left: 0; top: 50%; z-index:2; width:30%; height: 2px; background-color: $white; @include resetPivot; @include txnTransform(0.5, $easeOutExpo); @include scale2D(0,1)}
+}
+.o-rhombus-button{display: block; text-align: center;
+  .o-rhombus{@include center}
+  &:hover{
+    .o-rhombus{@include translateX(em(18))}
+    @include rhombusHover;
+  }
+}
+.o-arrow{stroke: $redA; fill: transparent; stroke-width: 2; stroke-dasharray: 70; stroke-dashoffset:0; @include prefix((transition: stroke-dashoffset 0.5s 'ease'));
 }
 .o-diamond{@include box(em(166), em(166)); @include bkg($blackA); @include prefix((transform: rotate(-45deg))); overflow:hidden; @include cover;
 }
@@ -212,7 +290,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.c-docs{position: relative;
     &:after{@include after(100%, 100%, #F7F7F7); z-index:-5}
   }
+  &.u-pb-0{padding-bottom:0}
+  &.u-pb-l{padding-bottom: 3em}
 }
+
+.o-tint{background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute}
 .o-crumb{@include clear; 
   div{float: left; opacity:0.5}
   &.s--updates{font-size: em(24); color: $redA; margin-bottom: 2.5em;
@@ -259,7 +341,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
   p{padding-top: em(24); padding-right: em(12); }
   figure{@include box(em(120), em(120)); @include bkg(grey); margin-left:1em}
-  &:after{@include after(200px, 200px, $redA); opacity: 0.1; z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
+  &:after{@include after(200px, 200px, #E8E8E8); z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
   .c-statistics &{
     &:after{@include bkg($blackC); opacity: 0.2}
   }
@@ -267,13 +349,14 @@ em{font-family: 'Georgia'; font-style: italic;}
     span{font-size: em(18); padding-right:em(0)}
     p{padding-top:em(12)}
     .o-icon{background-color: $blackA; margin-bottom: em(12)}
-    &:after{@include bkg(#E8E8E8); opacity: 1}
   }
 }
 
 .o-networks{
   li{display: inline-block;}
-  a{display: block;margin:em(2); @include clear}
+  a{display: block;margin:em(2); @include clear; @include txnOpacity(0.2);
+    &:hover{opacity: 0.5;}
+  }
   i{display: inline-block; @include box(36px, 36px); float:left}
   span{display: inline-block; margin-left:em(12); padding-top:9px; color:$redA}
   .c-fb{@include image('social/facebook.svg')}
@@ -317,14 +400,6 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-imagelist{;
   li{margin-bottom: em(24);}
 }
-.o-slider{@include clear; color: $white;
-  .o-slider-col{padding:em(96) 0;}
-  .u-threefourth{background-color:#E5E5E5}
-  .u-fourth{background-color:#D8D8D8;}
-  .o-line{display: block; margin-top: 2em}
-  em{font-size: em(14); line-height: 1.5}
-  h2{padding-bottom: em(24)}
-}
 .o-quote{text-align: center; width: 70%; @include center; padding-top:em(72);
   p{font-weight: 600; font-size: em(40); line-height: 1.3}
   div{padding-top: em(24); font-size: em(14);
@@ -333,12 +408,39 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   .o-line{margin-top:2em;}
 }
+.o-slider__buttons{position: absolute; z-index: 20; bottom: 0; right: 0; font-size: 1.5em;
+  .s--prev{transform: rotate(180deg)}
+}
+.o-slider{@include clear; color: $white;
+  .o-slider-col{padding:em(96) 0;}
+  .u-threefourth{background-color:#E5E5E5}
+  .u-fourth{background-color:#D8D8D8;}
+  .o-line{display: block; margin-top: 2em}
+  em{font-size: em(14); line-height: 1.5}
+  h2{padding-bottom: em(24)}
 
-.o-slider__image{padding-bottom:53%; background-color: $blackA; width: 90%; float: right}
+  .swiper-container{height:520px; background-position: center}
+  .swiper-wrapper{@include prefix((transition-timing-function: cubic-bezier(0.63, -0.01, 0.15, 1)));
+    @include device(xs){@include prefix((transition-timing-function:linear))}
+  }
+  .swiper-slide{
+    span{display: none;}
+  }
+}
+.o-slider__image{background-color: $blackA; width: 90%; float: right;
+  figure{@include canvas}
+}
 .o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
 .o-partners{@include clear;
   li{float: left; width: 20%}
-  a{display: block; padding-bottom: 40%; background-color:grey; margin: em(9)}
+  a{display: block;margin: em(9); position: relative;
+    &:after{content:""; position: absolute; height: 2px; background-color: $redA; left: 0; bottom: 0; width: 75%; @include txnTransform(0.3, $easeOutExpo); @include scale2D(0,1); @include resetPivot}
+    &:hover{
+      &:after{@include scale2D(1,1)}
+      figure{@include translateY(em(-24))}
+    }
+  }
+  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); background-color: grey}
   &.s--third{
     li{width: percentage(1/3)}
   }
@@ -359,8 +461,18 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-article__row{@include clear}
 .o-article{color: $white; margin-bottom:0; float: left; width:44em;
   a{display: block; @include clear}
-  h2{font-weight: 600; font-size: 2em; padding-bottom: em(12)}
-  figure{@include box(em(360), 100%); background-color: $blackA; float: left; padding-bottom: 65%;}
+  h2{font-weight: 600; font-size: 2em; padding-bottom: em(12); color: $white;
+    a{
+      &:hover{color: $white;}
+      &:after{background-color: $white;};
+    }
+  }
+  figure{@include box(em(360), 100%); background-color: $blackA; float: left; padding-bottom: 65%; position: relative; @include txnOpacity(0.3);
+    a{position: absolute; @include canvas; @include cover; @include txnTransform(0.4,ease);
+      &:hover{@include translateX(em(24));}
+    }
+    &:hover{opacity: 0.9}
+  }
   .o-article__summary{@include bkg($redC); float: left; width:em(288); padding: em(14); position: relative; z-index: 2; left: em(-36);}
   .o-button{color: $white; padding-top:1.5em;}
   .o-line{margin: em(24) 0}
@@ -386,15 +498,17 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-article__wrap{width: 95%}
   }
 }
-.o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white;
+.o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
   a{display: block; padding: em(6) 0}
 }
 
 
 /*components*/
-.c-spine{@include box(em(30), 100%); @include bkg(#fff); @include absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%}
+.c-spine{@include box(em(28), 100%); @include bkg(#fff); @include absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10}
 .c-page__header{padding-top: em(36); @include absolute; width:100%; z-index: 5}
-.c-logo{@include box(170px, 66px); display:block; @include image('logo.svg'); @include contain }
+.c-logo{@include box(170px, 66px); display:block; @include image('logo-white.svg'); @include contain; position: relative; top: -24px;
+  .single-partner &{@include image('logo.svg')}
+}
 
 .c-deco{@include clear}
 .c-deco__circle{@include box(7px,7px); border:solid 2px #CBCBCB; border-radius:50%; float: left}
@@ -403,37 +517,82 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-menu{text-align:right; @include relative; top: em(-14); font-size:em(14);
   li{display:inline-block}
-  a{display:block;padding:0.75em; color:$redA}
-  span{@include superscript; font-weight: bold; opacity:0.7; color: $blackC}
+  a{display:block;padding:0.75em; color: #fff}
+  span{@include superscript; font-weight: bold}
 }
 
-.c-splash{@include box(100%, 70%);
-  .o-button{margin-top: em(24)}
-  .o-table__cell{vertical-align: bottom; padding-bottom:6em}
+.c-splash{@include box(100%, 75%); @include image('shield.svg'); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative;
+  .o-button{padding-top: em(48)}
+  .o-table{position: absolute; z-index: 2}
+  .o-table__cell{vertical-align: bottom; padding-bottom:3em}
   .o-box{@include clear}
 }
 
-.c-highlights{height:30%; overflow:hidden; position: relative; color: $white;
-  section{float:left; width:55%; padding-top:10%}
-  figure{float: right; width: 30%; transform:translateX(em(-36)) translateY(em(42))}
-  .o-button{color: #fff; font-weight: 300; margin-top:1.5em}
+.c-splash__image{width: 100%; height: 100%; position: relative; z-index:1;
+  figure{height: 100%; @include cover}
 }
-.c-paginator{overflow: hidden; padding: 42px 0; position: relative; margin:5em 0 6em}
-.c-paginator__button{display: inline-block; color: $redA; float:left; z-index: -1; position: relative;
-  figure{@include box(200px, 200px); background: grey; @include prefix((transform: translateX(-40%) rotate(45deg))); float: left;}
-  i{display: block; @include box(em(68), em(48)); float: left; background: $redA}
-  span{float: left; position: relative; top: em(15); margin-left: em(16)}
-  div{float: left; position: relative; top: em(72)}
-  &.s--right{float: right; @include prefix((transform: translateX(10%)));
-    figure{@include prefix((transform: translateX(40%) rotate(45deg)));}
-    span{margin-left: auto; margin-right: em(16)}
+
+.c-highlights{height:25%; overflow:hidden; position: relative; color: $white;
+  section{float:left; width:70%; padding-top: 1.5em}
+  .o-rhombus{float: right}
+  h2{font-size: 1em}
+  .o-button{padding-top:2em}
+  .o-rhombus{
+    &:hover{
+      @include rhombusHover;
+    }
   }
 }
-.c-paginator__labels{position: absolute; width: 100%; text-align: center; z-index: 1; top: 12%;
-  a{display: inline-block; font-family: "Times New Roman", Times, serif; font-style: italic; padding: 6em 3em;}
-  span{left: 45%; display: block; position: absolute; @include prefix((transform: rotate(-45deg))); width: em(172); height: 1px; background-color: #dedede; top: 45%;}
+.c-paginator{overflow: hidden; padding: em(48) 0; position: relative;}
+.c-paginator__button{display: inline-block; color: $redA; float:left; position: relative; @include clear;
+  .o-rhombus{float:left; margin-left: em(-96);}
+  i{display: block; @include box(em(68), em(48)); float: left; background: $redA}
+  .o-arrow{float: left; width: em(68); height:em(48)}
+  span{float: left; position: relative; top: em(15); margin-left: em(16); @include txnTransform(0.5, ease)}
+  div{float: left; position: relative; top: em(96)}
+
+  &.s--left{
+    .o-rhombus__image{
+      &:before{@include prefix((transform: rotate(45deg) translate(100%, -100%)))}
+      &:after{left: auto; right:0; @include prefix((transform-origin: 100% 0%))}
+    }
+  }
+  &.s--right{float: right; @include prefix((transform: translateX(10%)));
+    .o-rhombus{margin-right: em(-96); margin-left: auto;}
+    /*figure{@include prefix((transform: translateX(40%) rotate(45deg)));}*/
+    span{margin-left: auto; margin-right: em(16)}
+  }
+  
+  &:hover, &.is-active{color: black;
+    .o-arrow{stroke-dashoffset: 70}
+    &.s--left{
+      span{@include translateX(em(-24))}
+       .o-rhombus{@include translateX(em(30))}
+       .o-rhombus__image{@include translateX(-12px);
+          &:before{@include prefix((transform: rotate(45deg) translate(58%, -58%)))}
+          &:after{@include scale2D(1,1)}
+       }
+    }
+    &.s--right{
+      @include rhombusHover;
+      span{@include translateX(em(24))}
+      .o-rhombus{@include translateX(em(-30))}
+    }
+  }
 }
-.c-page__footer{position: relative; background-color: $redC; color:$white; font-weight: 300; padding: em(96) 0 em(96);
+
+.c-paginator__labels{position: absolute; width: 50%; text-align: center; z-index: 1; top: 19%; left: 25%; 
+  a{display: inline-block; font-family: "Times New Roman", Times, serif; font-style: italic; padding: 6em 3em; @include txnTransform(0.7, ease); color: #b7b7b7; 
+    &:hover{color: $redA;
+      &.js-paginator__prev{@include translateX(em(-12))}
+      &.js-paginator__next{@include translateX(em(12))}
+    }
+  }
+  span{left: 40%; display: block; position: absolute; @include prefix((transform: rotate(-45deg))); width: em(172); height: 1px; background-color: #dedede; top: 45%; @include txnTransform(0.6, $easeOutExpo);
+    &.is-left{@include prefix((transform: rotate(45deg)))}
+  }
+}
+.c-page__footer{position: relative; font-weight: 300; padding: em(96) 0 em(96); @include image('globe.svg'); background-repeat:no-repeat; background-position:center top; background-size:130%; z-index: 20;
   .o-box{width:80%}
   h1{font-size: em(28); font-weight: 500; letter-spacing: 0; padding-bottom: em(54)}
   h3,h4{font-weight: 500}
@@ -444,16 +603,17 @@ em{font-family: 'Georgia'; font-style: italic;}
     :-ms-input-placeholder{color: $color}
     :-moz-placeholder {color: $color}
   }
-  input{color: #fff}
-  .o-button{color: #e081b0}
-  button{background-color: #fff}
-  .c-cta{ border-bottom:solid 2px #831c4f; padding-bottom: em(84); margin-bottom: em(72)}
+  input{color: $white;
+    &:focus{border-color: $white;}
+  }
+  .o-circle__inner{stroke: #dedede}
+  .c-cta{ border-bottom:solid 1px #b93c7a; padding-bottom: em(84); margin-bottom: em(72)}
 }
 .c-cta{@include clear; text-align: center;
   h3{text-align: center; margin-bottom: em(24)}
   input{border-radius: 24px; border: solid 2px #e081b0; padding: em(9) em(18); width: 75%; float: left}
-  button{width: 36px; height: 36px; background-color: $redA; border-radius: 50%; border:none; float: left; position: relative; top:3px; left: 6px;}
-  .o-button{font-size: em(18); padding-top: 0;
+  button{width: 36px; height: 36px; border:none; float: left; position: relative; left: 6px; background-color: transparent;}
+  .o-button{font-size: em(16); padding-top: 0;
     i{border-width: 2px}
   }
 }
@@ -467,19 +627,19 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .c-cover{height: 100%; position: relative;
   h1{padding-bottom: em(16)}
-  .u-half{height: 100%;}
+  .u-half{height: 100%; position: relative;}
   &.s--story{height:70%}
 }
-.c-about{background-color: $redC; color: $white;
+.c-about{background-color: $redC;
   .o-box{width: 60%; text-align: center;}
   .o-line{margin:em(36) 0;}
   .o-button{color:$white;}
   section{width: 70%; @include center}
   .o-table__cell{vertical-align: bottom; padding-bottom: 3em}
 }
-.c-cover__image{background-color: #000; height: 100%;}
-.c-cover__profile{background-color: $redC; color: $white;
-  section{padding: 0 em(24); width: 85%;}
+.c-cover__image{height: 100%; @include cover; background-color:$blackA}
+.c-cover__profile{background-color: $redC;
+  .c-cover__section{padding: 0 em(24); width: 85%;}
   .o-button{color: inherit}
   .o-table__cell{padding-bottom: 6em; vertical-align: bottom}
   &.s--single{background-color: #EFF0F0; color: $blackB;}
@@ -534,4 +694,6 @@ em{font-family: 'Georgia'; font-style: italic;}
   h3{padding-bottom:em(16)}
 }
 #barba-wrapper{@include box(100%, 100%)}
-.barba-container{@include box(100%, 100%)}
+.barba-container{@include box(100%, 100%);
+  .o-section:last-child{padding-bottom:0; background-color:red}
+}

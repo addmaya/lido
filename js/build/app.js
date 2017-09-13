@@ -136,8 +136,31 @@ jQuery(document).ready(function($) {
 		    html = document.documentElement;
 		var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 		$('.c-spine').css({
-			height: height-20
+			height: height-100
 		});
+	}
+
+	function activatePaginators(){
+		$('.js-paginator__prev').hover(function() {
+			$('.c-paginator span').addClass('is-left');
+		}, function() {
+			$('.c-paginator span').removeClass('is-left');
+		});
+	}
+
+	function renderSwiper(){
+		var ImageSwiper = new Swiper ('.o-slider .swiper-container', {
+		    loop: true,
+		    speed: 800,
+		    autoplayDisableOnInteraction:false,
+		    pagination: '.swiper-pagination',
+		    paginationClickable: true,
+		    nextButton: '.o-slider__buttons .s--next',
+		    prevButton: '.o-slider__buttons .s--prev',
+		    onSlideChangeEnd: function(){
+		    	$('.o-slider__caption em').html($('.swiper-slide-active span').html());
+		    }
+		 });
 	}
 
 	//menu
@@ -195,6 +218,8 @@ jQuery(document).ready(function($) {
 		setSpineHeight();
 		matchHeights();
 		AOS.init({duration: 700});
+		activatePaginators();
+		renderSwiper();
 	}
 	
 	pageLoad();

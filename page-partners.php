@@ -1,12 +1,12 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover">
+<div class="c-cover t-dark">
 	<div class="u-half">
 		<figure class="c-cover__image"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
-				<section>
+				<section class="c-cover__section">
 					<h1>Our partners tiam consectetur elementum cursus. In in ligula vel odio congue pellentesque.</h1>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					<div class="u-pt-l">
