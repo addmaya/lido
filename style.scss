@@ -7,7 +7,7 @@ Author URI: http://addmaya.com/
 @import 'reset';
 /*variables*/
 $browser-context: 16;
-$placeholderColor: #3E526E;
+$placeholderColor: lighten(grey,3%);
 $easeOutExpo: cubic-bezier(0, 0.5, 0, 1);
 $easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
 $redA: #C6006F;
@@ -113,6 +113,8 @@ $white: lighten($blackC,18%);
   to {visibility: hidden; @include prefix((transform: translate3d(0, -100%, 0)))}
 }
 
+@mixin line{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: -6px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
+
 /*defaults*/
 html, body{width:100%; height:100%;}
 body{font-family: "acumin-pro",sans-serif; color: #58595B; font-weight: 400;
@@ -127,7 +129,7 @@ h1,h2,h3{color: #393637;
   }
   a{display: block; position: relative;
     span{display: block; @include txnTransform(0.4,'ease')}
-    &:after{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: -6px; left: 0; @include resetPivot; @include txnTransform(0.3,'ease'); @include scale2D(0,1)}
+    &:after{@include line}
     &:hover{color: $redB;
       &:after{@include scale2D(1,1)}
       span{@include translateY(-16px)}
@@ -188,7 +190,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-uppercase{text-transform: uppercase;}
 
 /*objects*/
-.o-box{width:87%; @include center; @include clear}
+.o-box{width:85%; @include center; @include clear}
 .o-table{display: table; width: 100%; height: 100%}
 .o-table__cell{display: table-cell; vertical-align: middle}
 .o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center}
@@ -341,7 +343,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
   p{padding-top: em(24); padding-right: em(12); }
   figure{@include box(em(120), em(120)); @include bkg(grey); margin-left:1em}
-  &:after{@include after(200px, 200px, #E8E8E8); z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
+  &:after{@include after(200px, 200px, #f2f2f2); z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
   .c-statistics &{
     &:after{@include bkg($blackC); opacity: 0.2}
   }
@@ -434,7 +436,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-partners{@include clear;
   li{float: left; width: 20%}
   a{display: block;margin: em(9); position: relative;
-    &:after{content:""; position: absolute; height: 2px; background-color: $redA; left: 0; bottom: 0; width: 75%; @include txnTransform(0.3, $easeOutExpo); @include scale2D(0,1); @include resetPivot}
+    &:after{@include line}
     &:hover{
       &:after{@include scale2D(1,1)}
       figure{@include translateY(em(-24))}
@@ -446,9 +448,15 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 
-.o-input{position: relative; margin-bottom:em(36);
-  input,textarea,select{padding:0 0 em(18);font-family: "acumin-pro",sans-serif; width: 100%}
+.o-input{position: relative; margin-bottom:em(26);overflow: hidden;
+  input,textarea,select{padding:em(12) 0 em(18);font-family: "acumin-pro",sans-serif; width: 100%;}
+  select{color: lighten(grey, 3%)}
   span{@include box(100%, 2px); @include bkg($redA); display: block; bottom: 0; position: absolute; left:0; z-index:2}
+  &:after{@include box(em(16), em(16)); content: ""; position: absolute; top: 0; left: 0; background-color: $redB; @include prefix((transform: translate(0%, -120%) rotate(45deg))); @include txnTransform(0.3, $easeOutBack)}
+  &.is-active{
+    span{@include bkg($blackA)}
+    &:after{@include prefix((transform: translate(0%, -75%) rotate(45deg)))}
+  }
 }
 
 .o-olist{font-size: 0.875em;
@@ -543,7 +551,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-paginator{overflow: hidden; padding: em(48) 0; position: relative;}
+.c-paginator{overflow: hidden; padding: em(48) 0; position: relative; z-index: 3}
 .c-paginator__button{display: inline-block; color: $redA; float:left; position: relative; @include clear;
   .o-rhombus{float:left; margin-left: em(-96);}
   i{display: block; @include box(em(68), em(48)); float: left; background: $redA}
@@ -639,7 +647,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .c-cover__image{height: 100%; @include cover; background-color:$blackA}
 .c-cover__profile{background-color: $redC;
-  .c-cover__section{padding: 0 em(24); width: 85%;}
+  .c-cover__section{padding: 0 em(24); width: 80%}
   .o-button{color: inherit}
   .o-table__cell{padding-bottom: 6em; vertical-align: bottom}
   &.s--single{background-color: #EFF0F0; color: $blackB;}
@@ -693,7 +701,80 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{padding-bottom:em(36)}
   h3{padding-bottom:em(16)}
 }
+.c-docs{
+  .o-statistic{display: block; margin: auto; padding: em(56) 0 em(112);
+    &:after{@include txnTransform(0.5, ease); @include prefix((transform-origin:50% 50%)); @include prefix((transform: translate(0, 2.5em) rotate(45deg)))}
+    &:hover{
+      &:after{@include prefix((transform: translate(0, 2.5em) rotate(90deg)))}
+      .u-half:first-child{@include translateY(em(-36));
+        &:after{@include scale2D(1,1)}
+      }
+    }
+  }
+  .u-half{
+    &:after{@include line}
+    &:first-child{@include txnTransform(0.5, ease)}
+  }
+}
+.c-sectionator{position: fixed; z-index: 2; right: em(12); height: 100%; text-align: center; font-size: 1.125em; transition: color 0.3s, opacity 1s; color: $blackA;
+  a{display: inline-block;}
+  &.is-active{color: $redA;
+    svg{stroke: $redA}
+  }
+}
+.c-sectionator__button{padding: em(6);
+  span{@include box(em(12), em(12)); border:solid 2px; transform: rotate(45deg); @include txnTransform(0.3, $easeOutBack); position: relative; display: block;
+    &:after{content:""; @include canvas; background-color: $blackA; position: absolute; top: 0; left: 0; @include txnTransform(0.5, ease); @include scale2D(0,0);
+      .is-active &{background-color: $redA}
+    }
+  }
+
+  &:hover{
+    span{@include prefix((transform: rotate(0)));
+      &:after{@include scale2D(1,1)}
+    }
+  }
+}
+.c-hamburger{position: relative; padding:em(6); @include txnOpacity(0.5); margin-bottom: em(9); font-family: 'Arial', sans-serif;
+  svg{@include box(em(30), em(30)); fill:none; stroke: $blackA; stroke-width:2; position: relative; z-index: 1; @include txnTransform(0.3, ease)}
+  line{stroke-dasharray: 15; @include prefix((transition: stroke-dashoffset 0.3s))}
+  span{display: block; font-size: 9px; font-weight: bold; opacity: 0.8; position: relative; z-index: 2}
+  
+  &:after{content: ""; position: absolute;@include canvas; top:0; left: 0; @include resetPivot; @include scale2D(0,0); @include txnTransform(0.6, $easeOutExpo); background-color: $redB}
+  
+  &:hover{color: $white;
+    &:after{@include scale2D(1,1)}
+    svg{@include translateX(em(-3)); stroke: $white;}
+    line{
+      &:first-child{stroke-dashoffset: 5;}
+      &:last-child{stroke-dashoffset: 10;}
+    }
+  }
+}
+.c-burger{background-color: #231f20; width: 45%; position: fixed; right: 0; top:0; z-index: 30; height: 100%; overflow: scroll; @include txnTransform(0.7, cubic-bezier(0.42,-0.01, 0, 1)); @include translateX(100%);
+  h3{padding-bottom: 1.5em}
+
+  &.is-visible{@include translateX(0%)}
+}
+.c-burger__close{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s;
+  &:hover{background-color: darken($redA,10%)}
+}
+.c-burger-menu{font-size: 1.5em;color: white}
+.c-burger-menu__item{border-bottom:solid 1px #353233;
+  a{display: block; padding: em(26) 0; position: relative; overflow: hidden; padding-left: 1em;
+    &:hover{
+      figure{@include translateY(0)}
+      span{@include translateY(em(12))}
+    }
+  }
+  span{position: relative; z-index: 2; display: block; @include txnTransform(0.3, ease)}
+  figure{@include canvas; position: absolute; background-color: red; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6; filter: grayscale(100%);}
+}
+
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%);
   .o-section:last-child{padding-bottom:0; background-color:red}
 }
+
+/*states*/
+.is-invisible{opacity: 0; visibility: hidden}

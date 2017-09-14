@@ -48,44 +48,46 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<div class="c-orbit">
-			<div class="o-table">
-				<div class="o-table__cell">
-					<span class="c-orbit__sun"></span>
+		<div class="scene">
+			<div class="c-orbit layer" data-depth="0.2">
+				<div class="o-table">
+					<div class="o-table__cell">
+						<span class="c-orbit__sun" data-depth="0.1"></span>
+					</div>
 				</div>
+				<section class="c-values layer" data-depth="0.4">
+					<div class="o-value s--one">
+						<figure class="u-half">
+							<span class="o-rhombus s--medium u-block"></span>
+						</figure>
+						<section class="u-half">
+							<h3>Justice</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
+							<span class="o-line t-dark"></span>
+						</section>
+					</div>
+					<div class="o-value s--two">
+						<figure class="u-half">
+							<span class="o-rhombus s--medium u-block"></span>
+						</figure>
+						<section class="u-half">
+							<h3>Justice</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
+							<span class="o-line t-dark"></span>
+						</section>
+					</div>
+					<div class="o-value s--three">
+						<figure class="u-half">
+							<span class="o-rhombus s--medium u-block"></span>
+						</figure>
+						<section class="u-half">
+							<h3>Justice</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
+							<span class="o-line t-dark"></span>
+						</section>
+					</div>
+				</section>
 			</div>
-			<section class="c-values">
-				<div class="o-value s--one">
-					<figure class="u-half">
-						<span class="o-rhombus s--medium u-block"></span>
-					</figure>
-					<section class="u-half">
-						<h3>Justice</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-						<span class="o-line t-dark"></span>
-					</section>
-				</div>
-				<div class="o-value s--two">
-					<figure class="u-half">
-						<span class="o-rhombus s--medium u-block"></span>
-					</figure>
-					<section class="u-half">
-						<h3>Justice</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-						<span class="o-line t-dark"></span>
-					</section>
-				</div>
-				<div class="o-value s--three">
-					<figure class="u-half">
-						<span class="o-rhombus s--medium u-block"></span>
-					</figure>
-					<section class="u-half">
-						<h3>Justice</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-						<span class="o-line t-dark"></span>
-					</section>
-				</div>
-			</section>
 		</div>
 		<div class="u-pt-xl u-center">
 			<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>

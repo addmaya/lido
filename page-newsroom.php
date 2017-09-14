@@ -210,7 +210,7 @@
 			<div class="o-crumb__circle"></div>
 		</div>
 		<div class="u-clear u-pt-m">
-			<div class="o-statistic u-third s--doc">
+			<a href="#" class="o-statistic u-third s--doc">
 				<div class="u-clear">
 					<div class="u-half">
 						<i class="o-icon"></i>
@@ -221,8 +221,8 @@
 						<figure></figure>
 					</div>
 				</div>
-			</div>
-			<div class="o-statistic u-third s--doc">
+			</a>
+			<a href="#" class="o-statistic u-third s--doc">
 				<div class="u-clear">
 					<div class="u-half">
 						<i class="o-icon"></i>
@@ -233,8 +233,8 @@
 						<figure></figure>
 					</div>
 				</div>
-			</div>
-			<div class="o-statistic u-third s--doc">
+			</a>
+			<a href="#" class="o-statistic u-third s--doc">
 				<div class="u-clear">
 					<div class="u-half">
 						<i class="o-icon"></i>
@@ -245,7 +245,7 @@
 						<figure></figure>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
 </section>

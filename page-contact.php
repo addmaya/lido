@@ -30,7 +30,7 @@
 					<span></span>
 				</div>
 				<button class="o-button">
-					<i class="o-icon"></i>
+					<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
 					<span>Send Message</span>
 				</button>
 			</form>
@@ -41,27 +41,30 @@
 			<h1>Get in Touch</h1>
 			<section class="u-clear">
 				<div class="u-half">
-					<h3>Regional Office</h3>
-					<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
+					<section>
+						<h3>Regional Office</h3>
+						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
+					</section>
 				</div>
 				<div class="u-half">
-					<h3>Juba Country Office</h3>
-					<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
+					<section>
+						<h3>Juba Country Office</h3>
+						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
+					</section>
 				</div>
-			</section>
-			<section>
-				<h3>Make an Inquiry</h3>
-				<div class="u-clear">
-					<div class="u-half">
-						<p>Telephone</p>
-						<p>Fax</p>
-						<p>Mail</p>
-					</div>
-					<div class="u-half">
-						<p>+256 777 578 890</p>
-						<p>+256 777 578 890</p>
-						<p><a href="mailto:sfeastafrica@stromme.org">sfeastafrica@stromme.org</a></p>
-					</div>
+				<div class="u-half">
+					<section>
+						<h3>Global Office</h3>
+						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
+					</section>
+				</div>
+				<div class="u-half">
+					<section>
+						<h3>Make an Inquiry</h3>
+						<p>Telephone: +256 777 578 890</p>
+						<p>Fax: +256 777 578 890</p>
+						<p>Mail: <a href="mailto:sfeastafrica@stromme.org">sfeastafrica@stromme.org</a></p>
+					</section>
 				</div>
 			</section>
 			<section>

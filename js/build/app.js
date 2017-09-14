@@ -36,6 +36,11 @@ jQuery(document).ready(function($) {
 	//variables
 	var preloader = $('.c-preloader');
 	var menu = $('.c-page__menu');
+	var hamburger = $('.c-hamburger');
+	var sectionator = $('.c-sectionator');
+	var footer = $('.c-page__footer');
+	var header = $('.c-page__header');
+	var burger = $('.c-burger');
 
 	//functions
 	$('.element').each(function() {
@@ -174,6 +179,57 @@ jQuery(document).ready(function($) {
 		$('.o-slider-col').matchHeight();
 	}
 
+
+	//CLEAN THIS UP
+
+	$('.scene').parallax();
+
+	$('.o-input input, .o-input textarea').focus(function() {
+		$('.o-input.is-active').removeClass('is-active');
+		$(this).closest('.o-input').addClass('is-active');
+	});
+
+	header.bind('inview', function (event, isInView) {
+		if(isInView){
+			hamburger.addClass('is-invisible');
+			sectionator.removeClass('is-active');
+		}
+		else{
+			hamburger.removeClass('is-invisible');
+			sectionator.addClass('is-active');
+		}
+	});
+
+	footer.bind('inview', function (event, isInView) {
+		if(isInView){
+			sectionator.addClass('is-invisible');
+		}
+		else{
+			sectionator.removeClass('is-invisible');
+		}
+	});
+
+	hamburger.click(function(e) {
+		e.preventDefault();
+		burger.addClass('is-visible');
+		$('body').addClass('u-oh');
+	});
+	$('.c-burger__close').click(function(e) {
+		e.preventDefault();
+		burger.removeClass('is-visible');
+		$('body').removeClass('u-oh');
+	});
+
+	$(document).mouseup(function(e) 
+	{
+	    var container = burger;
+	    if (!container.is(e.target) && container.has(e.target).length === 0) 
+	    {
+	        container.removeClass('is-visible');
+	        $('body').removeClass('u-oh');
+	    }
+	});
+	
 	//page
 	var page = Barba.BaseView.extend({
 	  namespace: 'page',
