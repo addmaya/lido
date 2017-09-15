@@ -16,7 +16,7 @@ $redC: #7A003C;
 $blackA: #231F20;
 $blackB: #58595B;
 $blackC: #A7A9AC;
-$white: lighten($blackC,18%);
+$white: lighten($blackC,25%);
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -375,12 +375,13 @@ em{font-family: 'Georgia'; font-style: italic;}
   .c-pin{@include image('social/pinterest.svg')}
   .c-wa{@include image('social/whatsapp.svg')}
 
-  &.t--light{
+  &.t-light{
     .c-fb{@include image('social-white/facebook.svg')}
     .c-tw{@include image('social-white/twitter.svg')}
     .c-gplus{@include image('social-white/gplus.svg')}
     .c-pin{@include image('social-white/pinterest.svg')}
     .c-wa{@include image('social-white/whatsapp.svg')}
+    .c-mail{@include image('social-white/mail.svg')}
   }
 }
 
@@ -563,6 +564,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-paginator{overflow: hidden; padding: em(48) 0; position: relative; z-index: 3}
 .c-paginator__button{display: inline-block; color: $redA; float:left; position: relative; @include clear;
   .o-rhombus{float:left; margin-left: em(-96);}
+  .o-rhombus__image{filter: grayscale(100%)}
   i{display: block; @include box(em(68), em(48)); float: left; background: $redA}
   .o-arrow{float: left; width: em(68); height:em(48)}
   span{float: left; position: relative; top: em(15); margin-left: em(16); @include txnTransform(0.5, ease)}
@@ -582,6 +584,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   
   &:hover, &.is-active{color: black;
     .o-arrow{stroke-dashoffset: 70}
+    .o-rhombus__image{filter:grayscale(0%)}
     &.s--left{
       span{@include translateX(em(-24))}
        .o-rhombus{@include translateX(em(30))}
@@ -637,7 +640,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-globe{@include box(1722px, 1722px); position: absolute; top: 0; background-color: red; border-radius: 50%}
 .c-sitemap{
   li{font-size: 0.875em}
-  a{padding:em(6) 0; display: inline-block;}
+  a{padding:em(6) 0 em(3); display: inline-block; @include txnOpacity(0.4);
+    &:hover{opacity:0.7}
+  }
   section{padding: em(6)}
   h4{margin-bottom: em(24);}
   strong{display: inline-block; margin-right: em(6)}

@@ -164,15 +164,15 @@
 			<div class="u-pt-xl">
 				<a href="<?php echo home_url(); ?>/programs#education" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $educationPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Education Programs', 'div'); ?>
+					<?php echo renderButton('','Education', 'div'); ?>
 				</a>
 				<a href="<?php echo home_url(); ?>/programs#livelihood" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $livelihoodPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Livelihood Programs', 'div'); ?>
+					<?php echo renderButton('','Livelihoods', 'div'); ?>
 				</a>
 				<a href="<?php echo home_url(); ?>/programs#capacity-building" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $capacityPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Capacity Building Programs', 'div'); ?>
+					<?php echo renderButton('','Capacity Building', 'div'); ?>
 				</a>
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 		</div>
 	</div>
 </section>
-<section class="o-splash">
+<section class="o-splash" style="margin-bottom: 3em">
 	<?php
 		$featuredQuote = get_field('featured_quote');
 		$featuredQuoteTitle = $featuredQuote['quote'];
@@ -201,7 +201,7 @@
 					<p><?php echo $featuredQuoteTitle; ?></p>
 					<span class="o-line"></span>
 				</blockquote>
-				<?php if(!$featuredAuthorName){?>
+				<?php if(!get_field('quote_author')){?>
 					<div class="o-author">
 						<?php
 							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$featuredQuoteAuthor));
@@ -232,55 +232,5 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section u-pb-l">
-	<div class="o-box">
-		<div class="u-clear">
-			<div class="u-twothird">
-				<?php 
-					$statistics = get_field('statistics', 22);
-					$statisticsList = array_rand( $statistics, 4);
-					foreach( $statisticsList as $statistic ){
-						$statisticNumber = $statistics[$statistic]['number'];
-						$statisticSummary = $statistics[$statistic]['summary'];
-						$statisticUnit = $statistics[$statistic]['unit'];
-						$statisticPhoto = $statistics[$statistic]['photo'];
-				 ?>
-				<div class="o-statistic u-half">
-					<div class="u-clear">
-						<div class="u-half">
-							<span><?php echo number_format($statisticNumber); ?><i class="u-superscript"><?php echo $statisticUnit; ?></i></span>
-							<p><?php echo $statisticSummary; ?></p>
-						</div>
-						<div class="u-half">
-							<figure class="js-lazy" data-image-url="<?php echo $statisticPhoto; ?>"></figure>
-						</div>
-					</div>
-				</div>
-				<?php } ?>
-			</div>
-			<div class="u-third">
-				<section>
-					<?php
-						$groupImpact = get_field('impact');
-						$groupImpactTitle =$groupImpact['title'];
-						$groupImpactSummary =$groupImpact['summary'];
-						$groupImpactStoriesPhoto = $groupImpact['stories_photo'];
-						$groupImpactStatsPhoto = $groupImpact['stats_photo'];
-					?>
-					<div class="o-crumb">
-						<div class="o-crumb__title">The Impact</div>
-						<div class="o-crumb__line"></div>
-						<div class="o-crumb__circle"></div>
-					</div>
-					<h1><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $groupImpactTitle; ?></span></a></h1>
-					<p><?php echo $groupImpactSummary; ?></p>
-					<div class="u-pt-l">
-						<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $groupImpactStoriesPhoto); ?>
-						<?php echo renderCircularButton(home_url().'/change-stories', 'See the Numbers', $groupImpactStatsPhoto); ?>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-</section>
+
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer') ); ?>

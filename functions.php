@@ -18,6 +18,18 @@
 	
 	show_admin_bar(false);
 
+	if( function_exists('acf_add_options_page') ) {
+		
+		acf_add_options_page(array(
+			'page_title' 	=> 'Quick Links',
+			'menu_title'	=> 'Quick Links',
+			'menu_slug' 	=> 'quick-links',
+			'capability'	=> 'edit_posts',
+			'redirect'		=> false
+		));
+		
+	}
+
 	function disable_wp_emojicons() {
 	  remove_action( 'admin_print_styles', 'print_emoji_styles' );
 	  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );

@@ -39,13 +39,20 @@
 					<div class="u-third">
 						<section>
 							<h3>Let the world know.<br/>Share this page.</h3>
-							<ul class="o-networks t--light">
-								<li><a href=""><i class="c-fb"></i></a></li>
-								<li><a href=""><i class="c-tw"></i></a></li>
-								<li><a href=""><i class="c-gplus"></i></a></li>
-								<li><a href=""><i class="c-pin"></i></a></li>
-								<li><a href=""><i class="c-wa"></i></a></li>
+							<?php
+								$pageTitle = get_the_title();
+								$pagePermalink = get_permalink();
+								$pageID = get_the_id();
+							?>
+
+							<ul class="o-networks t-light">
+								<li><a href="mailto:?&subject=<?php echo $pageTitle;?>&body=<?php echo $pagePermalink; ?>"><i class="c-mail"></i></a></li>
+								<li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $pagePermalink; ?>"><i class="c-fb"></i></a></li>
+								<li><a href="https://twitter.com/home?status=<?php echo $pagePermalink; ?>"><i class="c-tw"></i></a></li>
+								<li><a href="https://plus.google.com/share?url=<?php echo $pagePermalink; ?>"><i class="c-gplus"></i></a></li>
+								<li><a href="whatsapp://send?text=<?php echo $pagePermalink; ?>"><i class="c-wa"></i></a></li>
 							</ul>
+
 						</section>
 					</div>
 					<div class="u-third">
@@ -62,30 +69,26 @@
 					<div class="u-third">
 						<section class="u-center">
 							<h3>Let’s get working.<br/>Partner with Us</h3>
-							<?php echo renderButton('','Become a Partner'); ?>
+							<?php echo renderButton(home_url().'/contact','Become a Partner'); ?>
 						</section>
 					</div>
 				</div>
 				<div class="c-sitemap">
 					<div class="u-fifth">
 						<section>
-							<p>Copyright 2017. <br/>Stromme Foundation East Africa</p>
+							<p>&copy; <?php echo date("Y"); ?> <?php bloginfo( 'name' ); ?></p>
 						</section>
 					</div>
 					<div class="u-fifth">
 						<section>
-							<h4>Programs</h4>
+							<h4>Our Programs</h4>
 							<ul>
-								<li><a href="">Program Title 1</a></li>
-								<li><a href="">Program Title 2</a></li>
-								<li><a href="">Program Title 3</a></li>
-								<li><a href="">Program Title 4</a></li>
-								<li><a href="">Program Title 5</a></li>
-								<li><a href="">Program Title 6</a></li>
-								<li><a href="">Program Title 7</a></li>
-								<li><a href="">Program Title 8</a></li>
-								<li><a href="">Program Title 9</a></li>
-								<li><a href="">Program Title 10</a></li>
+								<?php  
+									$programsList = new WP_Query(array('post_type'=>'program','posts_per_page'=>-1));
+									while ( $programsList->have_posts() ) : $programsList->the_post();
+								?>
+								<li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
+							<?php endwhile; wp_reset_postdata(); ?>
 							</ul>
 						</section>
 					</div>
@@ -93,23 +96,28 @@
 						<section>
 							<h4>About SFEA</h4>
 							<ul>
-								<li><a href="">Sitemap Title 1</a></li>
-								<li><a href="">Sitemap Title 2</a></li>
-								<li><a href="">Sitemap Title 3</a></li>
-								<li><a href="">Sitemap Title 4</a></li>
-								<li><a href="">Sitemap Title 5</a></li>
+								<li><a href="<?php echo home_url(); ?>/about">Profile</a></li>
+								<li><a href="<?php echo home_url(); ?>/change-stories">Change Stories</a></li>
+								<li><a href="<?php echo home_url(); ?>/partners">Partners</a></li>
+								<li><a href="<?php echo home_url(); ?>/newsroom">Newsroom</a></li>
 							</ul>
 						</section>
 					</div>
 					<div class="u-fifth">
 						<section>
 							<h4>Contact</h4>
+							<?php
+								$contactInfo = get_field('contacts',18);
+								$contactTel = $contactInfo[0]['telephone'];
+								$contactEmail = $contactInfo[0]['email'];
+								$fb = esc_url(get_field('facebook',18));
+								$tw = esc_url(get_field('twitter',18));
+							?>
 							<ul>
-								<li><a href=""><strong>T</strong><span>Content Here 1</span></a></li>
-								<li><a href=""><strong>T</strong><span>Content Here 2</span></a></li>
-								<li><a href=""><strong>T</strong><span>Content Here 3</span></a></li>
-								<li><a href=""><strong>T</strong><span>Content Here 4</span></a></li>
-								<li><a href=""><strong>T</strong><span>Content Here 5</span></a></li>
+								<li><a href=""><strong>T:</strong><span><?php echo $contactTel; ?></span></a></li>
+								<li><a href="mailto:<?php echo $contactEmail; ?>"><strong>E:</strong><span><?php echo $contactEmail; ?></span></a></li>
+								<li><a href="<?php echo $fb; ?>"><span>Facebook</span></a></li>
+								<li><a href="<?php echo $tw; ?>"><span>Twitter</span></a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,11 +125,18 @@
 						<section>
 							<h4>Quick Links</h4>
 							<ul>
-								<li><a href="">Quick Link 1</a></li>
-								<li><a href="">Quick Link 2</a></li>
-								<li><a href="">Quick Link 3</a></li>
-								<li><a href="">Quick Link 4</a></li>
-								<li><a href="">Quick Link 5</a></li>
+								<?php 
+									while ( have_rows('quick_links', 'option') ) : the_row();
+										$linkTitle = get_sub_field('title');
+										$externalLink = get_sub_field('external_link');
+										if($externalLink){
+											$linkURL = esc_url(get_sub_field('URL'));
+										} else {
+											$linkURL = get_sub_field('link');
+										}
+								 ?>
+								<li><a href="<?php echo $linkURL; ?>"><?php echo $linkTitle; ?></a></li>
+								<?php endwhile; ?>
 							</ul>
 						</section>
 					</div>
