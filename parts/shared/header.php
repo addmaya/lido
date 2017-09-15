@@ -3,11 +3,6 @@
 	<div class="o-box">
 		<section class="u-clear">
 			<div class="u-half">
-				<!-- <div class="c-deco">
-					<div class="c-deco__circle"></div>
-					<div class="c-deco__dash"></div>
-					<div class="c-deco__line"></div>
-				</div> -->
 				<a href="<?php echo home_url(); ?>" class="c-logo"></a>
 			</div>
 			<div class="u-half">
@@ -17,7 +12,7 @@
 							<a href="<?php echo home_url(); ?>/programs">Programs <span>8</span></a>
 						</li>
 						<li>
-							<a href="<?php echo home_url(); ?>/impact-stories">Change Stories <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span>8</span></a>
 						</li>
 						<li>
 							<a href="<?php echo home_url(); ?>/partners">Partners <span>8</span></a>
@@ -32,7 +27,6 @@
 				</nav>
 			</div>
 		</section>
-		
 	</div>
 </header>
 <div class="c-sectionator">
@@ -46,7 +40,6 @@
 							<line x1="5.5" y1="12" x2="18.7" y2="12"/>
 							<line x1="5.5" y1="17.2" x2="18.7" y2="17.2"/>
 						</svg>
-						<span>MENU</span>
 					</a>
 				</li>
 				<li><a href="#" class="c-sectionator__button"><span></span></a></li>
@@ -57,29 +50,29 @@
 	</div>
 </div>
 <div class="c-burger t-dark">
-	<a href="#" class="c-burger__close"></a>
+	<!-- <a href="#" class="c-burger__close"></a> -->
 	<div>
 		<ul class="c-burger-menu">
 			<li class="c-burger-menu__item">
-				<a href="#">
+				<a href="<?php echo home_url(); ?>/programs">
 					<span>Programs</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
 				</a>
 			</li>
 			<li class="c-burger-menu__item">
-				<a href="#">
+				<a href="<?php echo home_url(); ?>/impact-stories">
 					<span>Change Stories</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-2.jpg')"></figure>
 				</a>
 			</li>
 			<li class="c-burger-menu__item">
-				<a href="#">
+				<a href="<?php echo home_url(); ?>/partners">
 					<span>Partners</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
 				</a>
 			</li>
 			<li class="c-burger-menu__item">
-				<a href="#">
+				<a href="<?php echo home_url(); ?>/newroom">
 					<span>Newsroom</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
 				</a>
@@ -89,21 +82,43 @@
 			<div class="u-half">
 				<section class="u-wrap">
 					<h3>About</h3>
-					<p>Irene Pereyra is one half of the world-famous design duo Anton and Irene. Unlike many top design firms</p>
-					<?php echo renderButton('#', 'Learn More'); ?>
+					<p><?php the_field('description', 8); ?></p>
+					<?php echo renderButton(home_url().'/about', 'Learn More'); ?>
 				</section>
 			</div>
 			<div class="u-half">
 				<section class="u-wrap">
 					<h3>Get in Touch</h3>
-					<p>Telephone: +256 777 578 890</p>
-					<p>Fax: +256 777 578 890</p>
-					<p>Mail: <a href="mailto:sfeastafrica@stromme.org">sfeastafrica@stromme.org</a></p>
-					<?php echo renderButton('#', 'Get in Touch'); ?>
+					<?php
+						$contactInfo = get_field('contacts',18);
+						$contactTel = $contactInfo[0]['telephone'];
+						$contactAddress = $contactInfo[0]['address'];
+						$contactEmail = $contactInfo[0]['email'];
+						$fb = esc_url(get_field('facebook',18));
+						$tw = esc_url(get_field('twitter',18));
+					?>
+					<p>Address: <?php echo $contactAddress; ?></p>
+					<p>Telephone: <?php echo $contactTel; ?></p>
+					<p>Mail: <a href="mailto:<?php echo $contactEmail; ?>"><?php echo $contactEmail; ?></a></p>
+					<ul class="o-networks u-pt-m">
+						<li>
+							<a href="<?php echo $fb; ?>">
+								<i class="c-fb"></i>
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $tw; ?>">
+								<i class="c-tw"></i>
+							</a>
+						</li>
+					</ul>
+					<div class="u-pt-m"><?php echo renderButton(home_url().'/contact', 'Get in Touch'); ?></div>
 				</section>
 			</div>
 		</div>
 	</div>
 </div>
 <div id="barba-wrapper">
-	<div class="barba-container">
+	<div class="barba-container" data-namespace="<?php
+		if(is_front_page()){echo 'home';}
+	?>">

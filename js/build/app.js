@@ -168,6 +168,21 @@ jQuery(document).ready(function($) {
 		 });
 	}
 
+	function loadLazyImage(obj){
+		obj.bind('inview', function (event, isInView) {
+	      if (isInView) {
+	      	var me = $(this);
+	      	var imageURL = me.data('image-url');
+
+	      	if(imageURL){
+	      		me.removeClass('js-lazy');
+	      		me.css('background-image', 'url(' + imageURL + ')');
+	      		me.addClass('is-loaded');
+	    	}
+	      }
+	    });
+    }
+
 	//menu
 	$('nav a').click(function() {
 		$('nav .is-active').removeClass('is-active');
@@ -229,15 +244,25 @@ jQuery(document).ready(function($) {
 	        $('body').removeClass('u-oh');
 	    }
 	});
-	
-	//page
-	var page = Barba.BaseView.extend({
-	  namespace: 'page',
+
+	//page-home
+	var pageHome = Barba.BaseView.extend({
+	  namespace: 'home',
 	  onEnter: function() {
-	    alert('go');
+	    var splashSwiper = new Swiper('#c-splash__swiper', {
+	      	loop: true,
+	      	autoplay: 7000,
+	      	speed: 1500,
+	      	effect:'fade',
+	      	fade: {crossFade: true},
+	      	autoplayDisableOnInteraction:false,
+	      	nextButton: '.swiper-button-next',
+	      	prevButton: '.swiper-button-prev'
+	      });
 	  }
 	});
-	page.init();
+	pageHome.init();
+
 	
 	
 	//page transition
@@ -268,6 +293,7 @@ jQuery(document).ready(function($) {
 
 	//page load
 	function pageLoad(){
+		loadLazyImage($('.js-lazy'));
 		submitContactForm();
 		getStories();
 		popInit();
