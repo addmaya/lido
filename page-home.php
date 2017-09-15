@@ -54,14 +54,16 @@
 					?>
 
 						<div class="u-half">
-							<section>
-								<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyTitle; ?></span></a></h2>
-								<span class="o-byline"><?php echo $storyArea; ?></span>
-								<?php echo renderButton($storyLink, 'Read '.$storyAuthor."'s Story"); ?>
-							</section>
-							<a href="#" class="o-rhombus s--small">
-								<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $storyPhoto; ?>"><span></span></figure>
-							</a>
+							<div class="u-wrap u-clear">
+								<section>
+									<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyTitle; ?></span></a></h2>
+									<span class="o-byline"><?php echo $storyArea; ?></span>
+									<?php echo renderButton($storyLink, 'Read '.$storyAuthor."'s Story"); ?>
+								</section>
+								<a href="#" class="o-rhombus s--small">
+									<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $storyPhoto; ?>"><span></span></figure>
+								</a>
+							</div>
 						</div>
 
 					<?php endwhile; wp_reset_postdata(); ?>
@@ -164,15 +166,15 @@
 			<div class="u-pt-xl">
 				<a href="<?php echo home_url(); ?>/programs#education" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $educationPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Education Programs', 'div'); ?>
+					<?php echo renderButton('','Education', 'div'); ?>
 				</a>
 				<a href="<?php echo home_url(); ?>/programs#livelihood" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $livelihoodPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Livelihood Programs', 'div'); ?>
+					<?php echo renderButton('','Livelihood', 'div'); ?>
 				</a>
 				<a href="<?php echo home_url(); ?>/programs#capacity-building" class="o-button s--circular">
 					<section><figure class="js-lazy" data-image-url="<?php echo $capacityPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Capacity Building Programs', 'div'); ?>
+					<?php echo renderButton('','Capacity Building', 'div'); ?>
 				</a>
 			</div>
 		</div>
@@ -276,7 +278,6 @@
 					<p><?php echo $groupImpactSummary; ?></p>
 					<div class="u-pt-l">
 						<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $groupImpactStoriesPhoto); ?>
-						<?php echo renderCircularButton(home_url().'/change-stories', 'See the Numbers', $groupImpactStatsPhoto); ?>
 					</div>
 				</section>
 			</div>

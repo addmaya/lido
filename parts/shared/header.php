@@ -72,7 +72,7 @@
 				</a>
 			</li>
 			<li class="c-burger-menu__item">
-				<a href="<?php echo home_url(); ?>/newroom">
+				<a href="<?php echo home_url(); ?>/newsroom">
 					<span>Newsroom</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
 				</a>

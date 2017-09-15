@@ -16,7 +16,7 @@ $redC: #7A003C;
 $blackA: #231F20;
 $blackB: #58595B;
 $blackC: #A7A9AC;
-$white: lighten($blackC,25%);
+$white: lighten($blackC,20%);
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -190,7 +190,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-uppercase{text-transform: uppercase;}
 
 /*objects*/
-.o-box{width:85%; @include center; @include clear}
+.o-box{width:87%; @include center; @include clear}
 .o-table{display: table; width: 100%; height: 100%}
 .o-table__cell{display: table-cell; vertical-align: middle}
 .o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center}
@@ -296,7 +296,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.u-pb-l{padding-bottom: 3em}
 }
 
-.o-tint{background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute}
+.o-tint{opacity:0.8; background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute}
 .o-crumb{@include clear; 
   div{float: left; opacity:0.5}
   &.s--updates{font-size: em(24); color: $redA; margin-bottom: 2.5em;
@@ -344,9 +344,9 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-image__cover{@include translateY(100%)}
   }
 }
-.o-image__cover{display: block; @include canvas; background-color:#a2a2a2; z-index:3; position: absolute; @include image('shield.svg'); background-repeat: no-repeat; background-position: center; background-size: em(72); @include txnTransform(0.8, cubic-bezier(1,0, 0, 1))}
+.o-image__cover{display: block; @include canvas; background-color:#fff; z-index:3; position: absolute; @include txnTransform(0.8, cubic-bezier(1,0, 0, 1))}
 
-.o-statistic{position: relative; margin:em(56) 0 em(112);
+.o-statistic{position: relative; margin:em(56) 0 em(144);
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
   p{padding-top: em(24); padding-right: em(12); font-family: 'Georgia'; font-style: italic; line-height: 1.6;}
   figure{@include box(em(120), em(120)); @include bkg(grey); margin-left:1em; @include cover}
@@ -539,7 +539,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 
 .c-splash{@include box(100%, 75%); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:black;
-  .o-button{padding-top: em(48)}
+  .o-button{padding-top: em(30)}
   .o-table{position: absolute; z-index: 2}
   .o-table__cell{vertical-align: bottom; padding-bottom:3em}
   .o-box{@include clear}
@@ -551,10 +551,18 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 
 .c-highlights{height:25%; overflow:hidden; position: relative; color: $white;
-  section{float:left; width:70%; padding-top: 1.5em}
-  .o-rhombus{float: right}
+  section{float:left; width:70%; padding-top:em(12)}
+  .o-rhombus{float: right; filter:grayscale(100%)}
   h2{font-size: 1em}
-  .o-button{padding-top:em(24)}
+  .o-button{padding-top:em(18)}
+  .u-half{
+    &:first-child{
+      .u-wrap{padding-left:0}
+    }
+    &:last-child{
+      .u-wrap{padding-right:0}
+    }
+  }
   .o-rhombus{
     &:hover{
       @include rhombusHover;
