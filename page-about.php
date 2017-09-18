@@ -3,38 +3,28 @@
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="o-box">
+				<?php
+					$sectionVision = get_field('funding_partners');
+					$vision =$sectionVision['title'];
+					$mission =$sectionVision['summary'];
+					$valuesImage = $sectionVision['core_values'];
+					$areasImage = $sectionVision['where_we_work'];
+					$impactImage = $sectionVision['impact_highlights'];
+				?>
 				<section>
-					<h1>A world free of poverty</h1>
-					<p>Stromme Foundation is a Norwegian based international development organization that has, since 1976, worked to help people in Asia, South America, West and Eastern Africa get out of poverty. SF Head Office is in Kristiansand, Norway. The organization currently works in 13 countries including Kenya, Tanzania, Uganda and South Sudan which are under Stromme Foundation Eastern Africa.</p>		
+					<h1><?php echo $vision; ?></h1>
+					<p><?php echo $mission; ?></p>	
 				</section>
 				<span class="o-line"></span>
 				<ul class="u-clear">
 					<li class="u-third">
-						<a href="#" class="o-button-rhombus">
-							<figure></figure>
-							<div class="o-button">
-								<i class="o-icon"></i>
-								<span>Our Core Values</span>
-							</div>
-						</a>
+						<?php echo renderRhombusButton('#', 'Core Values', $valuesImage); ?>
 					</li>
 					<li class="u-third">
-						<a href="#" class="o-button-rhombus">
-							<figure></figure>
-							<div class="o-button">
-								<i class="o-icon"></i>
-								<span>Where we Work</span>
-							</div>
-						</a>
+						<?php echo renderRhombusButton('#', 'Where We Work', $areasImage); ?>
 					</li>
 					<li class="u-third">
-						<a href="#" class="o-button-rhombus">
-							<figure></figure>
-							<div class="o-button">
-								<i class="o-icon"></i>
-								<span>Impact Highlights</span>
-							</div>
-						</a>
+						<?php echo renderRhombusButton('#', 'Impact Highlights', $impactImage); ?>
 					</li>
 				</ul>
 			</div>
@@ -56,36 +46,43 @@
 					</div>
 				</div>
 				<section class="c-values layer" data-depth="0.4">
-					<div class="o-value s--one">
+					<?php 
+						$valueCount = 0; 
+						$valueClass = '';
+
+						while( have_rows('values') ): the_row();
+							$valueTitle = get_sub_field('title');
+							$valueDescription = get_sub_field('description');
+							$valueImage = get_sub_field('photo');
+
+							switch ($valueCount) {
+								case 0:
+									$valueClass = 's--one';
+									break;
+								case 1:
+									$valueClass = 's--two';
+									break;
+								case 2:
+									$valueClass = 's--three';
+									break;
+								
+								default:
+									break;
+							}
+					?>
+					<div class="o-value <?php echo $valueClass; ?>">
 						<figure class="u-half">
 							<span class="o-rhombus s--medium u-block"></span>
 						</figure>
 						<section class="u-half">
-							<h3>Justice</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
+							<h3><?php echo $valueTitle; ?></h3>
+							<p><?php echo $valueDescription; ?></p>
 							<span class="o-line t-dark"></span>
 						</section>
 					</div>
-					<div class="o-value s--two">
-						<figure class="u-half">
-							<span class="o-rhombus s--medium u-block"></span>
-						</figure>
-						<section class="u-half">
-							<h3>Justice</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-							<span class="o-line t-dark"></span>
-						</section>
-					</div>
-					<div class="o-value s--three">
-						<figure class="u-half">
-							<span class="o-rhombus s--medium u-block"></span>
-						</figure>
-						<section class="u-half">
-							<h3>Justice</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-							<span class="o-line t-dark"></span>
-						</section>
-					</div>
+
+					<?php $valueCount++; endwhile; ?>
+
 				</section>
 			</div>
 		</div>
@@ -96,21 +93,52 @@
 	</div>
 </section>
 <section class="o-splash">
-	<figure class="o-splash__figure">
+	<?php
+		$featuredQuote = get_field('featured_quote');
+		$featuredQuoteTitle = $featuredQuote['quote'];
+		$featuredQuotePhoto = $featuredQuote['image'];
+
+		$featuredQuoteAuthor = $featuredQuote['staff'];
+		$featuredAuthorName = $featuredQuote['author']['name'];
+		$featuredAuthorTitle = $featuredQuote['author']['title'];
+	?>
+	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
+		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content">
 			<div class="o-box">
+				
 				<blockquote>
-					<p>Hope is ipsum dolor sit amet consectur community elit. Morbi molestie.</p>
+					<p><?php echo $featuredQuoteTitle; ?></p>
 					<span class="o-line"></span>
 				</blockquote>
-				<div class="o-author">
-					<figure></figure>
-					<section>
-						<strong>Mrs. Priscilla M.Serukka</strong>
-						<em>Regional Director, SFEA</em>
-					</section>
-				</div>
+				<?php if(!get_field('quote_author')){?>
+					<div class="o-author">
+						<?php
+							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$featuredQuoteAuthor));
+							while ( $featureQuoteStaff->have_posts() ) : $featureQuoteStaff->the_post();
+								$featureQuoteStaffPhoto = get_field('photo');
+								$featureQuoteStaffTitle = get_field('job_title');
+								$featureQuoteStaffName = get_the_title();
+						?>
+						<figure class="js-lazy" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
+						<section>
+							<strong><?php echo $featureQuoteStaffName; ?></strong>
+							<em><?php echo $featureQuoteStaffTitle; ?>, SFEA</em>
+						</section>
+
+						<?php endwhile; wp_reset_postdata(); ?>
+					</div>
+
+				<?php } else {?>
+					<div class="o-author">
+						<figure></figure>
+						<section>
+							<strong><?php echo $featuredAuthorName; ?></strong>
+							<em><?php echo $featuredAuthorTitle; ?></em>
+						</section>
+					</div>
+				<?php } ?>
 			</div>
 		</section>
 	</figure>
@@ -125,8 +153,14 @@
 			</div>
 			<figure class="c-regions__map"></figure>
 			<section>
-				<h1>Taking hope to hard to reach areas of East Africa.</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				<?php
+					$sectionAreas = get_field('where_we_work');
+					$sectionAreasTitle =$sectionAreas['title'];
+					$sectionAreasSummary =$sectionAreas['summary'];
+					$sectionAreasPhoto =$sectionAreas['photo'];
+				?>
+				<h1><?php echo $sectionAreasTitle; ?></h1>
+				<p><?php echo $sectionAreasSummary; ?></p>
 				<div class="u-pt-l">
 					<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
 					<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
@@ -134,7 +168,7 @@
 			</section>
 		</div>
 		<div class="u-half c-regions__col">
-			<figure class="c-regions__image"></figure>
+			<figure class="c-regions__image js-lazy" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
 		</div>
 	</div>
 </section>
@@ -143,14 +177,14 @@
 		<div class="o-slider__image">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
-						<span>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
-					</div>
-					<div class="swiper-slide">
-						<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-2.jpg')"></figure>
-						<span>Mary is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</span>
-					</div>
+					<?php 
+						$photos = get_field('photo_highlights');
+						foreach ($photos as $photo) { ?>
+							<div class="swiper-slide">
+								<figure class="js-lazy" data-image-url="<?php echo $photo['url']; ?>"></figure>
+								<span><?php echo $photo['caption']; ?></span>
+							</div>
+					<?php } ?>
 				</div>
 				<div class="o-slider__buttons t-dark">
 					<?php echo renderButton('#','','div','s--prev') ?>

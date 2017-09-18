@@ -439,7 +439,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 .o-slider__image{background-color: $blackA; width: 90%; float: right;
-  figure{@include canvas}
+  figure{@include canvas; @include cover;}
 }
 .o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
 .o-partners{@include clear;

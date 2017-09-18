@@ -1,5 +1,4 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-
 <section class="c-splash t-dark">
 	<div class="swiper-container" id="c-splash__swiper">
 		<div class="swiper-wrapper">
@@ -234,7 +233,7 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section u-pb-l">
+<section class="o-section u-pb-0">
 	<div class="o-box">
 		<div class="u-clear">
 			<div class="u-twothird">
