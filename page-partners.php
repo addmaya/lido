@@ -44,7 +44,7 @@
 					));
 					while ( $fundingPartners->have_posts() ) : $fundingPartners->the_post();
 				?>
-					<li><a href="#"></a></li>
+					<li><a href="#"><figure></figure></a></li>
 				<?php  endwhile; wp_reset_postdata(); ?>
 			</ul>
 		</div>
@@ -247,7 +247,7 @@
 						));
 						while ( $networkPartners->have_posts() ) : $networkPartners->the_post();
 					?>
-						<li><a href="#"></a></li>
+						<li><a href="#"><figure></figure></a></li>
 					<?php  endwhile; wp_reset_postdata(); ?>
 				</ul>
 			</section>

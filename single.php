@@ -1,14 +1,33 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+<?php
+	$storyTitle = get_field('fancy_title');
+	$storySummary = get_field('summary');
+	$storyPhoto = get_field('photo');
+	$storyArea = get_field('area');
+	$storyProgramID = get_field('program');
+?>
 <div class="c-cover s--story t-dark">
 	<div class="o-story__header">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section>
-					<h1>Improved Delivery of Quality Education - James’ Story</h1>
+					<h1><?php echo $storyTitle; ?> - <?php the_title(); ?></h1>
 					<ul class="o-article__meta">
-						<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-						<li><a href="#">/ Uganda</a></li>
-						<li><a href="#">/ Published: June 29 2017</a></li>
+						<li><a href="#">/ Published: <?php echo get_the_date(); ?></a></li>
+						<?php if ($storyProgramID):
+							$storyPrograms = new WP_Query(array(
+								'post_type'=>'program',
+								'post__in'=>$storyProgramID,
+								'posts_per_page'=>-1
+							));
+							while($storyPrograms->have_posts()):$storyPrograms->the_post();
+						?>
+							<li><a href="<?php the_permalink(); ?>">/ Program: <?php the_title(); ?></a></li>
+						<?php endwhile; wp_reset_postdata(); endif; ?>
+
+						<?php if ($storyArea): ?>
+							<li><a href="#">/ Area: <?php echo $storyArea; ?></a></li>
+						<?php endif ?>						
 					</ul>
 					<span class="o-line"></span>
 				</section>
@@ -16,81 +35,10 @@
 		</div>
 	</div>
 	<div class="o-story__cover u-threefourth">
-		<figure></figure>
+		<figure class="js-lazy" data-image-url="<?php echo $storyPhoto; ?>"></figure>
 	</div>
 </div>
-<div class="o-story s--single">
-	<div class="o-box">
-		<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur </p>
-		<h3>Giving Girls Hope</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-		<strong>Benefits of Strommee</strong>
-		<ol>
-		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-		   <li>Aliquam tincidunt mauris eu risus.</li>
-		   <li>Vestibulum auctor dapibus neque.</li>
-		</ol>
-	</div>
-</div>
-<section class="o-splash">
-	<figure class="o-splash__figure">
-		<div class="o-splash__tint"></div>
-		<section class="o-splash__content">
-			<div class="o-box">
-				<blockquote>
-					<p>Hope is ipsum dolor sit amet consectur community elit. Morbi molestie.</p>
-					<span class="o-line"></span>
-				</blockquote>
-				<div class="o-author">
-					<figure></figure>
-					<section>
-						<strong>Mrs. Priscilla M.Serukka</strong>
-						<em>Regional Director, SFEA</em>
-					</section>
-				</div>
-			</div>
-		</section>
-	</figure>
-</section>
-<div class="o-story s--single">
-	<div class="o-box">
-		<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur </p>
-		<h3>Giving Girls Hope</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-	</div>
-</div>
-<section class="o-slider">
-	<div class="u-threefourth o-slider-col">
-		<figure class="o-slider__image"></figure>
-	</div>
-	<div class="u-fourth o-slider-col">
-		<div class="o-slider__caption">
-			<section class="u-wrap">
-				<em>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</em>
-				<span class="o-line"></span>
-			</section>
-		</div>
-	</div>
-</section>
-<section>
-	<div class="o-box">
-		<blockquote class="o-quote">
-			<p>Most of my work lorem ipsum sit amet consectur partners elit. Morbi molestie.</p>
-			<div>
-				<strong>Mr James Nakkaka</strong>
-				<em>Beneficiary</em>
-			</div>
-			<span class="o-line"></span>
-		</blockquote>
-	</div>
-</section>
-<div class="o-story s--single">
-	<div class="o-box">
-		<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur </p>
-		<h3>Giving Girls Hope</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.</p>
-	</div>
-</div>
+<?php Starkers_Utilities::get_template_parts(array('parts/shared/content'));?>
 <div class="o-box">
 	<div class="c-cta">
 		<div class="u-third">

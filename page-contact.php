@@ -40,44 +40,38 @@
 		<section class="c-contact__section">
 			<h1>Get in Touch</h1>
 			<section class="u-clear">
-				<div class="u-half">
-					<section>
-						<h3>Regional Office</h3>
-						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
-					</section>
-				</div>
-				<div class="u-half">
-					<section>
-						<h3>Juba Country Office</h3>
-						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
-					</section>
-				</div>
-				<div class="u-half">
-					<section>
-						<h3>Global Office</h3>
-						<p>Plot 25 Bukoto Street Kampala<br/>P.O. Box 27200,<br/>Kampala, Uganda</p>
-					</section>
-				</div>
-				<div class="u-half">
-					<section>
-						<h3>Make an Inquiry</h3>
-						<p>Telephone: +256 777 578 890</p>
-						<p>Fax: +256 777 578 890</p>
-						<p>Mail: <a href="mailto:sfeastafrica@stromme.org">sfeastafrica@stromme.org</a></p>
-					</section>
-				</div>
+				<?php 
+					while(have_rows('contacts')): the_row();
+						$office = get_sub_field('office');
+						$telephone = get_sub_field('telephone');
+						$fax = get_sub_field('fax');
+						$email = get_sub_field('email');
+						$address = get_sub_field('address');
+				 ?>
+					
+					<div class="u-half">
+						<section>
+							<h3><?php echo $office; ?></h3>
+							<p><?php echo $address; ?></p>
+							<p>Telephone: <?php echo $telephone; ?></p>
+							<p>Fax: <?php echo $fax; ?></p>
+							<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+						</section>
+					</div>
+				
+				<?php endwhile; ?>
 			</section>
 			<section>
 				<h3>Connect with Us</h3>
 				<ul class="o-networks">
 					<li>
-						<a href="">
+						<a href="<?php echo esc_url(get_field('facebook')); ?>">
 							<i class="c-fb"></i>
 							<span>StrommeEA</span>
 						</a>
 					</li>
 					<li class="u-pl-m">
-						<a href="">
+						<a href="<?php echo esc_url(get_field('twitter')); ?>">
 							<i class="c-tw"></i>
 							<span>PovertyBusters</span>
 						</a>

@@ -1,12 +1,20 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+<?php 
+	$partnerYear = get_field('partner_since');
+	$partnerLogo = get_field('logo');
+	$partnerSummary = get_field('summary');
+	$partnerAreas = get_field('intervention_areas');
+	$partnerPrograms = get_field('interventions_supported');
+ ?>
 <div class="c-cover s--story">
 	<div class="o-story__header s--partner">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section>
-					<h1>Norad FK</h1>
+					<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+					<h1><?php the_title(); ?></h1>
 					<ul class="o-article__meta">
-						<li><a href="#">/ Partner Since: June 29 2017</a></li>
+						<li><a href="#">/ Partner Since: <?php echo $partnerYear; ?></a></li>
 					</ul>
 					<span class="o-line"></span>
 				</section>
@@ -19,38 +27,70 @@
 </div>
 <div class="o-story s--single">
 	<div class="o-box">
-		<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies.Lorem ipsum dolor sit amet, consectetur </p>
+		<p><?php echo $partnerSummary; ?></p>
 		<span class="o-line"></span>
-		<h3 class="u-pt-m">Programs Supported</h3>
-		<div>
-			<a href="#" class="o-button s--circular s--block">
-				<figure></figure>
-				<div>
-					<i class="o-icon"></i>
-					<span>Bonga Adolescent Girls empowerment Program</span>
-				</div>
-			</a>
-			<a href="#" class="o-button s--circular s--block">
-				<figure></figure>
-				<div>
-					<i class="o-icon"></i>
-					<span>Community Managed Microfinance (CMMF)</span>
-				</div>
-			</a>
-			<a href="#" class="o-button s--circular s--block">
-				<figure></figure>
-				<div>
-					<i class="o-icon"></i>
-					<span>Climate resilience and diversification</span>
-				</div>
-			</a>
-		</div>
+		<?php
+			$programs = new WP_Query(array(
+				'post_type'=>'program',
+				'post__in'=>$partnerPrograms,
+				'posts_per_page'=>-1
+			));
+		?>
+		<?php if ($programs->have_posts()): ?>
+			<h3 class="u-pt-m">Programs Supported</h3>
+			<div>
+				<?php while($programs->have_posts()):$programs->the_post();
+					echo renderCircularButton(get_permalink(), get_the_title(), get_field('photo'));
+					endwhile; wp_reset_postdata();
+				?>
+			</div>
+		<?php endif ?>
 		<span class="o-line"></span>
-		<h3 class="u-pt-m">Area Implementation of SFEA Interventions</h3>
-		<p>Abim, Kotido, Kaabong</p>
-		<div style="height: 500px">
-			
-		</div>
+		
+		<?php if ($partnerAreas): ?>
+			<h3 class="u-pt-m">Area Implementation of SFEA Interventions</h3>
+			<p><?php echo $partnerAreas; ?></p>
+			<div style="height: 500px">
+				
+			</div>
+		<?php endif ?>
+		<?php if (condition): ?>
+			<section>
+				<h3 class="u-ptm-m">Contact <?php the_title(); ?></h3>
+				<?php 
+					while(have_rows('contacts')): the_row();
+						$office = get_sub_field('office');
+						$telephone = get_sub_field('telephone');
+						$fax = get_sub_field('fax');
+						$email = get_sub_field('email');
+						$address = get_sub_field('address');
+				 ?>
+					
+					<h3><?php echo $office; ?></h3>
+					<p><?php echo $address; ?></p>
+					<p>Telephone: <?php echo $telephone; ?></p>
+					<p>Fax: <?php echo $fax; ?></p>
+					<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+
+
+					<ul class="o-networks t-light">
+						<?php 
+							$networks = acf_get_fields('255');
+							if ($networks){
+								foreach ($networks as $network) {
+									$networkName = $network['name'];
+									$networkField = get_field($networkName, get_the_ID());
+									if($networkField){
+									echo '<li><a target="_blank" href="'.$networkField.'"><i class="c-fb s--'.$networkName.'"></i></a></li>';
+									}
+								}
+							}
+						 ?>
+					</ul>
+				
+				<?php endwhile; ?>
+			</section>
+		<?php endif ?>
 	</div>
 </div>
 <div class="o-box">

@@ -323,7 +323,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     h2{margin: em(18) 0;}
   }
 }
-.o-splash__figure{@include bkg(grey); position: absolute; @include canvas; top: 0; z-index: -1; @include cover}
+.o-splash__figure{@include bkg(grey); position: absolute; @include canvas; top: 0; z-index:1;@include cover}
 .o-splash__tint{@include absolute; @include canvas; z-index:2; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
 .o-splash__content{position: absolute; bottom: 10%; width: 100%; z-index: 3; text-align: center;
@@ -430,7 +430,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   em{font-size: em(14); line-height: 1.5}
   h2{padding-bottom: em(24)}
 
-  .swiper-container{height:520px; background-position: center}
+  .swiper-container{height:100%; background-position: center}
   .swiper-wrapper{@include prefix((transition-timing-function: cubic-bezier(0.63, -0.01, 0.15, 1)));
     @include device(xs){@include prefix((transition-timing-function:linear))}
   }
@@ -438,7 +438,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     span{display: none;}
   }
 }
-.o-slider__image{background-color: $blackA; width: 90%; float: right;
+.o-slider__image{background-color: $blackA; width: 90%; float: right; height:100%;
   figure{@include canvas; @include cover;}
 }
 .o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
@@ -484,13 +484,13 @@ em{font-family: 'Georgia'; font-style: italic;}
       &:after{background-color: $white;};
     }
   }
-  figure{@include box(em(360), 100%); background-color: $blackA; float: left; padding-bottom: 65%; position: relative; @include txnOpacity(0.3);
+  figure{@include box(em(360), auto); background-color: $blackA; float: left; padding-bottom: 65%; position: relative; @include txnOpacity(0.3); @include cover;
     a{position: absolute; @include canvas; @include cover; @include txnTransform(0.4,ease);
       &:hover{@include translateX(em(24));}
     }
     &:hover{opacity: 0.9}
   }
-  .o-article__summary{@include bkg($redC); float: left; width:em(288); padding: em(14); position: relative; z-index: 2; left: em(-36);}
+  .o-article__summary{@include bkg($redC); float: left; width:em(288); padding: em(14); position: relative; z-index: 4;left: em(-36);}
   .o-button{color: $white; padding-top:1.5em;}
   .o-line{margin: em(24) 0}
   &.s--bottom-left{width: em(360); float: right;
@@ -655,7 +655,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   h4{margin-bottom: em(24);}
   strong{display: inline-block; margin-right: em(6)}
 }
-.c-cover{height: 100%; position: relative;
+.c-cover{height: 100%; position: relative; z-index:1;
   h1{padding-bottom: em(16)}
   .u-half{height: 100%; position: relative;}
   &.s--story{height:70%}

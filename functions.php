@@ -110,7 +110,12 @@
 	}
 	function renderRhombusButton($link, $title, $image){
 		$button = renderButton('',$title, 'div');
-		return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div>'.$button.'</a>';
+		if($title){
+			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div>'.$button.'</a>';
+		}
+		else {
+			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div></a>';
+		}
 	}
 
 	function submitContact(){

@@ -111,7 +111,14 @@
 						<section class="o-article__summary">
 							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyAuthor; ?></span></a></h2>
 							<ul class="o-article__meta">
-								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
+								
+								<?php
+									$storyPrograms = get_field('program');
+									if ($storyPrograms):
+										foreach ($storyPrograms as $storyProgram):
+								?>
+									<li><a href="<?php echo get_permalink($storyProgram->ID); ?>">/ <?php echo get_the_title($storyProgram->ID); ?></a></li>
+								<?php endforeach; endif; ?>
 								<li><a href="#">/ <?php echo $storyArea; ?></a></li>
 								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
 							</ul>

@@ -1,4 +1,4 @@
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <section class="o-section c-updates">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
@@ -7,92 +7,69 @@
 			<div class="o-crumb__circle"></div>
 		</div>
 		<div class="o-article__grid s--updates">
-			<div class="o-article__row">
-				<article class="o-article">
+			<?php
+				$featuredUpdates = new WP_Query(array(
+					'posts_per_page'=>-1
+					)
+				);
+
+				$rowCount = 0;
+				$articleCount = 0;
+				$articleClass = '';
+
+				while ($featuredUpdates->have_posts()) : $featuredUpdates->the_post();
+					$storyAuthor = get_the_title();
+					$storyLink = get_permalink();
+					$storyTitle = get_field('fancy_title');
+					$storyPhoto = get_field('photo');
+					$storyArea = get_field('area');
+				if ($rowCount > 1) {
+					$rowCount = 0;
+				}
+				switch ($articleCount) {
+					case 1:
+						$articleClass = 's--bottom-left';
+						break;
+					case 2:
+						$articleClass = 's--bottom-right';
+						break;
+					case 3:
+						$articleClass = 's--right';
+						break;
+					default:
+						break;
+				}
+			?>
+				<article class="o-article <?php echo $articleClass; ?>">
 					<section class="u-clear">
-						<figure></figure>
-						<section class="o-article__summary">
-							<h2>Mary Ling Nakilyowas</h2>
-							<ul class="o-article__meta">
-								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-								<li><a href="#">/ Uganda</a></li>
-								<li><a href="#">/ June 29 2017</a></li>
-							</ul>
-							<a class="o-button s--block" href="#">
-								<div>
-									<i class="o-icon"></i>
-									<span>Read Story</span>
-								</div>
+						<figure>
+							<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
+								<span class="o-image__cover"></span>
 							</a>
-						</section>
-					</section>
-				</article>
-				<article class="o-article s--bottom-left" style="float:right">
-					<section class="u-clear">
-						<figure></figure>
+						</figure>
 						<section class="o-article__summary">
-							<h2>Langa Mark</h2>
+							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyAuthor; ?></span></a></h2>
 							<ul class="o-article__meta">
-								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-								<li><a href="#">/ Uganda</a></li>
-								<li><a href="#">/ June 29 2017</a></li>
+								
+								<?php
+									$storyPrograms = get_field('program');
+									if ($storyPrograms):
+										foreach ($storyPrograms as $storyProgram):
+								?>
+									<li><a href="<?php echo get_permalink($storyProgram->ID); ?>">/ <?php echo get_the_title($storyProgram->ID); ?></a></li>
+								<?php endforeach; endif; ?>
+								<li><a href="#">/ <?php echo $storyArea; ?></a></li>
+								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
 							</ul>
-							<a class="o-button s--block" href="#">
-								<div>
-									<i class="o-icon"></i>
-									<span>Read Story</span>
-								</div>
-							</a>
+							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>
 						</section>
 					</section>
 				</article>
-			</div>
-			<div class="o-article__row">
-				<article class="o-article s--bottom-right">
-					<section class="u-clear">
-						<figure></figure>
-						<section class="o-article__wrap">
-							<section class="o-article__summary">
-								<h2>Langa Mark</h2>
-								<ul class="o-article__meta">
-									<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-									<li><a href="#">/ Uganda</a></li>
-									<li><a href="#">/ June 29 2017</a></li>
-								</ul>
-								<a class="o-button s--block" href="#">
-									<div>
-										<i class="o-icon"></i>
-										<span>Read Story</span>
-									</div>
-								</a>
-							</section>
-						</section>
-					</section>
-				</article>
-				<article class="o-article s--right">
-					<section class="u-clear">
-						<figure></figure>
-						<section class="o-article__summary">
-							<h2>Langa Mark</h2>
-							<ul class="o-article__meta">
-								<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-								<li><a href="#">/ Uganda</a></li>
-								<li><a href="#">/ June 29 2017</a></li>
-							</ul>
-							<a class="o-button s--block" href="#">
-								<div>
-									<i class="o-icon"></i>
-									<span>Read Story</span>
-								</div>
-							</a>
-						</section>
-					</section>
-				</article>
-			</div>
+			<?php $rowCount++; $articleCount++; endwhile; wp_reset_postdata(); ?>
 		</div>
 		<div class="u-center">
 			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"></i>
+				<i class="o-icon"><strong>15</strong></i>
 				<span>More Change Stories</span>
 			</a>
 		</div>
@@ -111,10 +88,22 @@
 				<section class="o-splash__content">
 					<div class="o-box">
 						<span class="o-line"></span>
-						<h2>Video: Our Work in East Africa so far</h2>
+						<?php 
+							$featuredVideo = new WP_Query(array(
+								'post_type'=>'video',
+								'posts_per_page'=>1
+								)
+							);
+							while ($featuredVideo->have_posts()) : $featuredVideo->the_post();
+								$videoLink = get_field('link');
+								$videoSummary = get_field('summary');
+						 ?>
+						<h2>Video: <?php echo the_title(); ?></h2>
+						<a href="#">Play Video</a>
 						<p>
-							<em>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. </em>
+							<em><?php echo $videoSummary; ?></em>
 						</p>
+						<?php endwhile; wp_reset_postdata(); ?>
 					</div>
 				</section>
 			</figure>
@@ -136,13 +125,37 @@
 		</div>
 		<section class="o-slider">
 			<div class="u-threefourth o-slider-col">
-				<figure class="o-slider__image"></figure>
+				<div class="o-slider__image">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							
+							<?php 
+								$featuredAlbum = new WP_Query(array(
+									'post_type'=>'album',
+									'posts_per_page'=>1
+									)
+								);
+
+								while ($featuredAlbum->have_posts()) : $featuredAlbum->the_post();
+								$photos = get_field('photos');
+								foreach ($photos as $photo): ?>
+									<div class="swiper-slide">
+										<figure class="js-lazy" data-image-url="<?php echo $photo['url']; ?>"></figure>
+										<span><?php echo $photo['caption']; ?></span>
+									</div>
+							<?php endforeach; endwhile; wp_reset_postdata(); ?>
+						</div>
+						<div class="o-slider__buttons t-dark">
+							<?php echo renderButton('#','','div','s--prev') ?>
+							<?php echo renderButton('#','','div','s--next') ?>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="u-fourth o-slider-col">
 				<div class="o-slider__caption">
 					<section class="u-wrap">
-						<h2>Photos: Field visit to Kenya</h2>
-						<em>Jane is a Bonga Girl who Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec.</em>
+						<em></em>
 						<span class="o-line"></span>
 					</section>
 				</div>
@@ -150,48 +163,38 @@
 		</section>
 		<div class="u-pt-l">
 			<div class="o-article__row">
-				<article class="o-article s--bottom-right s--album">
-					<section class="u-clear">
-						<figure></figure>
-						<section class="o-article__wrap">
-							<section class="o-article__summary">
-								<h2>Langa Mark</h2>
-								<ul class="o-article__meta">
-									<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-									<li><a href="#">/ Uganda</a></li>
-									<li><a href="#">/ June 29 2017</a></li>
-								</ul>
-								<a class="o-button s--block" href="#">
-									<div>
-										<i class="o-icon"></i>
-										<span>View Album</span>
-									</div>
-								</a>
+				<?php 
+					$albums = new WP_Query(array(
+						'post_type'=>'album',
+						'posts_per_page'=>2,
+						'offset'=>-1
+						)
+					);
+
+					$i=0;
+					
+					while ($albums->have_posts()) : $albums->the_post();
+						$albumPhotos = get_field('photos');
+						$albumCover = $albumPhotos[$i]['url'];
+					?>
+						<article class="o-article s--bottom-right s--album">
+							<section class="u-clear">
+								<figure class="o-image js-lazy" data-image-url="<?php echo $albumCover; ?>">
+									<span class="o-image__cover"></span>
+								</figure>
+								<section class="o-article__wrap">
+									<section class="o-article__summary">
+										<h2><a href="#"><span><?php the_title(); ?></span></a></h2>
+										<ul class="o-article__meta">
+											<li><a href="#">/ <?php the_field('location'); ?></a></li>
+											<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
+										</ul>
+										<div class="t-dark"><?php echo renderButton('#', 'View Photos'); ?></div>
+									</section>
+								</section>
 							</section>
-						</section>
-					</section>
-				</article>
-				<article class="o-article s--bottom-right s--album">
-					<section class="u-clear">
-						<figure></figure>
-						<section class="o-article__wrap">
-							<section class="o-article__summary">
-								<h2>Langa Mark</h2>
-								<ul class="o-article__meta">
-									<li><a href="#">/ Bong Girls Empowerment Program</a></li>
-									<li><a href="#">/ Uganda</a></li>
-									<li><a href="#">/ June 29 2017</a></li>
-								</ul>
-								<a class="o-button s--block" href="#">
-									<div>
-										<i class="o-icon"></i>
-										<span>View Album</span>
-									</div>
-								</a>
-							</section>
-						</section>
-					</section>
-				</article>
+						</article>
+				<?php $i++; endwhile; wp_reset_postdata(); ?>
 			</div>
 		</div>
 		<div class="u-center">
@@ -210,42 +213,30 @@
 			<div class="o-crumb__circle"></div>
 		</div>
 		<div class="u-clear u-pt-m">
-			<a href="#" class="o-statistic u-third s--doc">
-				<div class="u-clear">
-					<div class="u-half">
-						<i class="o-icon"></i>
-						<span>2016 Stromme Annual Impact Report</span>
-						<p>5 June 2016</p>
-					</div>
-					<div class="u-half">
-						<figure></figure>
-					</div>
-				</div>
-			</a>
-			<a href="#" class="o-statistic u-third s--doc">
-				<div class="u-clear">
-					<div class="u-half">
-						<i class="o-icon"></i>
-						<span>2015 Stromme Annual Impact Report</span>
-						<p>5 June 2016</p>
-					</div>
-					<div class="u-half">
-						<figure></figure>
-					</div>
-				</div>
-			</a>
-			<a href="#" class="o-statistic u-third s--doc">
-				<div class="u-clear">
-					<div class="u-half">
-						<i class="o-icon"></i>
-						<span>2014 Stromme Annual Impact Report</span>
-						<p>5 June 2016</p>
-					</div>
-					<div class="u-half">
-						<figure></figure>
-					</div>
-				</div>
-			</a>
+			<?php 
+				$documents = new WP_Query(array(
+					'post_type'=>'document',
+					'posts_per_page'=>3,
+					)
+				);
+				
+				while ($documents->have_posts()) : $documents->the_post();
+					$documentFile = get_field('file');
+					$documentCover ='';
+				?>
+					<a title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-statistic u-third s--doc">
+						<div class="u-clear">
+							<div class="u-half">
+								<i class="o-icon"></i>
+								<span><?php the_title(); ?></span>
+								<p><?php echo get_the_date(); ?></p>
+							</div>
+							<div class="u-half">
+								<figure></figure>
+							</div>
+						</div>
+					</a>
+			<?php $i++; endwhile; wp_reset_postdata(); ?>
 		</div>
 	</div>
 </section>
