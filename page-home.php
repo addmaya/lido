@@ -8,6 +8,7 @@
 				$slideBtnLink = get_sub_field('button_link');
 				$slidePhoto = get_sub_field('photo');
 				$slideVideo = get_sub_field('video');
+				$slideCaption = get_sub_field('caption');
 			?>
 			
 			<div class="swiper-slide">
@@ -16,6 +17,7 @@
 						<div class="o-box">
 							<div class="u-half">
 								<h1><a href="#"><span><?php echo $slideTitle; ?></span></a></h1>
+								<p><?php echo $slideCaption; ?></p>
 								<?php echo renderButton($slideBtnLink, $slideBtnLabel); ?>
 							</div>
 						</div>
@@ -33,6 +35,44 @@
 </section>
 
 <section class="c-highlights t-dark">
+	<div class="o-div s--left"></div>
+	<div class="o-div s--right"></div>
+	<div class="o-table">
+		<div class="o-table__cell">
+			<div class="o-box">
+				<div class="u-clear">
+				
+					<?php
+						$blockHighlights = get_field('highlights');
+						$blockFeatures = $blockHighlights['feature'];
+
+						foreach ($blockFeatures as $feature) {
+							$featureTitle = $feature['title'];
+							$featureSubtitle = $feature['subtitle'];
+							$featureLink = $feature['button_link'];
+							$featureLabel = $feature['button_label'];
+							$featurePhoto = $feature['photo'];
+					?>
+						<div class="u-half">
+							<div class="u-wrap u-clear">
+								<section>
+									<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $featureTitle; ?></span></a></h2>
+									<span class="o-byline"><?php echo $featureSubtitle; ?></span>
+									<?php echo renderButton($featureLink, $featureLabel); ?>
+								</section>
+								<a href="#" class="o-rhombus s--small">
+									<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $featurePhoto; ?>"><span></span></figure>
+								</a>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- <section class="c-highlights t-dark">
 	<div class="o-div s--left"></div>
 	<div class="o-div s--right"></div>
 	<div class="o-table">
@@ -70,33 +110,33 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <section class="o-section" style="background-color: #E2E2E2">
 	<div class="o-box">
 		<div class="u-half s--right">
 			<?php
-				$groupCause = get_field('why_east_africa');
-				$groupCauseTitle =$groupCause['title'];
-				$groupCauseSummary =$groupCause['summary'];
-				$groupCauseImage =$groupCause['image'];
-				$groupCauseStaff = $groupCause['featured_staff'];
+				$blockCause = get_field('why_east_africa');
+				$blockCauseTitle =$blockCause['title'];
+				$blockCauseSummary =$blockCause['summary'];
+				$blockCauseImage =$blockCause['image'];
+				$blockCauseStaff = $blockCause['featured_staff'];
 			?>
 			<div class="o-crumb">
 				<div class="o-crumb__title">Why East Africa</div>
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<h1><a href="<?php echo home_url(); ?>/about"><span><?php echo $groupCauseTitle; ?></span></a></h1>
+			<h1><a href="<?php echo home_url(); ?>/about"><span><?php echo $blockCauseTitle; ?></span></a></h1>
 			<section class="u-clear">
 				<div class="u-half">
-					<p><?php echo $groupCauseSummary; ?></p>
+					<p><?php echo $blockCauseSummary; ?></p>
 				</div>
 				<div class="u-half">
 
 					<div class="o-author">
 						<?php
-							$causeStaff = new WP_Query(array('post_type'=>'team', 'p'=>$groupCauseStaff));
+							$causeStaff = new WP_Query(array('post_type'=>'team', 'p'=>$blockCauseStaff));
 							while ( $causeStaff->have_posts() ) : $causeStaff->the_post();
 								$causeStaffPhoto = get_field('photo');
 								$causeStaffTitle = get_field('job_title');
@@ -122,30 +162,30 @@
 	<div class="o-box">
 		<div class="u-twothird">
 			<?php
-				$groupPrograms = get_field('how_we_work');
-				$groupProgramsTitle =$groupPrograms['title'];
-				$groupProgramsSummary =$groupPrograms['summary'];
-				$groupProgramsImage =$groupPrograms['image'];
-				$educationPhoto = $groupPrograms['education_photo'];
-				$livelihoodPhoto = $groupPrograms['livelihoods_photo'];
-				$capacityPhoto = $groupPrograms['capacity_photo'];
-				$groupProgramsStaff = $groupPrograms['featured_staff'];
+				$blockPrograms = get_field('how_we_work');
+				$blockProgramsTitle =$blockPrograms['title'];
+				$blockProgramsSummary =$blockPrograms['summary'];
+				$blockProgramsImage =$blockPrograms['image'];
+				$educationPhoto = $blockPrograms['education_photo'];
+				$livelihoodPhoto = $blockPrograms['livelihoods_photo'];
+				$capacityPhoto = $blockPrograms['capacity_photo'];
+				$blockProgramsStaff = $blockPrograms['featured_staff'];
 			?>
 			<div class="o-crumb">
 				<div class="o-crumb__title">How we work</div>
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<h1><a href="<?php echo home_url(); ?>/programs"><span><?php echo $groupProgramsTitle; ?></span></a></h1>
+			<h1><a href="<?php echo home_url(); ?>/programs"><span><?php echo $blockProgramsTitle; ?></span></a></h1>
 			<section class="u-clear">
 				<div class="u-half">
-					<p><?php echo $groupProgramsSummary; ?></p>
+					<p><?php echo $blockProgramsSummary; ?></p>
 				</div>
 				<div class="u-half">
 					
 					<div class="o-author">
 						<?php
-							$programsStaff = new WP_Query(array('post_type'=>'team', 'p'=>$groupProgramsStaff));
+							$programsStaff = new WP_Query(array('post_type'=>'team', 'p'=>$blockProgramsStaff));
 							while ( $programsStaff->have_posts() ) : $programsStaff->the_post();
 								$programsStaffPhoto = get_field('photo');
 								$programsStaffTitle = get_field('job_title');
@@ -178,43 +218,43 @@
 			</div>
 		</div>
 		<div class="u-third">
-			<figure data-image-url="<?php echo $groupProgramsImage; ?>"></figure>
+			<figure data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
 		</div>
 	</div>
 </section>
 <section class="o-splash">
 	<?php
-		$featuredQuote = get_field('featured_quote');
-		$featuredQuoteTitle = $featuredQuote['quote'];
-		$featuredQuotePhoto = $featuredQuote['image'];
+		$blockQuote = get_field('featured_quote');
+		$blockQuoteTitle = $blockQuote['quote'];
+		$blockQuotePhoto = $blockQuote['image'];
 
-		$featuredQuoteAuthor = $featuredQuote['staff'];
-		$featuredAuthorName = $featuredQuote['author']['name'];
-		$featuredAuthorTitle = $featuredQuote['author']['title'];
+		$blockQuoteAuthor = $blockQuote['staff'];
+		$featuredAuthorName = $blockQuote['author']['name'];
+		$featuredAuthorTitle = $blockQuote['author']['title'];
 	?>
-	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
+	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $blockQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content">
 			<div class="o-box">
 				
 				<blockquote>
-					<p><?php echo $featuredQuoteTitle; ?></p>
+					<p><?php echo $blockQuoteTitle; ?></p>
 					<span class="o-line"></span>
 				</blockquote>
 				<?php if(!get_field('quote_author')){?>
 					<div class="o-author">
 						<?php
-							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$featuredQuoteAuthor));
-							while ( $featureQuoteStaff->have_posts() ) : $featureQuoteStaff->the_post();
-								$featureQuoteStaffPhoto = get_field('photo');
-								$featureQuoteStaffTitle = get_field('job_title');
-								$featureQuoteStaffName = get_the_title();
+							$staff = new WP_Query(array('post_type'=>'team', 'p'=>$blockQuoteAuthor));
+							while ( $staff->have_posts() ) : $staff->the_post();
+								$staffPhoto = get_field('photo');
+								$staffTitle = get_field('job_title');
+								$staffName = get_the_title();
 						?>
-						<figure class="js-lazy" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
+						<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
 						<section>
-							<strong><?php echo $featureQuoteStaffName; ?></strong>
-							<em><?php echo $featureQuoteStaffTitle; ?>, SFEA</em>
+							<strong><?php echo $staffName; ?></strong>
+							<em><?php echo $staffTitle; ?>, SFEA</em>
 						</section>
 
 						<?php endwhile; wp_reset_postdata(); ?>
@@ -262,21 +302,20 @@
 			<div class="u-third">
 				<section>
 					<?php
-						$groupImpact = get_field('impact');
-						$groupImpactTitle =$groupImpact['title'];
-						$groupImpactSummary =$groupImpact['summary'];
-						$groupImpactStoriesPhoto = $groupImpact['stories_photo'];
-						$groupImpactStatsPhoto = $groupImpact['stats_photo'];
+						$blockImpact = get_field('impact');
+						$blockImpactTitle =$blockImpact['title'];
+						$blockImpactSummary =$blockImpact['summary'];
+						$blockImpactPhoto = $blockImpact['photo'];
 					?>
 					<div class="o-crumb">
 						<div class="o-crumb__title">The Impact</div>
 						<div class="o-crumb__line"></div>
 						<div class="o-crumb__circle"></div>
 					</div>
-					<h1><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $groupImpactTitle; ?></span></a></h1>
-					<p><?php echo $groupImpactSummary; ?></p>
+					<h1><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
+					<p><?php echo $blockImpactSummary; ?></p>
 					<div class="u-pt-l">
-						<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $groupImpactStoriesPhoto); ?>
+						<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>
 					</div>
 				</section>
 			</div>

@@ -62,14 +62,14 @@
 						<div class="o-crumb__line"></div>
 						<div class="o-crumb__circle"></div>
 					</div>
-					<h1><a href="<?php echo get_permalink();?>"><span><?php the_field('fancy_title'); ?></span></a></h1>
+					<h1><a href="<?php echo get_permalink();?>"><span><?php the_title(); ?></span></a></h1>
 					<section class="u-clear">
 						<div class="u-half">
 							<p><?php the_field('summary'); ?></p>
 						</div>
 						<div class="u-half">
 							<section class="u-pl-m">
-								<?php echo renderButton(get_permalink(), 'Read '.get_the_title()."'s Story"); ?>
+								<?php echo renderButton(get_permalink(), 'Read '.get_field('beneficiary')."'s Story"); ?>
 							</section>
 						</div>
 					</section>

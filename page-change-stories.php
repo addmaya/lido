@@ -79,9 +79,9 @@
 				$articleClass = '';
 
 				while ($featureStories->have_posts()) : $featureStories->the_post();
-					$storyAuthor = get_the_title();
+					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
-					$storyTitle = get_field('fancy_title');
+					$storyBeneficiary = get_field('beneficiary');
 					$storyPhoto = get_field('photo');
 					$storyArea = get_field('area');
 				if ($rowCount > 1) {
@@ -109,7 +109,7 @@
 							</a>
 						</figure>
 						<section class="o-article__summary">
-							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyAuthor; ?></span></a></h2>
+							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyBeneficiary; ?></span></a></h2>
 							<ul class="o-article__meta">
 								
 								<?php

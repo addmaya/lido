@@ -57,18 +57,37 @@
 				<div class="o-splash__tint"></div>
 				<section class="o-splash__content">
 					<div class="o-box">
-						
 						<blockquote>
 							<p><?php echo $quote; ?></p>
 							<span class="o-line"></span>
 						</blockquote>
-						<div class="o-author">
-							<figure></figure>
-							<section>
-								<strong><?php echo $quoteAuthorName; ?></strong>
-								<em><?php echo $quoteAuthorTitle; ?></em>
-							</section>
-						</div>
+						
+						<?php if(!get_sub_field('quote_by_staff')){?>
+							<div class="o-author">
+								<?php
+									$staff = new WP_Query(array('post_type'=>'team', 'p'=>get_sub_field('staff')));
+									while ( $staff->have_posts() ) : $staff->the_post();
+										$staffPhoto = get_field('photo');
+										$staffTitle = get_field('job_title');
+										$staffName = get_the_title();
+								?>
+								<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
+								<section>
+									<strong><?php echo $staffName; ?></strong>
+									<em><?php echo $staffTitle; ?>, SFEA</em>
+								</section>
+
+								<?php endwhile; wp_reset_postdata(); ?>
+							</div>
+
+						<?php } else {?>
+							<div class="o-author">
+								<section>
+									<strong><?php echo $quoteAuthorName; ?></strong>
+									<em><?php echo $quoteAuthorTitle; ?></em>
+								</section>
+							</div>
+						<?php } ?>
 					</div>
 				</section>
 			</figure>

@@ -1,6 +1,7 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <?php
-	$storyTitle = get_field('fancy_title');
+	$storyTitle = get_the_title();
+	$storyBeneficiary = get_field('beneficiary');
 	$storySummary = get_field('summary');
 	$storyPhoto = get_field('photo');
 	$storyArea = get_field('area');
@@ -11,7 +12,13 @@
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section>
-					<h1><?php echo $storyTitle; ?> - <?php the_title(); ?></h1>
+					<h1><?php 
+						if(!$storyBeneficiary){
+							echo $storyTitle;
+						} else {
+							echo $storyTitle.' -'.$storyBeneficiary;
+						} 
+					?></h1>
 					<ul class="o-article__meta">
 						<li><a href="#">/ Published: <?php echo get_the_date(); ?></a></li>
 						<?php if ($storyProgramID):
