@@ -838,6 +838,10 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{@include canvas; position: absolute; background-color: red; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6; filter: grayscale(100%);}
 }
 .c-eastafrica{@include image('illustrations/ea_map.jpg'); @include contain; background-color: #dbdbdb}
+.c-impact{
+  h1{width:50%; @include center}
+}
+.c-impact__summary{width: 50%; @include center; text-align: center}
 
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}

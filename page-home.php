@@ -221,48 +221,38 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section u-pb-0">
+<section class="o-section u-pb-0 c-impact">
 	<div class="o-box">
+		<?php
+			$blockImpact = get_field('impact');
+			$blockImpactTitle =$blockImpact['title'];
+			$blockImpactSummary =$blockImpact['summary'];
+			$blockImpactPhoto = $blockImpact['photo'];
+		?>
+		<h1 class="u-pb-m"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
+		
 		<div class="u-clear">
-			<div class="u-twothird">
-				<?php 
-					$statistics = get_field('statistics', 22);
-					$statisticsList = array_rand( $statistics, 4);
-					foreach( $statisticsList as $statistic ){
-						$statisticNumber = $statistics[$statistic]['number'];
-						$statisticSummary = $statistics[$statistic]['summary'];
-						$statisticUnit = $statistics[$statistic]['unit'];
-						$statisticPhoto = $statistics[$statistic]['photo'];
-				 ?>
-				<div class="o-statistic u-half s--figure">
-					<section>
-						<span><?php echo $statisticNumber; ?></span>
-						<p><?php echo $statisticSummary; ?></p>
-					</section>
-				</div>
-				<?php } ?>
-			</div>
-			<div class="u-third">
-				<section>
-					<?php
-						$blockImpact = get_field('impact');
-						$blockImpactTitle =$blockImpact['title'];
-						$blockImpactSummary =$blockImpact['summary'];
-						$blockImpactPhoto = $blockImpact['photo'];
-					?>
-					<div class="o-crumb">
-						<div class="o-crumb__title">The Impact</div>
-						<div class="o-crumb__line"></div>
-						<div class="o-crumb__circle"></div>
-					</div>
-					<h1><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
-					<p><?php echo $blockImpactSummary; ?></p>
-					<div class="u-pt-l">
-						<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>
-					</div>
-				</section>
-			</div>
+			<?php 
+				$statistics = get_field('statistics', 22);
+				$statisticsList = array_rand( $statistics, 4);
+				foreach( $statisticsList as $statistic ){
+					$statisticNumber = $statistics[$statistic]['number'];
+					$statisticSummary = $statistics[$statistic]['summary'];
+			 ?>
+				 <div class="o-statistic u-fourth s--figure">
+				 	<section>
+				 		<span><?php echo $statisticNumber; ?></span>
+				 		<p><?php echo $statisticSummary; ?></p>
+				 	</section>
+				 </div>
+			 <?php } ?>
 		</div>
+		<section class="c-impact__summary u-pt-l">
+			<p><?php echo $blockImpactSummary; ?></p>
+			<div class="u-pt-m">
+				<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>
+			</div>
+		</section>
 	</div>
 </section>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer') ); ?>
