@@ -1,11 +1,11 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="c-cover c-about t-dark">
+<section class="c-cover c-about t-dark" id="profile">
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="o-box">
 				<?php
-					$sectionVision = get_field('funding_partners');
-					$vision =$sectionVision['title'];
+					$sectionVision = get_field('vision_mission');
+					$vision =$sectionVision['vision'];
 					$mission =$sectionVision['summary'];
 					$valuesImage = $sectionVision['core_values'];
 					$areasImage = $sectionVision['where_we_work'];
@@ -18,20 +18,20 @@
 				<span class="o-line"></span>
 				<ul class="u-clear">
 					<li class="u-third">
-						<?php echo renderRhombusButton('#', 'Core Values', $valuesImage); ?>
+						<?php echo renderRhombusButton('#values', 'Core Values', $valuesImage); ?>
 					</li>
 					<li class="u-third">
-						<?php echo renderRhombusButton('#', 'Where We Work', $areasImage); ?>
+						<?php echo renderRhombusButton('#areas', 'Where We Work', $areasImage); ?>
 					</li>
 					<li class="u-third">
-						<?php echo renderRhombusButton('#', 'Impact Highlights', $impactImage); ?>
+						<?php echo renderRhombusButton('#impact', 'Impact Highlights', $impactImage); ?>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </section>
-<section class="o-section">
+<section class="o-section" id="value">
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Our Core Values</div>
@@ -72,7 +72,7 @@
 					?>
 					<div class="o-value <?php echo $valueClass; ?>">
 						<figure class="u-half">
-							<span class="o-rhombus s--medium u-block"></span>
+							<span class="o-rhombus s--medium u-block js-lazy" data-image-url="<?php echo $valueImage; ?>"></span>
 						</figure>
 						<section class="u-half">
 							<h3><?php echo $valueTitle; ?></h3>
@@ -87,8 +87,14 @@
 			</div>
 		</div>
 		<div class="u-pt-xl u-center">
-			<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-			<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+			<?php
+				$blockPrograms = get_field('how_we_work', 8);
+				$educationPhoto = $blockPrograms['education_photo'];
+				$livelihoodPhoto = $blockPrograms['livelihoods_photo'];
+			?>
+
+			<?php echo renderCircularButton(home_url().'/programs#education','Education Programs', $educationPhoto); ?>
+			<?php echo renderCircularButton(home_url().'/programs#livelihood','Livelihood Programs', $livelihoodPhoto); ?>
 		</div>
 	</div>
 </section>
@@ -107,7 +113,6 @@
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content">
 			<div class="o-box">
-				
 				<blockquote>
 					<p><?php echo $featuredQuoteTitle; ?></p>
 					<span class="o-line"></span>
@@ -143,7 +148,7 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section c-regions">
+<section class="o-section c-regions" id="areas">
 	<div class="o-box">
 		<div class="u-half c-regions__col">
 			<div class="o-crumb">
@@ -155,9 +160,9 @@
 			<section>
 				<?php
 					$sectionAreas = get_field('where_we_work');
-					$sectionAreasTitle =$sectionAreas['title'];
-					$sectionAreasSummary =$sectionAreas['summary'];
-					$sectionAreasPhoto =$sectionAreas['photo'];
+					$sectionAreasTitle = $sectionAreas['title'];
+					$sectionAreasSummary = $sectionAreas['summary'];
+					$sectionAreasPhoto = $sectionAreas['photo'];
 				?>
 				<h1><?php echo $sectionAreasTitle; ?></h1>
 				<p><?php echo $sectionAreasSummary; ?></p>
@@ -172,7 +177,7 @@
 		</div>
 	</div>
 </section>
-<section class="o-slider">
+<section class="o-slider" id="impact">
 	<div class="u-threefourth o-slider-col">
 		<div class="o-slider__image">
 			<div class="swiper-container">

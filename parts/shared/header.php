@@ -20,9 +20,9 @@
 						<li>
 							<a href="<?php echo home_url(); ?>/about">About</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
-						</li>
+						</li> -->
 					</ul>
 				</nav>
 			</div>
@@ -72,17 +72,23 @@
 				</a>
 			</li>
 			<li class="c-burger-menu__item">
+				<a href="<?php echo home_url(); ?>/about">
+					<span>About</span>
+					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+				</a>
+			</li>
+			<!-- <li class="c-burger-menu__item">
 				<a href="<?php echo home_url(); ?>/newsroom">
 					<span>Newsroom</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 		<div class="u-clear u-pt-m">
 			<div class="u-half">
 				<section class="u-wrap">
 					<h3>About</h3>
-					<p><?php the_field('description', 8); ?></p>
+					<p>Stromme Foundation is a Norwegian based international development organization that has, since 1976, worked to help people in Asia, South America, West and Eastern Africa get out of poverty</p>
 					<?php echo renderButton(home_url().'/about', 'Learn More'); ?>
 				</section>
 			</div>

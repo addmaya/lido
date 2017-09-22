@@ -1,18 +1,17 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image"></figure>
+		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section class="c-cover__section">
 					<h1><?php the_field('title'); ?></h1>
-					<p><?php the_field('summary'); ?></p>
+					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<?php echo renderCircularButton('#', 'Impact Statistics', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-						<?php echo renderCircularButton('#', 'Change Stories', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-					</div>
+						<?php echo renderButton('#education', 'Impact Statistics','anchor', 's--block'); ?>
+						<?php echo renderButton('#livelihood', 'Change Stories','anchor', 's--block'); ?>					</div>
 				</section>
 			</div>
 		</div>
@@ -28,38 +27,36 @@
 		<section class="c-history">
 			<span>Since</span>
 			<header>
+				<?php 
+					$history = get_field('history');
+					$historyByline =$history['byline'];
+					$historySummary =$history['summary'];
+					$historyPhoto =$history['photo'];
+				 ?>
 				<h1>1976</h1>
-				<span>SFEA has touched millions of lives in East African.</span>
-				<figure></figure>
+				<span><?php echo $historyByline; ?></span>
+				<figure class="js-lazy" data-image-url="<?php echo $historyPhoto; ?>"></figure>
 			</header>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augue, quis vestibulum enim convallis nec. Sed gravida convallis ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie eleifend augu.</p>
+			<p><?php echo $historySummary; ?></p>
 		</section>
 		<div class="u-clear u-pt-xl">
 			<?php 
 				$statistics = get_field('statistics', 22);
-				$statisticsList = array_rand( $statistics, 4);
-				foreach( $statisticsList as $statistic ){
-					$statisticNumber = $statistics[$statistic]['number'];
-					$statisticSummary = $statistics[$statistic]['summary'];
-					$statisticUnit = $statistics[$statistic]['unit'];
-					$statisticPhoto = $statistics[$statistic]['photo'];
+				foreach( $statistics as $stat ){
+					$statisticNumber = $stat['number'];
+					$statisticSummary = $stat['summary'];
 			 ?>
-			 <div class="o-statistic u-third">
-			 	<div class="u-clear">
-			 		<div class="u-half">
-			 			<span><?php echo number_format($statisticNumber); ?><i class="u-superscript"><?php echo $statisticUnit; ?></i></span>
-			 			<p><?php echo $statisticSummary; ?></p>
-			 		</div>
-			 		<div class="u-half">
-			 			<figure class="js-lazy" data-image-url="<?php echo $statisticPhoto; ?>"></figure>
-			 		</div>
-			 	</div>
+			 <div class="o-statistic u-fourth s--figure">
+			 	<section>
+			 		<span><?php echo $statisticNumber; ?></span>
+			 		<p><?php echo $statisticSummary; ?></p>
+			 	</section>
 			 </div>
 			 <?php } ?>
 		</div>
 	</div>
 </section>
-<section class="o-section s--bottom__med" style="background-color: #F7F7F7">
+<section class="o-section s--bottom__med" id="stories">
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Change Stories</div>
@@ -84,6 +81,7 @@
 					$storyBeneficiary = get_field('beneficiary');
 					$storyPhoto = get_field('photo');
 					$storyArea = get_field('area');
+					$storyPrograms = get_field('program');
 				if ($rowCount > 1) {
 					$rowCount = 0;
 				}
@@ -98,6 +96,7 @@
 						$articleClass = 's--right';
 						break;
 					default:
+						$articleClass = 's--left';
 						break;
 				}
 			?>
@@ -113,13 +112,13 @@
 							<ul class="o-article__meta">
 								
 								<?php
-									$storyPrograms = get_field('program');
 									if ($storyPrograms):
-										foreach ($storyPrograms as $storyProgram):
 								?>
-									<li><a href="<?php echo get_permalink($storyProgram->ID); ?>">/ <?php echo get_the_title($storyProgram->ID); ?></a></li>
-								<?php endforeach; endif; ?>
-								<li><a href="#">/ <?php echo $storyArea; ?></a></li>
+									<li><a href="<?php echo get_permalink($storyPrograms[0]); ?>">/ <?php echo get_the_title($storyPrograms[0]); ?></a></li>
+								<?php endif; ?>
+								<?php if ($storyArea): ?>
+									<li><a href="#">/ <?php echo $storyArea; ?></a></li>
+								<?php endif ?>
 								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
 							</ul>
 							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>

@@ -136,14 +136,14 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	function setSpineHeight(){
-		var body = document.body,
-		    html = document.documentElement;
-		var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-		$('.c-spine').css({
-			height: height-100
-		});
-	}
+	// function setSpineHeight(){
+	// 	var body = document.body,
+	// 	    html = document.documentElement;
+	// 	var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+	// 	$('.c-spine').css({
+	// 		height: height-100
+	// 	});
+	// }
 
 	function activatePaginators(){
 		$('.js-paginator__prev').hover(function() {
@@ -251,7 +251,7 @@ jQuery(document).ready(function($) {
 	  onEnter: function() {
 	    var splashSwiper = new Swiper('#c-splash__swiper', {
 	      	loop: true,
-	      	autoplay: 7000,
+	      	autoplay: 8000,
 	      	speed: 1500,
 	      	effect:'fade',
 	      	fade: {crossFade: true},
@@ -297,7 +297,7 @@ jQuery(document).ready(function($) {
 		submitContactForm();
 		getStories();
 		popInit();
-		setSpineHeight();
+		// setSpineHeight();
 		matchHeights();
 		AOS.init({duration: 700});
 		activatePaginators();

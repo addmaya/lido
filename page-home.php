@@ -1,39 +1,32 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <section class="c-splash t-dark">
-	<div class="swiper-container" id="c-splash__swiper">
-		<div class="swiper-wrapper">
-			<?php while( have_rows('slides') ): the_row();
-				$slideTitle = get_sub_field('title');
-				$slideBtnLabel = get_sub_field('button_label');
-				$slideBtnLink = get_sub_field('button_link');
-				$slidePhoto = get_sub_field('photo');
-				$slideVideo = get_sub_field('video');
-				$slideCaption = get_sub_field('caption');
-			?>
-			
-			<div class="swiper-slide">
-				<div class="o-table">
-					<div class="o-table__cell">
-						<div class="o-box">
-							<div class="u-half">
-								<h1><a href="#"><span><?php echo $slideTitle; ?></span></a></h1>
-								<p><?php echo $slideCaption; ?></p>
-								<?php echo renderButton($slideBtnLink, $slideBtnLabel); ?>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="c-splash__image">
-					<div class="o-tint"></div>
-					<figure data-image-url="<?php echo $slidePhoto; ?>" class="o-image js-lazy"><span class="o-image__cover"></span></figure>
+	<?php
+		$slides = get_field('slides');
+		$featuredSlide = $slides[array_rand($slides)];
+
+		$slideTitle = $featuredSlide['title'];
+		$slideBtnLabel = $featuredSlide['button_label'];
+		$slideBtnLink = $featuredSlide['button_link'];
+		$slidePhoto = $featuredSlide['photo'];
+		$slideVideo = $featuredSlide['video'];
+		$slideCaption = $featuredSlide['caption'];
+	?>
+	<div class="o-table" data-depth="0.2">
+		<div class="o-table__cell">
+			<div class="o-box">
+				<div class="u-half">
+					<h1><a href="#"><span><?php echo $slideTitle; ?></span></a></h1>
+					<!-- <p><?php echo $slideCaption; ?></p> -->
+					<?php echo renderButton($slideBtnLink, $slideBtnLabel); ?>
 				</div>
 			</div>
-			
-			<?php endwhile; ?>
 		</div>
 	</div>
+	<div class="c-splash__image" data-depth="0.5">
+		<div class="o-tint"></div>
+		<figure data-image-url="<?php echo $slidePhoto; ?>" class="o-image js-lazy"><span class="o-image__cover"></span></figure>
+	</div>
 </section>
-
 <section class="c-highlights t-dark">
 	<div class="o-div s--left"></div>
 	<div class="o-div s--right"></div>
@@ -56,11 +49,11 @@
 						<div class="u-half">
 							<div class="u-wrap u-clear">
 								<section>
-									<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $featureTitle; ?></span></a></h2>
-									<span class="o-byline"><?php echo $featureSubtitle; ?></span>
+									<h2><a href="<?php echo $featureLink; ?>"><span><?php echo $featureTitle; ?></span></a></h2>
+									<!-- <span class="o-byline"><?php echo $featureSubtitle; ?></span> -->
 									<?php echo renderButton($featureLink, $featureLabel); ?>
 								</section>
-								<a href="#" class="o-rhombus s--small">
+								<a href="<?php echo $featureLink; ?>"class="o-rhombus s--small">
 									<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $featurePhoto; ?>"><span></span></figure>
 								</a>
 							</div>
@@ -71,48 +64,7 @@
 		</div>
 	</div>
 </section>
-
-<!-- <section class="c-highlights t-dark">
-	<div class="o-div s--left"></div>
-	<div class="o-div s--right"></div>
-	<div class="o-table">
-		<div class="o-table__cell">
-			<div class="o-box">
-				<div class="u-clear">
-				
-					<?php
-						$args = array('post_type'=>'story', 'posts_per_page'=>2);
-						$featureStories = new WP_Query($args);
-
-						while ( $featureStories->have_posts() ) : $featureStories->the_post();
-							$storyAuthor = get_the_title();
-							$storyLink = get_permalink();
-							$storyTitle = get_field('fancy_title');
-							$storyPhoto = get_field('photo');
-							$storyArea = get_field('area');
-					?>
-
-						<div class="u-half">
-							<div class="u-wrap u-clear">
-								<section>
-									<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyTitle; ?></span></a></h2>
-									<span class="o-byline"><?php echo $storyArea; ?></span>
-									<?php echo renderButton($storyLink, 'Read '.$storyAuthor."'s Story"); ?>
-								</section>
-								<a href="#" class="o-rhombus s--small">
-									<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $storyPhoto; ?>"><span></span></figure>
-								</a>
-							</div>
-						</div>
-
-					<?php endwhile; wp_reset_postdata(); ?>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-
-<section class="o-section" style="background-color: #E2E2E2">
+<section class="o-section c-eastafrica">
 	<div class="o-box">
 		<div class="u-half s--right">
 			<?php
@@ -120,7 +72,7 @@
 				$blockCauseTitle =$blockCause['title'];
 				$blockCauseSummary =$blockCause['summary'];
 				$blockCauseImage =$blockCause['image'];
-				$blockCauseStaff = $blockCause['featured_staff'];
+				$blockCauseStaff = $blockCause['featured_staff'][0];
 			?>
 			<div class="o-crumb">
 				<div class="o-crumb__title">Why East Africa</div>
@@ -136,7 +88,7 @@
 
 					<div class="o-author">
 						<?php
-							$causeStaff = new WP_Query(array('post_type'=>'team', 'p'=>$blockCauseStaff));
+							$causeStaff = new WP_Query(array('posts_per_page'=>1,'post_type'=>'team', 'p'=>$blockCauseStaff));
 							while ( $causeStaff->have_posts() ) : $causeStaff->the_post();
 								$causeStaffPhoto = get_field('photo');
 								$causeStaffTitle = get_field('job_title');
@@ -153,14 +105,14 @@
 				</div>
 			</section>
 			<div class="u-pt-l">
-				<?php echo renderButton(home_url().'/about', 'Read about SFEA'); ?>
+				<?php echo renderButton(home_url().'/about', 'See our Response'); ?>
 			</div>
 		</div>
 	</div>
 </section>
 <section class="o-section">
 	<div class="o-box">
-		<div class="u-twothird">
+		<div class="u-half">
 			<?php
 				$blockPrograms = get_field('how_we_work');
 				$blockProgramsTitle =$blockPrograms['title'];
@@ -169,7 +121,7 @@
 				$educationPhoto = $blockPrograms['education_photo'];
 				$livelihoodPhoto = $blockPrograms['livelihoods_photo'];
 				$capacityPhoto = $blockPrograms['capacity_photo'];
-				$blockProgramsStaff = $blockPrograms['featured_staff'];
+				$blockProgramsStaff = $blockPrograms['featured_staff'][0];
 			?>
 			<div class="o-crumb">
 				<div class="o-crumb__title">How we work</div>
@@ -202,23 +154,19 @@
 
 				</div>
 			</section>
-			<div class="u-pt-xl">
-				<a href="<?php echo home_url(); ?>/programs#education" class="o-button s--circular">
-					<section><figure class="js-lazy" data-image-url="<?php echo $educationPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Education', 'div'); ?>
-				</a>
-				<a href="<?php echo home_url(); ?>/programs#livelihood" class="o-button s--circular">
-					<section><figure class="js-lazy" data-image-url="<?php echo $livelihoodPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Livelihood', 'div'); ?>
-				</a>
-				<a href="<?php echo home_url(); ?>/programs#capacity-building" class="o-button s--circular">
-					<section><figure class="js-lazy" data-image-url="<?php echo $capacityPhoto; ?>"></figure></section>
-					<?php echo renderButton('','Capacity Building', 'div'); ?>
-				</a>
+			<div class="u-pt-l">
+				<?php echo renderCircularButton(home_url().'/programs#education','Education Programs', $educationPhoto); ?>
+				<?php echo renderCircularButton(home_url().'/programs#livelihood','Livelihood Programs', $livelihoodPhoto); ?>
+				<!-- <?php echo renderCircularButton(home_url().'/programs#capacity-building','Capacity Building', $capacityPhoto); ?> -->
 			</div>
 		</div>
-		<div class="u-third">
-			<figure data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
+		<div class="u-half">
+			<a href="<?php echo home_url().'/programs'; ?>" class="o-rhombus-button s--patterned">
+				<div class="o-rhombus s--xlarge">
+					<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
+				</div>
+				<div class="o-rhombus__pattern"></div>
+			</a>
 		</div>
 	</div>
 </section>
@@ -228,7 +176,7 @@
 		$blockQuoteTitle = $blockQuote['quote'];
 		$blockQuotePhoto = $blockQuote['image'];
 
-		$blockQuoteAuthor = $blockQuote['staff'];
+		$blockQuoteAuthor = $blockQuote['staff'][0];
 		$featuredAuthorName = $blockQuote['author']['name'];
 		$featuredAuthorTitle = $blockQuote['author']['title'];
 	?>
@@ -286,16 +234,11 @@
 						$statisticUnit = $statistics[$statistic]['unit'];
 						$statisticPhoto = $statistics[$statistic]['photo'];
 				 ?>
-				<div class="o-statistic u-half">
-					<div class="u-clear">
-						<div class="u-half">
-							<span><?php echo number_format($statisticNumber); ?><i class="u-superscript"><?php echo $statisticUnit; ?></i></span>
-							<p><?php echo $statisticSummary; ?></p>
-						</div>
-						<div class="u-half">
-							<figure class="js-lazy" data-image-url="<?php echo $statisticPhoto; ?>"></figure>
-						</div>
-					</div>
+				<div class="o-statistic u-half s--figure">
+					<section>
+						<span><?php echo $statisticNumber; ?></span>
+						<p><?php echo $statisticSummary; ?></p>
+					</section>
 				</div>
 				<?php } ?>
 			</div>

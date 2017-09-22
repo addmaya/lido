@@ -2,25 +2,25 @@
 <div class="c-cover t-dark">
 	<div class="u-half">
 		<div class="o-tint"></div>
-		<figure class="c-cover__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section class="c-cover__section">
 					<h1><?php the_field('title'); ?></h1>
-					<p><?php the_field('summary'); ?></p>
+					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<?php echo renderCircularButton('#', 'Education', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-						<?php echo renderCircularButton('#', 'Livelihood', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-						<?php echo renderCircularButton('#', 'Capacity Building and Training', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+						<?php echo renderButton('#education', 'Education Programs','anchor', 's--block'); ?>
+						<?php echo renderButton('#livelihood', 'Livelihood Programs','anchor', 's--block'); ?>
+						<?php echo renderButton('#capacity-building', 'Capacity Building & Training','anchor', 's--block'); ?>
 					</div>
 				</section>
 			</div>
 		</div>
 	</div>
 </div>
-<section class="o-section" style="background-color:#EDEEEE">
+<section class="o-section" id="education">
 	<div class="o-box">
 		<section class="u-clear">
 			<div class="u-half">
@@ -31,35 +31,29 @@
 				</div>
 				<?php
 					$sectionEduc = get_field('education');
-					$sectionEducTitle =$sectionEduc['title'];
-					$sectionEducSummary =$sectionEduc['summary'];
+					$sectionEducTitle = $sectionEduc['title'];
+					$sectionEducSummary = $sectionEduc['summary'];
 				?>
 				<h1><?php echo $sectionEducTitle; ?></h1>
-				<section class="u-clear">
-					<div class="u-half">
-						<p><?php echo $sectionEducSummary; ?></p>
-					</div>
-					<div class="u-half">
-						<div class="o-author">
-							<figure></figure>
-							<section>
-								<strong>Mrs. Priscilla M.Serukka</strong>
-								<em>Regional Director, SFEA</em>
-							</section>
-						</div>
-					</div>
-				</section>
+				<p><?php echo $sectionEducSummary; ?></p>
 			</div>
 		</section>
-		<ul class="u-clear u-pt-l">
+		<ul class="o-rhombus__list">
 			<?php 
 				$educationPrograms = new WP_Query(array(
 					'post_type'=>'program',
 					'tax_query'=> array(
+						'relation'=>'AND',
 						array(
 							'taxonomy'=>'group',
 							'field'=>'slug',
 							'terms'=>'education'
+						),
+						array(
+							'taxonomy'=>'group',
+							'field'=>'slug',
+							'terms'=>'south-sudan',
+							'operator'=>'NOT IN'
 						)
 					)
 				));
@@ -74,12 +68,19 @@
 		<section class="u-clear">
 			<?php
 				$sectionSudan = get_field('south_sudan');
-				$sectionSudanTitle =$sectionEduc['title'];
-				$sectionSudanSummary =$sectionEduc['summary'];
-				$sectionSudanPhoto =$sectionEduc['photo'];
+				$sectionSudanTitle =$sectionSudan['title'];
+				$sectionSudanSummary =$sectionSudan['summary'];
+				$sectionSudanPhoto =$sectionSudan['photo'];
 			?>
 			<div class="u-third">
-				<figure class="o-rhombus s--large" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
+				<a href="" class="o-rhombus-button s--patterned">
+					<div class="o-rhombus s--large">
+						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
+					</div>
+					<div class="o-rhombus__pattern"></div>
+				</a>
+
+				
 			</div>
 			<div class="u-third">
 				<h1><?php echo $sectionSudanTitle; ?></h1>
@@ -107,7 +108,7 @@
 		</section>
 	</div>
 </section>
-<section class="o-section t-dark" style="background-color:#970055">
+<section class="o-section t-dark" id="livelihood">
 	<div class="o-box">
 		<div class="u-half">
 			<div class="o-crumb">
@@ -117,24 +118,11 @@
 			</div>
 			<?php
 				$sectionLivelihood = get_field('livelihoods');
-				$sectionLivelihoodTitle =$sectionEduc['title'];
-				$sectionLivelihoodSummary =$sectionEduc['description'];
+				$sectionLivelihoodTitle =$sectionLivelihood['title'];
+				$sectionLivelihoodSummary =$sectionLivelihood['description'];
 			?>
-			<h1><?php echo $sectionLivelihood; ?></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $sectionLivelihoodSummary; ?></p>
-				</div>
-				<div class="u-half">
-					<div class="o-author">
-						<figure></figure>
-						<section>
-							<strong>Mrs. Priscilla M.Serukka</strong>
-							<em>Regional Director, SFEA</em>
-						</section>
-					</div>
-				</div>
-			</section>
+			<h1><?php echo $sectionLivelihoodTitle; ?></h1>
+			<p><?php echo $sectionLivelihoodSummary; ?></p>
 			<ul class="u-clear u-pt-l">
 				<?php 
 					$livelihoodPrograms = new WP_Query(array(
@@ -157,13 +145,13 @@
 		</div>
 	</div>
 </section>
-<section class="o-section" style="background-color:#EDEEEE">
+<section class="o-section" id="capacity-building">
 	<div class="o-box">
 		<div class="u-half s--right">
 			<?php
 				$sectionCapacity = get_field('capacity_building_programs');
-				$sectionCapacityTitle =$sectionEduc['title'];
-				$sectionCapacitySummary =$sectionEduc['description'];
+				$sectionCapacityTitle =$sectionCapacity['title'];
+				$sectionCapacitySummary =$sectionCapacity['description'];
 			?>
 			<div class="o-crumb">
 				<div class="o-crumb__title">Capacity Building Programs</div>
@@ -171,20 +159,7 @@
 				<div class="o-crumb__circle"></div>
 			</div>
 			<h1><?php echo $sectionCapacityTitle; ?></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $sectionCapacitySummary; ?></p>
-				</div>
-				<div class="u-half">
-					<div class="o-author">
-						<figure></figure>
-						<section>
-							<strong>Mrs. Priscilla M.Serukka</strong>
-							<em>Regional Director, SFEA</em>
-						</section>
-					</div>
-				</div>
-			</section>
+			<p><?php echo $sectionCapacitySummary; ?></p>
 			<ul class="u-clear u-pt-l">
 				<?php 
 					$capacityPrograms = new WP_Query(array(

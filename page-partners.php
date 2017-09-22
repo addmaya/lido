@@ -1,19 +1,19 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image"></figure>
+		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section class="c-cover__section">
 					<h1><?php the_field('title'); ?></h1>
-					<p><?php the_field('summary'); ?></p>
+					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
 						<div class="u-pt-l">
-							<?php echo renderCircularButton('#', 'Funding Partners', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-							<?php echo renderCircularButton('#', 'Implementing Partners', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-							<?php echo renderCircularButton('#', 'Networks & Collaborations', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+							<?php echo renderButton('#education', 'Funding Partners','anchor', 's--block'); ?>
+							<?php echo renderButton('#livelihood', 'Implementing Partners','anchor', 's--block'); ?>
+							<?php echo renderButton('#livelihood', 'Networks & Collaborations','anchor', 's--block'); ?>
 						</div>
 					</div>
 				</section>
@@ -57,42 +57,37 @@
 				?>
 				<h1><?php echo $sectionFundingTitle; ?></h1>
 				<p><?php echo $sectionFundingSummary; ?></p>
-				<div class="u-pt-l">
-					<a href="#" class="o-button s--block">
-						<div>
-							<i class="o-icon"></i>
-							<span>Together we can end Poverty. Become a Partner</span>
-						</div>
-					</a>
-				</div>
+				
 			</section>
+			<div class="u-pt-l u-pl-l">
+				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
+			</div>
 		</div>
 	</div>
 </section>
 <section class="o-splash">
 	<?php
-		$featuredQuote = get_field('featured_quote');
-		$featuredQuoteTitle = $featuredQuote['quote'];
-		$featuredQuotePhoto = $featuredQuote['image'];
+		$quote = get_field('featured_quote');
+		$quoteTitle = $quote['quote'];
+		$quotePhoto = $quote['image'];
 
-		$featuredQuoteAuthor = $featuredQuote['staff'];
-		$featuredAuthorName = $featuredQuote['author']['name'];
-		$featuredAuthorTitle = $featuredQuote['author']['title'];
+		$quoteAuthor = $quote['staff'];
+		$featuredAuthorName = $quote['author']['name'];
+		$featuredAuthorTitle = $quote['author']['title'];
 	?>
-	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
+	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $quotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content">
 			<div class="o-box">
-				
 				<blockquote>
-					<p><?php echo $featuredQuoteTitle; ?></p>
+					<p><?php echo $quoteTitle; ?></p>
 					<span class="o-line"></span>
 				</blockquote>
 				<?php if(!get_field('quote_author')){?>
 					<div class="o-author">
 						<?php
-							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$featuredQuoteAuthor));
+							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$quoteAuthor));
 							while ( $featureQuoteStaff->have_posts() ) : $featureQuoteStaff->the_post();
 								$featureQuoteStaffPhoto = get_field('photo');
 								$featureQuoteStaffTitle = get_field('job_title');
@@ -133,22 +128,8 @@
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			
-			<h1><?php echo $sectionImplement; ?></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $sectionImplementSummary; ?></p>
-				</div>
-				<div class="u-half">
-					<div class="o-author">
-						<figure></figure>
-						<section>
-							<strong>Mrs. Priscilla M.Serukka</strong>
-							<em>Regional Director, SFEA</em>
-						</section>
-					</div>
-				</div>
-			</section>
+			<h1><?php echo $sectionImplementTitle; ?></h1>
+			<p><?php echo $sectionImplementSummary; ?></p>
 			<section class="u-clear u-pt-l">
 				<section class="u-third">
 					<ul class="o-olist u-pt-l">
@@ -192,18 +173,13 @@
 				</section>
 			</section>
 			<div class="u-pt-l">
-				<a href="#" class="o-button s--block">
-					<div>
-						<i class="o-icon"></i>
-						<span>Join our Implementing Team</span>
-					</div>
-				</a>
+				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
 		<div class="u-half"></div>
 	</div>
 </section>
-<section class="o-section" style="background-color: #E2E2E2">
+<section class="o-section" id="networks">
 	<div class="o-box">
 		<div class="u-half s--right">
 			<div class="o-crumb">
@@ -212,25 +188,12 @@
 				<div class="o-crumb__circle"></div>
 			</div>
 			<?php
-				$sectionNetworks = get_field('implementing_partners');
+				$sectionNetworks = get_field('networks');
 				$sectionNetworksTitle =$sectionNetworks['title'];
 				$sectionNetworksSummary =$sectionNetworks['summary'];
 			?>
 			<h1><?php echo $sectionNetworksTitle; ?></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $sectionNetworksSummary; ?></p>
-				</div>
-				<div class="u-half">
-					<div class="o-author">
-						<figure></figure>
-						<section>
-							<strong>Mrs. Priscilla M.Serukka</strong>
-							<em>Regional Director, SFEA</em>
-						</section>
-					</div>
-				</div>
-			</section>
+			<p><?php echo $sectionNetworksSummary; ?></p>
 			<section class="u-pt-l">
 				<ul class="o-partners s--third">
 					<?php 

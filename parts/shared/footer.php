@@ -35,44 +35,46 @@
 			<!-- <div class="c-globe"></div> -->
 			<div class="o-box">
 				<h1 class="u-center">Together we can <br/>eradicate povery from East Africa</h1>
-				<div class="c-cta">
-					<div class="u-third">
-						<section>
-							<h3>Let the world know.<br/>Share this page.</h3>
-							<?php
-								$pageTitle = get_the_title();
-								$pagePermalink = get_permalink();
-								$pageID = get_the_id();
-							?>
+				<?php if (is_singular('program')): ?>
+					<div class="c-cta">
+						<div class="u-third">
+							<section>
+								<h3>Let the world know.<br/>Share this page.</h3>
+								<?php
+									$pageTitle = get_the_title();
+									$pagePermalink = get_permalink();
+									$pageID = get_the_id();
+								?>
 
-							<ul class="o-networks t-light">
-								<li><a href="mailto:?&subject=<?php echo $pageTitle;?>&body=<?php echo $pagePermalink; ?>"><i class="c-mail"></i></a></li>
-								<li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $pagePermalink; ?>"><i class="c-fb"></i></a></li>
-								<li><a href="https://twitter.com/home?status=<?php echo $pagePermalink; ?>"><i class="c-tw"></i></a></li>
-								<li><a href="https://plus.google.com/share?url=<?php echo $pagePermalink; ?>"><i class="c-gplus"></i></a></li>
-								<li><a href="whatsapp://send?text=<?php echo $pagePermalink; ?>"><i class="c-wa"></i></a></li>
-							</ul>
+								<ul class="o-networks t-light">
+									<li><a href="mailto:?&subject=<?php echo $pageTitle;?>&body=<?php echo $pagePermalink; ?>"><i class="c-mail"></i></a></li>
+									<li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $pagePermalink; ?>"><i class="c-fb"></i></a></li>
+									<li><a href="https://twitter.com/home?status=<?php echo $pagePermalink; ?>"><i class="c-tw"></i></a></li>
+									<li><a href="https://plus.google.com/share?url=<?php echo $pagePermalink; ?>"><i class="c-gplus"></i></a></li>
+									<li><a href="whatsapp://send?text=<?php echo $pagePermalink; ?>"><i class="c-wa"></i></a></li>
+								</ul>
 
-						</section>
+							</section>
+						</div>
+						<div class="u-third">
+							<section>
+								<h3>Get Inspired.<br/>Our Change Stories to your inbox.</h3>
+								<form action="">
+									<input type="text" placeholder="Your E-mail">
+									<button class="o-button">
+										<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
+									</button>
+								</form>
+							</section>
+						</div>
+						<div class="u-third">
+							<section class="u-center">
+								<h3>Let’s get working.<br/>Partner with Us</h3>
+								<?php echo renderButton(home_url().'/contact','Become a Partner'); ?>
+							</section>
+						</div>
 					</div>
-					<div class="u-third">
-						<section>
-							<h3>Get Inspired.<br/>Our Change Stories to your inbox.</h3>
-							<form action="">
-								<input type="text" placeholder="Your E-mail">
-								<button class="o-button">
-									<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
-								</button>
-							</form>
-						</section>
-					</div>
-					<div class="u-third">
-						<section class="u-center">
-							<h3>Let’s get working.<br/>Partner with Us</h3>
-							<?php echo renderButton(home_url().'/contact','Become a Partner'); ?>
-						</section>
-					</div>
-				</div>
+				<?php endif ?>
 				<div class="c-sitemap">
 					<div class="u-fifth">
 						<section>

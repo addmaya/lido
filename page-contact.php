@@ -1,5 +1,6 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover">
+<div class="c-cover" id="contact">
+	<span class="c-contact__tint"></span>
 	<div class="u-half">
 		<section class="c-contact__section">
 			<h1>Reach Out</h1>

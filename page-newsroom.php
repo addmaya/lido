@@ -1,5 +1,5 @@
 i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="o-section c-updates">
+<section class="o-section c-updates" id="updates">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Updates</div>
@@ -18,9 +18,8 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 				$articleClass = '';
 
 				while ($featuredUpdates->have_posts()) : $featuredUpdates->the_post();
-					$storyAuthor = get_the_title();
+					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
-					$storyTitle = get_field('fancy_title');
 					$storyPhoto = get_field('photo');
 					$storyArea = get_field('area');
 				if ($rowCount > 1) {
@@ -48,7 +47,7 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 							</a>
 						</figure>
 						<section class="o-article__summary">
-							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyAuthor; ?></span></a></h2>
+							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyTitle; ?></span></a></h2>
 							<ul class="o-article__meta">
 								
 								<?php
@@ -58,7 +57,6 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 								?>
 									<li><a href="<?php echo get_permalink($storyProgram->ID); ?>">/ <?php echo get_the_title($storyProgram->ID); ?></a></li>
 								<?php endforeach; endif; ?>
-								<li><a href="#">/ <?php echo $storyArea; ?></a></li>
 								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
 							</ul>
 							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>
@@ -70,7 +68,7 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 		<div class="u-center">
 			<a href="#" class="o-button s--multiline s--med">
 				<i class="o-icon"><strong>15</strong></i>
-				<span>More Change Stories</span>
+				<span>More Updates</span>
 			</a>
 		</div>
 	</div>
@@ -205,7 +203,7 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 		</div>
 	</div>
 </section>
-<section class="o-section s--med c-docs">
+<section class="o-section s--med c-docs" id="documents">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Documents</div>
@@ -216,7 +214,7 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 			<?php 
 				$documents = new WP_Query(array(
 					'post_type'=>'document',
-					'posts_per_page'=>3,
+					'posts_per_page'=>-1,
 					)
 				);
 				

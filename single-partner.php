@@ -27,7 +27,7 @@
 </div>
 <div class="o-story s--single">
 	<div class="o-box">
-		<p><?php echo $partnerSummary; ?></p>
+		<p><?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $partnerSummary); ?></p>
 		<span class="o-line"></span>
 		<?php
 			$programs = new WP_Query(array(
