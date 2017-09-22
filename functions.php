@@ -30,6 +30,52 @@
 		
 	}
 
+
+	add_action('admin_post_submitContact', 'submitContact');
+	add_action('admin_post_nopriv_submitContact', 'submitContact');
+
+	function verifyEmail($a){
+		if(isset($_POST[$a])) {
+			$userEmail = trim($_POST[$a]);
+			if(($userEmail != 'Email') && (preg_match("/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", $userEmail))){
+				return $userEmail;
+			}
+		}
+	}
+	
+	function submitContact(){
+		if(isset($_POST['form_nonce']) || wp_verify_nonce($_POST['form_nonce'], 'form_nonce_key')){
+			if(isset($_POST['userName'])){
+				$userName = trim($_POST['userName']);
+			}
+			if(isset($_POST['userTelephone'])){
+				$userTelephone = trim($_POST['userTelephone']);
+			}			
+			if(isset($_POST['userEmail'])){
+				$userEmail = verifyEmail('userEmail');
+			}
+
+			if(isset($_POST['userSubject'])){
+				$userSubject = ' :'.trim($_POST['userSubject']);
+			}
+
+			$messageHeader[] = 'From: '.$userName.' <'.$userEmail.'>';
+			$messageHeader[] = 'Reply-To: '.$userName.' <'.$userEmail.'>';
+
+			if(isset($_POST['userMessage'])){
+				$userMessage = trim($_POST['userMessage']);
+				if(!strstr($userMessage, 'http://')){
+					$messageBody = 'Email: '.$userEmail."\n".'Name: '.$userName."\n".'Phone Number: '.$userTelephone."\n".'Message: '.$userMessage;
+					wp_mail('ask@addmaya.com', 'SF Website Inquiry'.$userSubject, $messageBody, $messageHeader);
+					echo $userSubject;
+				}
+				else {exit; echo 'error';}
+			}
+		}
+		else {exit; echo 'fup';}	
+	}
+
+
 	function disable_wp_emojicons() {
 	  remove_action( 'admin_print_styles', 'print_emoji_styles' );
 	  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -116,33 +162,6 @@
 		else {
 			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div></a>';
 		}
-	}
-
-	function submitContact(){
-		if(isset($_POST['form_nonce']) || wp_verify_nonce($_POST['form_nonce'], 'form_nonce_key')){
-			if(isset($_POST['userName'])){
-				$userName = trim($_POST['userName']);
-			}
-			if(isset($_POST['userTelephone'])){
-				$userTelephone = trim($_POST['userTelephone']);
-			}			
-			if(isset($_POST['userEmail'])){
-				$userEmail = verifyEmail('userEmail');
-			}
-
-			$messageHeader[] = 'From: '.$userName.' <'.$userEmail.'>';
-			$messageHeader[] = 'Reply-To: '.$userName.' <'.$userEmail.'>';
-
-			if(isset($_POST['userMessage'])){
-				$userMessage = trim($_POST['userMessage']);
-				if(!strstr($userMessage, 'http://')){
-					$messageBody = 'Email: '.$userEmail."\n".'Name: '.$userName."\n".'Phone Number: '.$userTelephone."\n".'Message: '.$userMessage;
-					wp_mail('info@reachahand.org', 'RAHU Website Inquiry', $messageBody, $messageHeader);	
-				}
-				else {exit;}
-			}
-		}
-		else {exit;}	
 	}
 
 	function getPostTime(){

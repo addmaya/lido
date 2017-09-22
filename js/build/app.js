@@ -39,6 +39,7 @@ jQuery(document).ready(function($) {
 	var hamburger = $('.c-hamburger');
 	var sectionator = $('.c-sectionator');
 	var footer = $('.c-page__footer');
+	var logo = $('.c-logo')
 	var header = $('.c-page__header');
 	var burger = $('.c-burger');
 
@@ -64,21 +65,27 @@ jQuery(document).ready(function($) {
 
 	function submitContactForm(){
 		var contactForm = $('#contactForm');
-		var submitButton = contactForm.find('button .o-button__title');
+		var submitButton = contactForm.find('button span');
+		var formAlert = $('#contactFormAlert');
 		contactForm.ajaxForm({
 		    beforeSend: function() { 
 		        submitButton.html('Sending...');
 		    },
 		    success: function() {
-		        contactForm.find('#contactFormAlert').html('Thank you. Your Request was sent');
-		        submitButton.html('Send Message');
+		        submitButton.html('Send Message [Done]');
 		        contactForm.each(function(){
 		        	this.reset();
 		        });
+
+		        setTimeout(function(){
+		          submitButton.html('Send Message');
+		        }, 2000);
 		    },
 		    error: function(){
-		    	contactForm.find('#contactFormAlert').html('Please try again');
-		    	submitButton.html('Send Message');
+		    	submitButton.html('Send Message [Error]');
+		    	setTimeout(function(){
+		          submitButton.html('Send Message');
+		        }, 2000);
 		    },
 		    resetForm: true
 		});
@@ -154,18 +161,26 @@ jQuery(document).ready(function($) {
 	}
 
 	function renderSwiper(){
-		var ImageSwiper = new Swiper ('.o-slider .swiper-container', {
-		    loop: true,
-		    speed: 800,
-		    autoplayDisableOnInteraction:false,
-		    pagination: '.swiper-pagination',
-		    paginationClickable: true,
-		    nextButton: '.o-slider__buttons .s--next',
-		    prevButton: '.o-slider__buttons .s--prev',
-		    onSlideChangeEnd: function(){
-		    	$('.o-slider__caption em').html($('.swiper-slide-active span').html());
-		    }
-		 });
+		var swiperInstances = {};
+		$(".o-slider .swiper-container").each(function(index, element){
+		    var $this = $(this);
+		    $this.addClass("instance-" + index);
+		    $this.closest('.o-slider').addClass('slide-'+index);
+		    $(".slide-"+index).find(".s--prev").addClass("btn-prev-" + index);
+		    $(".slide-"+index).find(".s--next").addClass("btn-next-" + index);
+		    swiperInstances[index] = new Swiper(".instance-" + index, {
+		        loop: true,
+		        speed: 800,
+		        autoplayDisableOnInteraction:false,
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true,
+		        nextButton: ".btn-next-" + index,
+		        prevButton: ".btn-prev-" + index,
+		        onSlideChangeEnd: function(){
+		        	$(".slide-"+index).find('.o-slider__caption em').html($('.swiper-slide-active span').html());
+		        }
+		    });
+		});
 	}
 
 	function loadLazyImage(obj){
@@ -245,7 +260,7 @@ jQuery(document).ready(function($) {
 	    }
 	});
 
-	//page-home
+	//page - home
 	var pageHome = Barba.BaseView.extend({
 	  namespace: 'home',
 	  onEnter: function() {
@@ -262,6 +277,33 @@ jQuery(document).ready(function($) {
 	  }
 	});
 	pageHome.init();
+
+	//page - program
+	var pageProgram = Barba.BaseView.extend({
+	  namespace: 'program',
+	  onEnter: function() {
+	    header.addClass('t-dark');
+	  },
+	  onLeave: function(){
+	  	header.removeClass('t-dark');
+	  }
+	});
+	pageProgram.init();
+
+
+	//page - contact
+	var pageContact = Barba.BaseView.extend({
+	  namespace: 'contact',
+	  onEnter: function() {
+	    header.addClass('t-dark');
+	    logo.addClass('t-dark');
+	  },
+	  onLeave: function(){
+	  	header.removeClass('t-dark');
+	  	logo.removeClass('t-dark');
+	  }
+	});
+	pageContact.init();
 
 	
 	

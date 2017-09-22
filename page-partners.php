@@ -11,9 +11,9 @@
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
 						<div class="u-pt-l">
-							<?php echo renderButton('#education', 'Funding Partners','anchor', 's--block'); ?>
-							<?php echo renderButton('#livelihood', 'Implementing Partners','anchor', 's--block'); ?>
-							<?php echo renderButton('#livelihood', 'Networks & Collaborations','anchor', 's--block'); ?>
+							<?php echo renderButton('#education', 'Funding Partners','anchor', 's--block s--vertical'); ?>
+							<?php echo renderButton('#livelihood', 'Implementing Partners','anchor', 's--block s--vertical'); ?>
+							<?php echo renderButton('#livelihood', 'Networks & Collaborations','anchor', 's--block s--vertical'); ?>
 						</div>
 					</div>
 				</section>
@@ -29,9 +29,9 @@
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<ul class="o-partners s--third">
+			<ul class="o-partners">
 				<?php 
-					$fundingPartners = new WP_Query(array(
+					$fundingPartnersLogos = new WP_Query(array(
 						'post_type'=>'partner',
 						'posts_per_page'=>-1,
 						'tax_query'=> array(
@@ -40,11 +40,59 @@
 								'field'=>'slug',
 								'terms'=>'funding'
 							)
-						)
+						),
+						'meta_query'=> array(
+							array(
+								'key'=>'logo',
+								'value'=>'',
+								'compare'=> '!='
+						))
 					));
-					while ( $fundingPartners->have_posts() ) : $fundingPartners->the_post();
+					while ( $fundingPartnersLogos->have_posts() ) : $fundingPartnersLogos->the_post();
+						$partnerWebsite = esc_url(get_field('website'));
+						$partnerLogo = get_field('logo');
+						$partnerName = get_the_title();
 				?>
-					<li><a href="#"><figure></figure></a></li>
+					<li>
+						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
+							<?php if ($partnerLogo){ ?>
+								<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+							<?php } else {?>
+							<span class="s--inline"><?php echo $partnerName; ?></span>
+							<?php } ?>
+						</a>
+					</li>
+				<?php  endwhile; wp_reset_postdata(); ?>
+			</ul>
+			<ul class="o-partners u-pt-l">
+				<?php 
+					$fundingPartnersPlain = new WP_Query(array(
+						'post_type'=>'partner',
+						'posts_per_page'=>-1,
+						'tax_query'=> array(
+							array(
+								'taxonomy'=>'class',
+								'field'=>'slug',
+								'terms'=>'funding'
+							)
+						),
+						'meta_query'=> array(
+							array(
+								'key'=>'logo',
+								'value'=>'',
+								'compare'=> '='
+						))
+					));
+					while ( $fundingPartnersPlain->have_posts() ) : $fundingPartnersPlain->the_post();
+						$partnerWebsite = esc_url(get_field('website'));
+						$partnerLogo = get_field('logo');
+						$partnerName = get_the_title();
+				?>
+					<li style="width: 50%">
+						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
+							<span><?php echo $partnerName; ?></span>
+						</a>
+					</li>
 				<?php  endwhile; wp_reset_postdata(); ?>
 			</ul>
 		</div>

@@ -10,8 +10,8 @@
 					<h1><?php the_field('title'); ?></h1>
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<?php echo renderButton('#education', 'Impact Statistics','anchor', 's--block'); ?>
-						<?php echo renderButton('#livelihood', 'Change Stories','anchor', 's--block'); ?>					</div>
+						<?php echo renderButton('#education', 'Impact Statistics','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#livelihood', 'Change Stories','anchor', 's--block s--vertical'); ?>					</div>
 				</section>
 			</div>
 		</div>

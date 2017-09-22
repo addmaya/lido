@@ -11,9 +11,9 @@
 					<h1><?php the_field('title'); ?></h1>
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<?php echo renderButton('#education', 'Education Programs','anchor', 's--block'); ?>
-						<?php echo renderButton('#livelihood', 'Livelihood Programs','anchor', 's--block'); ?>
-						<?php echo renderButton('#capacity-building', 'Capacity Building & Training','anchor', 's--block'); ?>
+						<?php echo renderButton('#education', 'Education Programs','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#livelihood', 'Livelihood Programs','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#capacity-building', 'Capacity Building & Training','anchor', 's--block s--vertical'); ?>
 					</div>
 				</section>
 			</div>
@@ -123,7 +123,7 @@
 			?>
 			<h1><?php echo $sectionLivelihoodTitle; ?></h1>
 			<p><?php echo $sectionLivelihoodSummary; ?></p>
-			<ul class="u-clear u-pt-l">
+			<ul class="o-rhombus__list">
 				<?php 
 					$livelihoodPrograms = new WP_Query(array(
 						'post_type'=>'program',
@@ -160,7 +160,7 @@
 			</div>
 			<h1><?php echo $sectionCapacityTitle; ?></h1>
 			<p><?php echo $sectionCapacitySummary; ?></p>
-			<ul class="u-clear u-pt-l">
+			<ul class="o-rhombus__list">
 				<?php 
 					$capacityPrograms = new WP_Query(array(
 						'post_type'=>'program',

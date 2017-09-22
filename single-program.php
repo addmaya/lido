@@ -346,7 +346,10 @@
 				<?php endwhile; ?>
 			</ul>
 			<div class="c-program__cta">
-				<?php echo renderButton('#','Become a Partner','div','s--multiline s--med') ?>
+				<a href="#" class="o-button s--multiline s--med">
+					<i class="o-icon"><strong>+</strong></i>
+					<span>Become a Partner</span>
+				</a>
 			</div>
 		</div>
 	</section>

@@ -9,16 +9,19 @@
 				<nav class="c-menu">
 					<ul>
 						<li>
-							<a href="<?php echo home_url(); ?>/programs">Programs <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
 						</li>
 						<li>
-							<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span><?php echo wp_count_posts('story')->publish; ?></span></a>
 						</li>
 						<li>
-							<a href="<?php echo home_url(); ?>/partners">Partners <span>8</span></a>
+							<a href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
 						</li>
 						<li>
 							<a href="<?php echo home_url(); ?>/about">About</a>
+						</li>
+						<li>
+							<a href="<?php echo home_url(); ?>/contact">Contact</a>
 						</li>
 						<!-- <li>
 							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
@@ -127,4 +130,8 @@
 <div id="barba-wrapper">
 	<div class="barba-container" data-namespace="<?php
 		if(is_front_page()){echo 'home';}
+		if(is_singular('program')){echo 'program';}
+		if (is_page('contact')) {
+			echo 'contact';
+		}
 	?>">
