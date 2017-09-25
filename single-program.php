@@ -29,7 +29,9 @@
 <section class="c-cover">
 	<div class="u-half">
 		<div class="o-tint"></div>
-		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
+		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+			<span class="o-image__cover"></span>
+		</figure>
 	</div>
 	<div class="u-half c-cover__profile s--single" >
 		<div class="o-table js-lazy" data-image-url="<?php the_field('3d_illustration'); ?>">
@@ -77,7 +79,7 @@
 				<div class="u-half">
 					<section class="u-pl-l">
 						<div class="c-program__map">
-							
+							<div class="c-implementers s--programs"></div>
 						</div>
 						<div class="c-program__meta">
 							<div class="u-half">
@@ -88,7 +90,7 @@
 							<div class="u-half">
 								<span>Uganda, South Sudan</span>
 								<span>Education</span>
-								<span>398</span>
+								<span><?php echo $programPartners->post_count; ?></span>
 							</div>
 						</div>
 					</section>
@@ -343,7 +345,7 @@
 							<?php } ?>
 						</a>
 					</li>
-				<?php endwhile; ?>
+				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>
 			<div class="c-program__cta">
 				<a href="#" class="o-button s--multiline s--med">
@@ -353,5 +355,5 @@
 			</div>
 		</div>
 	</section>
-<?php endif ?>
+<?php endif; ?>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

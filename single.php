@@ -42,7 +42,9 @@
 		</div>
 	</div>
 	<div class="o-story__cover u-threefourth">
-		<figure class="js-lazy" data-image-url="<?php echo $storyPhoto; ?>"></figure>
+		<figure class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
+			<span class="o-image__cover"></span>
+		</figure>
 	</div>
 </div>
 <?php Starkers_Utilities::get_template_parts(array('parts/shared/content'));?>

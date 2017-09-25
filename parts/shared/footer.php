@@ -1,38 +1,82 @@
 		<section class="c-paginator">
+			<?php 
+				$pageList = array();
+				foreach (get_pages('sort_column=menu_order&sort_order=asc') as $page) {
+					$pageList[] += $page->ID;
+				}
+
+				$currentPage = 0;
+				$prevPageID = 0;
+				$nextPageID = 0;
+
+				if(!is_single()){
+					$currentPage = array_search(get_the_ID(), $pageList);
+					$prevPageID = $pageList[$currentPage-1];
+					$nextPageID = $pageList[$currentPage+1];
+
+					if(empty($nextPageID)){
+						$nextPageID = get_option('page_on_front');
+					}
+
+					if(empty($prevPageID)){
+						$pageCount = count($pageList);
+						$prevPageID = $pageList[$pageCount - 1];
+					}
+				} else {
+					$nextPost = get_previous_post();
+					$prevPost = get_next_post();
+					
+					if(!empty($nextPost)){
+						$nextPageID = $nextPost->ID;
+					}
+					else{
+						$nextPageID = 20;
+					}
+					
+					if (!empty($prevPost)){
+						$prevPageID = $prevPost->ID;
+					}
+					else {
+						$prevPageID = 20;
+					}						
+				}
+			 ?>
 			<div class="c-paginator__labels">
-				<a href="#" class="js-paginator__prev">Previous</a>
+				<a href="<?php echo get_permalink($prevPageID);?>" class="js-paginator__prev">Previous</a>
 				<span></span>
-				<a href="#" class="js-paginator__next">Next</a>
+				<a href="<?php echo get_permalink($nextPageID);?>" class="js-paginator__next">Next</a>
 			</div>
 			<div class="u-clear">
-				<a href="" class="c-paginator__button s--left">
+				<a href="<?php echo get_permalink($prevPageID);?>" class="c-paginator__button s--left">
 					<section class="o-rhombus s--medium">
-						<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo',$prevPageID); ?>"></figure>
 					</section>
 					<div>
 						<svg class="o-arrow" viewBox="0 0 68 48">
 							<path class="o-arrow_head" d="M65.9,23.9H3.2"/>
 							<path class="o-arrow_tail" d="M25.3,46.4L2.6,23.7L25.3,1"/>
 						</svg>
-						<span>Impact</span>
+						<span><?php echo get_the_title($prevPageID); ?></span>
 					</div>
 				</a>
-				<a href="" class="c-paginator__button s--right">
+				<a href="<?php echo get_permalink($nextPageID);?>" class="c-paginator__button s--right">
 					<div>
-						<span>Newsroom</span>
+						<span><?php echo get_the_title($nextPageID); ?></span>
 						<svg class="o-arrow" viewBox="0 0 68 48">
 							<path class="o-arrow_head" d="M2.6,23.5l62.6,0"/>
 							<path class="o-arrow_tail" d="M43.2,1l22.7,22.7L43.2,46.4"/>
 						</svg>
 					</div>
 					<section class="o-rhombus s--medium">
-						<figure class="o-rhombus__image" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo',$nextPageID); ?>"></figure>
 					</section>
 				</a>
 			</div>
 		</section>
 		<footer class="c-page__footer t-dark">
-			<!-- <div class="c-globe"></div> -->
+			<!-- <div class="c-globe__wrap">
+				<div class="c-globe"></div>
+			</div> -->
 			<div class="o-box">
 				<h1 class="u-center">Together we can <br/>eradicate povery from East Africa</h1>
 				<div class="c-cta">

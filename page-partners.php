@@ -1,7 +1,9 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
+		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+			<span class="o-image__cover"></span>
+		</figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">
@@ -29,7 +31,7 @@
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<ul class="o-partners">
+			<ul class="o-partners s--third">
 				<?php 
 					$fundingPartnersLogos = new WP_Query(array(
 						'post_type'=>'partner',
@@ -224,7 +226,11 @@
 				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
-		<div class="u-half"></div>
+		<div class="u-half">
+			<div class="c-implementers">
+				
+			</div>
+		</div>
 	</div>
 </section>
 <section class="o-section" id="networks">

@@ -1,7 +1,9 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy" data-image-url="<?php the_field('photo'); ?>"></figure>
+		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+			<span class="o-image__cover"></span>
+		</figure>
 	</div>
 	<div class="u-half c-cover__profile">
 		<div class="o-table">

@@ -423,7 +423,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{padding-left: 6em;}
   &.s--partner{background-color: white}
 }
-.o-story__cover{float: right; height: 100%; position: relative; z-index: -4;
+.o-story__cover{float: right; height: 100%; position: relative; z-index: -4; overflow: hidden;
   figure{background-color: $blackA; height: 100%; @include cover}
 }
 .o-story{
@@ -491,7 +491,7 @@ em{font-family: 'Georgia'; font-style: italic;}
       figure{@include translateY(em(-24))}
     }
   }
-  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain; }
+  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain; background-position: left center; }
   span{display: block; height:em(72); overflow: hidden;
     &.s--inline{height: auto;}
   }
@@ -671,7 +671,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     &.is-left{@include prefix((transform: rotate(45deg)))}
   }
 }
-.c-page__footer{position: relative; font-weight: 300; padding: em(96) 0 em(96); @include image('globe.svg'); background-repeat:no-repeat; background-position:center top; background-size:130%; z-index: 20;
+.c-page__footer{position: relative; font-weight: 300; padding: em(96) 0 em(96); @include image('globe.svg'); background-repeat:no-repeat; background-position:center top; background-size:130%; z-index: 20; 
   .o-box{width:80%}
   h1{font-size: em(28); font-weight: 500; letter-spacing: 0; padding-bottom: em(54)}
   h3,h4{font-weight: 500}
@@ -688,6 +688,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-circle__inner{stroke: #dedede}
   .c-cta{ border-bottom:solid 1px #b93c7a; padding-bottom: em(84); margin-bottom: em(72)}
 }
+/*.c-globe__wrap{position: absolute; top:0; width: 100%; z-index: -1; height: 200%}
+.c-globe{width: 100%; height: 100%; @include image('globe.svg'); background-size: cover; background-position: center top; background-repeat: no-repeat; margin: 0 auto;}*/
 .c-cta{@include clear; text-align: center;
   h3{text-align: center; margin-bottom: em(24)}
   input{border-radius: 24px; border: solid 2px #e081b0; padding: em(9) em(18); width: 75%; float: left}
@@ -696,7 +698,6 @@ em{font-family: 'Georgia'; font-style: italic;}
     i{border-width: 2px}
   }
 }
-.c-globe{@include box(1722px, 1722px); position: absolute; top: 0; background-color: red; border-radius: 50%}
 .c-sitemap{
   ul{list-style: circle}
   li{font-size: 0.875em; line-height:1.4}
@@ -709,7 +710,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .c-cover{height: 100%; position: relative; z-index:1;
   h1{padding-bottom: em(16)}
-  .u-half{height: 100%; position: relative;}
+  .u-half{height: 100%; position: relative; overflow: hidden;}
   &.s--story{height:70%}
   .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat;}
   &#profile{@include image('illustrations/profile.jpg'); background-position:center; background-size:cover; background-repeat: no-repeat; background-color:#f5f6f6}
@@ -757,8 +758,8 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-orbit__sun{@include box(em(240), em(240)); border-radius: 50%; background-color: $redC; display: inline-block;}
 
 .c-regions__col{position: relative;}
-.c-regions__image{height: em(506); width: em(215); position: absolute; bottom:0; left:30%; @include contain}
-.c-regions__map{height: em(408);}
+.c-regions__image{height: em(700); width: em(256); position: absolute; bottom:0; left:30%; @include contain}
+.c-regions__map{height: em(408); @include image('east-africa-spotlight.png'); background-size: contain;}
 .c-history{text-align: center; width: 50%; @include center;
   h1{color: $redA; font-size: em(300); padding-bottom: 0; margin-bottom: 0}
   span{font-weight: 600; font-size:em(20); color: $redA; display: block;}
@@ -853,6 +854,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   h1{width:50%; @include center}
 }
 .c-impact__summary{width: 50%; @include center; text-align: center}
+.c-implementers{@include image('ea-map.png'); height: 705px; @include contain;
+  &.s--programs{height: 600px}
+}
 
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}
