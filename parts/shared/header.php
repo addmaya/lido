@@ -6,7 +6,7 @@
 				<a href="<?php echo home_url(); ?>" class="c-logo"></a>
 			</div>
 			<div class="u-half">
-				<nav class="c-menu">
+				<nav class="c-menu-primary">
 					<ul>
 						<li>
 							<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
@@ -32,55 +32,42 @@
 		</section>
 	</div>
 </header>
-<div class="c-sectionator">
-	<div class="o-table">
-		<div class="o-table__cell">
-			<ul>
-				<li>
-					<a href="#" class="c-hamburger">
-						<svg viewBox="0 0 24 24">
-							<line x1="5.5" y1="6.7" x2="18.7" y2="6.7"/>
-							<line x1="5.5" y1="12" x2="18.7" y2="12"/>
-							<line x1="5.5" y1="17.2" x2="18.7" y2="17.2"/>
-						</svg>
-					</a>
-				</li>
-				<li><a href="#" class="c-sectionator__button"><span></span></a></li>
-				<li><a href="#" class="c-sectionator__button"><span></span></a></li>
-				<li><a href="#" class="c-sectionator__button"><span></span></a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="c-burger t-dark">
-	<!-- <a href="#" class="c-burger__close"></a> -->
+<a href="#" class="c-hamburger">
+	<svg viewBox="0 0 24 24">
+		<line x1="5.5" y1="6.7" x2="18.7" y2="6.7"/>
+		<line x1="5.5" y1="12" x2="18.7" y2="12"/>
+		<line x1="5.5" y1="17.2" x2="18.7" y2="17.2"/>
+	</svg>
+</a>
+<div class="c-menu-secondary t-dark">
+	<!-- <a href="#" class="o-closer"></a> -->
 	<div>
-		<ul class="c-burger-menu">
-			<li class="c-burger-menu__item">
+		<ul>
+			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/programs">
 					<span>Programs</span>
-					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
+					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 10); ?>"></figure>
 				</a>
 			</li>
-			<li class="c-burger-menu__item">
-				<a href="<?php echo home_url(); ?>/impact-stories">
+			<li class="c-menu-secondary__item">
+				<a href="<?php echo home_url(); ?>/change-stories">
 					<span>Change Stories</span>
-					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-2.jpg')"></figure>
+					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 22); ?>"></figure>
 				</a>
 			</li>
-			<li class="c-burger-menu__item">
+			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/partners">
 					<span>Partners</span>
-					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 41); ?>"></figure>
 				</a>
 			</li>
-			<li class="c-burger-menu__item">
+			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/about">
 					<span>About</span>
-					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy-3.jpg')"></figure>
+					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
 				</a>
 			</li>
-			<!-- <li class="c-burger-menu__item">
+			<!-- <li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/newsroom">
 					<span>Newsroom</span>
 					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>

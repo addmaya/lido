@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
 	var footer = $('.c-page__footer');
 	var logo = $('.c-logo')
 	var header = $('.c-page__header');
-	var burger = $('.c-burger');
+	var menuSecondary = $('.c-menu-secondary');
 
 	//functions
 	$('.element').each(function() {
@@ -199,9 +199,14 @@ jQuery(document).ready(function($) {
     }
 
 	//menu
-	$('nav a').click(function() {
-		$('nav .is-active').removeClass('is-active');
+	$('.c-menu-primary a').click(function() {
+		$('.c-menu-primary .is-active').removeClass('is-active');
 		$(this).addClass('is-active');
+	});
+
+	$('.c-menu-secondary a').click(function() {
+		menuSecondary.removeClass('is-visible');
+		$('body').removeClass('u-oh');
 	});
 
 	function matchHeights(){
@@ -210,7 +215,28 @@ jQuery(document).ready(function($) {
 	}
 
 
+
 	//CLEAN THIS UP
+
+	$('.o-splash .s--play').click(function(e) {
+		e.preventDefault();
+		var me = $(this);
+		var playerWrap = me.closest('.o-splash').find('.o-splash__player');
+		var player = me.closest('.o-splash').find('.o-player');
+		var videoID = me.data('video-id');
+
+		playerWrap.addClass('is-visible');
+		player.html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
+	});
+
+	$('.o-player__close').click(function(e) {
+		e.preventDefault();
+		var me = $(this);
+		var playerWrap = me.closest('.o-splash__player');
+		
+		playerWrap.removeClass('is-visible');
+		playerWrap.find('.o-player').html('');
+	});
 
 	$('.scene').parallax();
 
@@ -219,40 +245,44 @@ jQuery(document).ready(function($) {
 		$(this).closest('.o-input').addClass('is-active');
 	});
 
+	function renderDropCap(){
+		if($('.o-story.s--single p').length){
+			var firstChild = $('.o-story.s--single p').first();
+			var firstChildHTML = firstChild.html();
+			var firstChar = firstChildHTML.charAt(0);
+			var cap = '<span class="o-cap">'+firstChar+'</span>';
+
+			firstChild.html(cap+ firstChildHTML.substring(1));
+		}
+
+	}
+	renderDropCap();
+
+	
+
 	header.bind('inview', function (event, isInView) {
 		if(isInView){
-			hamburger.addClass('is-invisible');
-			sectionator.removeClass('is-active');
+			hamburger.removeClass('is-visible');
 		}
 		else{
-			hamburger.removeClass('is-invisible');
-			sectionator.addClass('is-active');
-		}
-	});
-
-	footer.bind('inview', function (event, isInView) {
-		if(isInView){
-			sectionator.addClass('is-invisible');
-		}
-		else{
-			sectionator.removeClass('is-invisible');
+			hamburger.addClass('is-visible');
 		}
 	});
 
 	hamburger.click(function(e) {
 		e.preventDefault();
-		burger.addClass('is-visible');
+		menuSecondary.addClass('is-visible');
 		$('body').addClass('u-oh');
 	});
 	$('.c-burger__close').click(function(e) {
 		e.preventDefault();
-		burger.removeClass('is-visible');
+		menuSecondary.removeClass('is-visible');
 		$('body').removeClass('u-oh');
 	});
 
 	$(document).mouseup(function(e) 
 	{
-	    var container = burger;
+	    var container = menuSecondary;
 	    if (!container.is(e.target) && container.has(e.target).length === 0) 
 	    {
 	        container.removeClass('is-visible');

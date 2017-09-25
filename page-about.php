@@ -31,7 +31,7 @@
 		</div>
 	</div>
 </section>
-<section class="o-section" id="value">
+<section class="o-section" id="values">
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Our Core Values</div>
@@ -173,6 +173,7 @@
 			</section>
 		</div>
 		<div class="u-half c-regions__col">
+			<div class="o-rhombus__pattern"></div>
 			<figure class="c-regions__image js-lazy" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
 		</div>
 	</div>
@@ -205,6 +206,35 @@
 				<span class="o-line"></span>
 			</section>
 		</div>
+	</div>
+</section>
+<section class="o-section c-team">
+	<div class="o-box">
+		<header>
+			<h1>Our Team</h1>
+			<p>We aim at seeing more people in rural and poor communities in Eastern Africa (particularly children, youth and women) economically and socially empowered live a life of dignity.</p>
+		</header>
+		<ul>
+			<?php 
+				$team = new WP_Query(array('post_type'=>'team', 'posts_per_page'=>-1));
+				while ($team->have_posts()): $team->the_post();
+					$staffTitle = get_the_title();
+					$staffPhoto = get_field('photo');
+					$staffJD = get_field('job_title');
+			 ?>
+			<li class="u-third">
+				<div class="o-author">
+					<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
+					<section>
+						<strong><?php echo $staffTitle; ?></strong>
+						<em><?php echo $staffJD; ?>, SFEA</em>
+					</section>
+
+				</div>
+			</li>
+			<?php endwhile; wp_reset_postdata(); ?>
+		</ul>
+		<div class="o-line s--divider"></div>
 	</div>
 </section>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

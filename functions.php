@@ -1,6 +1,26 @@
 <?php
 	require_once( 'external/starkers-utilities.php' );
+	
 	//add_theme_support('post-thumbnails');	
+	function get_custom_feeds($feed_query) {
+		if (isset($feed_query['feed']) && !isset($feed_query['post_type']))
+			$feed_query['post_type'] = array('story', 'post', 'album', 'video');
+		return $feed_query;
+	}
+	add_filter('request', 'get_custom_feeds');
+
+	function rss_content( $content ) {
+	    global $post;
+	    $postSummary = get_field('summary', $post->ID);
+	    $postPhoto = get_field('photo', $post->ID);
+
+	    if ($postPhoto) {	
+	    	$content = '<p><a href="'.get_permalink().'"><img src="' .$postPhoto.'" /></a>'. $postSummary . '</p>' . $content;
+	    }
+	    return $content;
+	}
+	add_filter( 'the_excerpt_rss', 'rss_content' );
+	add_filter( 'the_content_feed', 'rss_content' );
 	
 	function starkers_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment; 
@@ -30,6 +50,23 @@
 		
 	}
 
+	function getYoutubeID($url){
+	    parse_str(parse_url($url, PHP_URL_QUERY ), $yt_id);
+	    return $yt_id['v'];  
+	}
+
+	function getYoutubeMeta($yt_id){
+		$yt_apikey = 'AIzaSyCuQTR5LVpmHgs2EPrhBVbAGjmHunxTmMk';
+		$yt_query = file_get_contents('https://www.googleapis.com/youtube/v3/videos?id='.$yt_id.'&key='.$yt_apikey.'&fields=items(snippet(title,description,publishedAt,thumbnails(maxres,default)),statistics(viewCount))&part=snippet,statistics');
+		$yt_response = json_decode($yt_query);
+		$yt_meta['yt_date'] = $yt_response->items[0]->snippet->publishedAt;
+        $yt_meta['yt_title'] = $yt_response->items[0]->snippet->title;
+		$yt_meta['yt_desc'] = $yt_response->items[0]->snippet->description;
+		$yt_meta['yt_thumb'] = $yt_response->items[0]->snippet->thumbnails->maxres->url;
+		$yt_meta['yt_count'] = $yt_response->items[0]->statistics->viewCount;
+        $yt_meta['yt_thumb_std'] = $yt_response->items[0]->snippet->thumbnails->default->url;
+		return $yt_meta;
+	}
 
 	add_action('admin_post_submitContact', 'submitContact');
 	add_action('admin_post_nopriv_submitContact', 'submitContact');

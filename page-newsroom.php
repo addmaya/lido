@@ -81,25 +81,38 @@ i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header'
 			<div class="o-crumb__circle"></div>
 		</div>
 		<section class="o-splash s--video">
-			<figure class="o-splash__figure">
-				<div class="o-splash__tint"></div>
+			<?php 
+				$featuredVideo = new WP_Query(array(
+					'post_type'=>'video',
+					'posts_per_page'=>1
+					)
+				);
+				while ($featuredVideo->have_posts()) : $featuredVideo->the_post();
+					$videoLink = get_field('link', false, false);
+					$videoSummary = get_field('summary');
+					$videoID = getYoutubeID($videoLink);
+					$videoMeta = getYoutubeMeta($videoID);
+			 ?>
+			<figure class="o-splash__figure js-lazy" data-image-url="<?php echo $videoMeta['yt_thumb']; ?>" data-video-url="">
+				<div class="o-splash__player">
+					<a class="o-closer o-player__close" href="#"></a>
+					<div class="o-player">
+							
+					</div>
+				</div>
+				<div class="o-splash__tint">
+					<div class="o-table">
+						<div class="o-table__cell">
+							<a class="o-icon s--play" href="#" data-video-id="<?php echo $videoID; ?>"></a>
+						</div>
+					</div>
+				</div>
 				<section class="o-splash__content">
 					<div class="o-box">
 						<span class="o-line"></span>
-						<?php 
-							$featuredVideo = new WP_Query(array(
-								'post_type'=>'video',
-								'posts_per_page'=>1
-								)
-							);
-							while ($featuredVideo->have_posts()) : $featuredVideo->the_post();
-								$videoLink = get_field('link');
-								$videoSummary = get_field('summary');
-						 ?>
-						<h2>Video: <?php echo the_title(); ?></h2>
-						<a href="#">Play Video</a>
+						<h2>Video: <?php echo $videoMeta['yt_title']; ?></h2>
 						<p>
-							<em><?php echo $videoSummary; ?></em>
+							<em><?php echo $videoMeta['yt_desc']; ?></em>
 						</p>
 						<?php endwhile; wp_reset_postdata(); ?>
 					</div>

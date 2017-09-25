@@ -75,14 +75,12 @@
 				$sectionSudanPhoto =$sectionSudan['photo'];
 			?>
 			<div class="u-third">
-				<a href="" class="o-rhombus-button s--patterned">
+				<a href="#" class="o-rhombus-button s--patterned is-passive">
 					<div class="o-rhombus s--large">
 						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
 					</div>
 					<div class="o-rhombus__pattern"></div>
 				</a>
-
-				
 			</div>
 			<div class="u-third">
 				<h1><?php echo $sectionSudanTitle; ?></h1>

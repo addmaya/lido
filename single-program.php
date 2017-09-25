@@ -245,23 +245,32 @@
 			$statBrief = get_sub_field('description');
 			$statFigures = get_sub_field('statistics');
 		?>
-			<section class="o-section">
+			<section class="o-section c-stats">
 				<div class="o-box">
 					<div class="u-clear u-pt-xl">
-						<?php 
-							foreach( $statFigures as $stat ){
-								$statNumber = $stat['number'];
-								$statSummary = $stat['description'];
-								$statUnit = $stat['unit'];
-								$statPhoto = $stat['photo'];
-						 ?>
-						 <div class="o-statistic u-fourth s--figure">
-						 	<section>
-						 		<span><?php echo $statNumber; ?><i class="u-superscript"><?php echo $statUnit; ?></i></span>
-						 		<p><?php echo $statSummary; ?></p>
-						 	</section>
-						 </div>
-						 <?php } ?>
+						<div class="o-stat__box">
+							<?php 
+								foreach( $statFigures as $stat ){
+									$statNumber = $stat['number'];
+									$statSummary = $stat['description'];
+									$statUnit = $stat['unit'];
+									$statPhoto = $stat['photo'];
+							 ?>
+
+							 <div class="o-stat">
+							 	<div class="o-table">
+							 		<div class="o-table__cell">
+							 			<section>
+							 				<span><?php echo $statNumber; ?></span>
+							 				<p><?php echo $statSummary; ?></p>
+							 			</section>
+							 		</div>
+							 	</div>
+							 	<div class="o-rhombus__pattern"></div>
+							 </div>
+
+							 <?php } ?>
+						</div>
 					</div>
 				</div>
 			</section>

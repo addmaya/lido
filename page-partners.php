@@ -13,9 +13,9 @@
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
 						<div class="u-pt-l">
-							<?php echo renderButton('#education', 'Funding Partners','anchor', 's--block s--vertical'); ?>
-							<?php echo renderButton('#livelihood', 'Implementing Partners','anchor', 's--block s--vertical'); ?>
-							<?php echo renderButton('#livelihood', 'Networks & Collaborations','anchor', 's--block s--vertical'); ?>
+							<?php echo renderButton('#funding', 'Funding Partners','anchor', 's--block s--vertical'); ?>
+							<?php echo renderButton('#implementing', 'Implementing Partners','anchor', 's--block s--vertical'); ?>
+							<?php echo renderButton('#networks', 'Networks & Collaborations','anchor', 's--block s--vertical'); ?>
 						</div>
 					</div>
 				</section>
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 </div>
-<section class="o-section">
+<section class="o-section" id="funding">
 	<div class="o-box">
 		<div class="u-half">
 			<div class="o-crumb">
@@ -165,7 +165,7 @@
 		</section>
 	</figure>
 </section>
-<section class="o-section">
+<section class="o-section" id="implementing">
 	<div class="o-box">
 		<div class="u-half">
 			<?php

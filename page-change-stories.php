@@ -12,14 +12,14 @@
 					<h1><?php the_field('title'); ?></h1>
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<?php echo renderButton('#education', 'Impact Statistics','anchor', 's--block s--vertical'); ?>
-						<?php echo renderButton('#livelihood', 'Change Stories','anchor', 's--block s--vertical'); ?>					</div>
+						<?php echo renderButton('#stats', 'Impact Statistics','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#stories', 'Change Stories','anchor', 's--block s--vertical'); ?>					</div>
 				</section>
 			</div>
 		</div>
 	</div>
 </div>
-<section class="o-section c-statistics s--bottom__med">
+<section class="o-section c-statistics s--bottom__med" id="stats">
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Impact Statistics</div>
@@ -41,20 +41,27 @@
 			</header>
 			<p><?php echo $historySummary; ?></p>
 		</section>
-		<div class="u-clear u-pt-xl">
-			<?php 
-				$statistics = get_field('statistics', 22);
-				foreach( $statistics as $stat ){
-					$statisticNumber = $stat['number'];
-					$statisticSummary = $stat['summary'];
-			 ?>
-			 <div class="o-statistic u-fourth s--figure">
-			 	<section>
-			 		<span><?php echo $statisticNumber; ?></span>
-			 		<p><?php echo $statisticSummary; ?></p>
-			 	</section>
-			 </div>
-			 <?php } ?>
+		<div class="u-clear u-pt-l">
+			<div class="o-stat__box">
+				<?php 
+					$statistics = get_field('statistics', 22);
+					foreach( $statistics as $stat ){
+						$statisticNumber = $stat['number'];
+						$statisticSummary = $stat['summary'];
+				 ?>
+				 <div class="o-stat">
+				 	<div class="o-table">
+				 		<div class="o-table__cell">
+				 			<section>
+				 				<span><?php echo $statisticNumber; ?></span>
+				 				<p><?php echo $statisticSummary; ?></p>
+				 			</section>
+				 		</div>
+				 	</div>
+				 	<div class="o-rhombus__pattern"></div>
+				 </div>
+				 <?php } ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -123,7 +130,7 @@
 								<?php endif ?>
 								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
 							</ul>
-							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>
+							<div class="t-dark"><?php echo renderButton(get_permalink(), 'Read Story'); ?></div>
 						</section>
 					</section>
 				</article>

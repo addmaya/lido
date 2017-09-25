@@ -193,7 +193,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-box{width:87%; @include center; @include clear}
 .o-table{display: table; width: 100%; height: 100%}
 .o-table__cell{display: table-cell; vertical-align: middle}
-.o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center}
+.o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center;
+  &.s--play{@include image('play.svg')}
+}
 .o-circle{width:em(40); height:em(40); fill:transparent;  stroke-width: 1; stroke: $redA;
   circle{stroke-dasharray:70}
   .o-circle__outer{stroke-dashoffset: 70; transition:stroke-dashoffset 1s $easeOutExpo, stroke 0.5s; stroke-width:1.5; stroke:$blackA}
@@ -253,6 +255,14 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
+.o-stat__box{text-align: center;}
+.o-stat{width: 17em; height: 17em; position: relative; display: inline-block; 
+  span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
+  p{padding-top: em(24); padding-right: em(12); font-size:em(13); font-family: 'Georgia'; font-style: italic; line-height: 1.6;}
+  section{width:70%; @include center}
+  .o-table{background-color:#f2f2f2; @include rhombus}
+  .o-rhombus__pattern{z-index: -3; opacity: 0.5}
+}
 .o-button-rhombus{display: block;
   figure{@include box(em(240), em(240)); @include bkg(grey); @include rhombus;}
 }
@@ -291,6 +301,14 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-rhombus{@include translateX(em(18))}
     @include rhombusHover;
   }
+  &.is-passive{
+    &:hover{
+      .o-rhombus{@include translateX(0)}
+      .o-rhombus__image{@include translateX(0);
+        &:before, &:after{display: none}
+      }
+    }
+  }
 }
 .o-arrow{stroke: $redA; fill: transparent; stroke-width: 2; stroke-dasharray: 70; stroke-dashoffset:0; @include prefix((transition: stroke-dashoffset 0.5s 'ease'));
 }
@@ -311,6 +329,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   &.u-pb-0{padding-bottom:0}
   &.u-pb-l{padding-bottom: 3em}
+  &.c-stats{padding: em(56) 0}
+  
   &#education{@include image('illustrations/education_0.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#f0f0f0;
     .s--patterned{top:0}
   }
@@ -345,25 +365,32 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 
 .o-splash{@include relative; color: $white; padding-bottom: 54.25%;
-  .o-table__cell{vertical-align: bottom;}
   &.s--video{
     .o-box{width: 60%}
     .o-splash__content{text-align: left}
+    .o-splash__figure{cursor:default}
     h2{margin: em(18) 0;}
+    .o-icon{width: em(72); height: em(72); cursor: pointer; @include txnOpacity(0.5);
+      &:hover{opacity:0.6}
+    }
   }
+  
 }
-.o-splash__figure{@include bkg(grey); position: absolute; @include canvas; top: 0; z-index:1;@include cover}
-.o-splash__tint{@include absolute; @include canvas; z-index:2; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
-}
+.o-splash__figure{@include bkg(grey); position: absolute; @include canvas; top: 0; z-index:1;@include cover; cursor: pointer}
+.o-splash__tint{@include absolute; @include canvas; z-index:2; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000); text-align:center; }
 .o-splash__content{position: absolute; bottom: 5%; width: 100%; z-index: 3; text-align: center;
+  h2{color: inherit}
   blockquote{width: 60%; margin-bottom: em(24); @include center;
     p{font-size: 1.5em; font-weight:400; line-height: 1.5;}
     .o-line{margin-top: em(24)}
   }
   .o-author{text-align: left}
 }
+.o-splash__player{position: absolute; @include canvas; z-index: 5; background-color: black; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
+  &.is-visible{visibility:visible; opacity: 1}
+}
 
-.o-line{@include box(10%, 2px); @include bkg($white); display: inline-block;
+.o-line{@include box(10%, 2px); background-color: #f2f2f2; display: inline-block;
   &.s--divider{width: 90%; margin: 5em auto; display: block;}
   &.t-dark{background-color:lighten($blackA, 80%)}
 }
@@ -491,7 +518,7 @@ em{font-family: 'Georgia'; font-style: italic;}
       figure{@include translateY(em(-24))}
     }
   }
-  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain; background-position: left center; }
+  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain}
   span{display: block; height:em(72); overflow: hidden;
     &.s--inline{height: auto;}
   }
@@ -562,7 +589,13 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
   a{display: block; padding: em(6) 0}
 }
-
+.o-closer{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s;
+  &:hover{background-color: darken($redA,10%)}
+}
+.o-player{position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;
+  iframe, object, embed{position: absolute; top: 0; left: 0; width: 100%; height: 100%}
+}
+.o-cap{color: #903; float: left; font-size: em(84); line-height: 60px; padding: em(1) em(2) em(3) 0;background: url('images/pattern-2.png') repeat; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size:10%; font-weight:bold}
 
 /*components*/
 .c-spine{@include box(em(28), 100%); @include bkg(#fff); position: fixed; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10}
@@ -576,7 +609,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-deco__dash{@include box(12px, 2px); @include bkg(#CBCBCB); float: left; @include relative; top: 5px; left: 20px}
 .c-deco__line{@include box(89%, 6px); @include image('line-1.png'); background-size:contain; float: right; @include relative; top: 3px; opacity:0.5}
 
-.c-menu{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff;
+.c-menu-primary{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff;
   li{display:inline-block}
   a{display:block;padding:0.75em; position: relative;
     &:after{@include line; width: 100%; @include prefix((transform-origin: 50% 50%))}
@@ -759,8 +792,11 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-regions__col{position: relative;}
 .c-regions__image{height: em(700); width: em(256); position: absolute; bottom:0; left:30%; @include contain}
-.c-regions__map{height: em(408); @include image('east-africa-spotlight.png'); background-size: contain;}
-.c-history{text-align: center; width: 50%; @include center;
+.c-regions__map{height: em(408); @include image('east-africa-spotlight.png'); background-size: contain; background-repeat: no-repeat}
+.c-regions{
+  .o-rhombus__pattern{height:60%}
+}
+.c-history{text-align: center; width: 60%; @include center;
   h1{color: $redA; font-size: em(300); padding-bottom: 0; margin-bottom: 0}
   span{font-weight: 600; font-size:em(20); color: $redA; display: block;}
   header{position: relative; margin-top:em(-56); margin-bottom: em(48);
@@ -814,15 +850,17 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-hamburger{position: relative; @include txnOpacity(0.5); border:solid 2px; margin-bottom: em(9); font-family: 'Arial', sans-serif;
-  svg{@include box(em(30), em(30)); fill:none; stroke: $blackA; stroke-width:2; position: relative; z-index: 1; @include txnTransform(0.3, ease)}
+.c-hamburger{top:40%; right:1.5em; width: em(56); height: em(56); z-index: 2; position: fixed; border:solid 2px $redA; margin-bottom: em(9); overflow: hidden; border-radius: 50%;  visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
+  
+  svg{@include box(em(48), em(48)); fill:none; stroke: $redA; stroke-width:1; position: relative; z-index: 1; @include txnTransform(0.3, ease); display: block; @include center; top: 2px;}
   line{stroke-dasharray: 15; @include prefix((transition: stroke-dashoffset 0.3s))}
   span{display: block; font-size: 9px; font-weight: bold; opacity: 0.8; position: relative; z-index: 2}
   
-  &:after{content: ""; position: absolute;@include canvas; top:0; left: 0; @include resetPivot; @include scale2D(0,0); @include txnTransform(0.6, $easeOutExpo); background-color: $redB}
+  &.is-visible{visibility: visible; opacity: 1}
+/*  &:after{content: ""; position: absolute;@include canvas; top:0; left: 0; @include resetPivot; @include scale2D(0,0); @include txnTransform(0.6, $easeOutExpo); background-color: $redB}*/
   
-  &:hover{color: $white; border-color: $redB;
-    &:after{@include scale2D(1,1)}
+  &:hover{color: $white; border-color: $redB; background-color: $redB;
+/*    &:after{@include scale2D(1,1)}*/
     svg{@include translateX(em(-3)); stroke: $white;}
     line{
       &:first-child{stroke-dashoffset: 5;}
@@ -830,16 +868,13 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-burger{background-color: #231f20; width: 40%; position: fixed; right: 0; top:0; z-index: 30; height: 100%; overflow: scroll; @include txnTransform(0.7, cubic-bezier(0.42,-0.01, 0, 1)); @include translateX(100%);
+.c-menu-secondary{background-color: #231f20; width: 40%; position: fixed; right: 0; top:0; z-index: 30; height: 100%; overflow: scroll; @include txnTransform(0.7, cubic-bezier(0.42,-0.01, 0, 1)); @include translateX(100%);
   h3{padding-bottom: 1.5em}
 
   &.is-visible{@include translateX(0%)}
+  ul{font-size: 1.5em;color: white}
 }
-.c-burger__close{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s;
-  &:hover{background-color: darken($redA,10%)}
-}
-.c-burger-menu{font-size: 1.5em;color: white}
-.c-burger-menu__item{border-bottom:solid 1px #353233;
+.c-menu-secondary__item{border-bottom:solid 1px #353233;
   a{display: block; padding: em(26) 0; position: relative; overflow: hidden; padding-left: 1em;
     &:hover{
       figure{@include translateY(0)}
@@ -849,17 +884,25 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{position: relative; z-index: 2; display: block; @include txnTransform(0.3, ease)}
   figure{@include canvas; position: absolute; background-color: red; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6; filter: grayscale(100%);}
 }
+
 .c-eastafrica{@include image('illustrations/ea_map.jpg'); @include contain; background-color: #dbdbdb}
-.c-impact{
+.c-impact{text-align: center;
   h1{width:50%; @include center}
 }
 .c-impact__summary{width: 50%; @include center; text-align: center}
 .c-implementers{@include image('ea-map.png'); height: 705px; @include contain;
   &.s--programs{height: 600px}
 }
+.c-team{text-align:center; padding-bottom: 0;
+  header{width: 50%; @include center; padding-bottom: 4em}
+  ul{@include clear; text-align: left}
+  figure{width: em(96); height: em(96)}
+  section{top: em(36)}
+  .o-author{padding-bottom:1em}
+}
 
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}
 
 /*states*/
-.is-invisible{opacity: 0; visibility: hidden}
+.is-invisible{opacity: 0; visibility: hidden;}
