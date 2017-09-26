@@ -261,7 +261,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   p{padding-top: em(24); padding-right: em(12); font-size:em(13); font-family: 'Georgia'; font-style: italic; line-height: 1.6;}
   section{width:70%; @include center}
   .o-table{background-color:#f2f2f2; @include rhombus}
-  .o-rhombus__pattern{z-index: -3; opacity: 0.5}
+  .o-rhombus__pattern{z-index: -3; opacity: 0.3; background-size: 20%}
 }
 .o-button-rhombus{display: block;
   figure{@include box(em(240), em(240)); @include bkg(grey); @include rhombus;}
@@ -511,7 +511,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
 .o-partners{@include clear;
   li{float: left; width: 20%; line-height:1.3}
-  a{display: block;margin: em(9); position: relative;
+  a{display: block;margin: em(9); position: relative; background-color: #fff;
     &:after{@include line}
     &:hover{
       &:after{@include scale2D(1,1)}
@@ -636,7 +636,6 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-highlights{height:25%; overflow:hidden; position: relative; color: $white;
   section{float:left; width:70%; padding-top:em(24)}
-  .o-rhombus{float: right; filter:grayscale(100%)}
   h2{font-size: 1em}
   .o-button{padding-top:em(30)}
   .u-half{
@@ -647,7 +646,8 @@ em{font-family: 'Georgia'; font-style: italic;}
       .u-wrap{padding-right:0}
     }
   }
-  .o-rhombus{
+  .o-rhombus{float: right; filter:grayscale(100%); width: 30%; height:auto;
+    .o-rhombus__image{padding-bottom:100%}
     &:hover{
       @include rhombusHover; filter: grayscale(0);
     }
@@ -761,7 +761,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   .c-cover__section{padding: 0 em(24); width: 80%}
   .o-button{color: inherit}
   .o-table__cell{padding-bottom: 6em; vertical-align: bottom}
-  &.s--single{background-color: #EFF0F0; color: $blackB;}
+  &.s--single{background-color: #EFF0F0; color: $blackB; 
+    .o-table__cell{background-color: rgba(239, 241, 240, 0.75)}
+  }
 }
 
 .c-program__meta{font-size: em(14); @include clear; border:solid 1px #e6e6e6; border-right: none; border-left: none; padding: 1.5em 0;

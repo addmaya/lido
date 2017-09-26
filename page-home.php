@@ -232,6 +232,7 @@
 		<h1 class="u-pb-m"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
 		
 		<div class="u-clear">
+			<div class="o-stat__box">
 			<?php 
 				$statistics = get_field('statistics', 22);
 				$statisticsList = array_rand( $statistics, 4);
@@ -239,13 +240,19 @@
 					$statisticNumber = $statistics[$statistic]['number'];
 					$statisticSummary = $statistics[$statistic]['summary'];
 			 ?>
-				 <div class="o-statistic u-fourth s--figure">
-				 	<section>
-				 		<span><?php echo $statisticNumber; ?></span>
-				 		<p><?php echo $statisticSummary; ?></p>
-				 	</section>
+				 <div class="o-stat">
+				 	<div class="o-table">
+				 		<div class="o-table__cell">
+				 			<section>
+				 				<span><?php echo $statisticNumber; ?></span>
+				 				<p><?php echo $statisticSummary; ?></p>
+				 			</section>
+				 		</div>
+				 	</div>
+				 	<div class="o-rhombus__pattern"></div>
 				 </div>
 			 <?php } ?>
+			 </div>
 		</div>
 		<section class="c-impact__summary u-pt-l">
 			<p><?php echo $blockImpactSummary; ?></p>

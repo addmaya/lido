@@ -143,7 +143,7 @@
 								<li><a href="<?php echo home_url(); ?>/about">Profile</a></li>
 								<li><a href="<?php echo home_url(); ?>/change-stories">Change Stories</a></li>
 								<li><a href="<?php echo home_url(); ?>/partners">Partners</a></li>
-								<li><a href="<?php echo home_url(); ?>/newsroom">Newsroom</a></li>
+								<!-- <li><a href="<?php echo home_url(); ?>/newsroom">Newsroom</a></li> -->
 							</ul>
 						</section>
 					</div>

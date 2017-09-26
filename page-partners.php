@@ -263,8 +263,19 @@
 							)
 						));
 						while ( $networkPartners->have_posts() ) : $networkPartners->the_post();
+							$partnerWebsite = esc_url(get_field('website'));
+							$partnerLogo = get_field('logo');
+							$partnerName = get_the_title();
 					?>
-						<li><a href="#"><figure></figure></a></li>
+						<li>
+							<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
+								<?php if ($partnerLogo){ ?>
+									<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+								<?php } else {?>
+								<span class="s--inline"><?php echo $partnerName; ?></span>
+								<?php } ?>
+							</a>
+						</li>
 					<?php  endwhile; wp_reset_postdata(); ?>
 				</ul>
 			</section>
