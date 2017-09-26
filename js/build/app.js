@@ -35,7 +35,8 @@ var deleteCookie = function(name) {
 jQuery(document).ready(function($) {
 	//variables
 	var preloader = $('.c-preloader');
-	var menu = $('.c-page__menu');
+	var body = $('body');
+	var menu = $('.c-menu-primary');
 	var hamburger = $('.c-hamburger');
 	var sectionator = $('.c-sectionator');
 	var footer = $('.c-page__footer');
@@ -121,12 +122,12 @@ jQuery(document).ready(function($) {
 	}
 
 	function openPop(ele){
-		$('body').addClass('u-oh');
+		body.addClass('u-oh');
 		ele.show();
 	}
 
 	function closePop(){
-		$('body').removeClass('u-oh');
+		body.removeClass('u-oh');
 		$('.o-pop').hide();
 	}
 
@@ -152,13 +153,6 @@ jQuery(document).ready(function($) {
 	// 	});
 	// }
 
-	function activatePaginators(){
-		$('.js-paginator__prev').hover(function() {
-			$('.c-paginator span').addClass('is-left');
-		}, function() {
-			$('.c-paginator span').removeClass('is-left');
-		});
-	}
 
 	function renderSwiper(){
 		var swiperInstances = {};
@@ -206,7 +200,7 @@ jQuery(document).ready(function($) {
 
 	$('.c-menu-secondary a').click(function() {
 		menuSecondary.removeClass('is-visible');
-		$('body').removeClass('u-oh');
+		body.removeClass('u-oh');
 	});
 
 	function matchHeights(){
@@ -272,12 +266,12 @@ jQuery(document).ready(function($) {
 	hamburger.click(function(e) {
 		e.preventDefault();
 		menuSecondary.addClass('is-visible');
-		$('body').addClass('u-oh');
+		body.addClass('u-oh');
 	});
 	$('.c-burger__close').click(function(e) {
 		e.preventDefault();
 		menuSecondary.removeClass('is-visible');
-		$('body').removeClass('u-oh');
+		body.removeClass('u-oh');
 	});
 
 	$(document).mouseup(function(e) 
@@ -286,7 +280,7 @@ jQuery(document).ready(function($) {
 	    if (!container.is(e.target) && container.has(e.target).length === 0) 
 	    {
 	        container.removeClass('is-visible');
-	        $('body').removeClass('u-oh');
+	        body.removeClass('u-oh');
 	    }
 	});
 
@@ -338,30 +332,35 @@ jQuery(document).ready(function($) {
 	
 	
 	//page transition
-	// Barba.Pjax.start();
-	// var FadeTransition = Barba.BaseTransition.extend({	  
-	//   start: function() {
-	//     preloader.removeClass('is-hidden');
-	//     menu.find('.is-active').removeClass('is-active');
-	//     Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
-	//   },
-	//   fadeOut: function() {
-	//   	preloader.addClass('is-visible');
-	//     return $(this.oldContainer).promise();
-	//   },
-	//   fadeIn: function() {
-	//   	var transition = this;
-	//     var content = $(this.newContainer);	    
-	//     setTimeout(function(){
-	//     	$(this.oldContainer).hide();
-	//     	$('html, body').animate({ scrollTop: 0 }, 0);
-	//     	preloader.removeClass('is-visible').addClass('is-hidden');
-	//     	transition.done();
-	//     }, 800);
-	//     pageLoad();
-	//   }
-	// });
-	// Barba.Pjax.getTransition = function() {return FadeTransition;};
+	Barba.Pjax.start();
+
+	var FadeTransition = Barba.BaseTransition.extend({	  
+	  start: function() {
+	  	preloader.removeClass('is-exiting');    
+	    Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
+	  },
+	  fadeOut: function() {
+	  	preloader.addClass('is-appearing');
+	  	body.addClass('u-oh');
+	  	$(this.oldContainer).addClass('is-exiting');
+	    return $(this.oldContainer).promise();
+	  },
+	  fadeIn: function() {
+	  	var transition = this;
+	    var content = $(this.newContainer);	    
+	    setTimeout(function(){
+	    	$(this.oldContainer).hide();
+	    	$('html, body').animate({ scrollTop: 0 }, 0);
+	    	preloader.removeClass('is-appearing').addClass('is-exiting');
+	    	body.removeClass('u-oh');
+	    	transition.done();
+	    }, 800);
+	    pageLoad();
+	    
+	  }
+	});
+
+	Barba.Pjax.getTransition = function() {return FadeTransition;};
 
 	//page load
 	function pageLoad(){
@@ -369,10 +368,8 @@ jQuery(document).ready(function($) {
 		submitContactForm();
 		getStories();
 		popInit();
-		// setSpineHeight();
 		matchHeights();
 		AOS.init({duration: 700});
-		activatePaginators();
 		renderSwiper();
 	}
 	

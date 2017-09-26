@@ -1,4 +1,4 @@
-i<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <section class="o-section c-updates" id="updates">
 	<div class="o-box">
 		<div class="o-crumb s--updates">

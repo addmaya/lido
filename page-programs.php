@@ -1,7 +1,6 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<div class="o-tint"></div>
 		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>

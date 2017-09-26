@@ -1,3 +1,14 @@
+<div class="c-preloader">
+	<div class="o-box">
+		<h1 class="c-preloader__title" >
+			<span>{*Destination Page Title}</span>
+			<figure></figure>
+		</h1>
+		<span class="o-line"></span>
+	</div>
+	<span class="c-preloader__count">03</span>
+	<div class="c-preloader__bkg"></div>
+</div>
 <div class="c-spine"></div>
 <header class="c-page__header">
 	<div class="o-box">
@@ -20,12 +31,12 @@
 						<li>
 							<a href="<?php echo home_url(); ?>/about">About</a>
 						</li>
-						<li>
-							<a href="<?php echo home_url(); ?>/contact">Contact</a>
-						</li>
 						<!-- <li>
-							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
+							<a href="<?php echo home_url(); ?>/contact">Contact</a>
 						</li> -->
+						<li>
+							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -67,12 +78,6 @@
 					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
 				</a>
 			</li>
-			<!-- <li class="c-menu-secondary__item">
-				<a href="<?php echo home_url(); ?>/newsroom">
-					<span>Newsroom</span>
-					<figure style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/images/dummy.jpg')"></figure>
-				</a>
-			</li> -->
 		</ul>
 		<div class="u-clear u-pt-m">
 			<div class="u-half">

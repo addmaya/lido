@@ -31,5 +31,4 @@
 
 		<?php wp_head(); ?>
 	</head>
-	<body>
-		<div class="c-preloader"></div>
+	<body class="is-booting">

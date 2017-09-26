@@ -8,8 +8,7 @@ Author URI: http://addmaya.com/
 /*variables*/
 $browser-context: 16;
 $placeholderColor: lighten(grey,3%);
-$easeOutExpo: cubic-bezier(0, 0.5, 0, 1);
-$easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
+
 $redA: #C6006F;
 $redB: #9C0058;
 $redC: #7A003C;
@@ -17,6 +16,11 @@ $blackA: #231F20;
 $blackB: #58595B;
 $blackC: #A7A9AC;
 $white: lighten($blackC,20%);
+
+$easeOutExpo: cubic-bezier(0, 0.5, 0, 1);
+$easeInOutExpo: cubic-bezier(1,0, 0, 1);
+$easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
+$easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -60,6 +64,17 @@ $white: lighten($blackC,20%);
   $t: $seconds * 1s;
   @include prefix((transition: opacity $t ease));
 }
+@mixin txnDelay($seconds){
+  $delay: $seconds * 1s;
+  @include prefix((transition-delay: $delay));
+}
+
+@mixin animation($name, $duration, $delay, $timing, $mode){
+   $t: $duration * 1s;
+   $d: $delay * 1s;
+   animation: $name $t $d $timing $mode;
+}
+
 @mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {@content;}
   @-moz-keyframes #{$animationName} {@content;}
@@ -92,8 +107,8 @@ $white: lighten($blackC,20%);
   from {@include prefix((transform: translate3d(0, -100%, 0))); opacity: 0;}
   to {@include prefix((transform: none)); opacity: 1}
 }
-@keyframes fadeInRight {
-  from {@include prefix((transform: translate3d(100%, 0, 0))); opacity: 0;}
+@keyframes fadeInLeft {
+  from {@include prefix((transform: translate3d(-100%, 0, 0))); opacity: 0;}
   to {@include prefix((transform: none)); opacity: 1}
 }
 @keyframes fadeOutUp {
@@ -111,6 +126,18 @@ $white: lighten($blackC,20%);
 @keyframes slideOutUp {
   from {@include prefix((transform: translate3d(0, 0, 0)))}
   to {visibility: hidden; @include prefix((transform: translate3d(0, -100%, 0)))}
+}
+@keyframes slideOutRight {
+  from {@include prefix((transform: translate3d(0, 0, 0)))}
+  to {visibility: hidden; @include prefix((transform: translate3d(100%, 0, 0)))}
+}
+@keyframes slideInLeft {
+  from {@include prefix((transform: translate3d(-110%, 0, 0)))}
+  to {@include prefix((transform: none))}
+}
+@keyframes scaleInLeft {
+  from {transform: scale3d(0, 1, 1);}
+  to {transform: scale3d(1, 1, 1)}
 }
 
 @mixin line{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
@@ -400,7 +427,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-image__cover{@include translateY(100%)}
   }
 }
-.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; @include txnTransform(0.8, cubic-bezier(1,0, 0, 1))}
+.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; @include txnTransform(0.8, $easeInOutExpo)}
 
 .o-statistic{position: relative; margin:em(56) 0 em(144);
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
@@ -613,7 +640,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   li{display:inline-block}
   a{display:block;padding:0.75em; position: relative;
     &:after{@include line; width: 100%; @include prefix((transform-origin: 50% 50%))}
-    &:hover{
+    &.is-active, &:hover{
       &:after{@include scale2D(1,1)}
     }
   }
@@ -756,14 +783,20 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{width: 70%; @include center}
   .o-table__cell{vertical-align: bottom; padding-bottom: 3em}
 }
-.c-cover__image{height: 100%; @include cover; background-color:$blackA}
+.c-cover__image{height: 100%; @include cover; background-color:$blackA;
+  &.is-loaded{
+    .o-image__cover{@include translateX(100%)}
+  }
+}
 .c-cover__profile{background-color: $redC;
-  .c-cover__section{padding: 0 em(24); width: 80%}
   .o-button{color: inherit}
   .o-table__cell{padding-bottom: 6em; vertical-align: bottom}
   &.s--single{background-color: #EFF0F0; color: $blackB; 
     .o-table__cell{background-color: rgba(239, 241, 240, 0.75)}
   }
+}
+.c-cover__section{padding: 0 em(24); width: 80%;
+  .is-booting &{@include animation(fadeInLeft,1,0.8,ease,both)}
 }
 
 .c-program__meta{font-size: em(14); @include clear; border:solid 1px #e6e6e6; border-right: none; border-left: none; padding: 1.5em 0;
@@ -903,8 +936,28 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-author{padding-bottom:1em}
 }
 
+.c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 9; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden;
+  .o-table{position: absolute; z-index: 2;}
+  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
+  &.is-appearing{visibility: visible;
+    .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
+    .c-preloader__count{@include animation(slideInLeft, 1, 0, $easeOutQuart, both)}
+    .c-preloader__title{@include animation(slideInLeft, 0.9, 0, $easeOutQuart, both)}
+    .o-line{@include animation(scaleInLeft, 0.5, 0.3, $easeOutQuart, both)}
+  }
+  &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both)}
+}
+.c-preloader__title{color:#8D5669; width: 80%; position: absolute; z-index: 5; top: 45%; @include clear;
+    span{display: block; width: 50%; float: left}
+    figure{width: em(56); height: em(56); float: right; background-color: #484848; border-radius: 50%;}
+}
+.c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
+.c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:-24vw; top: -32vh; color:#D1849E; z-index: 1}
+
 #barba-wrapper{@include box(100%, 100%)}
-.barba-container{@include box(100%, 100%)}
+.barba-container{@include box(100%, 100%); @include txnTransform(0.9, ease); @include txnDelay(0.1);
+  &.is-exiting{@include translateX(50%)}
+}
 
 /*states*/
 .is-invisible{opacity: 0; visibility: hidden;}
