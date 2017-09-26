@@ -338,30 +338,30 @@ jQuery(document).ready(function($) {
 	
 	
 	//page transition
-	Barba.Pjax.start();
-	var FadeTransition = Barba.BaseTransition.extend({	  
-	  start: function() {
-	    preloader.removeClass('is-hidden');
-	    menu.find('.is-active').removeClass('is-active');
-	    Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
-	  },
-	  fadeOut: function() {
-	  	preloader.addClass('is-visible');
-	    return $(this.oldContainer).promise();
-	  },
-	  fadeIn: function() {
-	  	var transition = this;
-	    var content = $(this.newContainer);	    
-	    setTimeout(function(){
-	    	$(this.oldContainer).hide();
-	    	$('html, body').animate({ scrollTop: 0 }, 0);
-	    	preloader.removeClass('is-visible').addClass('is-hidden');
-	    	transition.done();
-	    }, 800);
-	    pageLoad();
-	  }
-	});
-	Barba.Pjax.getTransition = function() {return FadeTransition;};
+	// Barba.Pjax.start();
+	// var FadeTransition = Barba.BaseTransition.extend({	  
+	//   start: function() {
+	//     preloader.removeClass('is-hidden');
+	//     menu.find('.is-active').removeClass('is-active');
+	//     Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
+	//   },
+	//   fadeOut: function() {
+	//   	preloader.addClass('is-visible');
+	//     return $(this.oldContainer).promise();
+	//   },
+	//   fadeIn: function() {
+	//   	var transition = this;
+	//     var content = $(this.newContainer);	    
+	//     setTimeout(function(){
+	//     	$(this.oldContainer).hide();
+	//     	$('html, body').animate({ scrollTop: 0 }, 0);
+	//     	preloader.removeClass('is-visible').addClass('is-hidden');
+	//     	transition.done();
+	//     }, 800);
+	//     pageLoad();
+	//   }
+	// });
+	// Barba.Pjax.getTransition = function() {return FadeTransition;};
 
 	//page load
 	function pageLoad(){

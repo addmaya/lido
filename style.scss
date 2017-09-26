@@ -796,7 +796,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-regions__image{height: em(700); width: em(256); position: absolute; bottom:0; left:30%; @include contain}
 .c-regions__map{height: em(408); @include image('east-africa-spotlight.png'); background-size: contain; background-repeat: no-repeat}
 .c-regions{
-  .o-rhombus__pattern{height:60%}
+  .o-rhombus__pattern{height:60%; opacity:0.3}
 }
 .c-history{text-align: center; width: 60%; @include center;
   h1{color: $redA; font-size: em(300); padding-bottom: 0; margin-bottom: 0}
