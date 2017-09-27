@@ -468,11 +468,14 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 
 .o-image{overflow: hidden;
-  &.is-loaded{
-    .o-image__cover{@include translateY(100%)}
+  // &.is-loaded{
+  //   .o-image__cover{@include translateY(100%)}
+  // }
+  .is-booting &{
+    .o-image__cover{@include animation(slideOutRight, 1, 1, $easeInOutExpo, both)}
   }
 }
-.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; @include txnTransform(1, $easeInOutExpo)}
+.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; left:0; top:0}
 
 .o-statistic{position: relative; margin:em(56) 0 em(144);
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
@@ -521,7 +524,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-table__cell{vertical-align: bottom; padding-bottom: 2em}
   section{padding-left: 6em; padding-right:1.5em}
   &.s--partner{background-color: white}
-  .is-booting &{@include animation(slideInLeft, 1, 0, $easeOutExpo, both)}
+  .is-booting &{@include animation(slideInLeft, 1, 0.5, $easeOutExpo, both)}
 }
 .o-story__cover{float: right; height: 100%; position: relative; z-index: -4; overflow: hidden;
   figure{background-color: $blackA; height: 100%; @include cover}
@@ -869,11 +872,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-table{@include animation(slideInUp, 1,0.9,$easeInThief, both)}
   }
 }
-.c-cover__image{height: 100%; @include cover; background-color:$blackA;
-  &.is-loaded{
-    .o-image__cover{@include translateX(100%)}
-  }
-}
+.c-cover__image{height: 100%; @include cover; background-color:$blackA}
 .c-cover__profile{background-color: $redC;
   .o-button{color: inherit}
   .o-table__cell{padding-bottom: 6em; vertical-align: bottom}
