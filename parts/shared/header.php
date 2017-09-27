@@ -121,9 +121,10 @@
 </div>
 <div id="barba-wrapper">
 	<div class="barba-container" data-namespace="<?php
-		if(is_front_page()){echo 'home';}
-		if(is_singular('program')){echo 'program';}
-		if (is_page('contact')) {
-			echo 'contact';
+		global $post;
+		if(get_post_type() == 'program'){
+			echo 'program';
+		} else {
+			echo $post->post_name;
 		}
 	?>">

@@ -6,8 +6,8 @@
 	$partnerAreas = get_field('intervention_areas');
 	$partnerPrograms = get_field('interventions_supported');
  ?>
-<div class="c-cover s--story">
-	<div class="o-story__header s--partner">
+<div class="c-cover s--story t-dark">
+	<div class="o-story__header">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section>
