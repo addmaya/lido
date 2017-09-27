@@ -119,6 +119,10 @@ $easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
   from {opacity: 1}
   to {@include prefix((transform: translate3d(100%, 0, 0))); opacity: 0;}
 }
+@keyframes slideInDown {
+  from {@include prefix((transform: translate3d(0, -100%, 0)))}
+  to {@include prefix((transform: none))}
+}
 @keyframes slideInUp {
   from {@include prefix((transform: translate3d(0, 100%, 0)))}
   to {@include prefix((transform: none))}
@@ -138,6 +142,10 @@ $easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
 @keyframes scaleInLeft {
   from {transform: scale3d(0, 1, 1);}
   to {transform: scale3d(1, 1, 1)}
+}
+@keyframes kenBurns{
+  from {transform: scale3d(1, 1, 1);}
+  to {transform: scale3d(1.5, 1.5, 1.5)}
 }
 
 @mixin line{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
@@ -372,7 +380,6 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 }
 
-.o-tint{opacity:0.6; background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute}
 .o-crumb{@include clear; 
   div{float: left; opacity:0.65}
   &.s--updates{font-size: em(24); color: $redA; margin-bottom: 2.5em;
@@ -626,7 +633,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 /*components*/
 .c-spine{@include box(em(28), 100%); @include bkg(#fff); position: fixed; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10}
-.c-page__header{padding-top: em(36); @include absolute; width:100%; z-index: 5}
+.c-page__header{padding-top: em(36); @include absolute; width:100%; z-index: 5;
+  .is-booting &{@include animation(fadeInDown,1,0.8,ease,both)}
+}
 .c-logo{@include box(170px, 66px); display:block; @include image('logo-white.svg'); @include contain; position: relative; top: -24px;
   &.t-dark {@include image('logo.svg');}
 }
@@ -647,16 +656,26 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{@include superscript; font-weight: bold}
   .t-dark &{color: $redA}
 }
-
-.c-splash{@include box(100%, 75%); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:black;
-  .o-button{padding-top: em(30)}
+.c-splash__preloader{background-color:#ececec; z-index: 100; @include canvas; position: fixed; @include txnTransform(1.2, cubic-bezier(0.5, 0, 0, 1.01));
+  svg{stroke:darken(#dfdfdf,0%); display: block; fill: none; height: 30%; margin: 0 auto; stroke-width: 10px;}
+  &.is-loaded {@include translateX(100%)}
+}
+.c-splash{@include box(100%, 75%); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:#231F20; overflow: hidden;
+  .o-button{padding-top: em(30); font-size: 1em}
   .o-table{position: absolute; z-index: 2}
   .o-table__cell{vertical-align: bottom; padding-bottom:3em}
   .o-box{@include clear}
   .swiper-container{height: 100%}
   p{padding-top:em(12); width: 90%}
-}
 
+  &.is-loaded{
+    .c-splash__tint{opacity:1}
+    .c-splash__story{@include animation(slideInUp, 1,0.4, cubic-bezier(0.22, 0, 0, 1), both)}
+    .c-splash__image{@include animation(slideInUp, 1,0.3, cubic-bezier(0.22, 0, 0, 1), both)}
+    figure{@include animation(kenBurns, 60, 0, linear, both)}
+  }
+}
+.c-splash__tint{opacity:0; background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute; @include prefix((transition:opacity 1s ease 0.5s))}
 .c-splash__image{width: 100%; height: 100%; position: relative; z-index:1; overflow:hidden; background-color: $blackA;
   figure{height: 100%; @include cover; position: relative; opacity:0.8}
 }

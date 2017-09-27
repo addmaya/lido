@@ -28,7 +28,6 @@
 ?>
 <section class="c-cover">
 	<div class="u-half">
-		<div class="o-tint"></div>
 		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>

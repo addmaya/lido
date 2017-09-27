@@ -18,17 +18,9 @@
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/vendors.js"></script>
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/app.js"></script>
 		
-		<script>
-		  (function(d) {
-		    var config = {
-		      kitId: 'yqx0mtr',
-		      scriptTimeout: 3000,
-		      async: true
-		    },
-		    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-		  })(document);
-		</script>
+		<script src="https://use.typekit.net/yqx0mtr.js"></script>
+		<script>try{Typekit.load({ async: false });}catch(e){}</script>
 
 		<?php wp_head(); ?>
 	</head>
-	<body class="is-booting">
+	<body class="is-booting u-oh">

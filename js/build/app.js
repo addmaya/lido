@@ -44,7 +44,28 @@ jQuery(document).ready(function($) {
 	var menuSecondary = $('.c-menu-secondary');
 
 	//functions
-	function loadLazyImage(obj){
+	
+    function loadSplashImage(){
+        var splashImage = $('.c-splash__image figure');
+        if(splashImage.length){  
+            var splashImageURL= splashImage.data('image-url');
+            var image = document.createElement('img');
+            image.src = splashImageURL;
+
+            image.onload = function(){
+                $('.c-splash').addClass('is-loaded');
+                splashImage.css('background-image', 'url(' + splashImageURL + ')');
+                $('.c-splash__preloader').addClass('is-loaded');
+                body.removeClass('u-oh');
+            }
+        }
+        else {
+            $('.c-splash__preloader').addClass('is-loaded');
+            body.removeClass('u-oh');
+        }
+    }
+
+    function loadLazyImage(obj){
 		obj.bind('inview', function (event, isInView) {
 	      if (isInView) {
 	      	var me = $(this);
@@ -75,10 +96,13 @@ jQuery(document).ready(function($) {
     }
 
     function pageLoad(){
+        //lazy images
+        loadSplashImage();
     	loadLazyImage($('.js-lazy'));
 
     	//switch header theme
     	switchTheme($('.barba-container'));
+        
 
     	//start AOS
     	AOS.init({duration: 700});

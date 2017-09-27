@@ -11,20 +11,19 @@
 		$slideVideo = $featuredSlide['video'];
 		$slideCaption = $featuredSlide['caption'];
 	?>
-	<div class="o-table" data-depth="0.2">
+	<div class="o-table c-splash__story">
 		<div class="o-table__cell">
 			<div class="o-box">
 				<div class="u-half">
 					<h1><a href="#"><span><?php echo $slideTitle; ?></span></a></h1>
-					<!-- <p><?php echo $slideCaption; ?></p> -->
 					<?php echo renderButton($slideBtnLink, $slideBtnLabel); ?>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="c-splash__image" data-depth="0.5">
-		<div class="o-tint"></div>
-		<figure data-image-url="<?php echo $slidePhoto; ?>" class="o-image js-lazy"><span class="o-image__cover"></span></figure>
+	<div class="c-splash__image">
+		<div class="c-splash__tint"></div>
+		<figure data-image-url="<?php echo $slidePhoto; ?>" class="o-image"><!-- <span class="o-image__cover"></span> --></figure>
 	</div>
 </section>
 <section class="c-highlights t-dark">
