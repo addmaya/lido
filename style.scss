@@ -974,9 +974,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:-24vw; top: -32vh; color:#D1849E; z-index: 1}
 
 #barba-wrapper{@include box(100%, 100%)}
-.barba-container{@include box(100%, 100%); @include txnTransform(0.9, ease); @include txnDelay(0.1);
-  &.is-exiting{@include translateX(50%)}
-}
+.barba-container{@include box(100%, 100%)}
 
 /*states*/
 .is-invisible{opacity: 0; visibility: hidden;}
