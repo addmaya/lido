@@ -35,6 +35,7 @@ var deleteCookie = function(name) {
 jQuery(document).ready(function($) {
 	//variables
 	var preloader = $('.c-preloader');
+    var splashPreloader = $('.c-splash__preloader');
 	var body = $('body');
 	var menu = $('.c-menu-primary');
 	var hamburger = $('.c-hamburger');
@@ -42,6 +43,7 @@ jQuery(document).ready(function($) {
 	var logo = $('.c-logo')
 	var header = $('.c-page__header');
 	var menuSecondary = $('.c-menu-secondary');
+    var aosDuration = 900;
 
 	//functions
 	
@@ -55,12 +57,13 @@ jQuery(document).ready(function($) {
             image.onload = function(){
                 $('.c-splash').addClass('is-loaded');
                 splashImage.css('background-image', 'url(' + splashImageURL + ')');
-                $('.c-splash__preloader').addClass('is-loaded');
+                splashPreloader.addClass('is-loaded');
                 body.removeClass('u-oh');
+                $('.c-highlights').addClass('is-loaded');
             }
         }
         else {
-            $('.c-splash__preloader').addClass('is-loaded');
+            splashPreloader.addClass('is-loaded');
             body.removeClass('u-oh');
         }
     }
@@ -82,10 +85,10 @@ jQuery(document).ready(function($) {
 
     function switchTheme(obj){
     	var namespace = obj.data('namespace');
-    	if(namespace == 'program' || namespace == 'contact'){
+    	if(namespace == 'program' || namespace == 'contact' || namespace == 'newsroom'){
     		header.addClass('t-dark');
 
-    		if(namespace == 'contact'){
+    		if(namespace == 'contact' || namespace == 'newsroom'){
     			logo.addClass('t-dark');
     		}
     	}
@@ -96,7 +99,8 @@ jQuery(document).ready(function($) {
     }
 
     function pageLoad(){
-        //lazy images
+        
+        //load lazy images
         loadSplashImage();
     	loadLazyImage($('.js-lazy'));
 
@@ -105,7 +109,7 @@ jQuery(document).ready(function($) {
         
 
     	//start AOS
-    	AOS.init({duration: 700});
+    	AOS.init({duration: aosDuration});
 
     	//primary menu
     	menu.find('a').click(function() {
@@ -323,11 +327,15 @@ jQuery(document).ready(function($) {
 	    setTimeout(function(){
 	    	$(this.oldContainer).hide();
 	    	$('html, body').animate({ scrollTop: 0 }, 0);
+            console.log($(this.newContainer).addClass('data-namespace'));
 	    	switchTheme($(this.newContainer));
 	    	preloader.removeClass('is-appearing').addClass('is-exiting');
 	    	body.removeClass('u-oh');
 	    	
 	    	transition.done();
+
+            AOS.init({duration: aosDuration});
+
 	    }, 800);
 	    pageLoad();
 	    

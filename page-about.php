@@ -1,5 +1,6 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="c-cover c-about t-dark" id="profile">
+<section class="c-cover c-about t-dark s--bkg" id="profile">
+	<figure class="c-cover__bkg"></figure>
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="o-box">
@@ -11,12 +12,12 @@
 					$areasImage = $sectionVision['where_we_work'];
 					$impactImage = $sectionVision['impact_highlights'];
 				?>
-				<section>
+				<section class="c-about__vision">
 					<h1><?php echo $vision; ?></h1>
 					<p><?php echo $mission; ?></p>	
+					<span class="o-line"></span>
 				</section>
-				<span class="o-line"></span>
-				<ul class="u-clear">
+				<ul class="u-clear c-about__nav">
 					<li class="u-third">
 						<?php echo renderRhombusButton('#values', 'Core Values', $valuesImage); ?>
 					</li>
@@ -38,7 +39,7 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<div class="scene">
+		<div class="">
 			<div class="c-orbit layer" data-depth="0.2">
 				<div class="o-table">
 					<div class="o-table__cell">
@@ -111,7 +112,7 @@
 	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
-		<section class="o-splash__content">
+		<section class="o-splash__content" data-aos="fade-up">
 			<div class="o-box">
 				<blockquote>
 					<p><?php echo $featuredQuoteTitle; ?></p>
@@ -156,8 +157,8 @@
 				<div class="o-crumb__line"></div>
 				<div class="o-crumb__circle"></div>
 			</div>
-			<figure class="c-regions__map"></figure>
-			<section>
+			<figure class="c-regions__map" data-aos="fade-right"></figure>
+			<section data-aos="fade-up">
 				<?php
 					$sectionAreas = get_field('where_we_work');
 					$sectionAreasTitle = $sectionAreas['title'];
@@ -174,7 +175,7 @@
 		</div>
 		<div class="u-half c-regions__col">
 			<div class="o-rhombus__pattern"></div>
-			<figure class="c-regions__image js-lazy" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
+			<figure data-aos="fade-up" data-aos-delay="100" class="c-regions__image js-lazy" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
 		</div>
 	</div>
 </section>
@@ -192,15 +193,16 @@
 							</div>
 					<?php } ?>
 				</div>
-				<div class="o-slider__buttons t-dark">
-					<?php echo renderButton('#','','div','s--prev') ?>
-					<?php echo renderButton('#','','div','s--next') ?>
-				</div>
+				
 			</div>
 		</div>
 	</div>
 	<div class="u-fourth o-slider-col">
 		<div class="o-slider__caption">
+			<div class="o-slider__buttons t-dark">
+				<?php echo renderButton('#','','div','s--prev') ?>
+				<?php echo renderButton('#','','div','s--next') ?>
+			</div>
 			<section class="u-wrap">
 				<em></em>
 				<span class="o-line"></span>
@@ -216,13 +218,15 @@
 		</header>
 		<ul>
 			<?php 
-				$team = new WP_Query(array('post_type'=>'team', 'posts_per_page'=>-1));
+				$team = new WP_Query(array('post_type'=>'team', 'posts_per_page'=>-1, 'orderby'=>'menu_order'));
+				$aosDelay=0;
 				while ($team->have_posts()): $team->the_post();
 					$staffTitle = get_the_title();
 					$staffPhoto = get_field('photo');
 					$staffJD = get_field('job_title');
+					$aosDelay = $aosDelay + 50;
 			 ?>
-			<li class="u-third">
+			<li class="u-third" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 				<div class="o-author">
 					<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
 					<section>

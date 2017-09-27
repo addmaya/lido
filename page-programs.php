@@ -21,9 +21,10 @@
 		</div>
 	</div>
 </div>
-<section class="o-section" id="education">
+<section class="o-section s--cover" id="education">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
-		<section class="u-clear">
+		<section class="u-clear" data-aos="fade-up">
 			<div class="u-half">
 				<div class="o-crumb">
 					<div class="o-crumb__title">Education Programs</div>
@@ -58,9 +59,13 @@
 						)
 					)
 				));
-				while ( $educationPrograms->have_posts() ) : $educationPrograms->the_post();
+				
+				$aosDelay = 0;
+
+				while ($educationPrograms->have_posts() ) : $educationPrograms->the_post();
+					$aosDelay = $aosDelay + 100;
 			?>
-				<li class="u-fourth">
+				<li class="u-fourth" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 					<?php echo renderRhombusButton(get_permalink(), get_the_title(), get_field('photo')); ?>
 				</li>
 			<?php  endwhile; wp_reset_postdata(); ?>
@@ -73,7 +78,7 @@
 				$sectionSudanSummary =$sectionSudan['summary'];
 				$sectionSudanPhoto =$sectionSudan['photo'];
 			?>
-			<div class="u-third">
+			<div class="u-third" data-aos="fade-up">
 				<a href="#" class="o-rhombus-button s--patterned is-passive">
 					<div class="o-rhombus s--large">
 						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
@@ -81,7 +86,7 @@
 					<div class="o-rhombus__pattern"></div>
 				</a>
 			</div>
-			<div class="u-third">
+			<div class="u-third" data-aos="fade-up">
 				<h1><?php echo $sectionSudanTitle; ?></h1>
 				<p><?php echo $sectionSudanSummary; ?></p>
 			</div>
@@ -98,18 +103,23 @@
 								)
 							)
 						));
+						$aosDelay = 0;
 						while ( $sudanPrograms->have_posts() ) : $sudanPrograms->the_post();
+							$aosDelay = $aosDelay + 100;
 					?>
-						<?php echo renderCircularButton(get_permalink(), get_the_title(), get_field('photo')); ?>
+						<div data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
+							<?php echo renderCircularButton(get_permalink(), get_the_title(), get_field('photo')); ?>
+						</div>
 					<?php  endwhile; wp_reset_postdata(); ?>
 				</div>
 			</div>
 		</section>
 	</div>
 </section>
-<section class="o-section t-dark" id="livelihood">
+<section class="o-section t-dark s--cover" id="livelihood">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
-		<div class="u-half">
+		<div class="u-half" data-aos="fade-up">
 			<div class="o-crumb">
 				<div class="o-crumb__title">Livelihood Programs</div>
 				<div class="o-crumb__line"></div>
@@ -134,9 +144,11 @@
 							)
 						)
 					));
+					$aosDelay = 0;
 					while ( $livelihoodPrograms->have_posts() ) : $livelihoodPrograms->the_post();
+						$aosDelay = $aosDelay + 100;
 				?>
-					<li class="u-half">
+					<li class="u-half" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 						<?php echo renderRhombusButton(get_permalink(), get_the_title(), get_field('photo')); ?>
 					</li>
 				<?php  endwhile; wp_reset_postdata(); ?>
@@ -144,9 +156,10 @@
 		</div>
 	</div>
 </section>
-<section class="o-section" id="capacity-building">
+<section class="o-section s--cover" id="capacity-building">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
-		<div class="u-half s--right">
+		<div class="u-half s--right" data-aos="fade-up">
 			<?php
 				$sectionCapacity = get_field('capacity_building_programs');
 				$sectionCapacityTitle =$sectionCapacity['title'];
@@ -171,9 +184,11 @@
 							)
 						)
 					));
+					$aosDelay = 0;
 					while ( $capacityPrograms->have_posts() ) : $capacityPrograms->the_post();
+						$aosDelay = $aosDelay + 100;
 				?>
-					<li class="u-half">
+					<li class="u-half" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 						<?php echo renderRhombusButton(get_permalink(), get_the_title(), get_field('photo')); ?>
 					</li>
 				<?php  endwhile; wp_reset_postdata(); ?>

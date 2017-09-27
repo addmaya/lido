@@ -21,6 +21,7 @@ $easeOutExpo: cubic-bezier(0, 0.5, 0, 1);
 $easeInOutExpo: cubic-bezier(1,0, 0, 1);
 $easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
 $easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
+$easeInThief: cubic-bezier(0.22, 0, 0, 1);
 
 /*functions*/
 @mixin image($image){background-image: url('images/'+$image)}
@@ -148,7 +149,7 @@ $easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
   to {transform: scale3d(1.5, 1.5, 1.5)}
 }
 
-@mixin line{content:""; height: 2px; width: 90%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
+@mixin line{content:""; height: 2px; width: 50%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
 
 /*defaults*/
 html, body{width:100%; height:100%;}
@@ -352,7 +353,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-div{position: absolute; width:50%; height:100%; background-color:#830a46; z-index:-1;
   &.s--right{background-color:#7A003C; left: 50%}
 }
-.o-section{padding:em(114) 0 em(144);
+.o-section{padding:em(114) 0 em(144); 
   .o-crumb{margin-bottom:em(56)}
   h1{margin-bottom: em(24)}
   &:last-of-type{padding-bottom:12px; background-color: red}
@@ -365,20 +366,57 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.u-pb-0{padding-bottom:0}
   &.u-pb-l{padding-bottom: 3em}
   &.c-stats{padding: em(56) 0}
-  
-  &#education{@include image('illustrations/education_0.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#f0f0f0;
+
+  &.s--cover{position: relative;
+    &:after{content:""; position: absolute; top:0; left: 0; z-index:-2; @include canvas}
+  }
+  &.c-eastafrica{
+    &:after{background-color: #dbdbdb}
+    .o-section__cover{@include image('illustrations/ea_map.jpg')}
+  }
+
+  &#education{
+    &:after{background-color:#f0f0f0}
+    .o-section__cover{@include image('illustrations/education_0.jpg'); background-position:right top;}
     .s--patterned{top:0}
   }
-  &#livelihood{@include image('illustrations/livelihoods.jpg'); background-position:right center; background-size:contain; background-repeat: no-repeat; background-color:#950054;
-    .s--patterned{top:0}
+
+  &#livelihood{
+    &:after{background-color:#950054}
+    .o-section__cover{@include image('illustrations/livelihoods.jpg'); background-position:right center;}
   }
-  &#capacity-building{@include image('illustrations/capacity.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#f3f3f3}
-  &#stories{@include image('illustrations/stories.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#eeeeee}
-  &#networks{@include image('illustrations/partnership.jpg'); background-position:left top; background-size:contain; background-repeat: no-repeat; background-color:#f5f6f6}
-  &#updates{@include image('illustrations/media.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#efefef}
-  &#documents{@include image('illustrations/publications.jpg'); background-position:right top; background-size:50%; background-repeat: no-repeat; background-color:#f5f5f5}
+
+  &#capacity-building{
+    &:after{background-color:#f3f3f3}
+    .o-section__cover{@include image('illustrations/capacity.jpg'); background-position:right top;}
+  }
+
+  &#stories{
+    &:after{background-color:#eeeeee}
+    .o-section__cover{@include image('illustrations/stories.jpg'); background-position:right top; opacity:0.3}
+  }
+
+  &#networks{
+    &:after{background-color:#f5f6f6}
+    .o-section__cover{@include image('illustrations/partnership.jpg'); background-position:left top;}
+  }
+
+  &#updates{padding:12em 0 5em;
+    &:after{background-color:#efefef}
+    .o-section__cover{@include image('illustrations/media.jpg'); background-position:right top; opacity:0.3}
+    .is-booting &{
+      .o-section__cover{@include animation(slideInUp, 1, 0.3, $easeInThief, both)}
+      .o-article__grid{@include animation(slideInUp, 1, 0.4, $easeInThief, both)}
+    }
+  }
+
+  &#documents{
+    &:after{background-color:#f5f5f5}
+    .o-section__cover{@include image('illustrations/publications.jpg'); background-position:right top; background-size:50%;}
+  }
 
 }
+.o-section__cover{@include contain; @include canvas; position: absolute; z-index:-1; top:0; left: 0}
 
 .o-crumb{@include clear; 
   div{float: left; opacity:0.65}
@@ -434,7 +472,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-image__cover{@include translateY(100%)}
   }
 }
-.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; @include txnTransform(0.8, $easeInOutExpo)}
+.o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; @include txnTransform(1, $easeInOutExpo)}
 
 .o-statistic{position: relative; margin:em(56) 0 em(144);
   span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
@@ -481,8 +519,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .o-story__header{background-color: $redC; color: $white;position: absolute; top:0; z-index: -2; float: left; height: 80%; width: 50%;
   .o-table__cell{vertical-align: bottom; padding-bottom: 2em}
-  section{padding-left: 6em;}
+  section{padding-left: 6em; padding-right:1.5em}
   &.s--partner{background-color: white}
+  .is-booting &{@include animation(slideInLeft, 1, 0, $easeOutExpo, both)}
 }
 .o-story__cover{float: right; height: 100%; position: relative; z-index: -4; overflow: hidden;
   figure{background-color: $blackA; height: 100%; @include cover}
@@ -520,7 +559,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   .o-line{margin-top:2em;}
 }
-.o-slider__buttons{position: absolute; z-index: 20; bottom: 0; right: 0; font-size: 1.5em;
+.o-slider__buttons{position: absolute; z-index: 20; bottom: 0; left: 0; font-size: 1.5em;
   .s--prev{transform: rotate(180deg)}
 }
 .o-slider{@include clear; color: $white;
@@ -542,7 +581,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-slider__image{background-color: $blackA; width: 90%; float: right; height:em(576);
   figure{@include canvas; @include cover;}
 }
-.o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left;}
+.o-slider__caption{background-color: $blackB; height: 100%; width: 80%; float: left; position: relative}
 .o-partners{@include clear;
   li{float: left; width: 20%; line-height:1.3}
   a{display: block;margin: em(9); position: relative; background-color: #fff;
@@ -582,7 +621,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-article__row{@include clear}
 .o-article{color: $white; margin-bottom:0; float: left; width:44em;
   a{display: block; @include clear}
-  h2{font-weight: 600; font-size: 2em; padding-bottom: em(12); color: $white; line-height:1.25;
+  h2{font-weight: 600; font-size: 1.5em; padding-bottom: em(12); color: $white; line-height:1.25;
     a{
       &:hover{color: $white;}
       &:after{background-color: $white;};
@@ -656,8 +695,14 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{@include superscript; font-weight: bold}
   .t-dark &{color: $redA}
 }
-.c-splash__preloader{background-color:#ececec; z-index: 100; @include canvas; position: fixed; @include txnTransform(1.2, cubic-bezier(0.5, 0, 0, 1.01));
-  svg{stroke:darken(#dfdfdf,0%); display: block; fill: none; height: 30%; margin: 0 auto; stroke-width: 10px;}
+
+@keyframes strokeDashOffset{
+  from {stroke-dashoffset:0}
+  to {stroke-dashoffset:4000}
+}
+.c-splash__preloader{background-color:#c9c9c9; z-index: 100; @include canvas; position: fixed; @include txnTransform(1.2, cubic-bezier(0.5, 0, 0, 1.01));
+  svg{stroke:darken(#dfdfdf,0%); display: block; fill: none; height: 30%; margin: 0 auto; stroke-width: 10px; stroke-dasharray:1000; @include animation(strokeDashOffset, 10, 0, linear, both)}
+  
   &.is-loaded {@include translateX(100%)}
 }
 .c-splash{@include box(100%, 75%); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:#231F20; overflow: hidden;
@@ -670,9 +715,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 
   &.is-loaded{
     .c-splash__tint{opacity:1}
-    .c-splash__story{@include animation(slideInUp, 1,0.4, cubic-bezier(0.22, 0, 0, 1), both)}
-    .c-splash__image{@include animation(slideInUp, 1,0.3, cubic-bezier(0.22, 0, 0, 1), both)}
-    figure{@include animation(kenBurns, 60, 0, linear, both)}
+    .c-splash__story{@include animation(slideInUp, 1,0.4, $easeInThief, both)}
+    .c-splash__image{@include animation(slideInUp, 1,0.3, $easeInThief, both)}
+    figure{@include animation(kenBurns, 90, 0, linear, both)}
   }
 }
 .c-splash__tint{opacity:0; background:linear-gradient(45deg, #000000, rgba(0, 0, 0, 0) 70%); @include canvas; z-index:1; position: absolute; @include prefix((transition:opacity 1s ease 0.5s))}
@@ -692,11 +737,14 @@ em{font-family: 'Georgia'; font-style: italic;}
       .u-wrap{padding-right:0}
     }
   }
-  .o-rhombus{float: right; filter:grayscale(100%); width: 30%; height:auto;
+  .o-rhombus{float: right; filter:grayscale(100%); width: 25%; height:auto;
     .o-rhombus__image{padding-bottom:100%}
     &:hover{
       @include rhombusHover; filter: grayscale(0);
     }
+  }
+  &.is-loaded {
+    .u-half{@include animation(fadeInUp,1,0.6,ease, both)}
   }
 }
 .c-paginator{overflow: hidden; padding: em(48) 0; position: relative; z-index: 3}
@@ -792,15 +840,34 @@ em{font-family: 'Georgia'; font-style: italic;}
   .u-half{height: 100%; position: relative; overflow: hidden;}
   &.s--story{height:70%}
   .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat;}
-  &#profile{@include image('illustrations/profile.jpg'); background-position:center; background-size:cover; background-repeat: no-repeat; background-color:#f5f6f6}
-  &#contact{@include image('illustrations/contact.jpg'); background-position:right top; background-size:contain; background-repeat: no-repeat; background-color:#f5f5f5}
+  
+  &.s--bkg{
+    &:after{content:""; @include canvas; top:0; left:0; z-index: -2; position: absolute;}
+  }
+
+  &#profile{
+    &:after{background-color: #75003a;}
+    .c-cover__bkg{@include image('illustrations/profile.jpg'); background-position:center; background-size:cover;}
+  }
+
+  &#contact{
+    &:after{background-color: #f5f5f5;}
+    .c-cover__bkg{@include image('illustrations/contact.jpg'); background-position:right top; background-size:contain; opacity:0.3}
+  }
 }
-.c-about{background-color: $redC;
+
+.c-cover__bkg{@include canvas; position: absolute; z-index:-1; top:0; left:0; background-repeat: no-repeat;
+  .is-booting &{@include animation(slideInUp, 1,0.7,$easeInThief, both)}
+}
+.c-about{
   .o-box{width: 60%; text-align: center;}
   .o-line{margin:em(36) 0;}
   .o-button{color:$white;}
-  section{width: 70%; @include center}
+  section{width: 85%; @include center}
   .o-table__cell{vertical-align: bottom; padding-bottom: 3em}
+  .is-booting &{
+    .o-table{@include animation(slideInUp, 1,0.9,$easeInThief, both)}
+  }
 }
 .c-cover__image{height: 100%; @include cover; background-color:$blackA;
   &.is-loaded{
@@ -856,9 +923,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   header{position: relative; margin-top:em(-56); margin-bottom: em(48);
     span{margin-top: em(-16);}
   }
-  figure{position: absolute; right:-35%; @include box(em(240), em(360)); top:10%; @include image('illustrations/farmer.png'); @include contain}
+  figure{position: absolute; right:-20%; @include box(em(240), em(360)); top:10%; @include image('illustrations/farmer.png'); @include contain}
 }
-.c-updates{background-color: #F7F7F7; padding:12em 0 5em}
 .c-contact{@include clear;
   div{float: left; width: 50%}
   .s--textarea{width:100%; margin-bottom:em(6)}
@@ -868,6 +934,10 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-contact__section{padding-top:12em; padding-left:6em;
   section{padding-bottom:em(36)}
   h3{padding-bottom:em(16)}
+  .is-booting &{
+    &.s--form{@include animation(slideInLeft,1,0.7,$easeInThief, both)}
+    &.s--info{@include animation(slideInLeft,1,0.8,$easeInThief, both)}
+  }
 }
 .c-contact__tint{position: absolute; top:0; left: 0; @include canvas; background-color: rgba(255, 255, 255, 0.69)}
 .c-docs{
@@ -939,7 +1009,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{@include canvas; position: absolute; background-color: red; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6; filter: grayscale(100%);}
 }
 
-.c-eastafrica{@include image('illustrations/ea_map.jpg'); @include contain; background-color: #dbdbdb}
+
 .c-impact{text-align: center;
   h1{width:50%; @include center}
 }
@@ -955,7 +1025,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-author{padding-bottom:1em}
 }
 
-.c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 9; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden;
+.c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden;
   .o-table{position: absolute; z-index: 2;}
   .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
   &.is-appearing{visibility: visible;

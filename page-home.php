@@ -63,7 +63,8 @@
 		</div>
 	</div>
 </section>
-<section class="o-section c-eastafrica">
+<section class="o-section c-eastafrica s--cover">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
 		<div class="u-half s--right">
 			<?php
@@ -73,39 +74,41 @@
 				$blockCauseImage =$blockCause['image'];
 				$blockCauseStaff = $blockCause['featured_staff'][0];
 			?>
-			<div class="o-crumb">
-				<div class="o-crumb__title">Why East Africa</div>
-				<div class="o-crumb__line"></div>
-				<div class="o-crumb__circle"></div>
-			</div>
-			<h1><a href="<?php echo home_url(); ?>/about"><span><?php echo $blockCauseTitle; ?></span></a></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $blockCauseSummary; ?></p>
+			<section data-aos="fade-up">
+				<div class="o-crumb">
+					<div class="o-crumb__title">Why East Africa</div>
+					<div class="o-crumb__line"></div>
+					<div class="o-crumb__circle"></div>
 				</div>
-				<div class="u-half">
-
-					<div class="o-author">
-						<?php
-							$causeStaff = new WP_Query(array('posts_per_page'=>1,'post_type'=>'team', 'p'=>$blockCauseStaff));
-							while ( $causeStaff->have_posts() ) : $causeStaff->the_post();
-								$causeStaffPhoto = get_field('photo');
-								$causeStaffTitle = get_field('job_title');
-								$causeStaffName = get_the_title();
-						?>
-						<figure class="js-lazy" data-image-url="<?php echo $causeStaffPhoto; ?>"></figure>
-						<section>
-							<strong><?php echo $causeStaffName; ?></strong>
-							<em><?php echo $causeStaffTitle; ?>, SFEA</em>
-						</section>
-						<?php endwhile; wp_reset_postdata(); ?>
+				<h1><a href="<?php echo home_url(); ?>/about"><span><?php echo $blockCauseTitle; ?></span></a></h1>
+				<section class="u-clear">
+					<div class="u-half">
+						<p><?php echo $blockCauseSummary; ?></p>
 					</div>
-
+					<div class="u-half">
+				
+						<div class="o-author">
+							<?php
+								$causeStaff = new WP_Query(array('posts_per_page'=>1,'post_type'=>'team', 'p'=>$blockCauseStaff));
+								while ( $causeStaff->have_posts() ) : $causeStaff->the_post();
+									$causeStaffPhoto = get_field('photo');
+									$causeStaffTitle = get_field('job_title');
+									$causeStaffName = get_the_title();
+							?>
+							<figure class="js-lazy" data-image-url="<?php echo $causeStaffPhoto; ?>"></figure>
+							<section>
+								<strong><?php echo $causeStaffName; ?></strong>
+								<em><?php echo $causeStaffTitle; ?>, SFEA</em>
+							</section>
+							<?php endwhile; wp_reset_postdata(); ?>
+						</div>
+				
+					</div>
+				</section>
+				<div class="u-pt-l">
+					<?php echo renderButton(home_url().'/about', 'See our Response'); ?>
 				</div>
 			</section>
-			<div class="u-pt-l">
-				<?php echo renderButton(home_url().'/about', 'See our Response'); ?>
-			</div>
 		</div>
 	</div>
 </section>
@@ -122,45 +125,46 @@
 				$capacityPhoto = $blockPrograms['capacity_photo'];
 				$blockProgramsStaff = $blockPrograms['featured_staff'][0];
 			?>
-			<div class="o-crumb">
-				<div class="o-crumb__title">How we work</div>
-				<div class="o-crumb__line"></div>
-				<div class="o-crumb__circle"></div>
-			</div>
-			<h1><a href="<?php echo home_url(); ?>/programs"><span><?php echo $blockProgramsTitle; ?></span></a></h1>
-			<section class="u-clear">
-				<div class="u-half">
-					<p><?php echo $blockProgramsSummary; ?></p>
+			<section data-aos="fade-up">
+				<div class="o-crumb">
+					<div class="o-crumb__title">How we work</div>
+					<div class="o-crumb__line"></div>
+					<div class="o-crumb__circle"></div>
 				</div>
-				<div class="u-half">
-					
-					<div class="o-author">
-						<?php
-							$programsStaff = new WP_Query(array('post_type'=>'team', 'p'=>$blockProgramsStaff));
-							while ( $programsStaff->have_posts() ) : $programsStaff->the_post();
-								$programsStaffPhoto = get_field('photo');
-								$programsStaffTitle = get_field('job_title');
-								$programsStaffName = get_the_title();
-						?>
-						<figure class="js-lazy" data-image-url="<?php echo $programsStaffPhoto; ?>"></figure>
-						<section>
-							<strong><?php echo $programsStaffName; ?></strong>
-							<em><?php echo $programsStaffTitle; ?>, SFEA</em>
-						</section>
-
-						<?php endwhile; wp_reset_postdata(); ?>
+				<h1><a href="<?php echo home_url(); ?>/programs"><span><?php echo $blockProgramsTitle; ?></span></a></h1>
+				<section class="u-clear">
+					<div class="u-half">
+						<p><?php echo $blockProgramsSummary; ?></p>
 					</div>
-
+					<div class="u-half">
+						
+						<div class="o-author">
+							<?php
+								$programsStaff = new WP_Query(array('post_type'=>'team', 'p'=>$blockProgramsStaff));
+								while ( $programsStaff->have_posts() ) : $programsStaff->the_post();
+									$programsStaffPhoto = get_field('photo');
+									$programsStaffTitle = get_field('job_title');
+									$programsStaffName = get_the_title();
+							?>
+							<figure class="js-lazy" data-image-url="<?php echo $programsStaffPhoto; ?>"></figure>
+							<section>
+								<strong><?php echo $programsStaffName; ?></strong>
+								<em><?php echo $programsStaffTitle; ?>, SFEA</em>
+							</section>
+				
+							<?php endwhile; wp_reset_postdata(); ?>
+						</div>
+				
+					</div>
+				</section>
+				<div class="u-pt-l">
+					<?php echo renderCircularButton(home_url().'/programs#education','Education Programs', $educationPhoto); ?>
+					<?php echo renderCircularButton(home_url().'/programs#livelihood','Livelihood Programs', $livelihoodPhoto); ?>
 				</div>
 			</section>
-			<div class="u-pt-l">
-				<?php echo renderCircularButton(home_url().'/programs#education','Education Programs', $educationPhoto); ?>
-				<?php echo renderCircularButton(home_url().'/programs#livelihood','Livelihood Programs', $livelihoodPhoto); ?>
-				<!-- <?php echo renderCircularButton(home_url().'/programs#capacity-building','Capacity Building', $capacityPhoto); ?> -->
-			</div>
 		</div>
-		<div class="u-half">
-			<a href="<?php echo home_url().'/programs'; ?>" class="o-rhombus-button s--patterned">
+		<div class="u-half" data-aos="fade-right">
+			<a href="<?php echo home_url().'/programs'; ?>" class="o-rhombus-button s--patterned" >
 				<div class="o-rhombus s--xlarge">
 					<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
 				</div>
@@ -182,9 +186,8 @@
 	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $blockQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
-		<section class="o-splash__content">
+		<section class="o-splash__content" data-aos="fade-up">
 			<div class="o-box">
-				
 				<blockquote>
 					<p><?php echo $blockQuoteTitle; ?></p>
 					<span class="o-line"></span>
@@ -228,18 +231,20 @@
 			$blockImpactSummary =$blockImpact['summary'];
 			$blockImpactPhoto = $blockImpact['photo'];
 		?>
-		<h1 class="u-pb-m"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
+		<h1 class="u-pb-m" data-aos="fade-up"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
 		
 		<div class="u-clear">
 			<div class="o-stat__box">
 			<?php 
 				$statistics = get_field('statistics', 22);
 				$statisticsList = array_rand( $statistics, 4);
+				$aosDelay = 0;
 				foreach( $statisticsList as $statistic ){
+					$aosDelay = $aosDelay + 100;
 					$statisticNumber = $statistics[$statistic]['number'];
 					$statisticSummary = $statistics[$statistic]['summary'];
 			 ?>
-				 <div class="o-stat">
+				 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 				 	<div class="o-table">
 				 		<div class="o-table__cell">
 				 			<section>
@@ -253,7 +258,7 @@
 			 <?php } ?>
 			 </div>
 		</div>
-		<section class="c-impact__summary u-pt-l">
+		<section class="c-impact__summary u-pt-l" data-aos="fade-up">
 			<p><?php echo $blockImpactSummary; ?></p>
 			<div class="u-pt-m">
 				<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>

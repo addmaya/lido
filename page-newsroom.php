@@ -1,5 +1,6 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<section class="o-section c-updates" id="updates">
+<section class="o-section c-updates s--cover" id="updates">
+	<figure class="o-section__cover"></figure>
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Updates</div>
@@ -156,15 +157,15 @@
 									</div>
 							<?php endforeach; endwhile; wp_reset_postdata(); ?>
 						</div>
-						<div class="o-slider__buttons t-dark">
-							<?php echo renderButton('#','','div','s--prev') ?>
-							<?php echo renderButton('#','','div','s--next') ?>
-						</div>
 					</div>
 				</div>
 			</div>
 			<div class="u-fourth o-slider-col">
 				<div class="o-slider__caption">
+					<div class="o-slider__buttons t-dark">
+						<?php echo renderButton('#','','div','s--prev') ?>
+						<?php echo renderButton('#','','div','s--next') ?>
+					</div>
 					<section class="u-wrap">
 						<em></em>
 						<span class="o-line"></span>
@@ -230,12 +231,13 @@
 					'posts_per_page'=>-1,
 					)
 				);
-				
+				$aosDelay = 0;
 				while ($documents->have_posts()) : $documents->the_post();
 					$documentFile = get_field('file');
 					$documentCover ='';
+					$aosDelay = $aosDelay + 100;
 				?>
-					<a title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-statistic u-third s--doc">
+					<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-statistic u-third s--doc no-barba">
 						<div class="u-clear">
 							<div class="u-half">
 								<i class="o-icon"></i>

@@ -65,7 +65,7 @@
 	<section class="o-section" id="program-background">
 		<div class="o-box">
 			<div class="u-clear">
-				<div class="u-half">
+				<div class="u-half" data-aos="fade-up">
 					<div class="o-crumb">
 						<div class="o-crumb__title">Background</div>
 						<div class="o-crumb__line"></div>
@@ -75,7 +75,7 @@
 						<?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $programBackground); ?>
 					</section>
 				</div>
-				<div class="u-half">
+				<div class="u-half" data-aos="fade-up" data-aos-delay="200">
 					<section class="u-pl-l">
 						<div class="c-program__map">
 							<div class="c-implementers s--programs"></div>
@@ -111,11 +111,13 @@
 			</div>
 			<ul class="o-partners">
 				<?php
+					$aosDelay = 0;
 					while ($programPartners->have_posts()): $programPartners->the_post();
 						$partnerLogo = get_field('logo');
 						$partnerName = get_the_title();
+						$aosDelay = $aosDelay + 50;
 				?>
-					<li>
+					<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a href="<?php the_permalink(); ?>">
 							<?php if ($partnerLogo){ ?>
 								<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>

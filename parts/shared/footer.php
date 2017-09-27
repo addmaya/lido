@@ -1,4 +1,4 @@
-		<section class="c-paginator">
+		<section class="c-paginator" data-aos="fade-up">
 			<?php 
 				$pageList = array();
 				foreach (get_pages('sort_column=menu_order&sort_order=asc') as $page) {

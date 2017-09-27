@@ -26,9 +26,9 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<section class="c-history">
+		<section class="c-history" >
 			<span>Since</span>
-			<header>
+			<header data-aos="fade-up">
 				<?php 
 					$history = get_field('history');
 					$historyByline =$history['byline'];
@@ -37,19 +37,22 @@
 				 ?>
 				<h1>1976</h1>
 				<span><?php echo $historyByline; ?></span>
-				<figure class="js-lazy" data-image-url="<?php echo $historyPhoto; ?>"></figure>
+				<figure class="js-lazy" data-image-url="<?php echo $historyPhoto; ?>" data-aos="fade-up" data-aos-delay="200"></figure>
 			</header>
-			<p><?php echo $historySummary; ?></p>
+			<p data-aos="fade-up"><?php echo $historySummary; ?></p>
 		</section>
 		<div class="u-clear u-pt-l">
 			<div class="o-stat__box">
 				<?php 
 					$statistics = get_field('statistics', 22);
+					$aosDelay = 0;
 					foreach( $statistics as $stat ){
 						$statisticNumber = $stat['number'];
 						$statisticSummary = $stat['summary'];
+
+						$aosDelay = $aosDelay + 50;
 				 ?>
-				 <div class="o-stat">
+				 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 				 	<div class="o-table">
 				 		<div class="o-table__cell">
 				 			<section>
@@ -65,7 +68,8 @@
 		</div>
 	</div>
 </section>
-<section class="o-section s--bottom__med" id="stories">
+<section class="o-section s--bottom__med s--cover" id="stories">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
 		<div class="o-crumb">
 			<div class="o-crumb__title">Change Stories</div>
@@ -83,8 +87,10 @@
 				$rowCount = 0;
 				$articleCount = 0;
 				$articleClass = '';
+				$aosDelay = 0;
 
 				while ($featureStories->have_posts()) : $featureStories->the_post();
+					$aosDelay = $aosDelay + 50;
 					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
 					$storyBeneficiary = get_field('beneficiary');
@@ -109,7 +115,7 @@
 						break;
 				}
 			?>
-				<article class="o-article <?php echo $articleClass; ?>">
+				<article class="o-article <?php echo $articleClass; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 					<section class="u-clear">
 						<figure>
 							<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">

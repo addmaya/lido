@@ -26,15 +26,15 @@
 									</div>
 							<?php } ?>
 						</div>
-						<div class="o-slider__buttons t-dark">
-							<?php echo renderButton('#','','div','s--prev') ?>
-							<?php echo renderButton('#','','div','s--next') ?>
-						</div>
 					</div>
 				</div>
 			</div>
 			<div class="u-fourth o-slider-col">
 				<div class="o-slider__caption">
+					<div class="o-slider__buttons t-dark">
+						<?php echo renderButton('#','','div','s--prev') ?>
+						<?php echo renderButton('#','','div','s--next') ?>
+					</div>
 					<section class="u-wrap">
 						<em></em>
 						<span class="o-line"></span>
@@ -65,7 +65,7 @@
 	<div class="o-box">
 		<?php while($programStories->have_posts()):$programStories->the_post(); ?>
 		<div class="u-clear">
-			<div class="u-third">
+			<div class="u-third" data-aos="fade-right">
 				<a href="<?php echo get_permalink(); ?>" class="o-rhombus-button s--patterned" style="top:0">
 					<div class="o-rhombus s--large">
 						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo'); ?>"></figure>
@@ -74,7 +74,7 @@
 				</a>
 			</div>
 			<div class="u-twothird">
-				<section class="u-pl-l">
+				<section class="u-pl-l" data-aos="fade-up">
 					<div class="o-crumb">
 						<div class="o-crumb__title">Featured Change Stories</div>
 						<div class="o-crumb__line"></div>
@@ -113,7 +113,7 @@
 			<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $quotePhoto; ?>">
 				<span class="o-image__cover"></span>
 				<div class="o-splash__tint"></div>
-				<section class="o-splash__content">
+				<section class="o-splash__content" data-aos="fade-up">
 					<div class="o-box">
 						<blockquote>
 							<p><?php echo $quote; ?></p>
@@ -162,14 +162,17 @@
 					<div class="u-clear u-pt-xl">
 						<div class="o-stat__box">
 							<?php 
+								$aosDelay = 0;
 								foreach( $statFigures as $stat ){
 									$statNumber = $stat['number'];
 									$statSummary = $stat['description'];
 									$statUnit = $stat['unit'];
 									$statPhoto = $stat['photo'];
+
+									$aosDelay = $aosDelay + 100;
 							 ?>
 
-							 <div class="o-stat">
+							 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 							 	<div class="o-table">
 							 		<div class="o-table__cell">
 							 			<section>

@@ -26,11 +26,6 @@
 <section class="o-section" id="funding">
 	<div class="o-box">
 		<div class="u-half">
-			<div class="o-crumb">
-				<div class="o-crumb__title">Funding Partners</div>
-				<div class="o-crumb__line"></div>
-				<div class="o-crumb__circle"></div>
-			</div>
 			<ul class="o-partners s--third">
 				<?php 
 					$fundingPartnersLogos = new WP_Query(array(
@@ -50,12 +45,15 @@
 								'compare'=> '!='
 						))
 					));
+
+					$aosDelay = 0;
 					while ( $fundingPartnersLogos->have_posts() ) : $fundingPartnersLogos->the_post();
 						$partnerWebsite = esc_url(get_field('website'));
 						$partnerLogo = get_field('logo');
 						$partnerName = get_the_title();
+						$aosDelay = $aosDelay + 50;
 				?>
-					<li>
+					<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 							<?php if ($partnerLogo){ ?>
 								<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
@@ -89,8 +87,9 @@
 						$partnerWebsite = esc_url(get_field('website'));
 						$partnerLogo = get_field('logo');
 						$partnerName = get_the_title();
+						$aosDelay = $aosDelay + 50;
 				?>
-					<li style="width: 50%">
+					<li style="width: 50%" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 							<span><?php echo $partnerName; ?></span>
 						</a>
@@ -98,7 +97,7 @@
 				<?php  endwhile; wp_reset_postdata(); ?>
 			</ul>
 		</div>
-		<div class="u-half">
+		<div class="u-half" data-aos="fade-up" data-aos-delay="100">
 			<section class="u-pl-l o-story">
 				<?php
 					$sectionFunding = get_field('funding_partners');
@@ -128,7 +127,7 @@
 	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $quotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
-		<section class="o-splash__content">
+		<section class="o-splash__content" data-aos="fade-up">
 			<div class="o-box">
 				<blockquote>
 					<p><?php echo $quoteTitle; ?></p>
@@ -167,7 +166,7 @@
 </section>
 <section class="o-section" id="implementing">
 	<div class="o-box">
-		<div class="u-half">
+		<div class="u-half" data-aos="fade-up">
 			<?php
 				$sectionImplement = get_field('implementing_partners');
 				$sectionImplementTitle =$sectionImplement['title'];
@@ -226,16 +225,17 @@
 				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
-		<div class="u-half">
+		<div class="u-half" data-aos="fade-up" data-aos-delay="100">
 			<div class="c-implementers">
 				
 			</div>
 		</div>
 	</div>
 </section>
-<section class="o-section" id="networks">
+<section class="o-section s--cover" id="networks">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
-		<div class="u-half s--right">
+		<div class="u-half s--right" data-aos="fade-up" data-aos-delay="100">
 			<div class="o-crumb">
 				<div class="o-crumb__title">Networks and Collaborations</div>
 				<div class="o-crumb__line"></div>
@@ -262,12 +262,14 @@
 								)
 							)
 						));
+						$aosDelay = 0;
 						while ( $networkPartners->have_posts() ) : $networkPartners->the_post();
 							$partnerWebsite = esc_url(get_field('website'));
 							$partnerLogo = get_field('logo');
 							$partnerName = get_the_title();
+							$aosDelay = $aosDelay + 50;
 					?>
-						<li>
+						<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 							<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 								<?php if ($partnerLogo){ ?>
 									<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>

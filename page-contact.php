@@ -1,8 +1,8 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-cover" id="contact">
-	<span class="c-contact__tint"></span>
+<div class="c-cover s--bkg" id="contact">
+	<figure class="c-cover__bkg"></figure>
 	<div class="u-half">
-		<section class="c-contact__section">
+		<section class="c-contact__section s--form">
 			<h1>Reach Out</h1>
 			<form method="post" action="<?php echo get_admin_url();?>admin-post.php" class="c-contact" id="contactForm">
 				<div class="u-hide">
@@ -45,7 +45,7 @@
 		</section>
 	</div>
 	<div class="u-half">
-		<section class="c-contact__section">
+		<section class="c-contact__section s--info">
 			<h1>Get in Touch</h1>
 			<section class="u-clear">
 				<?php 
