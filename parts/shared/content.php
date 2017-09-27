@@ -43,60 +43,65 @@
 			</div>
 		</section>
 		<?php endif; ?>
-		
-		<?php 
-			$programStories = new WP_Query(array(
-				'post_type'=>'story',
-				'posts_per_page'=>1,
-				'meta_query'=>array(
-					array(
-						'key'=>'program',
-						'value'=> '"'.get_the_ID().'"',
-						'compare'=>'LIKE'
-					)
-				)
-			));
-			if($programStories->have_posts()){
-		?>
-		<section class="o-section u-pb-0">
-			<div class="o-box">
-				<?php while($programStories->have_posts()):$programStories->the_post(); ?>
-				<div class="u-clear">
-					<div class="u-third">
-						<a href="<?php echo get_permalink(); ?>" class="o-rhombus-button s--patterned" style="top:0">
-							<div class="o-rhombus s--large">
-								<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo'); ?>"></figure>
-							</div>
-							<div class="o-rhombus__pattern"></div>
-						</a>
-					</div>
-					<div class="u-twothird">
-						<section class="u-pl-l">
-							<div class="o-crumb">
-								<div class="o-crumb__title">Featured Change Stories</div>
-								<div class="o-crumb__line"></div>
-								<div class="o-crumb__circle"></div>
-							</div>
-							<h1><a href="<?php echo get_permalink();?>"><span><?php the_title(); ?></span></a></h1>
-							<section class="u-clear">
-								<div class="u-half">
-									<p><?php the_field('summary'); ?></p>
-								</div>
-								<div class="u-half">
-									<section class="u-pl-m">
-										<?php echo renderButton(get_permalink(), 'Read '.get_field('beneficiary')."'s Story"); ?>
-									</section>
-								</div>
-							</section>
-							<span class="o-line"></span>
-						</section>
-					</div>
-				</div>
-				<?php endwhile; wp_reset_postdata(); ?>
-			</div>
-		</section>
-		<?php } ?>
 
+	<?php endwhile; ?>
+<?php endif; ?>
+
+<?php 
+	$programStories = new WP_Query(array(
+		'post_type'=>'story',
+		'posts_per_page'=>1,
+		'meta_query'=>array(
+			array(
+				'key'=>'program',
+				'value'=> '"'.get_the_ID().'"',
+				'compare'=>'LIKE'
+			)
+		)
+	));
+	if($programStories->have_posts()){
+?>
+<section class="o-section">
+	<div class="o-box">
+		<?php while($programStories->have_posts()):$programStories->the_post(); ?>
+		<div class="u-clear">
+			<div class="u-third">
+				<a href="<?php echo get_permalink(); ?>" class="o-rhombus-button s--patterned" style="top:0">
+					<div class="o-rhombus s--large">
+						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo'); ?>"></figure>
+					</div>
+					<div class="o-rhombus__pattern"></div>
+				</a>
+			</div>
+			<div class="u-twothird">
+				<section class="u-pl-l">
+					<div class="o-crumb">
+						<div class="o-crumb__title">Featured Change Stories</div>
+						<div class="o-crumb__line"></div>
+						<div class="o-crumb__circle"></div>
+					</div>
+					<h1><a href="<?php echo get_permalink();?>"><span><?php the_title(); ?></span></a></h1>
+					<section class="u-clear">
+						<div class="u-half">
+							<p><?php the_field('summary'); ?></p>
+						</div>
+						<div class="u-half">
+							<section class="u-pl-m">
+								<?php echo renderButton(get_permalink(), 'Read '.get_field('beneficiary')."'s Story"); ?>
+							</section>
+						</div>
+					</section>
+					<span class="o-line"></span>
+				</section>
+			</div>
+		</div>
+		<?php endwhile; wp_reset_postdata(); ?>
+	</div>
+</section>
+<?php } ?>
+
+<?php  if (have_rows('content')): ?>
+	<?php while(have_rows('content')): the_row();?>
 		<?php if(get_row_layout() == 'quote'): ?>
 		<section class="o-splash">
 			<?php
