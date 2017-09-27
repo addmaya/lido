@@ -69,18 +69,28 @@ jQuery(document).ready(function($) {
     }
 
     function loadLazyImage(obj){
-		obj.bind('inview', function (event, isInView) {
-	      if (isInView) {
-	      	var me = $(this);
-	      	var imageURL = me.data('image-url');
+        obj.each(function() {
+            var me = $(this);
+            var imageURL = me.data('image-url');
 
-	      	if(imageURL){
-	      		me.removeClass('js-lazy');
-	      		me.css('background-image', 'url(' + imageURL + ')');
-	      		me.addClass('is-loaded');
-	    	}
-	      }
-	    });
+            if(imageURL){
+                me.removeClass('js-lazy');
+                me.css('background-image', 'url(' + imageURL + ')');
+                me.addClass('is-loaded');
+            }
+        });
+        // obj.bind('inview', function (event, isInView) {
+	 //      if (isInView) {
+	 //      	var me = $(this);
+	 //      	var imageURL = me.data('image-url');
+
+	 //      	if(imageURL){
+	 //      		me.removeClass('js-lazy');
+	 //      		me.css('background-image', 'url(' + imageURL + ')');
+	 //      		me.addClass('is-loaded');
+	 //    	}
+	 //      }
+	 //    });
     }
 
     function switchTheme(obj){
