@@ -370,9 +370,16 @@ jQuery(document).ready(function($) {
     });
 
     Barba.Dispatcher.on("newPageProgress", function(url) {
-     
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
        var req = new XMLHttpRequest();
-       var progress = 100;
+       var progress = getRandomInt(80,100);
+       console.log(progress);
+
        req.open('POST', url);
        req.send();
 
@@ -389,7 +396,7 @@ jQuery(document).ready(function($) {
            }
        }
        req.onloadend = function(e){
-            progress = 100;
+            progress = getRandomInt(80,100);
        }
     })
 
