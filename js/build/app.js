@@ -93,8 +93,7 @@ jQuery(document).ready(function($) {
 	 //    });
     }
 
-    function switchTheme(obj){
-    	var namespace = obj.data('namespace');
+    function switchTheme(namespace){
     	if(namespace == 'program' || namespace == 'contact' || namespace == 'newsroom'){
     		header.addClass('t-dark');
 
@@ -115,7 +114,7 @@ jQuery(document).ready(function($) {
     	loadLazyImage($('.js-lazy'));
 
     	//switch header theme
-    	switchTheme($('.barba-container'));
+    	// switchTheme($('.barba-container').data('namespace'));
         
 
     	//start AOS
@@ -319,7 +318,6 @@ jQuery(document).ready(function($) {
 
 	//page transition
 	Barba.Pjax.start();
-
 	var FadeTransition = Barba.BaseTransition.extend({	  
 	  start: function() {
 	  	preloader.removeClass('is-exiting');    
@@ -336,9 +334,7 @@ jQuery(document).ready(function($) {
 	    var content = $(this.newContainer);	  
 	    setTimeout(function(){
 	    	$(this.oldContainer).hide();
-	    	$('html, body').animate({ scrollTop: 0 }, 0);
-            console.log($(this.newContainer).addClass('data-namespace'));
-	    	switchTheme($(this.newContainer));
+	    	$('html, body').animate({ scrollTop: 0 }, 0);	    	
 	    	preloader.removeClass('is-appearing').addClass('is-exiting');
 	    	body.removeClass('u-oh');
 	    	
@@ -351,9 +347,45 @@ jQuery(document).ready(function($) {
 	    
 	  }
 	});
+	Barba.Pjax.getTransition = function() {return FadeTransition;}
 
-	Barba.Pjax.getTransition = function() {return FadeTransition;};
+    //switch theme
+    Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container) {
+        switchTheme(currentStatus.namespace);
+    });
 
+    //update preloader
+    Barba.Dispatcher.on('linkClicked', function(HTMLElement) {
+        var origin = location.origin;
+        var href = HTMLElement.href;
+        var destination = href.substring(origin.length);
+
+        if(href.substring(href.length - 1) == "/"){
+            destination = destination.substring(0, destination.length - 1);
+        }
+        $('.c-preloader__title span').html(destination.replace(/-/g, ' '));
+
+        Barba.Dispatcher.trigger("newPageProgress", href);
+
+    });
+
+    Barba.Dispatcher.on("newPageProgress", function(url) {
+     
+       var req = new XMLHttpRequest();
+       req.open('POST', url);
+       req.send();
+
+       req.onprogress = function (e) {
+            console.log(e);
+           if (!e.lengthComputable) {
+                $('.c-preloader__count').html(e.loaded+  " / " + e.total);
+           }
+       }
+    })
+
+
+    //boot system
 	pageLoad();
+    switchTheme($('.barba-container').data('namespace'));
 });
 

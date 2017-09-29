@@ -28,7 +28,7 @@
 <div class="c-preloader">
 	<div class="o-box">
 		<h1 class="c-preloader__title" >
-			<span>{*Destination Page Title}</span>
+			<span></span>
 			<figure></figure>
 		</h1>
 		<span class="o-line"></span>
