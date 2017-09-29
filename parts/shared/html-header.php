@@ -10,6 +10,37 @@
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="<?php bloginfo('description'); ?>">
+
+		<meta property="og:url" content="<?php echo get_permalink();?>"/>
+		<meta property="og:site_name" content="<?php bloginfo('name');?>"/>
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="<?php echo get_the_title(); ?>"/>
+		<meta property="og:description" content="<?php
+			$seoSummary = get_field('summary');
+			$seoDesc = get_field('description');
+
+			if($seoSummary){
+				echo $seoSummary;
+			}
+			else {
+				if($seoDesc){
+					echo $seoDesc;
+				}
+				else{
+					echo bloginfo('description');
+				}
+			}
+			?>"/>
+		<meta property="og:image" content="<?php
+			$seoImage = get_field('photo');
+			if($seoImage){
+				echo $seoImage;
+			}
+			else {
+				echo get_stylesheet_directory_uri().'/images/dummy-2.jpg';
+			}
+			?>"/>
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon_.ico"/>
 		<link href="<?php echo get_stylesheet_directory_uri(); ?>/style.css" rel="stylesheet">
 		

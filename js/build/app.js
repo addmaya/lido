@@ -200,29 +200,31 @@ jQuery(document).ready(function($) {
     	$('.c-regions__col').matchHeight();
     	$('.o-slider-col').matchHeight();
 
-    	//fetch stories
-    	$('#morestories').click(function(e) {
+    	//fetch posts
+    	$('.js-fetch-posts').click(function(e) {
     		e.preventDefault();
 
     		var me = $(this);
-    		var postPerPage = 9;
-    		var storiesGrid = $('#storiesGrid');
-    		var offset = storiesGrid.find('li').length;
-    		var tailIndex = storiesGrid.find('li').last().attr('id');
-    		var category = me.data('category');
+    		var postPerPage = 4;
+    		var storiesGrid = me.closest('.o-article__grid');
+    		var offset = storiesGrid.find('.o-article').length;
+    		var tailIndex = storiesGrid.find('.o-article').last().data('index');
+    		var post_type = me.data('post');
+
+            console.log('O:'offset + 'I:'+tailIndex + 'P': post_type);
 
     		$.ajax({
     		   url: ajaxURL,
     		   method: 'post',
     		   dataType: 'json',
-    		   data: {action: 'getStories', offset: offset, postsPerPage: 9, tailIndex: tailIndex, category: category},
+    		   data: {action: 'getPosts', offset: offset, postsPerPage: 9, tailIndex: tailIndex, post_type: category},
     		   success: function(data){
     		   	console.log(data.length);
     		       if(data.length){
     		       		storiesGrid.append(data);
     				}
     				else{
-    					$('html, body').animate({scrollTop: 0}, 500);
+    					$('html, body').animate({scrollTop: storiesGrid.position().top}, 500);
     				}
     		   } 
     		});

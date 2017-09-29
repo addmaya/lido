@@ -80,42 +80,31 @@
 			<?php
 				$featureStories = new WP_Query(array(
 					'post_type'=>'story',
-					'posts_per_page'=>-1
+					'posts_per_page'=>2
 					)
 				);
 
-				$rowCount = 0;
 				$articleCount = 0;
 				$articleClass = '';
 				$aosDelay = 0;
 
+				$postCount = $featureStories->post_count;
+				$postBalance = wp_count_posts('story')->publish - $postCount;
+
 				while ($featureStories->have_posts()) : $featureStories->the_post();
 					$aosDelay = $aosDelay + 50;
+					
 					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
 					$storyBeneficiary = get_field('beneficiary');
 					$storyPhoto = get_field('photo');
 					$storyArea = get_field('area');
 					$storyPrograms = get_field('program');
-				if ($rowCount > 1) {
-					$rowCount = 0;
-				}
-				switch ($articleCount) {
-					case 1:
-						$articleClass = 's--bottom-left';
-						break;
-					case 2:
-						$articleClass = 's--bottom-right';
-						break;
-					case 3:
-						$articleClass = 's--right';
-						break;
-					default:
-						$articleClass = 's--left';
-						break;
-				}
+
+					$articleClass = getArticleClass($articleCount);
+
 			?>
-				<article class="o-article <?php echo $articleClass; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
+				<article class="o-article <?php echo $articleClass; ?>" data-index="<?php echo $articleCount; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 					<section class="u-clear">
 						<figure>
 							<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
@@ -125,7 +114,6 @@
 						<section class="o-article__summary">
 							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyBeneficiary; ?></span></a></h2>
 							<ul class="o-article__meta">
-								
 								<?php
 									if ($storyPrograms):
 								?>
@@ -140,14 +128,18 @@
 						</section>
 					</section>
 				</article>
-			<?php $rowCount++; $articleCount++; endwhile; wp_reset_postdata(); ?>
+			<?php $articleCount++; endwhile; wp_reset_postdata(); ?>
 		</div>
-		<div class="u-center">
-			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"><strong>15</strong></i>
-				<span>More Change Stories</span>
-			</a>
-		</div>
+		
+		<?php if (!$postBalance <= 0): ?>
+			<div class="u-center">
+				<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="story">
+					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
+					<span>More Change Stories</span>
+				</a>
+			</div>
+		<?php endif ?>
+
 	</div>
 </section>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

@@ -1,6 +1,27 @@
 <?php
 	require_once( 'external/starkers-utilities.php' );
 	
+	function getArticleClass($articleCount){
+		
+		$articleClass = '';
+
+		switch ($articleCount) {
+			case 1:
+				$articleClass = 's--bottom-left';
+				break;
+			case 2:
+				$articleClass = 's--bottom-right';
+				break;
+			case 3:
+				$articleClass = 's--right';
+				break;
+			default:
+				$articleClass = 's--left';
+				break;
+		}
+		return $articleClass;
+	}
+
 	//add_theme_support('post-thumbnails');	
 	function get_custom_feeds($feed_query) {
 		if (isset($feed_query['feed']) && !isset($feed_query['post_type']))
@@ -214,46 +235,43 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
-	function getStories(){
+	function getPosts(){
 	    $offset = $_POST['offset'];
-	    $storyCategory = $_POST['category'];
+	    $postType = $_POST['post_type'];
 	    $postsPerPage = $_POST['postsPerPage'];
 	    $postIndex = intval($_POST['tailIndex']) + 1;
 	    $html = '';
-	    $bubbleSizes = ['s--xsmall', 's--small', 's--medium', 's--large'];
+	    
 	    $args = array();
 
-	    if($storyCategory){
-	    	$args = array('post_type'=>'story', 'post_per_page'=>$postsPerPage, 'offset'=>intval($offset), 'category_name' => $storyCategory);
-	    } 
-	    else{
-	    	$args = array('post_type'=>'story', 'post_per_page'=>$postsPerPage, 'offset'=>intval($offset));
+	    if($postType){
+	    	$args = array('post_type'=>$postType, 'post_per_page'=>$postsPerPage, 'offset'=>intval($offset));
 	    }
 
 	    $stories = new WP_Query($args);
 	    $storyClass = '';
+	    $aosDelay = 0;
 
 	    if ($stories->have_posts()){
 	    	while ($stories->have_posts()){
 	    		$stories->the_post();
+	    		
+	    		$storyTitle = get_the_title();
+	    		$storyLink = get_permalink();
 
-	    		if ($postIndex > 2) {
+	    		$storyBeneficiary = get_field('beneficiary');
+	    		$storyPhoto = get_field('photo');
+	    		$storyArea = get_field('area');
+	    		$storyPrograms = get_field('program');
+	    		
+	    		$aosDelay = $aosDelay + 50;
+	    		$articleClass = getArticleClass($postIndex);
+
+	    		if ($postIndex > 3) {
 	    			$postIndex = 0;
 	    		}
 
-	    		if($postIndex == 2){
-	    			$postClass = 'u-full';
-	    		} else {
-	    			$postClass = 'u-half';
-	    		}
-
-	    		$storyTitle = get_the_title();
-	    		$storyLink = get_permalink();
-	    		$storyTime = getPostTime();
-	    		$storyThumb = getPostThumbnail();
-	    		$storyExcerpt = getPostExcerpt(136);
-
-	    		$html .= '<li id="'.$postIndex.'" class="o-article '.$postClass.'" data-aos="fade-up"><a class="u-wrap o-article__link" href="'.$storyLink.'"><section class="o-article__figure"><figure style="background-image:url('.$storyThumb.')"><div class="u-center"><i class="o-icon s--pen"></i></div><span class="o-article__time o-subtitle">'.$storyTime.'</span></figure></section><span class="o-bubble '.$bubbleSizes[array_rand($bubbleSizes)].'"></span><section class="o-article__brief"><span class="o-subheading">'.$storyTitle.'</span><section>'.$storyExcerpt.'<span class="o-link"><i class="o-icon s--arrow-ltr"></i></span></section></section></a></li>';
+	    		$html .= '';
 
 	    		$postIndex ++;
 	    	}
@@ -264,8 +282,8 @@
 	    }
 	    die();
 	}
-	add_action('wp_ajax_getStories', 'getStories');
-	add_action('wp_ajax_nopriv_getStories', 'getStories');
+	add_action('wp_ajax_getPosts', 'getPosts');
+	add_action('wp_ajax_nopriv_getPosts', 'getPosts');
 
 	remove_filter('the_content', 'wpautop');
 	//add_filter('login_redirect', 'admin_default_page');
