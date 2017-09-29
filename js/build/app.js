@@ -389,8 +389,8 @@ jQuery(document).ready(function($) {
            }
            else {
                 progress = progress - 25;
-                if(progress < 0){
-                    progress = 0;
+                if(progress < 0 || progress == 0){
+                    progress = getRandomInt(1,5);
                 }
                 $('.c-preloader__count').html(progress);
            }
