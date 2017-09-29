@@ -1040,7 +1040,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     figure{width: em(56); height: em(56); float: right; background-color: #484848; border-radius: 50%;}
 }
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
-.c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:-24vw; top: -32vh; color:#D1849E; z-index: 1}
+.c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:0; top: -32vh; color:#D1849E; z-index: 1}
 
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}

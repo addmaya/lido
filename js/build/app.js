@@ -372,14 +372,24 @@ jQuery(document).ready(function($) {
     Barba.Dispatcher.on("newPageProgress", function(url) {
      
        var req = new XMLHttpRequest();
+       var progress = 100;
        req.open('POST', url);
        req.send();
 
        req.onprogress = function (e) {
-            console.log(e);
-           if (!e.lengthComputable) {
-                $('.c-preloader__count').html(e.loaded+  " / " + e.total);
+           if (e.lengthComputable) {
+                $('.c-preloader__count').html(e.loaded/e.total);
            }
+           else {
+                progress = progress - 25;
+                if(progress < 0){
+                    progress = 0;
+                }
+                $('.c-preloader__count').html(progress);
+           }
+       }
+       req.onloadend = function(e){
+            progress = 100;
        }
     })
 
