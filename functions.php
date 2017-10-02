@@ -241,10 +241,21 @@
 		$html .= '<article data-balance="'.$postBalance.'" class="o-article '.$articleClass.'" data-index="'.$articleCount.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
 
 		$html .= '<section class="u-clear">';
-		$html .= '<figure><a href="'.$storyLink.'" class="js-bkg o-image" data-image-url="'.$storyPhoto.'"><span class="o-image__cover"></span></a></figure>';
+		
+		if($articleClass != 's--video'){
+			$html .= '<figure><a href="'.$storyLink.'" class="js-bkg o-image" data-image-url="'.$storyPhoto.'"><span class="o-image__cover"></span></a></figure>';
+		} else {
+			$html .= '<figure><a href="'.$storyLink.'" class="js-defer o-image no-barba" data-image-url="'.$storyPhoto.'"><span class="o-image__cover"></span><div class="o-table"><div class="o-table__cell"><i class="o-icon s--play" data-video-id="'.$videoID.'"></i></div></div></a></figure>';
+		}
 
 		$html .= '<section class="o-article__summary">';
-		$html .= '<h2><a href="'.$storyLink.'"><span>'.$storyBeneficiary.'</span></a></h2>';
+		if ($articleClass != 's--video') {
+			$html .= '<h2><a href="'.$storyLink.'"><span>'.$storyBeneficiary.'</span></a></h2>';
+		}
+		else {
+			$html .= '<h2><a href="'.$storyLink.'" class="no-barba"><span>'.$storyBeneficiary.'</span></a></h2>';
+		}
+		
 		$html .= '<ul class="o-article__meta">';
 
 		if ($storyPrograms) {
@@ -257,7 +268,11 @@
 
 		$html .= '<li><a href="#">/ '.get_the_date().'</a></li>';
 		$html .= '</ul>';
-		$html .= '<div class="t-dark">'.renderButton(get_permalink(), 'Read Story').'</div>';
+
+		if ($articleClass != 's--video') {
+			$html .= '<div class="t-dark">'.renderButton(get_permalink(), 'Read Story').'</div>';
+		}
+		
 		$html .= '</section></section></article>';
 		
 		return $html;		

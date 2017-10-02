@@ -413,7 +413,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 
   &#documents{
     &:after{background-color:#f5f5f5}
-    .o-section__cover{@include image('illustrations/publications.jpg'); background-position:right top; background-size:50%;}
+    .o-section__cover{@include image('illustrations/publications.jpg'); background-position:right top; background-size:50%; opacity:0.3}
   }
 
 }
@@ -421,9 +421,8 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .o-crumb{@include clear; 
   div{float: left; opacity:0.65}
-  &.s--updates{font-size: em(24); color: $redA; margin-bottom: 2.5em;
+  &.s--updates{font-size: em(24); margin-bottom: 2.5em;
     div{opacity: 1}
-    .o-crumb__line{background-color: $redA}
   }
 }
 .o-crumb__title{font-size: em(12);}
@@ -572,7 +571,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .u-fourth{background-color:#D8D8D8;}
   .o-line{display: block; margin-top: 2em}
   em{font-size: em(14); line-height: 1.5}
-  h2{padding-bottom: em(24)}
+  h2{padding-bottom: em(24); color: $white; word-wrap: break-word}
 
   .swiper-container{height:100%; background-position: center}
   .swiper-wrapper{@include prefix((transition-timing-function: cubic-bezier(0.63, -0.01, 0.15, 1)));
@@ -621,7 +620,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{position: relative; top: 3px; margin-left: em(12)}
   a{display: block; padding-bottom: 0.75em}
 }
-.o-article__grid{@include clear}
+.o-article__grid{@include clear;
+  &.s--albums{
+    .o-icon{display: none}
+  }
+}
 .o-article__row{@include clear}
 .o-article{color: $white; margin-bottom:0; float: left; width:44em;
   a{display: block; @include clear}
@@ -653,15 +656,30 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-article__summary{float: right; left: auto; right:em(-36);}
     figure{float: right;}
   }
-  .o-article__wrap{width: em(360); @include clear}
-  .c-updates &{color: white;
-    .o-article__summary{@include bkg($blackB)}
-  }
+  .o-article__wrap{width: em(360); @include clear;}
+  .c-updates &{color: white}
   &.s--album{width: 50%;
     figure{width: 95%; padding-bottom: 50%;}
     .o-article__summary{@include bkg($blackB)}
     .o-article__wrap{width: 95%}
   }
+  &.s--solo{width: auto; float:none;
+    figure{width: 70%; padding-bottom: 40%}
+    .o-article__summary{width: 25%; left: 0;}
+  }
+  &.s--video{width: 50%;
+    >section{margin: em(24)}
+    figure{width: 100%; float: none;
+      a{opacity:0.8}
+    }
+    .o-article__summary{float: none; left: auto; width: 80%}
+    .o-table{text-align:center}
+    .o-icon{width: 4.5em; height: 4.5em}
+    a{
+      &:hover{@include translateX(0)}
+    }
+  }
+
 }
 .o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
   a{display: block; padding: em(6) 0}
@@ -945,7 +963,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     &:after{display:none}
     &:hover{
       &:after{@include prefix((transform: translate(0, 2.5em) rotate(90deg)))}
-      .u-half:first-child{@include translateY(em(-36));
+      .u-half:first-child{@include translateY(em(-18));
         &:after{@include scale2D(1,1)}
       }
     }
@@ -1048,9 +1066,22 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
 .c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:0; top: -32vh; color:#D1849E; z-index: 1}
 
+.c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; display: none;
+  .u-table{width: 100%;height: 100%;}
+  .u-cell{vertical-align: middle}
+  .u-canvas{width: 100%; height: 100%;}
+  iframe{width: 100%; height: 100%; top:0; left: 0;}
+}
+.c-pop__box{background-color: #fff; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
+  @include device(sm){width:auto}
+}
+.c-pop__close{width: 2em;height: 2em; background-position:center; background-repeat: no-repeat;; background-size: contain; @include image('btn-close.svg'); display: inline-block; position: absolute; top: -36px; right: 0; transition:opacity 0.3s ease;
+  &:hover{opacity:0.6;}
+}
+
+
+/*others*/
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}
 .size-full-wrap{width: 120%; position: relative; left: -10%}
-
-/*states*/
 .is-invisible{opacity: 0; visibility: hidden;}

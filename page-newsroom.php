@@ -1,4 +1,14 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+<div class="c-pop">
+	<div class="o-table">
+		<div class="o-table__cell">
+			<div class="c-pop__box">
+				<a href="#" class="o-closer"></a>
+				<div class="o-player"></div>
+			</div>
+		</div>
+	</div>
+</div>
 <section class="o-section c-updates s--cover" id="updates">
 	<figure class="o-section__cover"></figure>
 	<div class="o-box">
@@ -9,72 +19,51 @@
 		</div>
 		<div class="o-article__grid s--updates">
 			<?php
-				$featuredUpdates = new WP_Query(array(
-					'posts_per_page'=>-1
-					)
-				);
+				$updates = new WP_Query(array('post_type'=>'post'));
 
-				$rowCount = 0;
 				$articleCount = 0;
 				$articleClass = '';
+				$aosDelay = 0;
 
-				while ($featuredUpdates->have_posts()) : $featuredUpdates->the_post();
+				$postCount = $updates->post_count;
+				$postBalance = wp_count_posts('post')->publish - $postCount;
+
+				while ($updates->have_posts()) {
+					$updates->the_post();
+					
 					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
 					$storyPhoto = get_field('photo');
-					$storyArea = get_field('area');
-				if ($rowCount > 1) {
-					$rowCount = 0;
-				}
-				switch ($articleCount) {
-					case 1:
-						$articleClass = 's--bottom-left';
-						break;
-					case 2:
-						$articleClass = 's--bottom-right';
-						break;
-					case 3:
-						$articleClass = 's--right';
-						break;
-					default:
-						break;
-				}
+
+					$articleClass = getArticleClass($articleCount);
+					if ($postCount == 1) {
+						$articleClass = $articleClass.' s--solo';
+					}
+
+					if($articleCount > 3){
+						$articleCount = 0;
+					}
+
+					echo renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink,$storyTitle,'','');
+
+					$articleCount++;
+					$aosDelay = $aosDelay + 50;
+				} 
+					wp_reset_postdata();
 			?>
-				<article class="o-article <?php echo $articleClass; ?>">
-					<section class="u-clear">
-						<figure>
-							<a href="<?php echo $storyLink; ?>" class="js-bkg o-image" data-image-url="<?php echo $storyPhoto; ?>">
-								<span class="o-image__cover"></span>
-							</a>
-						</figure>
-						<section class="o-article__summary">
-							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyTitle; ?></span></a></h2>
-							<ul class="o-article__meta">
-								
-								<?php
-									$storyPrograms = get_field('program');
-									if ($storyPrograms):
-										foreach ($storyPrograms as $storyProgram):
-								?>
-									<li><a href="<?php echo get_permalink($storyProgram->ID); ?>">/ <?php echo get_the_title($storyProgram->ID); ?></a></li>
-								<?php endforeach; endif; ?>
-								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
-							</ul>
-							<div class="t-dark"><?php echo renderButton('#', 'Read Story'); ?></div>
-						</section>
-					</section>
-				</article>
-			<?php $rowCount++; $articleCount++; endwhile; wp_reset_postdata(); ?>
 		</div>
-		<div class="u-center">
-			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"><strong>15</strong></i>
-				<span>More Updates</span>
-			</a>
-		</div>
+
+		<?php if (!$postBalance <= 0): ?>
+			<div class="u-center">
+				<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="post">
+					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
+					<span>More Change Stories</span>
+				</a>
+			</div>
+		<?php endif ?>
 	</div>
 </section>
-<section class="o-section s--med s--bottom__clear">
+<section class="o-section s--med s--bottom__clear c-updates">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Videos</div>
@@ -93,8 +82,15 @@
 					$videoSummary = get_field('summary');
 					$videoID = getYoutubeID($videoLink);
 					$videoMeta = getYoutubeMeta($videoID);
+
+					$videoThumb = $videoMeta['yt_thumb'];
+					$videoThumbHigh = $videoMeta['yt_thumb_high'];
+
+					if(!$videoThumb){
+						$videoThumb = $videoThumbHigh;
+					}
 			 ?>
-			<figure class="o-splash__figure js-bkg" data-image-url="<?php echo $videoMeta['yt_thumb']; ?>" data-video-url="">
+			<figure class="o-splash__figure js-defer" data-image-url="<?php echo $videoThumb; ?>" data-video-url="">
 				<div class="o-splash__player">
 					<a class="o-closer o-player__close" href="#"></a>
 					<div class="o-player">
@@ -120,12 +116,56 @@
 				</section>
 			</figure>
 		</section>
-		<div class="u-center u-pt-m u-pb-m">
-			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"></i>
-				<span>More Videos</span>
-			</a>
+		
+		<div class="o-article__grid s--updates">
+			<?php
+				$videos = new WP_Query(array('post_type'=>'video','posts_per_page'=>2, 'offset'=>1));
+
+				$articleCount = 0;
+				$aosDelay = 0;
+
+				$postCount = $videos->post_count;
+				$postBalance = wp_count_posts('video')->publish - $postCount;
+
+				while ($videos->have_posts()) {
+					$videos->the_post();
+
+					$videoLink = get_field('link', false, false);
+					$videoSummary = get_field('summary');
+					$videoID = getYoutubeID($videoLink);
+					$videoMeta = getYoutubeMeta($videoID);
+
+					$videoThumb = $videoMeta['yt_thumb'];
+					$videoThumbHigh = $videoMeta['yt_thumb_high'];
+
+					if(!$videoThumb){
+						$videoThumb = $videoThumbHigh;
+					}
+					
+					$storyTitle = get_the_title();
+					$storyLink = get_permalink();
+					$storyPhoto = get_field('photo');
+
+					if($articleCount > 3){
+						$articleCount = 0;
+					}
+
+					echo renderArticle('s--video', $articleCount, $aosDelay, $videoThumb, $videoID, $storyTitle,'','');
+
+					$articleCount++;
+					$aosDelay = $aosDelay + 50;
+				} 
+					wp_reset_postdata();
+			?>
 		</div>
+		<?php if (!(($postBalance - 1) < 1)): ?>
+			<div class="u-center">
+				<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="video">
+					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
+					<span>More Videos</span>
+				</a>
+			</div>
+		<?php endif ?>
 	</div>
 </section>
 <section class="o-section s--med">
@@ -142,14 +182,16 @@
 						<div class="swiper-wrapper">
 							
 							<?php 
-								$featuredAlbum = new WP_Query(array(
+								$album = new WP_Query(array(
 									'post_type'=>'album',
 									'posts_per_page'=>1
 									)
 								);
 
-								while ($featuredAlbum->have_posts()) : $featuredAlbum->the_post();
+								while ($album->have_posts()) : $album->the_post();
 								$photos = get_field('photos');
+								$albumTitle = get_the_title();
+
 								foreach ($photos as $photo): ?>
 									<div class="swiper-slide">
 										<figure class="js-bkg" data-image-url="<?php echo $photo['url']; ?>"></figure>
@@ -167,6 +209,7 @@
 						<?php echo renderButton('#','','div','s--next') ?>
 					</div>
 					<section class="u-wrap">
+						<h2><?php echo $albumTitle; ?></h2>
 						<em></em>
 						<span class="o-line"></span>
 					</section>
@@ -174,50 +217,42 @@
 			</div>
 		</section>
 		<div class="u-pt-l">
-			<div class="o-article__row">
-				<?php 
-					$albums = new WP_Query(array(
-						'post_type'=>'album',
-						'posts_per_page'=>2,
-						'offset'=>-1
-						)
-					);
+			<div class="o-article__grid s--updates s--albums">
+				<?php
+					$albums = new WP_Query(array('post_type'=>'album', 'posts_per_page'=>2, 'offset'=>1));
 
-					$i=0;
-					
-					while ($albums->have_posts()) : $albums->the_post();
-						$albumPhotos = get_field('photos');
-						$albumCover = $albumPhotos[$i]['url'];
-					?>
-						<article class="o-article s--bottom-right s--album">
-							<section class="u-clear">
-								<figure class="o-image js-bkg" data-image-url="<?php echo $albumCover; ?>">
-									<span class="o-image__cover"></span>
-								</figure>
-								<section class="o-article__wrap">
-									<section class="o-article__summary">
-										<h2><a href="#"><span><?php the_title(); ?></span></a></h2>
-										<ul class="o-article__meta">
-											<li><a href="#">/ <?php the_field('location'); ?></a></li>
-											<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
-										</ul>
-										<div class="t-dark"><?php echo renderButton('#', 'View Photos'); ?></div>
-									</section>
-								</section>
-							</section>
-						</article>
-				<?php $i++; endwhile; wp_reset_postdata(); ?>
+					$aosDelay = 0;
+
+					$postCount = $albums->post_count;
+					$postBalance = wp_count_posts('album')->publish - $postCount;
+
+					while ($albums->have_posts()) {
+						$albums->the_post();
+						
+						$storyTitle = get_the_title();
+						$storyLink = get_permalink();
+						$storyPhoto = get_field('photos')[0]['sizes']['large'];
+
+						echo renderArticle('s--video', 0, $aosDelay, $storyPhoto, $videoID, $storyTitle,'','');
+
+						$aosDelay = $aosDelay + 50;
+					} 
+						wp_reset_postdata();
+				?>
 			</div>
-		</div>
-		<div class="u-center">
-			<a href="#" class="o-button s--multiline s--med">
-				<i class="o-icon"></i>
-				<span>More Albums</span>
-			</a>
+			<?php if (!(($postBalance - 1) < 1)): ?>
+				<div class="u-center">
+					<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="album">
+						<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
+						<span>More Albums</span>
+					</a>
+				</div>
+			<?php endif ?>
 		</div>
 	</div>
 </section>
-<section class="o-section s--med c-docs" id="documents">
+<section class="o-section s--med c-docs s--cover" id="documents">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Documents</div>

@@ -291,7 +291,7 @@ jQuery(document).ready(function($) {
     	    }
     	});
 
-        //play inline videos
+        //play splash videos
     	$('.o-splash .s--play').click(function(e) {
     		e.preventDefault();
     		var me = $(this);
@@ -303,14 +303,46 @@ jQuery(document).ready(function($) {
     		player.html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
     	});
 
-    	$('.o-player__close').click(function(e) {
-    		e.preventDefault();
-    		var me = $(this);
-    		var playerWrap = me.closest('.o-splash__player');
-    		
-    		playerWrap.removeClass('is-visible');
-    		playerWrap.find('.o-player').html('');
-    	});
+        $('.o-player__close').click(function(e) {
+            e.preventDefault();
+            var me = $(this);
+            var playerWrap = me.closest('.o-splash__player');
+            
+            playerWrap.removeClass('is-visible');
+            playerWrap.find('.o-player').html('');
+        });
+
+
+        //play pop videos
+        $('.o-article.s--video a').click(function(e) {
+            e.preventDefault();
+            body.addClass('u-oh');
+            var me = $(this);
+            var videoID = me.attr('href');
+
+            $('.c-pop .o-player').html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
+            $('.c-pop').show();
+        });
+
+        $('body').on('click', '.c-pop .o-closer', function(e) {
+            e.preventDefault();
+            closePop();
+        });
+
+        $('body').on('click', '.c-pop', function() {
+            closePop();
+        });
+
+        $('body').on('click', '.c-pop .c-pop__box', function() {
+            e.stopPropagation();
+        });
+
+        function closePop(){
+            $('body').removeClass('u-oh');
+            $('.c-pop__box .o-player').html('');
+            $('.c-pop').hide();
+        }
+
 
     	//render parallax scenes
     	if($('.scene').length){
