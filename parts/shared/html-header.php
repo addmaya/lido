@@ -50,6 +50,10 @@
 		<script src="https://use.typekit.net/yqx0mtr.js"></script>
 		<script>try{Typekit.load({ async: false });}catch(e){}</script>
 
+		<script>
+			var ajaxURL="<?php echo admin_url('admin-ajax.php'); ?>";
+		</script>
+
 		<?php wp_head(); ?>
 	</head>
 	<body class="is-booting u-oh">

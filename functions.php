@@ -235,56 +235,86 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
-	function getPosts(){
-	    $offset = $_POST['offset'];
-	    $postType = $_POST['post_type'];
-	    $postsPerPage = $_POST['postsPerPage'];
-	    $postIndex = intval($_POST['tailIndex']) + 1;
-	    $html = '';
-	    
-	    $args = array();
+	function renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $storyDate, $postBalance = 0){
+		$html = '';
 
-	    if($postType){
-	    	$args = array('post_type'=>$postType, 'post_per_page'=>$postsPerPage, 'offset'=>intval($offset));
-	    }
+		$html .= '<article data-balance="'.$postBalance.'" class="o-article '.$articleClass.'" data-index="'.$articleCount.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
 
-	    $stories = new WP_Query($args);
-	    $storyClass = '';
-	    $aosDelay = 0;
+		$html .= '<section class="u-clear">';
+		$html .= '<figure><a href="'.$storyLink.'" class="js-bkg o-image" data-image-url="'.$storyPhoto.'"><span class="o-image__cover"></span></a></figure>';
 
-	    if ($stories->have_posts()){
-	    	while ($stories->have_posts()){
-	    		$stories->the_post();
-	    		
-	    		$storyTitle = get_the_title();
-	    		$storyLink = get_permalink();
+		$html .= '<section class="o-article__summary">';
+		$html .= '<h2><a href="'.$storyLink.'"><span>'.$storyBeneficiary.'</span></a></h2>';
+		$html .= '<ul class="o-article__meta">';
 
-	    		$storyBeneficiary = get_field('beneficiary');
-	    		$storyPhoto = get_field('photo');
-	    		$storyArea = get_field('area');
-	    		$storyPrograms = get_field('program');
-	    		
-	    		$aosDelay = $aosDelay + 50;
-	    		$articleClass = getArticleClass($postIndex);
+		if ($storyPrograms) {
+			$html .= '<li><a href="'.get_permalink($storyPrograms[0]).'">/'.get_the_title($storyPrograms[0]).'</a></li>';
+		}
 
-	    		if ($postIndex > 3) {
-	    			$postIndex = 0;
-	    		}
+		if($storyArea){
+			$html .= '<li><a href="#">/ '.$storyArea.'</a></li>';	
+		}
 
-	    		$html .= '';
-
-	    		$postIndex ++;
-	    	}
-	    	wp_reset_postdata();
-	    	echo json_encode($html);
-	    } else {
-	    	echo 0;
-	    }
-	    die();
+		$html .= '<li><a href="#">/ '.get_the_date().'</a></li>';
+		$html .= '</ul>';
+		$html .= '<div class="t-dark">'.renderButton(get_permalink(), 'Read Story').'</div>';
+		$html .= '</section></section></article>';
+		
+		return $html;		
 	}
+
+	function getPosts(){
+		$offset = intval($_POST['offset']);
+		$postType = $_POST['post_type'];
+		$articleCount = intval($_POST['tailIndex']) + 1;
+		$articleClass = '';
+		$html = '';
+		$aosDelay = 0;
+
+		$stories = new WP_Query(array(
+			'post_type'=>$postType,
+			'posts_per_page'=>get_option('posts_per_page'),
+			'offset'=>$offset
+			)
+		);
+		
+		$postCount = $stories->post_count;
+		$postBalance = wp_count_posts($postType)->publish - $postCount;
+
+		if($stories->have_posts()){
+			while ($stories->have_posts()) {
+				$stories->the_post();
+
+				if($articleCount > 3){
+					$articleCount = 0;
+				}						
+				
+				$storyTitle = get_the_title();
+				$storyLink = get_permalink();
+				$storyBeneficiary = get_field('beneficiary');
+				$storyPhoto = get_field('photo');
+				$storyArea = get_field('area');
+				$storyPrograms = get_field('program');
+				$articleClass = getArticleClass($articleCount);
+				
+				$html .= renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $postBalance);
+				
+				$articleCount++;
+				$aosDelay = $aosDelay + 50;	
+			} 
+
+			wp_reset_postdata();
+			echo json_encode($html);	
+		}
+		else {
+			echo 0;
+		}
+		die();   
+	}
+
 	add_action('wp_ajax_getPosts', 'getPosts');
 	add_action('wp_ajax_nopriv_getPosts', 'getPosts');
 
-	remove_filter('the_content', 'wpautop');
+	//remove_filter('the_content', 'wpautop');
 	//add_filter('login_redirect', 'admin_default_page');
 ?>

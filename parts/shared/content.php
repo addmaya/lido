@@ -1,3 +1,11 @@
+
+<?php if (!is_singular('story') && have_posts() ) while ( have_posts() ) : the_post(); ?>
+	<div class="o-story s--single">
+		<div class="o-box">
+			<?php echo apply_filters('the_content', get_the_content()); ?>
+		</div>
+	</div>
+<?php endwhile; ?>
 <?php  if (have_rows('content')): ?>
 	<?php while(have_rows('content')): the_row();?>
 		

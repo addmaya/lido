@@ -76,11 +76,11 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<div class="o-article__grid s--updates">
+		<div class="o-article__grid s--updates" id="storiesGrid">
 			<?php
 				$featureStories = new WP_Query(array(
 					'post_type'=>'story',
-					'posts_per_page'=>2
+					'posts_per_page'=>4
 					)
 				);
 
@@ -91,9 +91,9 @@
 				$postCount = $featureStories->post_count;
 				$postBalance = wp_count_posts('story')->publish - $postCount;
 
-				while ($featureStories->have_posts()) : $featureStories->the_post();
-					$aosDelay = $aosDelay + 50;
-					
+				while ($featureStories->have_posts()) {
+
+					$featureStories->the_post();
 					$storyTitle = get_the_title();
 					$storyLink = get_permalink();
 					$storyBeneficiary = get_field('beneficiary');
@@ -103,32 +103,17 @@
 
 					$articleClass = getArticleClass($articleCount);
 
+					if($articleCount > 3){
+						$articleCount = 0;
+					}
+
+					echo renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea);
+
+					$articleCount++;
+					$aosDelay = $aosDelay + 50;
+				} 
+					wp_reset_postdata();
 			?>
-				<article class="o-article <?php echo $articleClass; ?>" data-index="<?php echo $articleCount; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
-					<section class="u-clear">
-						<figure>
-							<a href="<?php echo $storyLink; ?>" class="js-bkg o-image" data-image-url="<?php echo $storyPhoto; ?>">
-								<span class="o-image__cover"></span>
-							</a>
-						</figure>
-						<section class="o-article__summary">
-							<h2><a href="<?php echo $storyLink; ?>"><span><?php echo $storyBeneficiary; ?></span></a></h2>
-							<ul class="o-article__meta">
-								<?php
-									if ($storyPrograms):
-								?>
-									<li><a href="<?php echo get_permalink($storyPrograms[0]); ?>">/ <?php echo get_the_title($storyPrograms[0]); ?></a></li>
-								<?php endif; ?>
-								<?php if ($storyArea): ?>
-									<li><a href="#">/ <?php echo $storyArea; ?></a></li>
-								<?php endif ?>
-								<li><a href="#">/ <?php echo get_the_date(); ?></a></li>
-							</ul>
-							<div class="t-dark"><?php echo renderButton(get_permalink(), 'Read Story'); ?></div>
-						</section>
-					</section>
-				</article>
-			<?php $articleCount++; endwhile; wp_reset_postdata(); ?>
 		</div>
 		
 		<?php if (!$postBalance <= 0): ?>

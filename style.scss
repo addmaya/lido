@@ -23,8 +23,9 @@ $easeOutBack: cubic-bezier(0.42, 0, 0, 1.46);
 $easeOutQuart: cubic-bezier(0.44, 0.03, 0.05, 0.99);
 $easeInThief: cubic-bezier(0.22, 0, 0, 1);
 
+
 /*functions*/
-@mixin image($image){background-image: url('images/'+$image)}
+@mixin image($image){background-image: url('images/'+$image);}
 @mixin device($device){
   @if $device == xs {@media only screen and (max-width: 767px){@content}}
   @else if $device == xs-landscape{@media only screen and (max-width: $tablet - 1) and (orientation : landscape){@content}}
@@ -538,7 +539,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   img{max-width:100%; height: auto; margin: em(24) 0}
   blockquote{font-weight:bold; font-size:1.25em; width: 75%; margin: 0 auto; padding:em(24) 0; margin-bottom:em(24)}
   ol{list-style: decimal inside}
-  &.s--single{padding:4em 0 4em; font-size: em(20); font-weight: 300;
+  &.s--single{padding:4em 0 6em; font-size: em(20); font-weight: 300;
     p{line-height:1.8}
   }
   &.s--background{
@@ -1044,6 +1045,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 #barba-wrapper{@include box(100%, 100%)}
 .barba-container{@include box(100%, 100%)}
+.size-full-wrap{width: 120%; position: relative; left: -10%}
 
 /*states*/
 .is-invisible{opacity: 0; visibility: hidden;}

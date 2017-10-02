@@ -118,11 +118,7 @@ jQuery(document).ready(function($) {
         //load lazy images
         loadSplashImage();
     	loadBkg($('.js-bkg'));
-        deferImage($('.js-defer'));
-
-    	//switch header theme
-    	// switchTheme($('.barba-container').data('namespace'));
-        
+        deferImage($('.js-defer'));     
 
     	//start AOS
     	AOS.init({duration: aosDuration});
@@ -139,7 +135,7 @@ jQuery(document).ready(function($) {
     		body.removeClass('u-oh');
     	});
 
-    	header.bind('inview', function (event, isInView) {
+    	$('.c-page__header, .c-paginator, .c-page__footer').bind('inview', function (event, isInView) {
     		if(isInView){
     			hamburger.removeClass('is-visible');
     		}
@@ -169,6 +165,11 @@ jQuery(document).ready(function($) {
     	        body.removeClass('u-oh');
     	    }
     	});
+
+        //resize full images
+        $('.o-story.s--single .size-full').each(function() {
+            $(this).parent().addClass('size-full-wrap');
+        });
 
 
     	//render dropped caps
@@ -213,22 +214,27 @@ jQuery(document).ready(function($) {
 
     		var me = $(this);
     		var postPerPage = 4;
-    		var storiesGrid = me.closest('.o-article__grid');
+    		var storiesGrid = me.closest('.o-section').find('.o-article__grid');
     		var offset = storiesGrid.find('.o-article').length;
     		var tailIndex = storiesGrid.find('.o-article').last().data('index');
     		var post_type = me.data('post');
-
-           
 
     		$.ajax({
     		   url: ajaxURL,
     		   method: 'post',
     		   dataType: 'json',
-    		   data: {action: 'getPosts', offset: offset, postsPerPage: 9, tailIndex: tailIndex, post_type: category},
+    		   data: {action: 'getPosts', offset: offset, postsPerPage: 9, tailIndex: tailIndex, post_type: post_type},
     		   success: function(data){
-    		   	console.log(data.length);
     		       if(data.length){
     		       		storiesGrid.append(data);
+                        loadBkg(storiesGrid.find('.js-bkg'));
+
+                        var balance =  parseInt(storiesGrid.find('.o-article').last().data('balance'));
+                        if(balance){
+                            me.find('strong').html(balance);
+                        } else {
+                            me.parent().hide();
+                        }   
     				}
     				else{
     					$('html, body').animate({scrollTop: storiesGrid.position().top}, 500);
