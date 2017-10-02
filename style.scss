@@ -580,6 +580,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   .swiper-slide{
     span{display: none;}
   }
+  .c-pop &{
+    .o-slider-col{padding:0}
+    .o-slider__image{width: 100%}
+    .o-slider__caption{width: 100%}
+  }
 }
 .o-slider__image{background-color: $blackA; width: 90%; float: right; height:em(576);
   figure{@include canvas; @include cover;}

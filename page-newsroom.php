@@ -1,10 +1,40 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-pop">
+<div class="c-pop" style="display: block">
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="c-pop__box">
 				<a href="#" class="o-closer"></a>
-				<div class="o-player"></div>
+				<div class="o-player" style="display:none"></div>
+				<section class="o-slider">
+					<div class="u-threefourth o-slider-col">
+						<div class="o-slider__image">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<?php 
+										$sliderImages = get_sub_field('images');
+										foreach ($sliderImages as $slideImage) { ?>
+											<div class="swiper-slide">
+												<figure style="background-image:url('<?php echo $slideImage['url']; ?>')"></figure>
+												<span><?php echo $slideImage['caption']; ?></span>
+											</div>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-fourth o-slider-col">
+						<div class="o-slider__caption">
+							<div class="o-slider__buttons t-dark">
+								<?php echo renderButton('#','','div','s--prev') ?>
+								<?php echo renderButton('#','','div','s--next') ?>
+							</div>
+							<section class="u-wrap">
+								<em></em>
+								<span class="o-line"></span>
+							</section>
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>
@@ -231,9 +261,9 @@
 						
 						$storyTitle = get_the_title();
 						$storyLink = get_permalink();
-						$storyPhoto = get_field('photos')[0]['sizes']['large'];
+						$albumPhotos = get_field('photos');
 
-						echo renderArticle('s--video', 0, $aosDelay, $storyPhoto, $videoID, $storyTitle,'','');
+						echo renderArticle('s--video', 0, $aosDelay, $albumPhotos[0]['sizes']['large'], $videoID, $storyTitle,'','');
 
 						$aosDelay = $aosDelay + 50;
 					} 
