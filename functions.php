@@ -274,7 +274,7 @@
 		}
 
 		if ($photos) {
-			$html .= '<div class="c-album__photos">'.$extras.'</div>';
+			$html .= '<div class="c-album__photos">'.$photos.'</div>';
 		}
 		
 		$html .= '</section></section></article>';

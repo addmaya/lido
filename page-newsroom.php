@@ -5,21 +5,23 @@
 			<div class="c-pop__box">
 				<a href="#" class="o-closer"></a>
 				<div class="o-player u-hide"></div>
-				<section class="o-slider u-hide" id="c-pop__swiper">
+				<section class="o-slider" id="c-pop__swiper">
 					<div class="u-threefourth o-slider-col">
 						<div class="o-slider__image">
 							<div class="swiper-container">
-								<div class="swiper-wrapper"></div>
+								<div class="swiper-wrapper">
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="u-fourth o-slider-col">
 						<div class="o-slider__caption">
 							<div class="o-slider__buttons t-dark">
-								<?php echo renderButton('#','','div','s--prev') ?>
-								<?php echo renderButton('#','','div','s--next') ?>
+								<?php echo renderButton('#','','','s--prev') ?>
+								<?php echo renderButton('#','','','s--next') ?>
 							</div>
 							<section class="u-wrap">
+								<h2></h2>
 								<em></em>
 								<span class="o-line"></span>
 							</section>
@@ -111,7 +113,7 @@
 						$videoThumb = $videoThumbHigh;
 					}
 			 ?>
-			<figure class="o-splash__figure js-defer" data-image-url="<?php echo $videoThumb; ?>" data-video-url="">
+			<figure class="o-splash__figure js-defer" data-image-url="<?php echo $videoThumb; ?>">
 				<div class="o-splash__player">
 					<a class="o-closer o-player__close" href="#"></a>
 					<div class="o-player">
@@ -264,7 +266,7 @@
 						$albumSlides = '';
 
 						foreach ($albumPhotos as $albumPhoto) {
-							$albumSlides .= '<div class="swiper-slide"><figure data-photo-url="'.$albumPhoto['url'].'"></figure><span>'.$albumPhoto['caption'].'</span></div>';
+							$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['url'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
 						}
 
 						echo renderArticle('s--video', 0, $aosDelay, $albumPhotos[0]['sizes']['large'], $videoID, $storyTitle,'','',0, $albumSlides);

@@ -184,7 +184,7 @@ jQuery(document).ready(function($) {
 
     	//render image sliders
     	var swiperInstances = {};
-    	$(".o-slider .swiper-container").each(function(index, element){
+    	$(".o-slider .swiper-container").not('#c-pop__swiper .swiper-container').each(function(index, element){
     	    var $this = $(this);
     	    $this.addClass("instance-" + index);
     	    $this.closest('.o-slider').addClass('slide-'+index);
@@ -314,40 +314,45 @@ jQuery(document).ready(function($) {
 
 
         //play pop videos
-        $('.o-article.s--video a').click(function(e) {
+
+
+        var popSwiper = new Swiper('#c-pop__swiper .swiper-container', {
+            loop: true,
+            speed: 800,
+            autoplayDisableOnInteraction:false,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            nextButton: '#c-pop__swiper .s--next',
+            prevButton: '#c-pop__swiper .s--prev',
+            onSlideChangeEnd: function(){
+                $('#c-pop__swiper').find('#c-pop__swiper .o-slider__caption em').html($('#c-pop__swiper .swiper-slide-active span').html());
+            }
+          });
+
+
+        $('body').on('click', '.o-article.s--video a', function(e) {
             e.preventDefault();
             body.addClass('u-oh');
             var me = $(this);
             var videoID = me.attr('href');
             var photos = me.closest('.o-article').find('.c-album__photos').html();
+            var albumTitle = me.closest('.o-article').find('h2 span').html();
             var player = $('.c-pop .o-player');
-            var slider = $('.c-pop .o-slider');
+            var slider = $('#c-pop__swiper');
 
-            console.log(photos);
-
-            if(photos){
-                slider.show();
-                $('.c-pop .swiper-wrapper').html(photos);
-
-                var popSwiper = new Swiper('#c-pop__swiper .swiper-container', {
-                    loop: true,
-                    autoplay: 8000,
-                    speed: 1500,
-                    effect:'fade',
-                    fade: {crossFade: true},
-                    autoplayDisableOnInteraction:false,
-                    nextButton: '#c-pop__swiper .swiper-button-next',
-                    prevButton: '#c-pop__swiper .swiper-button-prev'
-                  });
-
+            if(photos){            
+                slider.removeClass('is-invisible');
+                slider.find('h2').html(albumTitle);
+                popSwiper.appendSlide(photos);
                 popSwiper.update();
             }
             else {
+                $('#c-pop__swiper').addClass('is-invisible');
                 player.show();
                 player.html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
             }
 
-            $('.c-pop').show();
+            $('.c-pop').addClass('is-visible');
         });
 
         $('body').on('click', '.c-pop .o-closer', function(e) {
@@ -359,14 +364,15 @@ jQuery(document).ready(function($) {
             closePop();
         });
 
-        $('body').on('click', '.c-pop .c-pop__box', function() {
+        $('body').on('click', '.c-pop .c-pop__box', function(e) {
             e.stopPropagation();
         });
 
         function closePop(){
             $('body').removeClass('u-oh');
             $('.c-pop__box .o-player').html('');
-            $('.c-pop').hide();
+            $('.c-pop').removeClass('is-visible');
+            popSwiper.removeAllSlides();
         }
 
     	//render parallax scenes

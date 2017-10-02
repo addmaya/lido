@@ -572,7 +572,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .u-fourth{background-color:#D8D8D8;}
   .o-line{display: block; margin-top: 2em}
   em{font-size: em(14); line-height: 1.5}
-  h2{padding-bottom: em(24); color: $white; word-wrap: break-word}
+  h2{padding-bottom: em(24); color: $white; word-wrap: break-word; text-align: left}
 
   .swiper-container{height:100%; background-position: center}
   .swiper-wrapper{@include prefix((transition-timing-function: cubic-bezier(0.63, -0.01, 0.15, 1)));
@@ -685,6 +685,7 @@ em{font-family: 'Georgia'; font-style: italic;}
       &:hover{@include translateX(0)}
     }
   }
+  .c-album__photos{display:none}
 
 }
 .o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
@@ -692,6 +693,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .o-closer{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s;
   &:hover{background-color: darken($redA,10%)}
+  .c-pop &{right: -56px}
 }
 .o-player{position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;
   iframe, object, embed{position: absolute; top: 0; left: 0; width: 100%; height: 100%}
@@ -1072,11 +1074,12 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
 .c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:0; top: -32vh; color:#D1849E; z-index: 1}
 
-.c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; display: none;
+.c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; visibility:hidden;
   .u-table{width: 100%;height: 100%;}
   .u-cell{vertical-align: middle}
   .u-canvas{width: 100%; height: 100%;}
   iframe{width: 100%; height: 100%; top:0; left: 0;}
+  &.is-visible{visibility: visible}
 }
 .c-pop__box{background-color: #fff; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
   @include device(sm){width:auto}
@@ -1084,7 +1087,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-pop__close{width: 2em;height: 2em; background-position:center; background-repeat: no-repeat;; background-size: contain; @include image('btn-close.svg'); display: inline-block; position: absolute; top: -36px; right: 0; transition:opacity 0.3s ease;
   &:hover{opacity:0.6;}
 }
-
+#c-pop__swiper{
+  &.is-invisible{visibility:hidden}
+}
 
 /*others*/
 #barba-wrapper{@include box(100%, 100%)}
