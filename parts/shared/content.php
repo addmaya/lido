@@ -1,10 +1,13 @@
-
-<?php if (!is_singular('story') && have_posts() ) while ( have_posts() ) : the_post(); ?>
+<?php if (have_posts() ) while ( have_posts() ) : the_post(); ?>
+	<?php
+		if( '' !== get_post()->post_content ) {
+	?>
 	<div class="o-story s--single">
 		<div class="o-box">
 			<?php echo apply_filters('the_content', get_the_content()); ?>
 		</div>
 	</div>
+	<?php } ?>
 <?php endwhile; ?>
 <?php  if (have_rows('content')): ?>
 	<?php while(have_rows('content')): the_row();?>
@@ -201,23 +204,47 @@
 		<?php endif; ?>
 
 		<?php if(get_row_layout() == 'embed'):
-			$vidTitle = get_sub_field('title');
-			$vidBrief = get_sub_field('description');
-			$vidLink = get_sub_field('embed');
+			$videoLink = get_sub_field('embed', false, false);
+			
+			$videoID = getYoutubeID($videoLink);
+			$videoMeta = getYoutubeMeta($videoID);
+			
+			$videoTitle = $videoMeta['yt_title'];
+			$videoSummary = $videoMeta['yt_desc'];
+			$videoThumb = $videoMeta['yt_thumb'];
+			$videoThumbHigh = $videoMeta['yt_thumb_high'];
+
+			if(!$videoThumb){
+				$videoThumb = $videoThumbHigh;
+			}
 		?>
-			<section class="o-section">
+			<section class="o-section s--med s--bottom__clear" data-aos="fade-up">
 				<div class="o-box">
 					<section class="o-splash s--video">
-						<figure class="o-splash__figure">
-							<div class="o-splash__tint"></div>
+						<figure class="o-splash__figure js-bkg" data-image-url="<?php echo $videoThumb; ?>">
+							<div class="o-splash__player">
+								<a class="o-closer o-player__close" href="#"></a>
+								<div class="o-player">
+										
+								</div>
+							</div>
+							<div class="o-splash__tint">
+								<div class="o-table">
+									<div class="o-table__cell">
+										<a class="o-icon s--play" href="#" data-video-id="<?php echo $videoID; ?>"></a>
+									</div>
+								</div>
+							</div>
 							<section class="o-splash__content">
 								<div class="o-box">
 									<span class="o-line"></span>
-									<h2>Video: <?php echo $vidTitle; ?></h2>
-									<a href="#">Play Video</a>
-									<p>
-										<em><?php echo $vidBrief; ?></em>
-									</p>
+									<h2>Video: <?php echo $videoTitle; ?></h2>
+									<?php if ($videoSummary): ?>
+										<p>
+											<em><?php echo $videoSummary; ?></em>
+										</p>
+									<?php endif ?>
+									
 								</div>
 							</section>
 						</figure>
