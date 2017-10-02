@@ -28,12 +28,12 @@
 ?>
 <section class="c-cover">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+		<figure class="c-cover__image js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>
 	</div>
 	<div class="u-half c-cover__profile s--single" >
-		<div class="o-table js-lazy" data-image-url="<?php the_field('3d_illustration'); ?>">
+		<div class="o-table js-bkg" data-image-url="<?php the_field('3d_illustration'); ?>">
 			<div class="o-table__cell">
 				<section class="c-cover__section">
 					<h1><?php the_title(); ?></h1>
@@ -120,7 +120,7 @@
 					<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a href="<?php the_permalink(); ?>">
 							<?php if ($partnerLogo){ ?>
-								<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+								<figure class="js-bkg" data-image-url="<?php echo $partnerLogo; ?>"></figure>
 							<?php } else {?>
 								<span><?php echo $partnerName; ?></span>
 							<?php } ?>

@@ -1,7 +1,7 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+		<figure class="c-cover__image js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>
 	</div>
@@ -37,7 +37,7 @@
 				 ?>
 				<h1>1976</h1>
 				<span><?php echo $historyByline; ?></span>
-				<figure class="js-lazy" data-image-url="<?php echo $historyPhoto; ?>" data-aos="fade-up" data-aos-delay="200"></figure>
+				<figure class="js-bkg" data-image-url="<?php echo $historyPhoto; ?>" data-aos="fade-up" data-aos-delay="200"></figure>
 			</header>
 			<p data-aos="fade-up"><?php echo $historySummary; ?></p>
 		</section>
@@ -107,7 +107,7 @@
 				<article class="o-article <?php echo $articleClass; ?>" data-index="<?php echo $articleCount; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 					<section class="u-clear">
 						<figure>
-							<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
+							<a href="<?php echo $storyLink; ?>" class="js-bkg o-image" data-image-url="<?php echo $storyPhoto; ?>">
 								<span class="o-image__cover"></span>
 							</a>
 						</figure>

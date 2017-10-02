@@ -84,25 +84,25 @@
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/programs">
 					<span>Programs</span>
-					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 10); ?>"></figure>
+					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 10); ?>"></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/change-stories">
 					<span>Change Stories</span>
-					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 22); ?>"></figure>
+					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 22); ?>"></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/partners">
 					<span>Partners</span>
-					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 41); ?>"></figure>
+					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 41); ?>"></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/about">
 					<span>About</span>
-					<figure class="js-lazy" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
+					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
 				</a>
 			</li>
 		</ul>

@@ -5,7 +5,7 @@
 		$html .= '<article class="o-article '.$articleClass.'" data-index="'.$articleCount.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
 
 		$html .= '<section class="u-clear">';
-		$html .= '<figure><a href="'.$storyLink.'" class="js-lazy o-image" data-image-url="'.$storyPhoto.'"></a><span class="o-image__cover"></span></figure>';
+		$html .= '<figure><a href="'.$storyLink.'" class="js-bkg o-image" data-image-url="'.$storyPhoto.'"></a><span class="o-image__cover"></span></figure>';
 
 		$html .= '<section class="o-article__summary">';
 
@@ -16,7 +16,7 @@
 <article class="o-article <?php echo $articleClass; ?>" data-index="<?php echo $articleCount; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 	<section class="u-clear">
 		<figure>
-			<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
+			<a href="<?php echo $storyLink; ?>" class="js-bkg o-image" data-image-url="<?php echo $storyPhoto; ?>">
 				<span class="o-image__cover"></span>
 			</a>
 		</figure>

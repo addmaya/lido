@@ -43,7 +43,7 @@
 				<article class="o-article <?php echo $articleClass; ?>">
 					<section class="u-clear">
 						<figure>
-							<a href="<?php echo $storyLink; ?>" class="js-lazy o-image" data-image-url="<?php echo $storyPhoto; ?>">
+							<a href="<?php echo $storyLink; ?>" class="js-bkg o-image" data-image-url="<?php echo $storyPhoto; ?>">
 								<span class="o-image__cover"></span>
 							</a>
 						</figure>
@@ -94,7 +94,7 @@
 					$videoID = getYoutubeID($videoLink);
 					$videoMeta = getYoutubeMeta($videoID);
 			 ?>
-			<figure class="o-splash__figure js-lazy" data-image-url="<?php echo $videoMeta['yt_thumb']; ?>" data-video-url="">
+			<figure class="o-splash__figure js-bkg" data-image-url="<?php echo $videoMeta['yt_thumb']; ?>" data-video-url="">
 				<div class="o-splash__player">
 					<a class="o-closer o-player__close" href="#"></a>
 					<div class="o-player">
@@ -152,7 +152,7 @@
 								$photos = get_field('photos');
 								foreach ($photos as $photo): ?>
 									<div class="swiper-slide">
-										<figure class="js-lazy" data-image-url="<?php echo $photo['url']; ?>"></figure>
+										<figure class="js-bkg" data-image-url="<?php echo $photo['url']; ?>"></figure>
 										<span><?php echo $photo['caption']; ?></span>
 									</div>
 							<?php endforeach; endwhile; wp_reset_postdata(); ?>
@@ -191,7 +191,7 @@
 					?>
 						<article class="o-article s--bottom-right s--album">
 							<section class="u-clear">
-								<figure class="o-image js-lazy" data-image-url="<?php echo $albumCover; ?>">
+								<figure class="o-image js-bkg" data-image-url="<?php echo $albumCover; ?>">
 									<span class="o-image__cover"></span>
 								</figure>
 								<section class="o-article__wrap">

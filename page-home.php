@@ -43,7 +43,7 @@
 							$featureSubtitle = $feature['subtitle'];
 							$featureLink = $feature['button_link'];
 							$featureLabel = $feature['button_label'];
-							$featurePhoto = $feature['photo'];
+							$featurePhoto = $feature['photo']['sizes']['medium'];
 					?>
 						<div class="u-half">
 							<div class="u-wrap u-clear">
@@ -53,7 +53,7 @@
 									<?php echo renderButton($featureLink, $featureLabel); ?>
 								</section>
 								<a href="<?php echo $featureLink; ?>"class="o-rhombus s--small">
-									<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $featurePhoto; ?>"><span></span></figure>
+									<figure class="o-rhombus__image js-bkg" data-image-url="<?php echo $featurePhoto; ?>"><span></span></figure>
 								</a>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 									$causeStaffTitle = get_field('job_title');
 									$causeStaffName = get_the_title();
 							?>
-							<figure class="js-lazy" data-image-url="<?php echo $causeStaffPhoto; ?>"></figure>
+							<figure class="js-bkg" data-image-url="<?php echo $causeStaffPhoto; ?>"></figure>
 							<section>
 								<strong><?php echo $causeStaffName; ?></strong>
 								<em><?php echo $causeStaffTitle; ?>, SFEA</em>
@@ -119,10 +119,9 @@
 				$blockPrograms = get_field('how_we_work');
 				$blockProgramsTitle =$blockPrograms['title'];
 				$blockProgramsSummary =$blockPrograms['summary'];
-				$blockProgramsImage =$blockPrograms['image'];
-				$educationPhoto = $blockPrograms['education_photo'];
-				$livelihoodPhoto = $blockPrograms['livelihoods_photo'];
-				$capacityPhoto = $blockPrograms['capacity_photo'];
+				$blockProgramsImage =$blockPrograms['image']['sizes']['large'];
+				$educationPhoto = $blockPrograms['education_photo']['sizes']['medium'];
+				$livelihoodPhoto = $blockPrograms['livelihoods_photo']['sizes']['medium'];
 				$blockProgramsStaff = $blockPrograms['featured_staff'][0];
 			?>
 			<section data-aos="fade-up">
@@ -146,7 +145,7 @@
 									$programsStaffTitle = get_field('job_title');
 									$programsStaffName = get_the_title();
 							?>
-							<figure class="js-lazy" data-image-url="<?php echo $programsStaffPhoto; ?>"></figure>
+							<figure class="js-bkg" data-image-url="<?php echo $programsStaffPhoto; ?>"></figure>
 							<section>
 								<strong><?php echo $programsStaffName; ?></strong>
 								<em><?php echo $programsStaffTitle; ?>, SFEA</em>
@@ -166,7 +165,7 @@
 		<div class="u-half" data-aos="fade-right">
 			<a href="<?php echo home_url().'/programs'; ?>" class="o-rhombus-button s--patterned" >
 				<div class="o-rhombus s--xlarge">
-					<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
+					<figure class="o-rhombus__image js-bkg" data-image-url="<?php echo $blockProgramsImage; ?>"></figure>
 				</div>
 				<div class="o-rhombus__pattern"></div>
 			</a>
@@ -183,7 +182,7 @@
 		$featuredAuthorName = $blockQuote['author']['name'];
 		$featuredAuthorTitle = $blockQuote['author']['title'];
 	?>
-	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $blockQuotePhoto; ?>">
+	<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $blockQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content" data-aos="fade-up">
@@ -201,7 +200,7 @@
 								$staffTitle = get_field('job_title');
 								$staffName = get_the_title();
 						?>
-						<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
+						<figure class="js-bkg" data-image-url="<?php echo $staffPhoto; ?>"></figure>
 						<section>
 							<strong><?php echo $staffName; ?></strong>
 							<em><?php echo $staffTitle; ?>, SFEA</em>
@@ -229,7 +228,7 @@
 			$blockImpact = get_field('impact');
 			$blockImpactTitle =$blockImpact['title'];
 			$blockImpactSummary =$blockImpact['summary'];
-			$blockImpactPhoto = $blockImpact['photo'];
+			$blockImpactPhoto = $blockImpact['photo']['sizes']['medium'];
 		?>
 		<h1 class="u-pb-m" data-aos="fade-up"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
 		

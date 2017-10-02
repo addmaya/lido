@@ -1,7 +1,7 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+		<figure class="c-cover__image js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>
 	</div>
@@ -56,7 +56,7 @@
 					<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 							<?php if ($partnerLogo){ ?>
-								<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+								<figure class="js-bkg" data-image-url="<?php echo $partnerLogo; ?>"></figure>
 							<?php } else {?>
 							<span class="s--inline"><?php echo $partnerName; ?></span>
 							<?php } ?>
@@ -124,7 +124,7 @@
 		$featuredAuthorName = $quote['author']['name'];
 		$featuredAuthorTitle = $quote['author']['title'];
 	?>
-	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $quotePhoto; ?>">
+	<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $quotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content" data-aos="fade-up">
@@ -142,7 +142,7 @@
 								$featureQuoteStaffTitle = get_field('job_title');
 								$featureQuoteStaffName = get_the_title();
 						?>
-						<figure class="js-lazy" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
+						<figure class="js-bkg" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
 						<section>
 							<strong><?php echo $featureQuoteStaffName; ?></strong>
 							<em><?php echo $featureQuoteStaffTitle; ?>, SFEA</em>
@@ -272,7 +272,7 @@
 						<li data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 							<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 								<?php if ($partnerLogo){ ?>
-									<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+									<figure class="js-bkg" data-image-url="<?php echo $partnerLogo; ?>"></figure>
 								<?php } else {?>
 								<span class="s--inline"><?php echo $partnerName; ?></span>
 								<?php } ?>

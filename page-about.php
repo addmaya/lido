@@ -73,7 +73,7 @@
 					?>
 					<div class="o-value <?php echo $valueClass; ?>">
 						<figure class="u-half">
-							<span class="o-rhombus s--medium u-block js-lazy" data-image-url="<?php echo $valueImage; ?>"></span>
+							<span class="o-rhombus s--medium u-block js-bkg" data-image-url="<?php echo $valueImage; ?>"></span>
 						</figure>
 						<section class="u-half">
 							<h3><?php echo $valueTitle; ?></h3>
@@ -109,7 +109,7 @@
 		$featuredAuthorName = $featuredQuote['author']['name'];
 		$featuredAuthorTitle = $featuredQuote['author']['title'];
 	?>
-	<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
+	<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
 		<div class="o-splash__tint"></div>
 		<section class="o-splash__content" data-aos="fade-up">
@@ -127,7 +127,7 @@
 								$featureQuoteStaffTitle = get_field('job_title');
 								$featureQuoteStaffName = get_the_title();
 						?>
-						<figure class="js-lazy" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
+						<figure class="js-bkg" data-image-url="<?php echo $featureQuoteStaffPhoto; ?>"></figure>
 						<section>
 							<strong><?php echo $featureQuoteStaffName; ?></strong>
 							<em><?php echo $featureQuoteStaffTitle; ?>, SFEA</em>
@@ -175,7 +175,7 @@
 		</div>
 		<div class="u-half c-regions__col">
 			<div class="o-rhombus__pattern"></div>
-			<figure data-aos="fade-up" data-aos-delay="100" class="c-regions__image js-lazy" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
+			<figure data-aos="fade-up" data-aos-delay="100" class="c-regions__image js-bkg" data-image-url="<?php echo $sectionAreasPhoto; ?>"></figure>
 		</div>
 	</div>
 </section>
@@ -188,7 +188,7 @@
 						$photos = get_field('photo_highlights');
 						foreach ($photos as $photo) { ?>
 							<div class="swiper-slide">
-								<figure class="js-lazy" data-image-url="<?php echo $photo['url']; ?>"></figure>
+								<figure class="js-bkg" data-image-url="<?php echo $photo['url']; ?>"></figure>
 								<span><?php echo $photo['caption']; ?></span>
 							</div>
 					<?php } ?>
@@ -228,7 +228,7 @@
 			 ?>
 			<li class="u-third" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 				<div class="o-author">
-					<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
+					<figure class="js-bkg" data-image-url="<?php echo $staffPhoto; ?>"></figure>
 					<section>
 						<strong><?php echo $staffTitle; ?></strong>
 						<em><?php echo $staffJD; ?>, SFEA</em>

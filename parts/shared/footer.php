@@ -49,7 +49,7 @@
 			<div class="u-clear">
 				<a href="<?php echo get_permalink($prevPageID);?>" class="c-paginator__button s--left">
 					<section class="o-rhombus s--medium">
-						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo',$prevPageID); ?>"></figure>
+						<figure class="o-rhombus__image js-defer" data-image-url="<?php echo get_field('photo',$prevPageID); ?>"></figure>
 					</section>
 					<div>
 						<svg class="o-arrow" viewBox="0 0 68 48">
@@ -68,7 +68,7 @@
 						</svg>
 					</div>
 					<section class="o-rhombus s--medium">
-						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo',$nextPageID); ?>"></figure>
+						<figure class="o-rhombus__image js-defer" data-image-url="<?php echo get_field('photo',$nextPageID); ?>"></figure>
 					</section>
 				</a>
 			</div>

@@ -61,14 +61,14 @@
 	));
 	if($programStories->have_posts()){
 ?>
-<section class="o-section">
+<section class="o-section" id="program-stories">
 	<div class="o-box">
 		<?php while($programStories->have_posts()):$programStories->the_post(); ?>
 		<div class="u-clear">
 			<div class="u-third" data-aos="fade-right">
 				<a href="<?php echo get_permalink(); ?>" class="o-rhombus-button s--patterned" style="top:0">
 					<div class="o-rhombus s--large">
-						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo get_field('photo'); ?>"></figure>
+						<figure class="o-rhombus__image js-bkg" data-image-url="<?php echo get_field('photo'); ?>"></figure>
 					</div>
 					<div class="o-rhombus__pattern"></div>
 				</a>
@@ -109,8 +109,9 @@
 				$quotePhoto = get_sub_field('photo');
 				$quoteAuthorName = get_sub_field('author_name');
 				$quoteAuthorTitle = get_sub_field('author_title');
+				$quoteStaffID = get_sub_field('staff')[0];
 			?>
-			<figure class="o-splash__figure js-lazy o-image" data-image-url="<?php echo $quotePhoto; ?>">
+			<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $quotePhoto; ?>">
 				<span class="o-image__cover"></span>
 				<div class="o-splash__tint"></div>
 				<section class="o-splash__content" data-aos="fade-up">
@@ -120,16 +121,16 @@
 							<span class="o-line"></span>
 						</blockquote>
 						
-						<?php if(!get_sub_field('quote_by_staff')){?>
+						<?php if(get_sub_field('quote_by_staff')){?>
 							<div class="o-author">
 								<?php
-									$staff = new WP_Query(array('post_type'=>'team', 'p'=>get_sub_field('staff')));
+									$staff = new WP_Query(array('post_type'=>'team', 'p'=>$quoteStaffID));
 									while ( $staff->have_posts() ) : $staff->the_post();
-										$staffPhoto = get_field('photo');
-										$staffTitle = get_field('job_title');
+										$staffPhoto = get_field('photo', get_the_ID());
+										$staffTitle = get_field('job_title', get_the_ID());
 										$staffName = get_the_title();
 								?>
-								<figure class="js-lazy" data-image-url="<?php echo $staffPhoto; ?>"></figure>
+								<figure class="js-bkg" data-image-url="<?php echo $staffPhoto; ?>"></figure>
 								<section>
 									<strong><?php echo $staffName; ?></strong>
 									<em><?php echo $staffTitle; ?>, SFEA</em>

@@ -68,29 +68,35 @@ jQuery(document).ready(function($) {
         }
     }
 
-    function loadLazyImage(obj){
+    function deferImage(obj){
+        var me = $(this);
+        var imageURL = me.data('image-url');
+
+        obj.bind('inview', function (event, isInView) {
+          if (isInView) {
+            var me = $(this);
+            var imageURL = me.data('image-url');
+
+            if(imageURL){
+                me.removeClass('js-bkg');
+                me.css('background-image', 'url(' + imageURL + ')');
+                me.addClass('is-loaded');
+            }
+          }
+        });
+    }
+
+    function loadBkg(obj){
         obj.each(function() {
             var me = $(this);
             var imageURL = me.data('image-url');
 
             if(imageURL){
-                me.removeClass('js-lazy');
+                me.removeClass('js-bkg');
                 me.css('background-image', 'url(' + imageURL + ')');
                 me.addClass('is-loaded');
             }
         });
-        // obj.bind('inview', function (event, isInView) {
-	 //      if (isInView) {
-	 //      	var me = $(this);
-	 //      	var imageURL = me.data('image-url');
-
-	 //      	if(imageURL){
-	 //      		me.removeClass('js-lazy');
-	 //      		me.css('background-image', 'url(' + imageURL + ')');
-	 //      		me.addClass('is-loaded');
-	 //    	}
-	 //      }
-	 //    });
     }
 
     function switchTheme(namespace){
@@ -111,7 +117,8 @@ jQuery(document).ready(function($) {
         
         //load lazy images
         loadSplashImage();
-    	loadLazyImage($('.js-lazy'));
+    	loadBkg($('.js-bkg'));
+        deferImage($('.js-defer'));
 
     	//switch header theme
     	// switchTheme($('.barba-container').data('namespace'));
@@ -211,7 +218,7 @@ jQuery(document).ready(function($) {
     		var tailIndex = storiesGrid.find('.o-article').last().data('index');
     		var post_type = me.data('post');
 
-            console.log('O:'offset + 'I:'+tailIndex + 'P': post_type);
+           
 
     		$.ajax({
     		   url: ajaxURL,

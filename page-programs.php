@@ -1,7 +1,7 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-cover t-dark">
 	<div class="u-half">
-		<figure class="c-cover__image js-lazy o-image" data-image-url="<?php the_field('photo'); ?>">
+		<figure class="c-cover__image js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
 			<span class="o-image__cover"></span>
 		</figure>
 	</div>
@@ -81,7 +81,7 @@
 			<div class="u-third" data-aos="fade-up">
 				<a href="#" class="o-rhombus-button s--patterned is-passive">
 					<div class="o-rhombus s--large">
-						<figure class="o-rhombus__image js-lazy" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
+						<figure class="o-rhombus__image js-bkg" data-image-url="<?php echo $sectionSudanPhoto; ?>"></figure>
 					</div>
 					<div class="o-rhombus__pattern"></div>
 				</a>

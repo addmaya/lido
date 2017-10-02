@@ -5,13 +5,27 @@
 	$partnerSummary = get_field('summary');
 	$partnerAreas = get_field('intervention_areas');
 	$partnerPrograms = get_field('interventions_supported');
+
+	$programs = new WP_Query(array(
+		'post_type'=>'program',
+		'post__in'=>$partnerPrograms,
+		'posts_per_page'=>-1
+	));
+
+	$programPhoto = new WP_Query(array(
+		'post_type'=>'program',
+		'post__in'=>$partnerPrograms,
+		'posts_per_page'=>1,
+		'orderby'=>'rand'
+	));
+
  ?>
 <div class="c-cover s--story t-dark">
 	<div class="o-story__header">
 		<div class="o-table">
 			<div class="o-table__cell">
 				<section>
-					<figure class="js-lazy" data-image-url="<?php echo $partnerLogo; ?>"></figure>
+					<figure class="js-bkg" data-image-url="<?php echo $partnerLogo; ?>"></figure>
 					<h1><?php the_title(); ?></h1>
 					<ul class="o-article__meta">
 						<li><a href="#">/ Partner Since: <?php echo $partnerYear; ?></a></li>
@@ -22,20 +36,23 @@
 		</div>
 	</div>
 	<div class="o-story__cover u-threefourth">
-		<figure></figure>
+		<?php if (!$programPhoto->have_posts()){?>
+			<?php while($programPhoto->have_posts()):$programPhoto->the_post(); ?>
+				<figure class="js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
+					<span class="o-image__cover"></span>
+				</figure>
+			<?php endwhile; wp_reset_postdata(); ?>
+		<?php } else {?>
+			<figure class="js-bkg o-image" data-image-url="<?php the_field('photo', 10); ?>" style="background-position: center top">
+				<span class="o-image__cover"></span>
+			</figure>
+		<?php } ?>
 	</div>
 </div>
 <div class="o-story s--single">
 	<div class="o-box">
 		<p><?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $partnerSummary); ?></p>
 		<span class="o-line"></span>
-		<?php
-			$programs = new WP_Query(array(
-				'post_type'=>'program',
-				'post__in'=>$partnerPrograms,
-				'posts_per_page'=>-1
-			));
-		?>
 		<?php if ($programs->have_posts()): ?>
 			<h3 class="u-pt-m">Programs Supported</h3>
 			<div>
@@ -126,9 +143,4 @@
 		</div>
 	</div>
 </div>
-<script>
-	jQuery(document).ready(function($) {
-		$('body').addClass('single-partner');
-	});
-</script>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
