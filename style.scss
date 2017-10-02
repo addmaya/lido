@@ -718,7 +718,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   p{padding-top:em(12); width: 90%}
 
   &.is-loaded{
-    .c-splash__tint{opacity:1}
+    .c-splash__tint{opacity:0.6}
     .c-splash__story{@include animation(slideInUp, 1,0.4, $easeInThief, both)}
     .c-splash__image{@include animation(slideInUp, 1,0.3, $easeInThief, both)}
     figure{@include animation(kenBurns, 90, 0, linear, both)}
