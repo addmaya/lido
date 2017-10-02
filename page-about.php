@@ -90,8 +90,8 @@
 		<div class="u-pt-xl u-center">
 			<?php
 				$blockPrograms = get_field('how_we_work', 8);
-				$educationPhoto = $blockPrograms['education_photo'];
-				$livelihoodPhoto = $blockPrograms['livelihoods_photo'];
+				$educationPhoto = $blockPrograms['education_photo']['sizes']['medium'];
+				$livelihoodPhoto = $blockPrograms['livelihoods_photo']['sizes']['medium'];
 			?>
 
 			<?php echo renderCircularButton(home_url().'/programs#education','Education Programs', $educationPhoto); ?>

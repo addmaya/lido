@@ -352,9 +352,7 @@ jQuery(document).ready(function($) {
 	    	$('html, body').animate({ scrollTop: 0 }, 0);	    	
 	    	preloader.removeClass('is-appearing').addClass('is-exiting');
 	    	body.removeClass('u-oh');
-	    	
 	    	transition.done();
-
             AOS.init({duration: aosDuration});
 
 	    }, 800);

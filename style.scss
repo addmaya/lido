@@ -1036,9 +1036,14 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both)}
 }
+
+@keyframes preloader{
+  100% { background-position: -6300px}
+}
+
 .c-preloader__title{color:#8D5669; width: 80%; position: absolute; z-index: 5; top: 45%; @include clear;
     span{display: block; width: 50%; float: left; text-transform: capitalize;}
-    figure{width: em(56); height: em(56); float: right; background-color: #484848; border-radius: 50%;}
+    figure{width: em(56); height: em(56); float: right; @include prefix((animation: preloader 2s infinite steps(50) forwards)); @include image('happy-globe-bw.png'); background-position:left center; background-size: cover; position: relative; top: em(-20)}
 }
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
 .c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:0; top: -32vh; color:#D1849E; z-index: 1}
