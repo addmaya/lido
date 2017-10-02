@@ -235,7 +235,7 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
-	function renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $storyDate, $postBalance = 0){
+	function renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $postBalance = 0, $photos = ''){
 		$html = '';
 
 		$html .= '<article data-balance="'.$postBalance.'" class="o-article '.$articleClass.'" data-index="'.$articleCount.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
@@ -271,6 +271,10 @@
 
 		if ($articleClass != 's--video') {
 			$html .= '<div class="t-dark">'.renderButton(get_permalink(), 'Read Story').'</div>';
+		}
+
+		if ($photos) {
+			$html .= '<div class="c-album__photos">'.$extras.'</div>';
 		}
 		
 		$html .= '</section></section></article>';

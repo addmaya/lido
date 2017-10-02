@@ -1,24 +1,15 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-pop" style="display: block">
+<div class="c-pop">
 	<div class="o-table">
 		<div class="o-table__cell">
 			<div class="c-pop__box">
 				<a href="#" class="o-closer"></a>
-				<div class="o-player" style="display:none"></div>
-				<section class="o-slider">
+				<div class="o-player u-hide"></div>
+				<section class="o-slider u-hide" id="c-pop__swiper">
 					<div class="u-threefourth o-slider-col">
 						<div class="o-slider__image">
 							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<?php 
-										$sliderImages = get_sub_field('images');
-										foreach ($sliderImages as $slideImage) { ?>
-											<div class="swiper-slide">
-												<figure style="background-image:url('<?php echo $slideImage['url']; ?>')"></figure>
-												<span><?php echo $slideImage['caption']; ?></span>
-											</div>
-									<?php } ?>
-								</div>
+								<div class="swiper-wrapper"></div>
 							</div>
 						</div>
 					</div>
@@ -246,6 +237,14 @@
 				</div>
 			</div>
 		</section>
+		<?php 
+			$sliderImages = get_sub_field('images');
+			foreach ($sliderImages as $slideImage) { ?>
+				<div class="swiper-slide">
+					<figure style="background-image:url('<?php echo $slideImage['url']; ?>')"></figure>
+					<span><?php echo $slideImage['caption']; ?></span>
+				</div>
+		<?php } ?>
 		<div class="u-pt-l">
 			<div class="o-article__grid s--updates s--albums">
 				<?php
@@ -262,8 +261,13 @@
 						$storyTitle = get_the_title();
 						$storyLink = get_permalink();
 						$albumPhotos = get_field('photos');
+						$albumSlides = '';
 
-						echo renderArticle('s--video', 0, $aosDelay, $albumPhotos[0]['sizes']['large'], $videoID, $storyTitle,'','');
+						foreach ($albumPhotos as $albumPhoto) {
+							$albumSlides .= '<div class="swiper-slide"><figure data-photo-url="'.$albumPhoto['url'].'"></figure><span>'.$albumPhoto['caption'].'</span></div>';
+						}
+
+						echo renderArticle('s--video', 0, $aosDelay, $albumPhotos[0]['sizes']['large'], $videoID, $storyTitle,'','',0, $albumSlides);
 
 						$aosDelay = $aosDelay + 50;
 					} 

@@ -319,8 +319,34 @@ jQuery(document).ready(function($) {
             body.addClass('u-oh');
             var me = $(this);
             var videoID = me.attr('href');
+            var photos = me.closest('.o-article').find('.c-album__photos').html();
+            var player = $('.c-pop .o-player');
+            var slider = $('.c-pop .o-slider');
 
-            $('.c-pop .o-player').html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
+            console.log(photos);
+
+            if(photos){
+                slider.show();
+                $('.c-pop .swiper-wrapper').html(photos);
+
+                var popSwiper = new Swiper('#c-pop__swiper .swiper-container', {
+                    loop: true,
+                    autoplay: 8000,
+                    speed: 1500,
+                    effect:'fade',
+                    fade: {crossFade: true},
+                    autoplayDisableOnInteraction:false,
+                    nextButton: '#c-pop__swiper .swiper-button-next',
+                    prevButton: '#c-pop__swiper .swiper-button-prev'
+                  });
+
+                popSwiper.update();
+            }
+            else {
+                player.show();
+                player.html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
+            }
+
             $('.c-pop').show();
         });
 
@@ -342,7 +368,6 @@ jQuery(document).ready(function($) {
             $('.c-pop__box .o-player').html('');
             $('.c-pop').hide();
         }
-
 
     	//render parallax scenes
     	if($('.scene').length){

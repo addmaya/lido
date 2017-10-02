@@ -225,6 +225,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-block{display: block;}
 .u-white{color:$white}
 .u-uppercase{text-transform: uppercase;}
+.u-hide{display: none}
 
 /*objects*/
 .o-box{width:87%; @include center; @include clear}
