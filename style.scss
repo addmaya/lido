@@ -1053,7 +1053,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden; color: #8d5769;
   .o-table{position: absolute; z-index: 2;}
-  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot; opacity:0.5}
+  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
   &.is-appearing{visibility: visible;
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
     .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
