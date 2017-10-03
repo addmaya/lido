@@ -934,8 +934,12 @@ em{font-family: 'Georgia'; font-style: italic;}
   .s--three{bottom: -10%; left:35%}
 }
 
-.c-orbit{@include box(em(720), em(720)); border: solid 1px $redA; border-radius: 50%; position: relative; @include center; text-align: center;}
-.c-orbit__sun{@include box(em(240), em(240)); border-radius: 50%; background-color: $redC; display: inline-block;}
+.c-orbit{@include box(em(720), em(720)); border: solid 1px $redA; border-radius: 50%; position: relative; @include center; text-align: center;
+  &:hover{
+    .c-orbit__sun{@include prefix((animation-play-state: running))}
+  }
+}
+.c-orbit__sun{@include box(256px, 266px); display: inline-block; @include prefix((animation: globe 2s infinite steps(50) forwards paused))}
 
 .c-regions__col{position: relative;}
 .c-regions__image{height: em(700); width: em(256); position: absolute; bottom:0; left:30%; @include contain}

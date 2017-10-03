@@ -39,11 +39,11 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<div class="">
+		<div class="scene">
 			<div class="c-orbit layer" data-depth="0.2">
 				<div class="o-table">
 					<div class="o-table__cell">
-						<span class="c-orbit__sun" data-depth="0.1"></span>
+						<span class="c-orbit__sun js-defer" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/globe-color.png"></span>
 					</div>
 				</div>
 				<section class="c-values layer" data-depth="0.4">
