@@ -478,23 +478,19 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; left:0; top:0}
 
-.o-statistic{position: relative; margin:em(56) 0 em(144);
-  span{font-weight: 600; display: block; font-size: em(36); color: $redA;}
-  p{padding-top: em(24); padding-right: em(12); font-size:em(13); font-family: 'Georgia'; font-style: italic; line-height: 1.6;}
+.o-doc{position: relative; margin:em(56) 0 em(144); display: block; margin: auto; padding:2em 0;
+  span{font-size: em(18); padding-right:em(0); color: $redA; display: block}
+  
+  p{padding-top: em(12); padding-right: em(12); font-size:em(13); font-family: 'Georgia'; font-style: italic; line-height: 1.6;}
   figure{@include box(em(120), em(120)); @include bkg(grey); margin-left:1em; @include cover}
-  section{text-align:center; width: 65%; margin: 0 auto; height: em(96)}
-  &:after{@include after(200px, 200px, #f2f2f2); z-index: -1; @include prefix((transform:translateX(25%) rotate(45deg)))}
-  .c-statistics &{
-    &:after{@include bkg($blackC); opacity: 0.2}
+  section{text-align:center; width: 90%; margin: 0 auto; height: em(96); @include txnTransform(0.3, ease);
+    &:after{@include line; width: 100%; bottom:em(-30);}
   }
-  .u-superscript{font-size: 40%; padding-left: 0.5em}
-  &.s--figure{
-    &:after{top: -28px}
-  }
-  &.s--doc{
-    span{font-size: em(18); padding-right:em(0)}
-    p{padding-top:em(12)}
-    .o-icon{@include image('document.svg'); margin-bottom: em(12)}
+  .o-icon{@include image('document.svg'); margin-bottom: em(12)}
+  &:hover{
+    section{@include translateY(em(-12));
+       &:after{@include scale2D(1,1)}
+    }
   }
 }
 
@@ -970,21 +966,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 .c-contact__tint{position: absolute; top:0; left: 0; @include canvas; background-color: rgba(255, 255, 255, 0.69)}
-.c-docs{
-  .o-statistic{display: block; margin: auto; padding:2em 0;
-    &:after{display:none}
-    &:hover{
-      &:after{@include prefix((transform: translate(0, 2.5em) rotate(90deg)))}
-      .u-half:first-child{@include translateY(em(-18));
-        &:after{@include scale2D(1,1)}
-      }
-    }
-  }
-  .u-half{
-    &:after{@include line; bottom:-3px}
-    &:first-child{@include txnTransform(0.5, ease)}
-  }
-}
+
 .c-sectionator{position: fixed; z-index: 2; right: em(16); height: 100%; text-align: center; font-size: 1.125em; transition: color 0.3s, opacity 1s; color: $blackA;
   a{display: inline-block;}
   &.is-active{color: $redA;

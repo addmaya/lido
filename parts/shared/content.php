@@ -205,7 +205,7 @@
 				<div class="o-box">
 					<div class="u-clear">
 						<?php foreach ($docs as $doc) {?>
-							<a href="<?php echo $doc['file']; ?>" target="_blank" class="o-statistic u-third s--doc">
+							<a href="<?php echo $doc['file']; ?>" target="_blank" class="o-doc u-third s--doc">
 								<div class="u-clear">
 									<div class="u-half">
 										<i class="o-icon"></i>

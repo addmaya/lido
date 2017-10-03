@@ -295,7 +295,7 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<div class="u-clear u-pt-m">
+		<div class="u-clear">
 			<?php 
 				$documents = new WP_Query(array(
 					'post_type'=>'document',
@@ -308,17 +308,12 @@
 					$documentCover ='';
 					$aosDelay = $aosDelay + 100;
 				?>
-					<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-statistic u-third s--doc no-barba">
-						<div class="u-clear">
-							<div class="u-half">
-								<i class="o-icon"></i>
-								<span><?php the_title(); ?></span>
-								<p><?php echo get_the_date(); ?></p>
-							</div>
-							<div class="u-half">
-								<figure></figure>
-							</div>
-						</div>
+					<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-doc u-fourth no-barba">
+						<section>
+							<i class="o-icon"></i>
+							<span><?php the_title(); ?></span>
+							<p><?php echo get_the_date(); ?></p>
+						</section>
 					</a>
 			<?php $i++; endwhile; wp_reset_postdata(); ?>
 		</div>
