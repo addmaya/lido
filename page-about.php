@@ -214,7 +214,7 @@
 	<div class="o-box">
 		<header>
 			<h1>Our Team</h1>
-			<p>We aim at seeing more people in rural and poor communities in Eastern Africa (particularly children, youth and women) economically and socially empowered live a life of dignity.</p>
+			<p>Our team is not just a collection of people, it is a union of strength working together towards a common vision.</p>
 		</header>
 		<ul>
 			<?php 

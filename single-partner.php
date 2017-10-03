@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="o-story__cover u-threefourth">
-		<?php if (!$programPhoto->have_posts()){?>
+		<?php if ($programPhoto->have_posts()){?>
 			<?php while($programPhoto->have_posts()):$programPhoto->the_post(); ?>
 				<figure class="js-bkg o-image" data-image-url="<?php the_field('photo'); ?>">
 					<span class="o-image__cover"></span>
