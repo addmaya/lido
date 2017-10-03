@@ -1,4 +1,8 @@
 	<?php wp_footer(); ?>
+	
+	<?php if (is_single() || is_page('partners') ): ?>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjywFUs38oQLAbYY66qPRtZ1rcHhmaunI"></script>
+	<?php endif ?>
 
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/vendors.js"></script>
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/app.js"></script>
@@ -22,7 +26,6 @@
 	  		'page_title': document.title
 	  	});
 	  });
-
 	</script>
 	
 	</body>

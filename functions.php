@@ -334,6 +334,13 @@
 	add_action('wp_ajax_getPosts', 'getPosts');
 	add_action('wp_ajax_nopriv_getPosts', 'getPosts');
 
+	function my_acf_init() {
+		
+		acf_update_setting('google_api_key', 'AIzaSyAjywFUs38oQLAbYY66qPRtZ1rcHhmaunI');
+	}
+
+	add_action('acf/init', 'my_acf_init');
+
 	//remove_filter('the_content', 'wpautop');
 	//add_filter('login_redirect', 'admin_default_page');
 ?>

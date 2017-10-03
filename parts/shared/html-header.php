@@ -52,6 +52,7 @@
 
 		<script>
 			var ajaxURL="<?php echo admin_url('admin-ajax.php'); ?>";
+			var themeURL="<?php echo get_stylesheet_directory_uri(); ?>";
 		</script>
 
 		<?php wp_head(); ?>

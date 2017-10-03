@@ -3,7 +3,7 @@
 	$partnerYear = get_field('partner_since');
 	$partnerLogo = get_field('logo');
 	$partnerSummary = get_field('summary');
-	$partnerAreas = get_field('intervention_areas');
+	$partnerAreas = get_field('areas');
 	$partnerPrograms = get_field('interventions_supported');
 
 	$programs = new WP_Query(array(
@@ -49,7 +49,7 @@
 		<?php } ?>
 	</div>
 </div>
-<div class="o-story s--single">
+<div class="o-story s--single" style="padding-bottom: 3em">
 	<div class="o-box">
 		<p><?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $partnerSummary); ?></p>
 		<span class="o-line"></span>
@@ -66,81 +66,14 @@
 		
 		<?php if ($partnerAreas): ?>
 			<h3 class="u-pt-m">Area Implementation of SFEA Interventions</h3>
-			<p><?php echo $partnerAreas; ?></p>
-			<div style="height: 500px">
-				
+			<div class="o-map s--partner">
+				<?php
+					foreach ($partnerAreas as $area){
+						echo '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
+					}
+				?>
 			</div>
 		<?php endif ?>
-		<?php if (condition): ?>
-			<section>
-				<h3 class="u-ptm-m">Contact <?php the_title(); ?></h3>
-				<?php 
-					while(have_rows('contacts')): the_row();
-						$office = get_sub_field('office');
-						$telephone = get_sub_field('telephone');
-						$fax = get_sub_field('fax');
-						$email = get_sub_field('email');
-						$address = get_sub_field('address');
-				 ?>
-					
-					<h3><?php echo $office; ?></h3>
-					<p><?php echo $address; ?></p>
-					<p>Telephone: <?php echo $telephone; ?></p>
-					<p>Fax: <?php echo $fax; ?></p>
-					<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
-
-
-					<ul class="o-networks t-light">
-						<?php 
-							$networks = acf_get_fields('255');
-							if ($networks){
-								foreach ($networks as $network) {
-									$networkName = $network['name'];
-									$networkField = get_field($networkName, get_the_ID());
-									if($networkField){
-									echo '<li><a target="_blank" href="'.$networkField.'"><i class="c-fb s--'.$networkName.'"></i></a></li>';
-									}
-								}
-							}
-						 ?>
-					</ul>
-				
-				<?php endwhile; ?>
-			</section>
-		<?php endif ?>
-	</div>
-</div>
-<div class="o-box">
-	<div class="c-cta">
-		<div class="u-third">
-			<section>
-				<h3>Let the world know.<br/>Share this page.</h3>
-				<ul class="o-networks">
-					<li><a href=""><i class="c-fb"></i></a></li>
-					<li><a href=""><i class="c-tw"></i></a></li>
-					<li><a href=""><i class="c-gplus"></i></a></li>
-					<li><a href=""><i class="c-pin"></i></a></li>
-					<li><a href=""><i class="c-wa"></i></a></li>
-				</ul>
-			</section>
-		</div>
-		<div class="u-third">
-			<section>
-				<h3>Get Inspired.<br/>Change Stories delivered to your inbox.</h3>
-				<form action="">
-					<input type="text" placeholder="Your E-mail">
-					<button class="o-button">
-						<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
-					</button>
-				</form>
-			</section>
-		</div>
-		<div class="u-third">
-			<section class="u-center">
-				<h3>Let’s get working.<br/>Partner with Us</h3>
-				<?php echo renderButton('','Become a Partner'); ?>
-			</section>
-		</div>
 	</div>
 </div>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

@@ -180,54 +180,51 @@
 			<h1><?php echo $sectionImplementTitle; ?></h1>
 			<p><?php echo $sectionImplementSummary; ?></p>
 			<section class="u-clear u-pt-l">
-				<section class="u-third">
-					<ul class="o-olist u-pt-l">
-						<!-- li*9>a>i>strong{$}^span{Partner $} -->
-						<li><a href=""><i><strong>1</strong></i><span>Partner 1</span></a></li>
-						<li><a href=""><i><strong>2</strong></i><span>Partner 2</span></a></li>
-						<li><a href=""><i><strong>3</strong></i><span>Partner 3</span></a></li>
-						<li><a href=""><i><strong>4</strong></i><span>Partner 4</span></a></li>
-						<li><a href=""><i><strong>5</strong></i><span>Partner 5</span></a></li>
-						<li><a href=""><i><strong>6</strong></i><span>Partner 6</span></a></li>
-						<li><a href=""><i><strong>7</strong></i><span>Partner 7</span></a></li>
-						<li><a href=""><i><strong>8</strong></i><span>Partner 8</span></a></li>
-						<li><a href=""><i><strong>9</strong></i><span>Partner 9</span></a></li>
-					</ul>
-				</section>
-				<section class="u-third">
-					<ul class="o-olist u-pt-l">
-						<li><a href=""><i><strong>1</strong></i><span>Partner 1</span></a></li>
-						<li><a href=""><i><strong>2</strong></i><span>Partner 2</span></a></li>
-						<li><a href=""><i><strong>3</strong></i><span>Partner 3</span></a></li>
-						<li><a href=""><i><strong>4</strong></i><span>Partner 4</span></a></li>
-						<li><a href=""><i><strong>5</strong></i><span>Partner 5</span></a></li>
-						<li><a href=""><i><strong>6</strong></i><span>Partner 6</span></a></li>
-						<li><a href=""><i><strong>7</strong></i><span>Partner 7</span></a></li>
-						<li><a href=""><i><strong>8</strong></i><span>Partner 8</span></a></li>
-						<li><a href=""><i><strong>9</strong></i><span>Partner 9</span></a></li>
-					</ul>
-				</section>
-				<section class="u-third">
-					<ul class="o-olist u-pt-l">
-						<li><a href=""><i><strong>1</strong></i><span>Partner 1</span></a></li>
-						<li><a href=""><i><strong>2</strong></i><span>Partner 2</span></a></li>
-						<li><a href=""><i><strong>3</strong></i><span>Partner 3</span></a></li>
-						<li><a href=""><i><strong>4</strong></i><span>Partner 4</span></a></li>
-						<li><a href=""><i><strong>5</strong></i><span>Partner 5</span></a></li>
-						<li><a href=""><i><strong>6</strong></i><span>Partner 6</span></a></li>
-						<li><a href=""><i><strong>7</strong></i><span>Partner 7</span></a></li>
-						<li><a href=""><i><strong>8</strong></i><span>Partner 8</span></a></li>
-						<li><a href=""><i><strong>9</strong></i><span>Partner 9</span></a></li>
-					</ul>
-				</section>
+				<ul class="o-partners">
+					<?php
+						$implementers = new WP_Query(array(
+							'post_type'=>'partner',
+							'posts_per_page'=>-1,
+							'tax_query'=> array(
+								array(
+									'taxonomy'=>'class',
+									'field'=>'slug',
+									'terms'=>'implementing'
+								)
+							)
+						));
+
+						$aosDelay = 0;
+						$partnerCodes = '';
+
+						while ($implementers->have_posts()): $implementers->the_post();
+							$partnerLogo = get_field('logo');
+							$partnerName = get_the_title();
+							$partnerAreas = get_field('areas');
+							
+							foreach ($partnerAreas as $area){
+								$partnerCodes .= '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
+							}
+					?>
+						<li class="u-third" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
+							<a href="<?php the_permalink(); ?>">
+								<p>
+									<span><?php echo $partnerName; ?></span>
+								</p>
+							</a>
+						</li>
+					<?php $aosDelay = $aosDelay + 25; endwhile; wp_reset_postdata(); ?>
+				</ul>
 			</section>
 			<div class="u-pt-l">
 				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
 		<div class="u-half" data-aos="fade-up" data-aos-delay="100">
-			<div class="c-implementers">
-				
+			<div class="u-wrap u-pt-xl">
+				<div class="o-map">
+					<?php echo $partnerCodes; ?>
+				</div>
 			</div>
 		</div>
 	</div>

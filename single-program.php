@@ -78,17 +78,52 @@
 				<div class="u-half" data-aos="fade-up" data-aos-delay="200">
 					<section class="u-pl-l">
 						<div class="c-program__map">
-							<div class="c-implementers s--programs"></div>
+							<div class="o-map">
+							<?php
+								$programAreas = array();
+								$mappedPartners = new WP_Query(array(
+									'post_type'=>'partner',
+									'posts_per_page'=>-1,
+									'meta_query'=>array(
+										array(
+											'key'=>'interventions_supported',
+											'value'=> '"'.get_the_ID().'"',
+											'compare'=>'LIKE'
+										),
+										array(
+											'key'=>'areas',
+											'value'=>'',
+											'compare'=> '!='
+										)
+									)
+								));
+
+								while($mappedPartners->have_posts()){
+									$mappedPartners->the_post();
+									$areas = get_field('areas');
+									foreach ($areas as $area){
+										echo '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
+										$programAreas[] = $area['area']['address'];
+									}
+								}
+								wp_reset_postdata();
+							?>
+							</div>
 						</div>
 						<div class="c-program__meta">
 							<div class="u-half">
-								<span class="u-uppercase">Region of Impact</span>
 								<span class="u-uppercase">Focus</span>
 								<span class="u-uppercase">Partners</span>
 							</div>
 							<div class="u-half">
-								<span>Uganda, South Sudan</span>
-								<span>Education</span>
+								<?php
+									$groupList  = array();
+									$groups = wp_get_post_terms($post->ID, 'group');
+									foreach ($groups as $group) {
+										$groupList[] = $group->name;
+									}
+								?>
+								<span><?php echo implode(', ', $groupList); ?></span>
 								<span><?php echo $programPartners->post_count; ?></span>
 							</div>
 						</div>

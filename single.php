@@ -4,7 +4,7 @@
 	$storyBeneficiary = get_field('beneficiary');
 	$storySummary = get_field('summary');
 	$storyPhoto = get_field('photo');
-	$storyArea = get_field('area');
+	$storyAreas = get_field('areas');
 	$storyProgramID = get_field('program');
 ?>
 <div class="c-cover s--story t-dark">
@@ -47,7 +47,21 @@
 		</figure>
 	</div>
 </div>
+<div class="o-story s--single s--map">
+	<div class="o-box" data-aos="fade-up">
+		<?php if ($storyAreas): ?>
+			<div class="o-map s--partner">
+				<?php
+					foreach ($storyAreas as $area){
+						echo '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
+					}
+				?>
+			</div>
+		<?php endif ?>	
+	</div>
+</div>
 <?php Starkers_Utilities::get_template_parts(array('parts/shared/content'));?>
+
 <div class="o-box">
 	<div class="c-cta">
 		<div class="u-third">
