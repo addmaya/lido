@@ -436,6 +436,34 @@ jQuery(document).ready(function($) {
         var origin = location.origin;
         var href = HTMLElement.href;
         var destination = href.substring(origin.length);
+        var preloaderIcon = $('.c-preloader__title figure');
+
+        preloaderIcon.removeClass();
+
+        function setPreloaderIcon(c){
+            preloaderIcon.addClass(c);
+        }
+
+        switch (true){
+            case destination.includes('stories'):
+                setPreloaderIcon('s--globe');
+                break;
+            case destination.includes('partner'):
+                setPreloaderIcon('s--handshake');
+                break;
+            case destination.includes('change'):
+                setPreloaderIcon('s--book');
+                break;
+            case destination.includes('newsroom'):
+                setPreloaderIcon('s--media');
+                break;
+            case destination.includes('contact'):
+                setPreloaderIcon('s--telephone');
+                break;
+            default: 
+                 setPreloaderIcon('s--globe');
+                 break;
+        }
 
         if(href.substring(href.length - 1) == "/"){
             destination = destination.substring(0, destination.length - 1);
@@ -455,7 +483,6 @@ jQuery(document).ready(function($) {
 
        var req = new XMLHttpRequest();
        var progress = getRandomInt(80,100);
-       console.log(progress);
 
        req.open('POST', url);
        req.send();
@@ -469,7 +496,7 @@ jQuery(document).ready(function($) {
                 if(progress < 0){
                     progress = 0;
                 }
-                $('.c-preloader__count').html(progress);
+                $('.c-preloader__count').html(progress + '%');
            }
        }
        req.onloadend = function(e){

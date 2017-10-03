@@ -714,7 +714,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-deco__dash{@include box(12px, 2px); @include bkg(#CBCBCB); float: left; @include relative; top: 5px; left: 20px}
 .c-deco__line{@include box(89%, 6px); @include image('line-1.png'); background-size:contain; float: right; @include relative; top: 3px; opacity:0.5}
 
-.c-menu-primary{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff;
+.c-menu-primary{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff; @include prefix((transition: color 0.5s ease));
   li{display:inline-block}
   a{display:block;padding:0.75em; position: relative;
     &:after{@include line; width: 100%; @include prefix((transform-origin: 50% 50%))}
@@ -1051,28 +1051,45 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-author{padding-bottom:1em}
 }
 
-.c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden;
+.c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden; color: #8d5769;
   .o-table{position: absolute; z-index: 2;}
-  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
+  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot; opacity:0.5}
   &.is-appearing{visibility: visible;
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
-    .c-preloader__count{@include animation(slideInLeft, 1, 0, $easeOutQuart, both)}
+    .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
     .c-preloader__title{@include animation(slideInLeft, 0.9, 0, $easeOutQuart, both)}
     .o-line{@include animation(scaleInLeft, 0.5, 0.3, $easeOutQuart, both)}
   }
   &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both)}
 }
 
-@keyframes preloader{
-  100% { background-position: -6300px}
+@keyframes globe{
+  100% { background-position: -13300px}
 }
-
-.c-preloader__title{color:#8D5669; width: 80%; position: absolute; z-index: 5; top: 45%; @include clear;
+@keyframes book{
+  100% { background-position: -2660px}
+}
+@keyframes handshake{
+  100% { background-position: -13300px}
+}
+@keyframes media{
+  100% { background-position: -9044px}
+}
+@keyframes telephone{
+  100% { background-position: -9044px}
+}
+.c-preloader__title{color:inherit; width: 80%; position: absolute; z-index: 5; top: 45%; @include clear;
     span{display: block; width: 50%; float: left; text-transform: capitalize;}
-    figure{width: em(56); height: em(56); float: right; @include prefix((animation: preloader 2s infinite steps(50) forwards)); @include image('happy-globe-bw.png'); background-position:left center; background-size: cover; position: relative; top: em(-20)}
+    figure{width: 256px; height: 266px; float: right; background-position:left center; position: relative; top:-106px; @include scale2D(0.5,0.5);
+    &.s--globe{@include prefix((animation: globe 1.5s infinite steps(50) forwards)); @include image('sequences/globe-bw.png')}
+    &.s--book{@include prefix((animation: book 0.3s infinite steps(10) forwards)); @include image('sequences/book.png')}
+    &.s--handshake{@include prefix((animation: handshake 1.5s infinite steps(50) forwards)); @include image('sequences/handshake.png')}
+    &.s--media{@include prefix((animation: media 1.36s infinite steps(34) forwards)); @include image('sequences/media.png')}
+    &.s--telephone{@include prefix((animation: telephone 1.36s infinite steps(34) forwards)); @include image('sequences/telephone.png')}
+  }
 }
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
-.c-preloader__count{position: absolute; font-size: 77vw; font-weight: bold; left:0; top: -32vh; color:#D1849E; z-index: 1}
+.c-preloader__count{position: absolute; font-size: em(36); font-weight: bold; top:1em; z-index: 1; display: block}
 
 .c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; visibility:hidden;
   .u-table{width: 100%;height: 100%;}

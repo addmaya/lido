@@ -27,13 +27,13 @@
 </div>
 <div class="c-preloader">
 	<div class="o-box">
+		<span class="c-preloader__count">03</span>
 		<h1 class="c-preloader__title" >
 			<span></span>
 			<figure></figure>
 		</h1>
 		<span class="o-line"></span>
 	</div>
-	<span class="c-preloader__count">03</span>
 	<div class="c-preloader__bkg"></div>
 </div>
 <div class="c-spine"></div>
@@ -47,6 +47,9 @@
 				<nav class="c-menu-primary">
 					<ul>
 						<li>
+							<a href="<?php echo home_url(); ?>/about">About</a>
+						</li>
+						<li>
 							<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
 						</li>
 						<li>
@@ -54,9 +57,6 @@
 						</li>
 						<li>
 							<a href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
-						</li>
-						<li>
-							<a href="<?php echo home_url(); ?>/about">About</a>
 						</li>
 						<!-- <li>
 							<a href="<?php echo home_url(); ?>/contact">Contact</a>
