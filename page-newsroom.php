@@ -1,6 +1,6 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 <div class="c-pop">
-	<div class="o-table">
+	<div class="o-table" >
 		<div class="o-table__cell">
 			<div class="c-pop__box">
 				<a href="#" class="o-closer"></a>
@@ -306,7 +306,6 @@
 				while ($documents->have_posts()) : $documents->the_post();
 					$documentFile = get_field('file');
 					$documentCover ='';
-					$aosDelay = $aosDelay + 100;
 				?>
 					<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-doc u-fourth no-barba">
 						<section>
@@ -315,7 +314,7 @@
 							<p><?php echo get_the_date(); ?></p>
 						</section>
 					</a>
-			<?php $i++; endwhile; wp_reset_postdata(); ?>
+			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
 		</div>
 	</div>
 </section>

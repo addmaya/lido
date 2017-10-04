@@ -12,11 +12,9 @@
 					<h1><?php the_field('title'); ?></h1>
 					<p><?php the_field('description'); ?></p>
 					<div class="u-pt-l">
-						<div class="u-pt-l">
-							<?php echo renderButton('#funding', 'Funding Partners','anchor', 's--block s--vertical'); ?>
-							<?php echo renderButton('#implementing', 'Implementing Partners','anchor', 's--block s--vertical'); ?>
-							<?php echo renderButton('#networks', 'Networks & Collaborations','anchor', 's--block s--vertical'); ?>
-						</div>
+						<?php echo renderButton('#funding', 'Funding Partners','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#implementing', 'Implementing Partners','anchor', 's--block s--vertical'); ?>
+						<?php echo renderButton('#networks', 'Networks & Collaborations','anchor', 's--block s--vertical'); ?>
 					</div>
 				</section>
 			</div>
@@ -89,7 +87,7 @@
 						$partnerName = get_the_title();
 						$aosDelay = $aosDelay + 50;
 				?>
-					<li style="width: 50%" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
+					<li clas="u-half" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
 						<a <?php if($partnerWebsite){echo 'href="'.$partnerWebsite.'" target="_blank"';} ?>>
 							<span><?php echo $partnerName; ?></span>
 						</a>

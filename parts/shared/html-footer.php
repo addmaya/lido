@@ -1,5 +1,5 @@
 	<?php wp_footer(); ?>
-	
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjywFUs38oQLAbYY66qPRtZ1rcHhmaunI"></script>
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/vendors.js"></script>
 	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/build/app.js"></script>
 

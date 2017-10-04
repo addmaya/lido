@@ -393,10 +393,16 @@ jQuery(document).ready(function($) {
 
         //play pop videos
 
+        var deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var popSwiperSpeed = 800;
+
+        if(deviceWidth < 768){
+            popSwiperSpeed = 300;
+        }
 
         var popSwiper = new Swiper('#c-pop__swiper .swiper-container', {
             loop: true,
-            speed: 800,
+            speed: popSwiperSpeed,
             autoplayDisableOnInteraction:false,
             pagination: '.swiper-pagination',
             paginationClickable: true,
@@ -417,12 +423,21 @@ jQuery(document).ready(function($) {
             var albumTitle = me.closest('.o-article').find('h2 span').html();
             var player = $('.c-pop .o-player');
             var slider = $('#c-pop__swiper');
+            
+            if (deviceWidth < 768) {
+                slider.find('.o-slider__image').css({
+                    width: deviceWidth,
+                    padding: '0',
+                    margin: '0 auto'
+                });                
+            }
 
             if(photos){            
                 slider.removeClass('is-invisible');
                 slider.find('h2').html(albumTitle);
                 popSwiper.appendSlide(photos);
                 popSwiper.update();
+                popSwiper.updateContainerSize();
             }
             else {
                 $('#c-pop__swiper').addClass('is-invisible');

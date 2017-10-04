@@ -78,7 +78,7 @@
 	</svg>
 </a>
 <div class="c-menu-secondary t-dark">
-	<!-- <a href="#" class="o-closer"></a> -->
+	<a href="#" class="o-closer"></a>
 	<div>
 		<ul>
 			<li class="c-menu-secondary__item">
@@ -102,6 +102,12 @@
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/about">
 					<span>About</span>
+					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
+				</a>
+			</li>
+			<li class="c-menu-secondary__item u-hide">
+				<a href="<?php echo home_url(); ?>/newsroom">
+					<span>Newsroom</span>
 					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
 				</a>
 			</li>

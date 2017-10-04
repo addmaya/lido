@@ -49,8 +49,6 @@
 					foreach( $statistics as $stat ){
 						$statisticNumber = $stat['number'];
 						$statisticSummary = $stat['summary'];
-
-						$aosDelay = $aosDelay + 50;
 				 ?>
 				 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
 				 	<div class="o-table">
@@ -63,7 +61,7 @@
 				 	</div>
 				 	<div class="o-rhombus__pattern"></div>
 				 </div>
-				 <?php } ?>
+				 <?php $aosDelay = $aosDelay + 50; } ?>
 			</div>
 		</div>
 	</div>
@@ -110,7 +108,7 @@
 					echo renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea);
 
 					$articleCount++;
-					$aosDelay = $aosDelay + 50;
+					$aosDelay = $aosDelay + 10;
 				} 
 					wp_reset_postdata();
 			?>

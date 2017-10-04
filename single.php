@@ -79,7 +79,7 @@
 		<div class="u-third">
 			<section>
 				<h3>Get Inspired.<br/>Change Stories delivered to your inbox.</h3>
-				<form action="//strommeea.us16.list-manage.com/subscribe/post?u=3b86477f4d57caf4ccef149c4&amp;id=938bdb1af2" method="post">
+				<form class="u-clear" action="//strommeea.us16.list-manage.com/subscribe/post?u=3b86477f4d57caf4ccef149c4&amp;id=938bdb1af2" method="post">
 					<input type="email" name="EMAIL" placeholder="Your E-mail" required/>
 					<button class="o-button">
 						<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>
