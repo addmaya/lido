@@ -1331,6 +1331,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .u-half{height: auto;background-color: transparent;}
   }
 }
+#sadolinplascon{width: 100%; height: 60px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
 .barba-container{@include box(100%, 100%)}
 .size-full-wrap{width: 120%; position: relative; left: -10%}
 .is-invisible{opacity: 0; visibility: hidden;}

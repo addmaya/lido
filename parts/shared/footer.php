@@ -78,7 +78,7 @@
 				<div class="c-globe"></div>
 			</div> -->
 			<div class="o-box">
-				<h1 class="u-center">Together we can <br/>eradicate povery from East Africa</h1>
+				<h1 class="u-center">Together we can <br/>eradicate poverty in East Africa</h1>
 				<div class="c-cta">
 					<div class="u-third">
 						<section>
@@ -186,6 +186,7 @@
 					</div>
 				</div>
 			</div>
+			<div id="sadolinplascon"></div>
 		</footer>
 	</div>
 </div>

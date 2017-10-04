@@ -11,7 +11,7 @@ var mapStyles =[
       "elementType":"geometry.stroke",
       "stylers":[
          {
-            "color":"#afafaf"
+            "color":"#c6006f"
          }
       ]
    },
@@ -27,7 +27,7 @@ var mapStyles =[
       "elementType":"labels.text.fill",
       "stylers":[
          {
-            "color":"#616161"
+            "color":"#aaaaaa"
          }
       ]
    },
