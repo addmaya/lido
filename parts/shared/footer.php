@@ -188,6 +188,6 @@
 			</div>
 			
 		</footer>
-		<div id="sadolinplascon"></div>
+		<!-- <div id="sadolinplascon"></div> -->
 	</div>
 </div>

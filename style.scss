@@ -833,7 +833,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &:after{
     content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
   }
-  @include device(lg){width: auto; margin: 0 auto}
+  @include device(lg){width: auto; margin: 0 auto; min-height:0; height: 100%}
 }
 .c-spine{@include box(em(28), 100%); @include bkg(#fff); position: absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10;
   @include device(lg){position: fixed}
