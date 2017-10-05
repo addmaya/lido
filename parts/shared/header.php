@@ -27,7 +27,7 @@
 </div>
 <div class="c-preloader">
 	<div class="o-box">
-		<span class="c-preloader__count">03</span>
+		<!-- <span class="c-preloader__count">03</span> -->
 		<h1 class="c-preloader__title" >
 			<span></span>
 			<figure></figure>

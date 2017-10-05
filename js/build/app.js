@@ -580,25 +580,21 @@ jQuery(document).ready(function($) {
         }
 
        var req = new XMLHttpRequest();
-       var progress = getRandomInt(80,100);
+       var preloaderLine = $('.c-preloader .o-line');
+       var progress = 0;
 
        req.open('POST', url);
        req.send();
 
        req.onprogress = function (e) {
-           if (e.lengthComputable) {
-                $('.c-preloader__count').html(e.loaded/e.total);
+           progress = progress + 20;
+           
+           if(progress >= 100){
+               progress = 75;
            }
-           else {
-                progress = progress - 25;
-                if(progress < 0){
-                    progress = 0;
-                }
-                $('.c-preloader__count').html(progress + '%');
-           }
-       }
-       req.onloadend = function(e){
-            progress = getRandomInt(80,100);
+           preloaderLine.css({
+               width: progress+'%'
+           });
        }
     })
 

@@ -833,7 +833,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &:after{
     content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
   }
-  @include device(sm){width: auto; margin: 0 auto}
+  @include device(lg){width: auto; margin: 0 auto}
 }
 .c-spine{@include box(em(28), 100%); @include bkg(#fff); position: absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10;
   @include device(lg){position: fixed}
@@ -1361,8 +1361,8 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 
 .c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden; color: #8d5769;
-  .o-table{position: absolute; z-index: 2;}
-  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 5%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
+  .o-table{position: absolute; z-index: 2}
+  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 0%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
   &.is-appearing{visibility: visible;
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
     .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
