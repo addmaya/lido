@@ -373,28 +373,6 @@ jQuery(document).ready(function($) {
     	    }
     	});
 
-        //play splash videos
-    	$('.o-splash .s--play').click(function(e) {
-    		e.preventDefault();
-    		var me = $(this);
-    		var playerWrap = me.closest('.o-splash').find('.o-splash__player');
-    		var player = me.closest('.o-splash').find('.o-player');
-    		var videoID = me.data('video-id');
-
-    		playerWrap.addClass('is-visible');
-    		player.html('<iframe type=text/html src=https://www.youtube.com/embed/'+videoID+'?autoplay=1></iframe>');
-    	});
-
-        $('.o-player__close').click(function(e) {
-            e.preventDefault();
-            var me = $(this);
-            var playerWrap = me.closest('.o-splash__player');
-            
-            playerWrap.removeClass('is-visible');
-            playerWrap.find('.o-player').html('');
-        });
-
-
         //play pop videos
         var deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var popSwiperSpeed = 800;

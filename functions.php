@@ -235,6 +235,38 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
+	function renderMedia($albumTitle, $albumCover, $type, $videoID = ''){
+		if($type == 'js-video'){
+			$icon = 's--play';
+			$label = 'Video';
+		}
+		else {
+			$icon = 's--camera';
+			$label = 'Photos';
+		}
+
+		$html = '';
+
+		$html .= '<a class="o-splash s--video js-photo" href="#" data-video-id="'.$videoID.'">';
+		$html .= '<figure class="o-splash__figure js-defer" data-image-url="'.$albumCover.'">';
+		$html .= '<div class="o-splash__tint">';
+		$html .= '<div class="o-table">';
+		$html .= '<div class="o-table__cell">';
+		$html .= '<i class="o-icon '.$icon.'"></i>';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '<section class="o-splash__content">';
+		$html .= '<div class="o-box">';
+		$html .= '<span class="o-line"></span>';
+		$html .= '<h2>'.$label.': '.$albumTitle.'</h2>';
+		$html .= '</div>';
+		$html .= '</section>';
+		$html .= '</figure></a>';
+
+		return $html;
+	}
+
 	function renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $postBalance = 0, $photos = ''){
 		$html = '';
 
@@ -259,14 +291,14 @@
 		$html .= '<ul class="o-article__meta">';
 
 		if ($storyPrograms) {
-			$html .= '<li><a href="'.get_permalink($storyPrograms[0]).'">/'.get_the_title($storyPrograms[0]).'</a></li>';
+			$html .= '<li><a href="'.get_permalink($storyPrograms[0]).'">'.get_the_title($storyPrograms[0]).'</a></li>';
 		}
 
 		if($storyArea){
-			$html .= '<li><a href="#">/ '.$storyArea.'</a></li>';	
+			$html .= '<li><a>'.$storyArea.'</a></li>';	
 		}
 
-		$html .= '<li><a href="#">/ '.get_the_date().'</a></li>';
+		$html .= '<li><a>'.get_the_date().'</a></li>';
 		$html .= '</ul>';
 
 		if ($articleClass != 's--video') {

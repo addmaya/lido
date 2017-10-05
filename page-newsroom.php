@@ -86,21 +86,27 @@
 		<?php endif ?>
 	</div>
 </section>
-<section class="o-section s--med s--bottom__clear c-updates">
+
+<?php 
+	$videos = new WP_Query(array(
+		'post_type'=>'video',
+		'posts_per_page'=>3
+		)
+	);
+	$postCount = $videos->post_count;
+	$postBalance = wp_count_posts('video')->publish - $postCount;
+	$videoIndex = 0;
+?>
+<section class="o-section s--med">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Videos</div>
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<section class="o-splash s--video">
-			<?php 
-				$featuredVideo = new WP_Query(array(
-					'post_type'=>'video',
-					'posts_per_page'=>1
-					)
-				);
-				while ($featuredVideo->have_posts()) : $featuredVideo->the_post();
+		<div class="c-library">
+			<?php
+				while ($videos->have_posts()) : $videos->the_post();
 					$videoLink = get_field('link', false, false);
 					$videoSummary = get_field('summary');
 					$videoID = getYoutubeID($videoLink);
@@ -113,74 +119,12 @@
 						$videoThumb = $videoThumbHigh;
 					}
 			 ?>
-			<figure class="o-splash__figure js-defer" data-image-url="<?php echo $videoThumb; ?>">
-				<div class="o-splash__player">
-					<a class="o-closer o-player__close" href="#"></a>
-					<div class="o-player">
-							
-					</div>
-				</div>
-				<div class="o-splash__tint">
-					<div class="o-table">
-						<div class="o-table__cell">
-							<a class="o-icon s--play" href="#" data-video-id="<?php echo $videoID; ?>"></a>
-						</div>
-					</div>
-				</div>
-				<section class="o-splash__content">
-					<div class="o-box">
-						<span class="o-line"></span>
-						<h2>Video: <?php echo $videoMeta['yt_title']; ?></h2>
-						<p>
-							<em><?php echo $videoMeta['yt_desc']; ?></em>
-						</p>
-						<?php endwhile; wp_reset_postdata(); ?>
-					</div>
-				</section>
-			</figure>
-		</section>
-		
-		<div class="o-article__grid s--updates">
-			<?php
-				$videos = new WP_Query(array('post_type'=>'video','posts_per_page'=>2, 'offset'=>1));
-
-				$articleCount = 0;
-				$aosDelay = 0;
-
-				$postCount = $videos->post_count;
-				$postBalance = wp_count_posts('video')->publish - $postCount;
-
-				while ($videos->have_posts()) {
-					$videos->the_post();
-
-					$videoLink = get_field('link', false, false);
-					$videoSummary = get_field('summary');
-					$videoID = getYoutubeID($videoLink);
-					$videoMeta = getYoutubeMeta($videoID);
-
-					$videoThumb = $videoMeta['yt_thumb'];
-					$videoThumbHigh = $videoMeta['yt_thumb_high'];
-
-					if(!$videoThumb){
-						$videoThumb = $videoThumbHigh;
-					}
-					
-					$storyTitle = get_the_title();
-					$storyLink = get_permalink();
-					$storyPhoto = get_field('photo');
-
-					if($articleCount > 3){
-						$articleCount = 0;
-					}
-
-					echo renderArticle('s--video', $articleCount, $aosDelay, $videoThumb, $videoID, $storyTitle,'','');
-
-					$articleCount++;
-					$aosDelay = $aosDelay + 50;
-				} 
-					wp_reset_postdata();
-			?>
+			<div class="u-half">
+				<?php echo renderMedia($videoMeta['yt_title'], $videoThumb, 'js-video', $videoID); ?>
+			</div>
+			<?php $videoIndex++; endwhile; wp_reset_postdata(); ?>
 		</div>
+
 		<?php if (!(($postBalance - 1) < 1)): ?>
 			<div class="u-center">
 				<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="video">
@@ -191,6 +135,16 @@
 		<?php endif ?>
 	</div>
 </section>
+
+<?php 
+	$albums = new WP_Query(array(
+		'post_type'=>'album',
+		'posts_per_page'=>3
+		)
+	);
+	$postCount = $albums->post_count;
+	$postBalance = wp_count_posts('video')->publish - $postCount;
+?>
 <section class="o-section s--med">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
@@ -198,95 +152,37 @@
 			<div class="o-crumb__line"></div>
 			<div class="o-crumb__circle"></div>
 		</div>
-		<section class="o-slider">
-			<div class="u-threefourth o-slider-col">
-				<div class="o-slider__image">
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							
-							<?php 
-								$album = new WP_Query(array(
-									'post_type'=>'album',
-									'posts_per_page'=>1
-									)
-								);
+		<div class="c-library">
+			<?php
+				while ($albums->have_posts()) : $albums->the_post();
+					$albumTitle = get_the_title();
+					$albumLink = get_permalink();
+					$albumPhotos = get_field('photos');
+					$albumCover = $albumPhotos[0]['sizes']['large'];
+					$albumSlides = '';
 
-								while ($album->have_posts()) : $album->the_post();
-								$photos = get_field('photos');
-								$albumTitle = get_the_title();
-
-								foreach ($photos as $photo): ?>
-									<div class="swiper-slide">
-										<figure class="js-bkg" data-image-url="<?php echo $photo['url']; ?>"></figure>
-										<span><?php echo $photo['caption']; ?></span>
-									</div>
-							<?php endforeach; endwhile; wp_reset_postdata(); ?>
-						</div>
-					</div>
-				</div>
+					foreach ($albumPhotos as $albumPhoto) {
+						$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['url'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
+					}
+			 ?>
+			<div class="u-half">
+				<?php echo renderMedia($albumTitle, $albumCover, 'js-photo'); ?>
 			</div>
-			<div class="u-fourth o-slider-col">
-				<div class="o-slider__caption">
-					<div class="o-slider__buttons t-dark">
-						<?php echo renderButton('#','','div','s--prev') ?>
-						<?php echo renderButton('#','','div','s--next') ?>
-					</div>
-					<section class="u-wrap">
-						<h2><?php echo $albumTitle; ?></h2>
-						<em></em>
-						<span class="o-line"></span>
-					</section>
-				</div>
-			</div>
-		</section>
-		<?php 
-			$sliderImages = get_sub_field('images');
-			foreach ($sliderImages as $slideImage) { ?>
-				<div class="swiper-slide">
-					<figure style="background-image:url('<?php echo $slideImage['url']; ?>')"></figure>
-					<span><?php echo $slideImage['caption']; ?></span>
-				</div>
-		<?php } ?>
-		<div class="u-pt-l">
-			<div class="o-article__grid s--updates s--albums">
-				<?php
-					$albums = new WP_Query(array('post_type'=>'album', 'posts_per_page'=>2, 'offset'=>1));
-
-					$aosDelay = 0;
-
-					$postCount = $albums->post_count;
-					$postBalance = wp_count_posts('album')->publish - $postCount;
-
-					while ($albums->have_posts()) {
-						$albums->the_post();
-						
-						$storyTitle = get_the_title();
-						$storyLink = get_permalink();
-						$albumPhotos = get_field('photos');
-						$albumSlides = '';
-
-						foreach ($albumPhotos as $albumPhoto) {
-							$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['url'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
-						}
-
-						echo renderArticle('s--video', 0, $aosDelay, $albumPhotos[0]['sizes']['large'], $videoID, $storyTitle,'','',0, $albumSlides);
-
-						$aosDelay = $aosDelay + 50;
-					} 
-						wp_reset_postdata();
-				?>
-			</div>
-			<?php if (!(($postBalance - 1) < 1)): ?>
-				<div class="u-center">
-					<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="album">
-						<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
-						<span>More Albums</span>
-					</a>
-				</div>
-			<?php endif ?>
+			<?php endwhile; wp_reset_postdata(); ?>
 		</div>
+
+		<?php if (!(($postBalance - 1) < 1)): ?>
+			<div class="u-center">
+				<a href="#" class="o-button s--multiline s--med js-media" data-post="video">
+					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
+					<span>More Albums</span>
+				</a>
+			</div>
+		<?php endif ?>
 	</div>
 </section>
+
+
 <section class="o-section s--med c-docs s--cover" id="documents">
 	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">

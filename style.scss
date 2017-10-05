@@ -98,7 +98,7 @@ $easeInThief: cubic-bezier(0.22, 0, 0, 1);
 @mixin rhombus{-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)/*clip-path:url('#rhombus'); -webkit-clip-path:url('#rhombus');*/}
 
 @keyframes fadeIn {
-  from {opacity:0}
+  from {opacity:0;}
   to {opacity:1}
 }
 @keyframes fadeInUp {
@@ -233,6 +233,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .u-white{color:$white}
 .u-uppercase{text-transform: uppercase;}
 .u-hide{display: none}
+.u-link{color: $redB}
 
 /*objects*/
 .o-box{width:87%; @include center; @include clear;
@@ -242,6 +243,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-table__cell{display: table-cell; vertical-align: middle}
 .o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center;
   &.s--play{@include image('play.svg')}
+  &.s--camera{@include image('camera.svg')}
 }
 .o-circle{width:em(40); height:em(40); fill:transparent;  stroke-width: 1; stroke: $redA;
   circle{stroke-dasharray:70}
@@ -379,8 +381,14 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-div{position: absolute; width:50%; height:100%; background-color:#830a46; z-index:-1;
   &.s--right{background-color:#7A003C; left: 50%}
 }
+.o-section__header{width: 50%; @include center; text-align: center; margin-bottom: 3em; 
+  @include device(xs){width: auto}
+}
 .o-section{padding:em(114) 0 em(144); 
   .o-crumb{margin-bottom:em(56)}
+  .o-section__header{
+    h1{margin-bottom: 0}
+  }
   h1{margin-bottom: em(24)}
   &:last-of-type{padding-bottom:12px; background-color: red}
   &.s--med{padding:em(72) 0}
@@ -482,11 +490,10 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .o-splash{@include relative; color: $white; padding-bottom: 54.25%;
   &.s--video{
-    .o-box{width: 60%}
+    .o-box{width: 90%}
     .o-splash__content{text-align: left}
-    .o-splash__figure{cursor:default}
     h2{margin: em(18) 0;}
-    .o-icon{width: em(72); height: em(72); cursor: pointer; @include txnOpacity(0.5);
+    .o-icon{width: em(60); height: em(60); @include txnOpacity(0.5);
       &:hover{opacity:0.6}
     }
   }
@@ -829,8 +836,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(md){float: none !important; width: auto !important; left: auto; right: auto !important;}
 }
 
-.o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
-  a{display: block; padding: em(6) 0}
+.o-article__meta{font-size: 0.75em; color: $white; opacity: 0.8;
+  a{display: block; padding: em(6) 0 em(3)}
 }
 .o-closer{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s; display: none;
   &:hover{background-color: darken($redA,10%)}
@@ -1183,8 +1190,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-rhombus{@include center; @include cover;
     .ua-microsoft &{border-radius: 50%}
   }
-  .s--one{top: -10%; right:-30%}
-  .s--two{top: 30%; left:-25%;
+  .o-rhombus__pattern{width: 17em; height: 17em; z-index:-10}
+  .s--one{top: -5%; right:-30%}
+  .s--two{top: 30%; left:-15%;
     .u-half{float:none;}
     .o-rhombus{margin-left:0;}
     @include device(sm){
@@ -1200,13 +1208,13 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 
-.c-orbit{@include box(em(720), em(720)); border: solid 1px $redA; border-radius: 50%; position: relative; @include center; text-align: center;
+.c-orbit{@include box(em(720), em(720)); background:#eeeded; border-radius: 50%; position: relative; @include center; text-align: center;
   &:hover{
-    .c-orbit__sun{@include prefix((animation-play-state: running))}
+    .c-orbit__sun{@include image('/sequences/globe-color.png'); @include prefix((animation-play-state: running))}
   }
   @include device(sm){width: auto; border:none; border-radius: 0; position: static; height: auto;}
 }
-.c-orbit__sun{@include box(256px, 266px); display: inline-block; @include prefix((animation: globe 2s infinite steps(50) forwards paused))}
+.c-orbit__sun{@include box(256px, 266px); display: inline-block; @include prefix((animation: globe 2s infinite steps(50) forwards paused)); @include image('/sequences/globe-bw.png');}
 
 .c-regions__col{position: relative;}
 .c-regions__image{height: em(700); width: em(256); position: absolute; bottom:0; left:30%; @include contain;
@@ -1338,20 +1346,6 @@ em{font-family: 'Georgia'; font-style: italic;}
     &.u-hide{display: block;}
   }
 }
-
-
-.c-impact{text-align: center;
-  h1{width:50%; @include center}
-  @include device(sm){
-    h1{width: 100%}
-  }
-  @include device(xs){
-    h1{width: auto}
-  }
-}
-.c-impact__summary{width: 50%; @include center; text-align: center;
-  @include device(sm){width: auto}
-}
 .c-implementers{@include image('ea-map.png'); height: 705px; @include contain;
   &.s--programs{height: 600px}
 }
@@ -1378,7 +1372,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden; color: #8d5769;
   .o-table{position: absolute; z-index: 2}
-  .o-line{position: absolute; bottom:4em; background-color: #8d5669; width: 0%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
+  .o-line{position: absolute; top:4em; background-color: #8d5669; width: 0%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
   &.is-appearing{visibility: visible;
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
     .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
@@ -1433,8 +1427,14 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.is-invisible{visibility:hidden; height: 0; }
   @include device(xs){width: 100%}
 }
+.c-library{
+  a{display: block}
+  .u-half:first-child{width:100%}
+  .o-splash{margin: em(12)}
+  .js-video{filter: grayscale(100%)}
+}
 
-/*others*/
+/*hooks*/
 #barba-wrapper{@include box(100%, 100%)}
 #program-background{
   @include device(sm){

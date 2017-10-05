@@ -113,34 +113,32 @@
 			$statFigures = get_sub_field('statistics');
 		?>
 			<section class="o-section c-stats">
-				<div class="o-box">
-					<div class="u-clear u-pt-xl">
-						<div class="o-stat__box">
-							<?php 
-								$aosDelay = 0;
-								foreach( $statFigures as $stat ){
-									$statNumber = $stat['number'];
-									$statSummary = $stat['description'];
-									$statUnit = $stat['unit'];
-									$statPhoto = $stat['photo'];
+				<div class="u-clear u-pt-xl">
+					<div class="o-stat__box">
+						<?php 
+							$aosDelay = 0;
+							foreach( $statFigures as $stat ){
+								$statNumber = $stat['number'];
+								$statSummary = $stat['description'];
+								$statUnit = $stat['unit'];
+								$statPhoto = $stat['photo'];
 
-									$aosDelay = $aosDelay + 100;
-							 ?>
+								$aosDelay = $aosDelay + 100;
+						 ?>
 
-							 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
-							 	<div class="o-table">
-							 		<div class="o-table__cell">
-							 			<section>
-							 				<span><?php echo $statNumber; ?></span>
-							 				<p><?php echo $statSummary; ?></p>
-							 			</section>
-							 		</div>
-							 	</div>
-							 	<div class="o-rhombus__pattern"></div>
-							 </div>
+						 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
+						 	<div class="o-table">
+						 		<div class="o-table__cell">
+						 			<section>
+						 				<span><?php echo $statNumber; ?></span>
+						 				<p><?php echo $statSummary; ?></p>
+						 			</section>
+						 		</div>
+						 	</div>
+						 	<div class="o-rhombus__pattern"></div>
+						 </div>
 
-							 <?php } ?>
-						</div>
+						 <?php } ?>
 					</div>
 				</div>
 			</section>

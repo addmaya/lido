@@ -41,28 +41,28 @@
 			</header>
 			<p data-aos="fade-up"><?php echo $historySummary; ?></p>
 		</section>
-		<div class="u-clear u-pt-l">
-			<div class="o-stat__box">
-				<?php 
-					$statistics = get_field('statistics', 22);
-					$aosDelay = 0;
-					foreach( $statistics as $stat ){
-						$statisticNumber = $stat['number'];
-						$statisticSummary = $stat['summary'];
-				 ?>
-				 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
-				 	<div class="o-table">
-				 		<div class="o-table__cell">
-				 			<section>
-				 				<span><?php echo $statisticNumber; ?></span>
-				 				<p><?php echo $statisticSummary; ?></p>
-				 			</section>
-				 		</div>
-				 	</div>
-				 	<div class="o-rhombus__pattern"></div>
-				 </div>
-				 <?php $aosDelay = $aosDelay + 50; } ?>
-			</div>
+	</div>
+	<div class="u-clear u-pt-l">
+		<div class="o-stat__box">
+			<?php 
+				$statistics = get_field('statistics', 22);
+				$aosDelay = 0;
+				foreach( $statistics as $stat ){
+					$statisticNumber = $stat['number'];
+					$statisticSummary = $stat['summary'];
+			 ?>
+			 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
+			 	<div class="o-table">
+			 		<div class="o-table__cell">
+			 			<section>
+			 				<span><?php echo $statisticNumber; ?></span>
+			 				<p><?php echo $statisticSummary; ?></p>
+			 			</section>
+			 		</div>
+			 	</div>
+			 	<div class="o-rhombus__pattern"></div>
+			 </div>
+			 <?php $aosDelay = $aosDelay + 50; } ?>
 		</div>
 	</div>
 </section>

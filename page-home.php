@@ -106,7 +106,7 @@
 					</div>
 				</section>
 				<div class="u-pt-l">
-					<?php echo renderButton(home_url().'/about', 'See our Response'); ?>
+					<?php echo renderButton(home_url().'/about', 'See our Poverty Interventions'); ?>
 				</div>
 			</section>
 		</div>
@@ -230,39 +230,38 @@
 			$blockImpactSummary =$blockImpact['summary'];
 			$blockImpactPhoto = $blockImpact['photo']['sizes']['medium'];
 		?>
-		<h1 class="u-pb-m" data-aos="fade-up"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
-		
-		<div class="u-clear">
-			<div class="o-stat__box">
-			<?php 
-				$statistics = get_field('statistics', 22);
-				$statisticsList = array_rand( $statistics, 4);
-				$aosDelay = 0;
-				foreach( $statisticsList as $statistic ){
-					$aosDelay = $aosDelay + 100;
-					$statisticNumber = $statistics[$statistic]['number'];
-					$statisticSummary = $statistics[$statistic]['summary'];
-			 ?>
-				 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
-				 	<div class="o-table">
-				 		<div class="o-table__cell">
-				 			<section>
-				 				<span><?php echo $statisticNumber; ?></span>
-				 				<p><?php echo $statisticSummary; ?></p>
-				 			</section>
-				 		</div>
-				 	</div>
-				 	<div class="o-rhombus__pattern"></div>
-				 </div>
-			 <?php } ?>
-			 </div>
-		</div>
-		<section class="c-impact__summary u-pt-l" data-aos="fade-up">
+		<header class="o-section__header">
+			<h1 class="u-pb-m" data-aos="fade-up"><a href="<?php echo home_url(); ?>/change-stories"><span><?php echo $blockImpactTitle; ?></span></a></h1>
 			<p><?php echo $blockImpactSummary; ?></p>
-			<div class="u-pt-m">
-				<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>
-			</div>
-		</section>
+		</header>
+	</div>	
+	<div class="u-clear">
+		<div class="o-stat__box">
+		<?php 
+			$statistics = get_field('statistics', 22);
+			$statisticsList = array_rand( $statistics, 4);
+			$aosDelay = 0;
+			foreach( $statisticsList as $statistic ){
+				$aosDelay = $aosDelay + 100;
+				$statisticNumber = $statistics[$statistic]['number'];
+				$statisticSummary = $statistics[$statistic]['summary'];
+		 ?>
+			 <div class="o-stat" data-aos="fade-right" data-aos-delay="<?php echo $aosDelay; ?>">
+			 	<div class="o-table">
+			 		<div class="o-table__cell">
+			 			<section>
+			 				<span><?php echo $statisticNumber; ?></span>
+			 				<p><?php echo $statisticSummary; ?></p>
+			 			</section>
+			 		</div>
+			 	</div>
+			 	<div class="o-rhombus__pattern"></div>
+			 </div>
+		 <?php } ?>
+		 </div>
+	</div>
+	<div class="u-center u-pt-m">
+		<?php echo renderCircularButton(home_url().'/change-stories','Read the Change Stories', $blockImpactPhoto); ?>
 	</div>
 </section>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer') ); ?>

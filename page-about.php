@@ -43,7 +43,7 @@
 			<div class="c-orbit layer" data-depth="0.2">
 				<div class="o-table">
 					<div class="o-table__cell">
-						<span class="c-orbit__sun js-defer" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/globe-color.png"></span>
+						<span class="c-orbit__sun"></span>
 					</div>
 				</div>
 				<section class="c-values layer" data-depth="0.4">
@@ -74,6 +74,7 @@
 					<div class="o-value <?php echo $valueClass; ?>">
 						<figure class="u-half">
 							<span class="o-rhombus s--medium u-block js-bkg" data-image-url="<?php echo $valueImage; ?>"></span>
+							<div class="o-rhombus__pattern"></div>
 						</figure>
 						<section class="u-half">
 							<h3><?php echo $valueTitle; ?></h3>
@@ -170,8 +171,8 @@
 				<h1><?php echo $sectionAreasTitle; ?></h1>
 				<p><?php echo $sectionAreasSummary; ?></p>
 				<div class="u-pt-l">
-					<?php echo renderCircularButton('#', 'Education Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
-					<?php echo renderCircularButton('#', 'Livelihood Programs', get_stylesheet_directory_uri().'/images/dummy.jpg'); ?>
+					<?php echo renderCircularButton('#', 'Funding Partners', get_field('photo',10)); ?>
+					<?php echo renderCircularButton('#', 'Implementing Partners', get_field('photo',41)); ?>
 				</div>
 			</section>
 		</div>

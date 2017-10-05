@@ -124,7 +124,7 @@
 									}
 								?>
 								<span><?php echo implode(', ', $groupList); ?></span>
-								<span><?php echo $programPartners->post_count; ?></span>
+								<span><a href="#program-partners" class="u-link"><?php echo $programPartners->post_count; ?></a></span>
 							</div>
 						</div>
 					</section>
@@ -217,7 +217,7 @@
 				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>
 			<div class="c-program__cta">
-				<a href="#" class="o-button s--multiline s--med">
+				<a href="<?php echo home_url().'/contact'; ?>" class="o-button s--multiline s--med">
 					<i class="o-icon"><strong>+</strong></i>
 					<span>Become a Partner</span>
 				</a>

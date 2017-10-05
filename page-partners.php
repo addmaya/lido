@@ -107,7 +107,7 @@
 				
 			</section>
 			<div class="u-pt-l u-pl-l">
-				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
+				<?php echo renderButton(home_url().'/contact', 'Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
 	</div>
@@ -215,7 +215,7 @@
 				</ul>
 			</section>
 			<div class="u-pt-l">
-				<?php echo renderButton('#', 'Join Us. Become a Partner','anchor', 's--block'); ?>
+				<?php echo renderButton(home_url().'/contact', 'Become a Partner','anchor', 's--block'); ?>
 			</div>
 		</div>
 		<div class="u-half" data-aos="fade-up" data-aos-delay="100">

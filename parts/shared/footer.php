@@ -173,13 +173,14 @@
 									while ( have_rows('quick_links', 'option') ) : the_row();
 										$linkTitle = get_sub_field('title');
 										$externalLink = get_sub_field('external_link');
+										
 										if($externalLink){
-											$linkURL = esc_url(get_sub_field('URL'));
+											$linkURL = esc_url(get_sub_field('url'));
 										} else {
 											$linkURL = get_sub_field('link');
 										}
 								 ?>
-								<li><a href="<?php echo $linkURL; ?>"><?php echo $linkTitle; ?></a></li>
+								<li><a href="<?php echo $linkURL; ?>" <?php if($externalLink){echo 'target="_blank"';} ?>><?php echo $linkTitle; ?></a></li>
 								<?php endwhile; ?>
 							</ul>
 						</section>

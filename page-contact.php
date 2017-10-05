@@ -59,11 +59,22 @@
 					
 					<div class="u-half">
 						<section>
-							<h3><?php echo $office; ?></h3>
-							<p><?php echo $address; ?></p>
-							<p>Telephone: <?php echo $telephone; ?></p>
-							<p>Fax: <?php echo $fax; ?></p>
-							<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+							<?php if ($office): ?>
+								<h3><?php echo $office; ?></h3>
+							<?php endif ?>
+							<?php if ($address): ?>
+								<p><?php echo $address; ?></p>
+							<?php endif ?>
+							<?php if ($telephone): ?>
+								<p>Telephone: <?php echo $telephone; ?></p>
+							<?php endif ?>
+							<?php if ($fax): ?>
+								<p>Fax: <?php echo $fax; ?></p>
+							<?php endif ?>
+							<?php if ($email): ?>
+								<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+							<?php endif ?>
+							
 						</section>
 					</div>
 				
