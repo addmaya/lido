@@ -58,3 +58,4 @@
 		<?php wp_head(); ?>
 	</head>
 	<body class="is-booting u-oh">
+		<div class="c-page__wrap">

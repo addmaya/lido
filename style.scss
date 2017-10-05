@@ -150,12 +150,12 @@ $easeInThief: cubic-bezier(0.22, 0, 0, 1);
   to {transform: scale3d(1.5, 1.5, 1.5)}
 }
 
-@mixin line{content:""; height: 2px; width: 50%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1)}
+@mixin line{content:""; height: 2px; width: 50%; background-color: $redA; position: absolute; bottom: 3px; left: 0; @include resetPivot; @include txnTransform(0.3,ease); @include scale2D(0,1);}
 
 /*defaults*/
 html, body{width:100%; height:100%;}
-body{font-family: "acumin-pro",sans-serif; color:#717273; font-weight: 400;
-  &.single-partner{background-color: #eaeaea}
+body{font-family: "acumin-pro",sans-serif; color:#717273; font-weight: 400; background-color: #e4e4e4;
+  @include device(lg){background-color:transparent}
 }
 h1,h2,h3{color: #393637;
   .t-dark &{color: $white;
@@ -174,6 +174,9 @@ h1,h2,h3{color: #393637;
   }
 }
 h1{font-size:em(36); font-weight:600; line-height: 1.3; letter-spacing: -1px;
+  @include device(sm){
+    font-size: em(30)
+  }
   @include device(xs){font-size: em(26); letter-spacing: 0}
 }
 h2{font-size:em(20); font-weight:500; line-height:1.4; letter-spacing:0.5px;
@@ -309,6 +312,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{width:70%; @include center}
   .o-table{background-color:#f2f2f2; @include rhombus}
   .o-rhombus__pattern{z-index: -3; opacity: 0.3; background-size: 20%}
+  @include device(sm){
+    width: 19em; height:19em;
+  }
 }
 .o-button-rhombus{display: block;
   figure{@include box(em(240), em(240)); @include bkg(grey); @include rhombus;}
@@ -325,8 +331,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.s--medium{@include box(em(240), em(240))}
 
   &.s--small{@include box(em(150), em(150))}
-  @include device(xs){
+  @include device(md){
     &.s--large{width: auto; height: auto}
+    &.s--medium{width:13em; height: 13em}
   }
 }
 .o-rhombus__image{padding-bottom: 100%;background-position: center;background-size: cover; background-repeat: no-repeat; @include txnTransform(0.5, ease); position: relative;
@@ -400,13 +407,25 @@ em{font-family: 'Georgia'; font-style: italic;}
   &#livelihood{
     &:after{background-color:#950054}
     .o-section__cover{@include image('illustrations/livelihoods.jpg'); background-position:right center;
-      @include device(xs){background-size: contain; background-position: top}
+    }
+    @include device(sm){
+      div.u-half{width: 70%}
+    }
+    @include device(xs){
+      div.u-half{width: auto}
+      .o-section__cover{background-position: top}
     }
   }
 
   &#capacity-building{
     &:after{background-color:#f3f3f3}
     .o-section__cover{@include image('illustrations/capacity.jpg'); background-position:right top;}
+    @include device(sm){
+      div.u-half{width: 70%}
+    }
+    @include device(xs){
+      div.u-half{width: auto}
+    }
   }
 
   &#stories{
@@ -466,10 +485,14 @@ em{font-family: 'Georgia'; font-style: italic;}
       &:hover{opacity:0.6}
     }
   }
+  @include device(sm){
+    &.s--video{
+      p{display: none}
+    }
+  }
   @include device(xs){padding-bottom: 200%;
     &.s--video{
-      .o-box{width: 90%}
-      p{display: none}
+      .o-box{width: 90%;}
     }
   }
 }
@@ -482,6 +505,11 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-line{margin-top: em(24)}
   }
   .o-author{text-align: left}
+  @include device(sm){
+    blockquote{width:85%;
+      p{font-size: em(16)}
+    }
+  }
   @include device(xs){bottom: 0;
     .o-author{text-align: center;
       figure{margin: 0 auto; float: none}
@@ -498,7 +526,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .o-line{@include box(10%, 2px); background-color: #f2f2f2; display: inline-block;
   &.s--divider{width: 90%; margin: 5em auto; display: block;
-    @include device(xs){margin: 2em auto; }
+    @include device(sm){margin: 2em auto; }
   }
   &.t-dark{background-color:lighten($blackA, 80%)}
 }
@@ -527,18 +555,20 @@ em{font-family: 'Georgia'; font-style: italic;}
        &:after{@include scale2D(1,1)}
     }
   }
-
-  @include device(xs){margin: 0; padding: 0;
+  @include device(sm){
+    width: 50%;
+  }
+  @include device(xs){margin: 0; padding: 0; width: auto;
     section{padding-bottom: em(36);}
   }
 }
 
 .o-networks{
-  li{display: inline-block;}
+  li{display: inline-block}
   a{display: block;margin:em(2); @include clear; @include txnOpacity(0.2);
     &:hover{opacity: 0.5;}
   }
-  i{display: inline-block; @include box(36px, 36px); float:left}
+  i{display: inline-block; @include box(em(36), em(36)); float:left; background-size: contain; background-repeat: no-repeat}
   span{display: inline-block; margin-left:em(12); padding-top:9px; color:$redA}
   .c-fb{@include image('social/facebook.svg')}
   .c-tw{@include image('social/twitter.svg')}
@@ -566,8 +596,8 @@ em{font-family: 'Georgia'; font-style: italic;}
     section{padding:6.5em 1.5em 0}
   }
 }
-.o-story__cover{float: right; height: 100%; position: relative; z-index: -4; overflow: hidden;
-  figure{background-color: $blackA; height: 100%; @include cover}
+.o-story__cover{float: right; height: 100%; position: relative; z-index: -4; overflow: hidden; background-color: $blackA;
+  figure{background-color: $blackA; height: 100%; @include cover; opacity: 0.8}
   @include device(xs){float: none; height: 240px; position: static;
     .o-image__cover{width: auto;}
   }
@@ -596,7 +626,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   .wp-caption-text{font-family: 'Georgia'; font-style: italic; font-size:0.7em; padding:em(12) 1em em(24)}
   .wp-caption{margin:em(12) 0 em(24)}
-
+  @include device(md){
+    .o-box{width:75%}
+  }
   @include device(xs){
     .o-box{width: 90%}
     blockquote{width: 90%; font-size: em(18)}
@@ -637,7 +669,13 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-slider__image{width: 100%}
     .o-slider__caption{width: 100%}
   }
+  @include device(sm){
+    .u-threefourth{width:65%}
+    .u-fourth{width:35%}
+  }
   @include device(xs){ margin-top: em(72);
+    .u-threefourth{width:auto}
+    .u-fourth{width:auto}
     .o-slider-col{padding: 0}
   }
 }
@@ -667,7 +705,12 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   &.s--third{
     li{width: percentage(1/3);
-      @include device(xs){width: 50%}
+      @include device(sm){width: 50%}
+    }
+  }
+  @include device(sm){
+    li{width:50%;
+      &.u-third{width: auto}
     }
   }
   @include device(xs){
@@ -759,12 +802,17 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
   .c-album__photos{display:none}
-  @include device(xs){width: auto !important; float: none !important;
+  @include device(md){width: 50% !important;
+    &.s--solo{width:100% !important}
     figure{width: auto !important; float: none !important;}
+    >section{margin: em(6);}
+  }
+  @include device(xs){
+    width: auto !important; float: none !important;
   }
 }
 .o-article__summary{@include bkg($redC); float: left; width:em(288); padding: em(14); position: relative; z-index: 4;left: em(-36);
-  @include device(xs){float: none !important; width: auto !important; left: auto; right: auto !important;}
+  @include device(md){float: none !important; width: auto !important; left: auto; right: auto !important;}
 }
 
 .o-article__meta{font-size: 0.7em; text-transform: uppercase; color: $white; opacity: 0.8;
@@ -773,7 +821,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-closer{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s; display: none;
   &:hover{background-color: darken($redA,10%)}
   .c-pop &{right: -56px}
-  @include device(xs){display: block;}
+  @include device(sm){display: block;}
 }
 .o-player{position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;
   iframe, object, embed{position: absolute; top: 0; left: 0; width: 100%; height: 100%}
@@ -781,14 +829,22 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-cap{color: #903; float: left; font-size: em(84); line-height: 60px; padding: em(1) em(2) em(3) 0;background: url('images/pattern-2.png') repeat; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size:10%; font-weight:bold}
 
 /*components*/
-.c-spine{@include box(em(28), 100%); @include bkg(#fff); position: fixed; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10;
+.c-page__wrap{width:55%; min-height: 100%; margin: em(30) auto; position: relative; 
+  &:after{
+    content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
+  }
+  @include device(sm){width: auto; margin: 0 auto}
+}
+.c-spine{@include box(em(28), 100%); @include bkg(#fff); position: absolute; top: 0; left: 0; @include image('pattern-1.png'); background-size:200%; z-index:10;
+  @include device(lg){position: fixed}
   @include device(xs){display: none}
 }
 .c-page__header{padding-top: em(36); @include absolute; width:100%; z-index: 5;
   .is-booting &{@include animation(fadeInDown,1,0.8,ease,both)}
   @include device(xs){padding-top: 0;}
 }
-.c-logo{@include box(170px, 66px); display:block; @include image('logo-white.svg'); @include contain; position: relative; top: -24px;
+
+.c-logo{@include box(170px, 66px); display:block; @include image('logo-white.svg'); @include contain; position: relative; top: -24px; float: left;
   &.t-dark {@include image('logo.svg');}
   @include device(xs){width:130px; top: em(3); left: -3px;}
 }
@@ -798,7 +854,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-deco__dash{@include box(12px, 2px); @include bkg(#CBCBCB); float: left; @include relative; top: 5px; left: 20px}
 .c-deco__line{@include box(89%, 6px); @include image('line-1.png'); background-size:contain; float: right; @include relative; top: 3px; opacity:0.5}
 
-.c-menu-primary{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff; @include prefix((transition: color 0.5s ease));
+.c-menu-primary{text-align:right; @include relative; top: em(-14); font-size:em(14);color: #fff; @include prefix((transition: color 0.5s ease)); float: right;
   li{display:inline-block}
   a{display:block;padding:0.75em; position: relative;
     &:after{@include line; width: 100%; @include prefix((transform-origin: 50% 50%))}
@@ -816,12 +872,12 @@ em{font-family: 'Georgia'; font-style: italic;}
   from {stroke-dashoffset:0}
   to {stroke-dashoffset:4000}
 }
-.c-splash__preloader{background-color:#c9c9c9; z-index: 100; @include canvas; position: fixed; @include txnTransform(1.2, cubic-bezier(0.5, 0, 0, 1.01));
+.c-splash__preloader{background-color:#c9c9c9; z-index: 100; @include canvas; position: fixed; @include txnTransform(1.2, cubic-bezier(0.5, 0, 0, 1.01)); left: 0; top:0;
   svg{stroke:darken(#dfdfdf,0%); display: block; fill: none; height: 30%; margin: 0 auto; stroke-width: 10px; stroke-dasharray:1000; @include animation(strokeDashOffset, 10, 0, linear, both)}
   
   &.is-loaded {@include translateX(100%)}
 }
-.c-splash{@include box(100%, 75%); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:#231F20; overflow: hidden;
+.c-splash{@include box(100%, 768px); background-position: right -60%; background-size:50%; background-repeat: no-repeat; position: relative; background-color:#231F20; overflow: hidden;
   .o-button{padding-top: em(30)}
   .o-table{position: absolute; z-index: 2}
   .o-table__cell{vertical-align: bottom; padding-bottom:3em}
@@ -835,7 +891,10 @@ em{font-family: 'Georgia'; font-style: italic;}
     .c-splash__image{@include animation(slideInUp, 1,0.3, $easeInThief, both)}
     figure{@include animation(kenBurns, 90, 0, linear, both)}
   }
-
+  @include device(lg){height:75%}
+  @include device(sm){
+    .u-half{width: 80%}
+  }
   @include device(xs){height:100%;
     &.is-loaded{
       .c-splash__tint{opacity: 1}
@@ -869,10 +928,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.is-loaded {
     .u-half{@include animation(fadeInUp,1,0.6,ease, both)}
   }
-
-  @include device(xs){height: auto;
+  @include device(sm){
     section{padding-top: 0; width: 65%}
     .o-rhombus{width: 35%}
+  }
+  @include device(xs){height: auto;
     .u-wrap{padding:0 !important}
     .u-half{padding:em(30) 0}
     .o-div{height: 50%; width: 100%;
@@ -880,7 +940,14 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-paginator{overflow: hidden; padding: em(48) 0; position: relative; z-index: 3}
+.c-paginator{overflow: hidden; padding: em(48) 0; position: relative; z-index: 3;
+  @include device(sm){
+    font-size: 0.75em
+  }
+  @include device(xs){
+    font-size: 1em;
+  }
+}
 .c-paginator__button{display: inline-block; color: $redA; float:left; position: relative; @include clear;
   .o-rhombus{float:left; margin-left: em(-96);}
   .o-rhombus__image{filter: grayscale(100%)}
@@ -961,10 +1028,17 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   .o-circle__inner{stroke: #dedede}
   .c-cta{ border-bottom:solid 1px #b93c7a; padding-bottom: em(84); margin-bottom: em(72)}
-  @include device(xs){background-size: cover;
+
+  @include device(md){font-size:0.9em; 
+    .o-box{width: 95%;}
+  }
+  @include device(sm){
+    background-size: cover;
+  }
+  @include device(xs){font-size: 1em;
     h1{font-size: em(24); padding-bottom: em(24)}
     .c-cta{margin-bottom: 0; padding-bottom: 0}
-    .o-box{width: 90%}
+    
   }
 }
 /*.c-globe__wrap{position: absolute; top:0; width: 100%; z-index: -1; height: 200%}
@@ -976,8 +1050,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-button{font-size: em(16); padding-top: 0;
     i{border-width: 2px}
   }
-  @include device(xs){
+  @include device(sm){
     input{width: 60%;}
+  }
+  @include device(xs){
+    
     .u-third{margin-bottom: em(36)}
   }
 }
@@ -990,16 +1067,18 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{padding: em(6)}
   h4{margin-bottom: em(24); position: relative; left: em(-18)}
   strong{display: inline-block; margin-right: em(6)}
+  @include device(sm){
+    .u-fifth{width:30%; padding-bottom: em(30)}
+  }
   @include device(xs){padding-top: 3em;
     h4{position: static;}
     ul{position: relative; left: em(18)}
-    .u-fifth{padding-bottom: em(30)}
+    .u-fifth{width: auto}
   }
 }
-.c-cover{height: 100%; position: relative; z-index:1;
+.c-cover{height: em(768); position: relative; z-index:1;
   h1{padding-bottom: em(16)}
   .u-half{height: 100%; position: relative; overflow: hidden;}
-  &.s--story{height:70%}
   .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat;}
   
   &.s--bkg{
@@ -1009,7 +1088,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   &#profile{
     &:after{background-color: #75003a;}
     .c-cover__bkg{@include image('illustrations/profile.jpg'); background-position:center; background-size:cover;
-      @include device(xs){background-size: contain; background-position: top}
+    @include device(sm){background-size: contain}
+      @include device(xs){background-position: top}
     }
   }
 
@@ -1017,6 +1097,11 @@ em{font-family: 'Georgia'; font-style: italic;}
     &:after{background-color: #f5f5f5;}
     .c-cover__bkg{@include image('illustrations/contact.jpg'); background-position:right top; background-size:contain; opacity:0.3}
   }
+
+  @include device(lg){width: 100%;
+    &.s--story{height:70%}
+  }
+
   @include device(xs){height: auto;
     .u-half{height: em(300);
       &:first-child{background-color: $blackA}
@@ -1037,6 +1122,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-table__cell{vertical-align: bottom; padding-bottom: 3em}
   .is-booting &{
     .o-table{@include animation(slideInUp, 1,0.9,$easeInThief, both)}
+  }
+  @include device(sm){
+    .o-box{width: 90%}
   }
   @include device(xs){
     .o-box{width: auto}
@@ -1083,9 +1171,13 @@ em{font-family: 'Georgia'; font-style: italic;}
   .s--two{top: 30%; left:-25%;
     .u-half{float:none;}
     .o-rhombus{margin-left:0;}
+    @include device(sm){
+      .o-rhombus{margin-left:auto}
+      .u-half{float: left}
+    }
   }
   .s--three{bottom: -10%; left:35%}
-  @include device(xs){width: auto; position: static !important;
+  @include device(sm){width: auto; position: static !important;
     .o-value{width: auto; position: static;}
     .o-table{display: none;}
     .o-rhombus{@include center}
@@ -1096,7 +1188,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &:hover{
     .c-orbit__sun{@include prefix((animation-play-state: running))}
   }
-  @include device(xs){width: auto; border:none; border-radius: 0; position: static; height: auto;}
+  @include device(sm){width: auto; border:none; border-radius: 0; position: static; height: auto;}
 }
 .c-orbit__sun{@include box(256px, 266px); display: inline-block; @include prefix((animation: globe 2s infinite steps(50) forwards paused))}
 
@@ -1105,7 +1197,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(xs){position: static; }
 }
 .c-regions__map{height: em(408); @include image('east-africa-spotlight.png'); background-size: contain; background-repeat: no-repeat;
-  @include device(xs){height: em(240);}
+  @include device(sm){height: em(260);}
 }
 .c-regions{
   .o-rhombus__pattern{height:60%; opacity:0.3}
@@ -1117,8 +1209,14 @@ em{font-family: 'Georgia'; font-style: italic;}
     span{margin-top: em(-16);}
   }
   figure{position: absolute; right:-20%; @include box(em(240), em(360)); top:10%; @include image('illustrations/farmer.png'); @include contain}
+  @include device(md){
+    width: 75%;
+  }
+  @include device(sm){
+    width: 80%; font-size: 0.8em;
+  }
   @include device(xs){width: auto;
-    h1{font-size: em(72); padding-bottom: em(3)}
+    h1{font-size: em(72); padding-bottom: em(3);}
     header{margin-top: 0;}
     span{font-size: 1em;}
     figure{top: -30px; height: 7.5em; right: 0; width: 5em;}
@@ -1129,7 +1227,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .s--textarea{width:100%; margin-bottom:em(6)}
   button{border:none; background:none}
   .o-button{margin-top:em(16); font-size:em(16)}
-  @include device(xs){
+  @include device(sm){
     div{float:none; width: auto}
   }
 }
@@ -1139,6 +1237,12 @@ em{font-family: 'Georgia'; font-style: italic;}
   .is-booting &{
     &.s--form{@include animation(slideInLeft,1,0.7,$easeInThief, both)}
     &.s--info{@include animation(slideInLeft,1,0.8,$easeInThief, both)}
+  }
+  @include device(md){padding-left:4em}
+  @include device(sm){
+    padding:12em 3em 0;
+    .u-half{float: none; width:auto}
+    .o-networks li{padding-left: 0 !important; margin-bottom: em(12)}
   }
   @include device(xs){padding:6em 1.5em 0}
 }
@@ -1163,7 +1267,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-hamburger{top:40%; right:1.5em; width: em(56); height: em(56); z-index: 10; position: fixed; border:solid 2px $redA; margin-bottom: em(9); overflow: hidden; border-radius: 50%;  visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
+.c-hamburger{top:40%; right:20%; width: em(56); height: em(56); z-index: 10; position: fixed; border:solid 2px $redA; margin-bottom: em(9); overflow: hidden; border-radius: 50%;  visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
   
   svg{@include box(em(48), em(48)); fill:none; stroke: $redA; stroke-width:1; position: relative; z-index: 1; @include txnTransform(0.3, ease); display: block; @include center; top: 2px;}
   line{stroke-dasharray: 15; @include prefix((transition: stroke-dashoffset 0.3s))}
@@ -1179,6 +1283,8 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 
+  @include device(lg){right: 1.5em;}
+
   @include device(xs){top:0; right: 0; visibility: visible; opacity: 1; @include scale2D(0.65,0.65); border-width: 4px; border-color: $white;
     svg{stroke: $white}
     &.is-visible{border-color: $redA;
@@ -1186,14 +1292,21 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-menu-secondary{background-color: #231f20; width: 40%; position: fixed; right: 0; top:0; z-index: 30; height: 100%; overflow: scroll; @include txnTransform(0.7, cubic-bezier(0.42,-0.01, 0, 1)); @include translateX(100%);
+.c-menu-secondary{background-color: #231f20; width: 25%; position: fixed; right: 0; top:0; z-index: 30; height: 100%; overflow: scroll; @include txnTransform(0.7, cubic-bezier(0.42,-0.01, 0, 1)); @include translateX(100%);
   h3{padding-bottom: 1.5em}
 
   &.is-visible{@include translateX(0%)}
   ul{font-size: 1.5em;color: white}
-  @include device(xs){width: 100%;
-    
+  @include device(lg){
+    width: 40%;
   }
+  @include device(md){
+    width: 70%
+  }
+  @include device(sm){
+    width: 80%;
+  }
+  @include device(xs){width: 100%}
 }
 .c-menu-secondary__item{border-bottom:solid 1px #353233;
   a{display: block; padding: em(26) 0 em(26) 1em; position: relative; overflow: hidden;
@@ -1213,12 +1326,15 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-impact{text-align: center;
   h1{width:50%; @include center}
+  @include device(sm){
+    h1{width: 100%}
+  }
   @include device(xs){
     h1{width: auto}
   }
 }
 .c-impact__summary{width: 50%; @include center; text-align: center;
-  @include device(xs){width: auto}
+  @include device(sm){width: auto}
 }
 .c-implementers{@include image('ea-map.png'); height: 705px; @include contain;
   &.s--programs{height: 600px}
@@ -1230,11 +1346,17 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{top: em(36)}
   .o-author{padding-bottom:1em}
 
+  @include device(sm){
+    .u-third{width: 50%}
+    header{width: 75%}
+      section{top: em(20); width: 50%;}
+    }
+  }
   @include device(xs){
     header{width: auto}
     .o-author{padding-bottom: 0;
-      section{top: em(20); width: 50%;}
-    }
+    .u-third{width: auto}
+    .o-author{padding-bottom: 0}
   }
 }
 
@@ -1286,26 +1408,38 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.is-visible{visibility: visible}
 }
 .c-pop__box{background-color: #fff; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
-  @include device(sm){width:auto; height: auto}
+  @include device(sm){width:90%; height: auto}
 }
 .c-pop__close{width: 2em;height: 2em; background-position:center; background-repeat: no-repeat;; background-size: contain; @include image('btn-close.svg'); display: inline-block; position: absolute; top: -36px; right: 0; transition:opacity 0.3s ease;
   &:hover{opacity:0.6;}
 }
 #c-pop__swiper{
-  &.is-invisible{visibility:hidden}
+  &.is-invisible{visibility:hidden; height: 0; }
   @include device(xs){width: 100%}
 }
 
 /*others*/
 #barba-wrapper{@include box(100%, 100%)}
 #program-background{
+  @include device(sm){
+    .u-half{width:85%; margin: 0 auto; float: none}
+  }
   @include device(xs){
+    .u-half{width: auto}
     .u-pl-l{padding-left: 0;}
   }
 }
 #program-stories{
-  @include device(xs){
+  @include device(sm){
+    .u-third{width: 50%}
+    .u-twothird{width: 50%}
+    .u-half{float: none; width:auto}
+    .o-rhombus.s--large{width:17.5em; height: 17.5em}
     .u-pl-m, .u-pl-l{padding-left: 0}
+  }
+  @include device(xs){
+    .u-third{width: auto}
+    .u-twothird{width: auto}
   }
 }
 #funding{
@@ -1314,6 +1448,13 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 #implementing{
+  @include device(sm){
+    .u-half{width: 85%; @include center; float: none}
+    .o-partners{
+      .u-third{width: 50%}
+      span{height:3em}
+    }
+  }
   @include device(xs){
     .o-partners {
       span{height: auto;}
@@ -1322,7 +1463,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 #values{
-  @include device(xs){
+  @include device(sm){
     .o-table{display: none;}
   }
 }
@@ -1331,8 +1472,49 @@ em{font-family: 'Georgia'; font-style: italic;}
     .u-half{height: auto;background-color: transparent;}
   }
 }
-#sadolinplascon{width: 100%; height: 60px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
-.barba-container{@include box(100%, 100%)}
+.c-eastafrica {
+  @include device(md){
+    .s--right{
+      .u-half{width: 100%;
+        &:first-child{padding-bottom: 1.5em;}
+      }
+    }
+  }
+}
+#how-work{
+  @include device(md){
+    .o-box{
+      >.u-half:first-child{width:70%}
+      >.u-half:last-child{width: 30%}
+    }
+  }
+  @include device(sm){
+    .u-half{float: none; width:auto !important} 
+  }
+}
+#education{
+  @include device(sm){
+    .u-half{width: 70%}
+    .o-rhombus.s--medium{width: 10em; height: 10em}
+    .u-third{width:50%;
+      &:first-child{width:auto;
+        .o-rhombus-button{@include center; margin-bottom: 2em}
+      }
+    }
+  }
+  @include device(xs){
+    .u-half{width: auto}
+    .o-rhombus.s--medium{width: 15em; height: 15em}
+    .u-third{width: auto}
+  }
+}
+#story-cta{
+  @include device(md){width:95%;
+    .c-cta{font-size:0.8em}
+  }
+}
+#sadolinplascon{width: 100%; height: 200px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
+.barba-container{@include box(100%, 100%); position: relative}
 .size-full-wrap{width: 120%; position: relative; left: -10%}
 .is-invisible{opacity: 0; visibility: hidden;}
 

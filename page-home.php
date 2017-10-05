@@ -112,7 +112,7 @@
 		</div>
 	</div>
 </section>
-<section class="o-section">
+<section class="o-section" id="how-work">
 	<div class="o-box">
 		<div class="u-half">
 			<?php

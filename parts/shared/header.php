@@ -40,33 +40,29 @@
 <header class="c-page__header">
 	<div class="o-box">
 		<section class="u-clear">
-			<div class="u-half">
-				<a href="<?php echo home_url(); ?>" class="c-logo"></a>
-			</div>
-			<div class="u-half">
-				<nav class="c-menu-primary">
-					<ul>
-						<li>
-							<a href="<?php echo home_url(); ?>/about">About</a>
-						</li>
-						<li>
-							<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
-						</li>
-						<li>
-							<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span><?php echo wp_count_posts('story')->publish; ?></span></a>
-						</li>
-						<li>
-							<a href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
-						</li>
-						<!-- <li>
-							<a href="<?php echo home_url(); ?>/contact">Contact</a>
-						</li> -->
-						<li>
-							<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
+			<a href="<?php echo home_url(); ?>" class="c-logo"></a>
+			<nav class="c-menu-primary">
+				<ul>
+					<li>
+						<a href="<?php echo home_url(); ?>/about">About</a>
+					</li>
+					<li>
+						<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
+					</li>
+					<li>
+						<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span><?php echo wp_count_posts('story')->publish; ?></span></a>
+					</li>
+					<li>
+						<a href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
+					</li>
+					<!-- <li>
+						<a href="<?php echo home_url(); ?>/contact">Contact</a>
+					</li> -->
+					<li>
+						<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
+					</li>
+				</ul>
+			</nav>
 		</section>
 	</div>
 </header>

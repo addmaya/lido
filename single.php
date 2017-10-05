@@ -62,7 +62,7 @@
 </div>
 <?php Starkers_Utilities::get_template_parts(array('parts/shared/content'));?>
 
-<div class="o-box">
+<div class="o-box" id="story-cta">
 	<div class="c-cta">
 		<div class="u-third">
 			<section>

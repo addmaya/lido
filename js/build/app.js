@@ -392,11 +392,10 @@ jQuery(document).ready(function($) {
 
 
         //play pop videos
-
         var deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var popSwiperSpeed = 800;
 
-        if(deviceWidth < 768){
+        if(deviceWidth < 960){
             popSwiperSpeed = 300;
         }
 
@@ -424,7 +423,7 @@ jQuery(document).ready(function($) {
             var player = $('.c-pop .o-player');
             var slider = $('#c-pop__swiper');
             
-            if (deviceWidth < 768) {
+            if (deviceWidth < 960) {
                 slider.find('.o-slider__image').css({
                     width: deviceWidth,
                     padding: '0',
@@ -466,6 +465,7 @@ jQuery(document).ready(function($) {
             $('.c-pop__box .o-player').html('');
             $('.c-pop').removeClass('is-visible');
             popSwiper.removeAllSlides();
+            $('.c-pop .o-player').hide();
         }
 
     	//render parallax scenes
@@ -530,6 +530,11 @@ jQuery(document).ready(function($) {
         var href = HTMLElement.href;
         var destination = href.substring(origin.length);
         var preloaderIcon = $('.c-preloader__title figure');
+
+        var deviceHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+        preloader.css({
+            height: deviceHeight
+        });
 
         preloaderIcon.removeClass();
 
