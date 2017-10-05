@@ -95,7 +95,7 @@ $easeInThief: cubic-bezier(0.22, 0, 0, 1);
 @mixin absolute{position: absolute}
 @mixin superscript{vertical-align:super; font-size:75%}
 @mixin canvas{width:100%; height: 100%}
-@mixin rhombus{/*-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)*/ clip-path:url('#rhombus');}
+@mixin rhombus{-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)/*clip-path:url('#rhombus'); -webkit-clip-path:url('#rhombus');*/}
 
 @keyframes fadeIn {
   from {opacity:0}
@@ -334,6 +334,11 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(md){
     &.s--large{width: auto; height: auto}
     &.s--medium{width:13em; height: 13em}
+  }
+  .ua-microsoft &{background-color: transparent;
+    .o-rhombus__image{border-radius:50%;
+      &:before{display: none;}
+    }
   }
 }
 .o-rhombus__image{padding-bottom: 100%;background-position: center;background-size: cover; background-repeat: no-repeat; @include txnTransform(0.5, ease); position: relative;
@@ -699,13 +704,22 @@ em{font-family: 'Georgia'; font-style: italic;}
       figure{@include translateY(em(-24))}
     }
   }
-  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain}
+  figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain;
+    #networks &{padding-bottom: 70%}
+  }
   span{display: block; height:em(72); overflow: hidden;
     &.s--inline{height: auto;}
   }
   &.s--third{
     li{width: percentage(1/3);
       @include device(sm){width: 50%}
+    }
+  }
+  &.s--others{
+    li{width: 50%;
+      @include device(sm){
+        width: auto
+      }
     }
   }
   @include device(sm){
@@ -829,7 +843,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-cap{color: #903; float: left; font-size: em(84); line-height: 60px; padding: em(1) em(2) em(3) 0;background: url('images/pattern-2.png') repeat; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size:10%; font-weight:bold}
 
 /*components*/
-.c-page__wrap{width:55%; min-height: 100%; margin: em(30) auto; position: relative; 
+.c-page__wrap{width:em(1400); min-height: 100%; margin: em(30) auto; position: relative; 
   &:after{
     content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
   }
@@ -1166,7 +1180,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   section{padding-top: em(24)}
   .o-line{margin-top: em(24)}
   .o-value{width: em(576); @include clear; position: absolute; text-align: left;}
-  .o-rhombus{@include center; @include cover;}
+  .o-rhombus{@include center; @include cover;
+    .ua-microsoft &{border-radius: 50%}
+  }
   .s--one{top: -10%; right:-30%}
   .s--two{top: 30%; left:-25%;
     .u-half{float:none;}

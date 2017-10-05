@@ -104,10 +104,6 @@
 		$featuredQuote = get_field('featured_quote');
 		$featuredQuoteTitle = $featuredQuote['quote'];
 		$featuredQuotePhoto = $featuredQuote['image'];
-
-		$featuredQuoteAuthor = $featuredQuote['staff'];
-		$featuredAuthorName = $featuredQuote['author']['name'];
-		$featuredAuthorTitle = $featuredQuote['author']['title'];
 	?>
 	<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $featuredQuotePhoto; ?>">
 		<span class="o-image__cover"></span>
@@ -118,9 +114,10 @@
 					<p><?php echo $featuredQuoteTitle; ?></p>
 					<span class="o-line"></span>
 				</blockquote>
-				<?php if(!get_field('quote_author')){?>
+				<?php if(get_field('quote_author')){?>
 					<div class="o-author">
 						<?php
+							$featuredQuoteAuthor = $featuredQuote['staff'];
 							$featureQuoteStaff = new WP_Query(array('post_type'=>'team', 'p'=>$featuredQuoteAuthor));
 							while ( $featureQuoteStaff->have_posts() ) : $featureQuoteStaff->the_post();
 								$featureQuoteStaffPhoto = get_field('photo');
@@ -136,12 +133,17 @@
 						<?php endwhile; wp_reset_postdata(); ?>
 					</div>
 
-				<?php } else {?>
+				<?php } else {
+
+					$author = $featuredQuote['author']['name'];
+					$authorTitle = $featuredQuote['author']['title'];
+					$authorPhoto = $featuredQuote['author']['photo'];
+					?>
 					<div class="o-author">
-						<figure></figure>
+						<figure class="js-bkg" data-image-url="<?php echo($authorPhoto['sizes']['medium']); ?>"></figure>
 						<section>
-							<strong><?php echo $featuredAuthorName; ?></strong>
-							<em><?php echo $featuredAuthorTitle; ?></em>
+							<strong><?php echo $author; ?></strong>
+							<em><?php echo $authorTitle; ?></em>
 						</section>
 					</div>
 				<?php } ?>

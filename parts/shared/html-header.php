@@ -58,13 +58,11 @@
 		<?php wp_head(); ?>
 	</head>
 	<body class="is-booting u-oh">
-		<svg width="0" height="0">
+		<svg width="0" height="0" style="display: none">
 		  <defs>
-		    <g>
-		    	<clipPath id="rhombus" clipPathUnits="objectBoundingBox">
-		    	  <path class="cls-1" d="M0.5,1L0,0.5,0.5,0,1,0.5Z"/>
-		    	</clipPath>
-		    </g>
+		    <clipPath id="rhombus" clipPathUnits="objectBoundingBox">
+		      <path class="cls-1" d="M0.5,1L0,0.5,0.5,0,1,0.5Z"/>
+		    </clipPath>
 		  </defs>
 		</svg>
 

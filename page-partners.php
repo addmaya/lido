@@ -62,7 +62,7 @@
 					</li>
 				<?php  endwhile; wp_reset_postdata(); ?>
 			</ul>
-			<ul class="o-partners u-pt-l">
+			<ul class="o-partners u-pt-l s--others">
 				<?php 
 					$fundingPartnersPlain = new WP_Query(array(
 						'post_type'=>'partner',
@@ -244,7 +244,7 @@
 			<h1><?php echo $sectionNetworksTitle; ?></h1>
 			<p><?php echo $sectionNetworksSummary; ?></p>
 			<section class="u-pt-l">
-				<ul class="o-partners s--third">
+				<ul class="o-partners s--third s--networks">
 					<?php 
 						$networkPartners = new WP_Query(array(
 							'post_type'=>'partner',

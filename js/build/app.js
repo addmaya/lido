@@ -183,10 +183,14 @@ jQuery(document).ready(function($) {
 
     }
 
-    
+   
 
     function pageLoad(){
-        
+        //add edge styles
+        if ((document.documentMode || /Edge/.test(navigator.userAgent))) {
+           body.addClass('ua-microsoft');
+        }
+
         //draw map
         var map = null;
         $('.o-map').each(function(){
@@ -596,8 +600,7 @@ jQuery(document).ready(function($) {
                width: progress+'%'
            });
        }
-    })
-
+    });
 
     //boot system
 	pageLoad();
