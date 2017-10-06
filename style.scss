@@ -1236,7 +1236,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   header{position: relative; margin-top:em(-56); margin-bottom: em(48);
     span{margin-top: em(-16);}
   }
-  figure{position: absolute; right:-20%; @include box(em(240), em(360)); top:10%; @include image('illustrations/farmer.png'); @include contain}
+  figure{position: absolute; right:-20%; @include box(em(240), em(360)); top:10%; @include contain}
   @include device(md){
     width: 75%;
   }
