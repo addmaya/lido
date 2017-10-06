@@ -503,7 +503,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
   @include device(xs){padding-bottom: 200%;
-    &.s--video{
+    &.s--video{padding-bottom:130%;
       .o-box{width: 90%;}
     }
   }
@@ -1209,6 +1209,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-value{width: auto; position: static;}
     .o-table{display: none;}
     .o-rhombus{@include center}
+    figure{position: relative}
   }
 }
 
@@ -1216,7 +1217,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &:hover{
     .c-orbit__sun{@include image('/sequences/globe-color.png'); @include prefix((animation-play-state: running))}
   }
-  @include device(sm){width: auto; border:none; border-radius: 0; position: static; height: auto;}
+  @include device(sm){width: auto; border:none; border-radius: 0; position: static; height: auto; background: transparent}
 }
 .c-orbit__sun{@include box(256px, 266px); display: inline-block; @include prefix((animation: globe 2s infinite steps(50) forwards paused)); @include image('/sequences/globe-bw.png');}
 
@@ -1365,12 +1366,10 @@ em{font-family: 'Georgia'; font-style: italic;}
     header{width: 75%}
       section{top: em(20); width: 50%;}
     }
-  }
   @include device(xs){
     header{width: auto}
-    .o-author{padding-bottom: 0;
-    .u-third{width: auto}
     .o-author{padding-bottom: 0}
+    .u-third{width:auto}
   }
 }
 
@@ -1418,8 +1417,11 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-preloader__bkg{@include canvas; position: absolute; top:0; left:0; @include resetPivot; background-color:#D888A3}
 .c-preloader__count{position: absolute; font-size: em(36); font-weight: bold; top:1em; z-index: 1; display: block}
 
-.c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; visibility:hidden;
+.c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; visibility:hidden; overflow:scroll;
   &.is-visible{visibility: visible}
+  @include device(xs){
+    .o-button__close{right:0; top: -56px}
+  }
 }
 .c-pop__box{background-color: #6d6d6d; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
   @include device(sm){width:90%; height: auto}
@@ -1446,11 +1448,16 @@ em{font-family: 'Georgia'; font-style: italic;}
 #barba-wrapper{@include box(100%, 100%)}
 #program-background{
   @include device(sm){
+    .o-section__cover{background:none}
     .u-half{width:85%; margin: 0 auto; float: none}
   }
   @include device(xs){
+    
     .u-half{width: auto}
     .u-pl-l{padding-left: 0;}
+    .c-program__meta{
+      .u-half{width: 50% !important; float: left !important}
+    }
   }
 }
 #program-stories{
@@ -1539,6 +1546,10 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 #sadolinplascon{width: 100%; height: 200px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
 .barba-container{@include box(100%, 100%); position: relative}
-.size-full-wrap{width: 120%; position: relative; left: -10%}
+.size-full-wrap{width: 120%; position: relative; left: -10%;
+  @include device(xs){
+    width: auto; left: auto;
+  }
+}
 .is-invisible{opacity: 0; visibility: hidden;}
 

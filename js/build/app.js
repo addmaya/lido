@@ -478,6 +478,7 @@ jQuery(document).ready(function($) {
                 if (deviceWidth < 960) {
                     albumPop.find('.o-slider__image').css({
                         width: deviceWidth - 36,
+                        height: deviceWidth,
                         margin: '0 auto'
                     });                
                 }
