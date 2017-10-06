@@ -839,10 +839,13 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-article__meta{font-size: 0.75em; color: $white; opacity: 0.8;
   a{display: block; padding: em(6) 0 em(3)}
 }
-.o-closer{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s; display: none;
+.o-button__close{position: absolute; top: 0; right: 0; @include box(em(56),em(56)); background-color: $redA; z-index: 2; @include image('close.svg'); background-repeat: no-repeat; background-position: center; background-size: 50%; transition: background-color 0.3s;
+  .c-menu-secondary &{display: none}
   &:hover{background-color: darken($redA,10%)}
   .c-pop &{right: -56px}
-  @include device(sm){display: block;}
+  @include device(sm){
+    .c-menu-secondary &{display: block}
+  }
 }
 .o-player{position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;
   iframe, object, embed{position: absolute; top: 0; left: 0; width: 100%; height: 100%}
@@ -1417,7 +1420,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-pop{position: fixed; top: 0; left:0; background-color: rgba(0,0,0,0.9); width: 100%; height: 100%; z-index: 200; visibility:hidden;
   &.is-visible{visibility: visible}
 }
-.c-pop__box{background-color: #fff; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
+.c-pop__box{background-color: #6d6d6d; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
   @include device(sm){width:90%; height: auto}
 }
 .c-pop__close{width: 2em;height: 2em; background-position:center; background-repeat: no-repeat;; background-size: contain; @include image('btn-close.svg'); display: inline-block; position: absolute; top: -36px; right: 0; transition:opacity 0.3s ease;
@@ -1433,6 +1436,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-splash{margin: em(12)}
   .js-video{filter: grayscale(100%)}
 }
+.c-libary__vault{display: none}
 
 /*hooks*/
 #barba-wrapper{@include box(100%, 100%)}

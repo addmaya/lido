@@ -53,7 +53,7 @@
 	</svg>
 </a>
 <div class="c-menu-secondary t-dark">
-	<a href="#" class="o-closer"></a>
+	<a href="#" class="o-button__close"></a>
 	<div>
 		<ul>
 			<li class="c-menu-secondary__item">

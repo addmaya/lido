@@ -235,7 +235,7 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
-	function renderMedia($albumTitle, $albumCover, $type, $videoID = ''){
+	function renderMedia($aosDelay, $albumTitle, $albumCover, $type, $videoID = ''){
 		if($type == 'js-video'){
 			$icon = 's--play';
 			$label = 'Video';
@@ -247,7 +247,7 @@
 
 		$html = '';
 
-		$html .= '<a class="o-splash s--video js-photo" href="#" data-video-id="'.$videoID.'">';
+		$html .= '<a class="o-splash s--video '.$type.'" href="#" data-video-id="'.$videoID.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
 		$html .= '<figure class="o-splash__figure js-defer" data-image-url="'.$albumCover.'">';
 		$html .= '<div class="o-splash__tint">';
 		$html .= '<div class="o-table">';
@@ -335,24 +335,61 @@
 		if($stories->have_posts()){
 			while ($stories->have_posts()) {
 				$stories->the_post();
+					if(!($postType == 'video' || $postType == 'album')){
+						if($articleCount > 3){
+							$articleCount = 0;
+						}						
+						
+						$storyTitle = get_the_title();
+						$storyLink = get_permalink();
+						$storyBeneficiary = get_field('beneficiary');
+						$storyPhoto = get_field('photo');
+						$storyArea = get_field('area');
+						$storyPrograms = get_field('program');
+						$articleClass = getArticleClass($articleCount);
+						
+						$html .= renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $postBalance);
+						
+						$articleCount++;
+						
+					}
+					else {
+						if ($postType == 'video') {
+							$type = 'js-video';
 
-				if($articleCount > 3){
-					$articleCount = 0;
-				}						
-				
-				$storyTitle = get_the_title();
-				$storyLink = get_permalink();
-				$storyBeneficiary = get_field('beneficiary');
-				$storyPhoto = get_field('photo');
-				$storyArea = get_field('area');
-				$storyPrograms = get_field('program');
-				$articleClass = getArticleClass($articleCount);
-				
-				$html .= renderArticle($articleClass, $articleCount, $aosDelay, $storyPhoto, $storyLink, $storyBeneficiary, $storyPrograms, $storyArea, $postBalance);
-				
-				$articleCount++;
-				$aosDelay = $aosDelay + 50;	
-			} 
+							$videoLink = get_field('link', false, false);
+							$videoID = getYoutubeID($videoLink);
+							$videoMeta = getYoutubeMeta($videoID);
+
+							$videoThumb = $videoMeta['yt_thumb'];
+							$videoThumbHigh = $videoMeta['yt_thumb_high'];
+
+							if(!$videoThumb){
+								$videoThumb = $videoThumbHigh;
+							}
+
+							$html .= '<div class="u-half">'.renderMedia($aosDelay, $videoMeta['yt_title'], $videoThumb, 'js-video', $videoID).'</div>';
+						}
+						else {
+							$type = 'js-photo';
+
+							$albumTitle = get_the_title();
+							$albumLink = get_permalink();
+							$albumPhotos = get_field('photos');
+							$albumCover = $albumPhotos[0]['sizes']['large'];
+							$albumSlides = '';
+
+							foreach ($albumPhotos as $albumPhoto) {
+								$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['url'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
+							}
+
+							$html .= '<div class="u-half">'.renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo').'<div class="c-libary__vault">'.$albumSlides.'</div></div>';
+						}
+						
+					}
+
+					$aosDelay = $aosDelay + 50;	
+				}
 
 			wp_reset_postdata();
 			echo json_encode($html);	

@@ -164,7 +164,7 @@
 					<section class="o-splash s--video">
 						<figure class="o-splash__figure js-bkg" data-image-url="<?php echo $videoThumb; ?>">
 							<div class="o-splash__player">
-								<a class="o-closer o-player__close" href="#"></a>
+								<a class="o-button__close o-player__close" href="#"></a>
 								<div class="o-player">
 										
 								</div>

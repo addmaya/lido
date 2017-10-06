@@ -1,11 +1,20 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-pop">
+<div class="c-pop" id="videoPop">
 	<div class="o-table" >
 		<div class="o-table__cell">
 			<div class="c-pop__box">
-				<a href="#" class="o-closer"></a>
-				<div class="o-player u-hide"></div>
-				<section class="o-slider" id="c-pop__swiper">
+				<a href="#" class="o-button__close"></a>
+				<div class="o-player"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="c-pop" id="albumPop">
+	<div class="o-table" >
+		<div class="o-table__cell">
+			<div class="c-pop__box">
+				<a href="#" class="o-button__close"></a>
+				<section class="o-slider">
 					<div class="u-threefourth o-slider-col">
 						<div class="o-slider__image">
 							<div class="swiper-container">
@@ -106,9 +115,9 @@
 		</div>
 		<div class="c-library">
 			<?php
+				$aosDelay = 0;
 				while ($videos->have_posts()) : $videos->the_post();
 					$videoLink = get_field('link', false, false);
-					$videoSummary = get_field('summary');
 					$videoID = getYoutubeID($videoLink);
 					$videoMeta = getYoutubeMeta($videoID);
 
@@ -120,14 +129,14 @@
 					}
 			 ?>
 			<div class="u-half">
-				<?php echo renderMedia($videoMeta['yt_title'], $videoThumb, 'js-video', $videoID); ?>
+				<?php echo renderMedia($aosDelay, $videoMeta['yt_title'], $videoThumb, 'js-video', $videoID); ?>
 			</div>
-			<?php $videoIndex++; endwhile; wp_reset_postdata(); ?>
+			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
 		</div>
 
 		<?php if (!(($postBalance - 1) < 1)): ?>
 			<div class="u-center">
-				<a href="#" class="o-button s--multiline s--med js-fetch-posts" data-post="video">
+				<a href="#" class="o-button s--multiline s--med js-media" data-post="video">
 					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
 					<span>More Videos</span>
 				</a>
@@ -145,7 +154,7 @@
 	$postCount = $albums->post_count;
 	$postBalance = wp_count_posts('video')->publish - $postCount;
 ?>
-<section class="o-section s--med">
+<section class="o-section">
 	<div class="o-box">
 		<div class="o-crumb s--updates">
 			<div class="o-crumb__title">Photo Galleries</div>
@@ -154,6 +163,7 @@
 		</div>
 		<div class="c-library">
 			<?php
+				$aosDelay = 0;
 				while ($albums->have_posts()) : $albums->the_post();
 					$albumTitle = get_the_title();
 					$albumLink = get_permalink();
@@ -166,14 +176,14 @@
 					}
 			 ?>
 			<div class="u-half">
-				<?php echo renderMedia($albumTitle, $albumCover, 'js-photo'); ?>
+				<?php echo renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo').'<div class="c-libary__vault">'.$albumSlides.'</div>'; ?>
 			</div>
-			<?php endwhile; wp_reset_postdata(); ?>
+			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
 		</div>
 
 		<?php if (!(($postBalance - 1) < 1)): ?>
 			<div class="u-center">
-				<a href="#" class="o-button s--multiline s--med js-media" data-post="video">
+				<a href="#" class="o-button s--multiline s--med js-media" data-post="album">
 					<i class="o-icon"><strong><?php echo $postBalance; ?></strong></i>
 					<span>More Albums</span>
 				</a>
