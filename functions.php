@@ -210,15 +210,15 @@
 	}
 	function renderCircularButton($link, $title, $image){
 		$button = renderButton('',$title, 'div');
-		return '<a href="'.$link.'" class="o-button s--circular"><section><figure style="background-image:url('.$image.')"></figure></section>'.$button.'</a>';
+		return '<a href="'.$link.'" class="o-button s--circular"><section><figure class="js-bkg" data-image-url="'.$image.'"></figure></section>'.$button.'</a>';
 	}
 	function renderRhombusButton($link, $title, $image){
 		$button = renderButton('',$title, 'div');
 		if($title){
-			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div>'.$button.'</a>';
+			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image js-bkg" data-image-url="'.$image.'"></figure></div>'.$button.'</a>';
 		}
 		else {
-			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image" style="background-image:url('.$image.')"></figure></div></a>';
+			return '<a href="'.$link.'" class="o-rhombus-button"><div class="o-rhombus s--medium"><figure class="o-rhombus__image js-bkg" data-image-url="'.$image.'"></figure></div></a>';
 		}
 	}
 
