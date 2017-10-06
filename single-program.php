@@ -25,6 +25,24 @@
 	));
 
 	$programBackground = get_field('background');
+
+	$programAreas = array();
+	$mappedPartners = new WP_Query(array(
+		'post_type'=>'partner',
+		'posts_per_page'=>-1,
+		'meta_query'=>array(
+			array(
+				'key'=>'interventions_supported',
+				'value'=> '"'.get_the_ID().'"',
+				'compare'=>'LIKE'
+			),
+			array(
+				'key'=>'areas',
+				'value'=>'',
+				'compare'=> '!='
+			)
+		)
+	));
 ?>
 <section class="c-cover">
 	<div class="u-half">
@@ -33,7 +51,7 @@
 		</figure>
 	</div>
 	<div class="u-half c-cover__profile s--single" >
-		<div class="o-table js-bkg" data-image-url="<?php the_field('3d_illustration'); ?>">
+		<div class="o-table js-bkg" <?php if($mappedPartners->have_posts()){echo 'data-image-url="'.get_field('3d_illustration').'"';}?>>
 			<div class="o-table__cell">
 				<section class="c-cover__section">
 					<h1><?php the_title(); ?></h1>
@@ -62,7 +80,10 @@
 </section>
 
 <?php if ($programBackground): ?>
-	<section class="o-section" id="program-background">
+	<section class="o-section s--cover" id="program-background">
+		<?php if (!($mappedPartners->have_posts())): ?>
+			<figure class="o-section__cover js-defer" data-image-url="<?php echo get_field('3d_illustration'); ?>" data-aos="fade-up" ></figure>
+		<?php endif ?>
 		<div class="o-box">
 			<div class="u-clear">
 				<div class="u-half" data-aos="fade-up">
@@ -76,58 +97,42 @@
 					</section>
 				</div>
 				<div class="u-half" data-aos="fade-up" data-aos-delay="200">
-					<section class="u-pl-l">
-						<div class="c-program__map">
-							<div class="o-map">
-							<?php
-								$programAreas = array();
-								$mappedPartners = new WP_Query(array(
-									'post_type'=>'partner',
-									'posts_per_page'=>-1,
-									'meta_query'=>array(
-										array(
-											'key'=>'interventions_supported',
-											'value'=> '"'.get_the_ID().'"',
-											'compare'=>'LIKE'
-										),
-										array(
-											'key'=>'areas',
-											'value'=>'',
-											'compare'=> '!='
-										)
-									)
-								));
-
-								while($mappedPartners->have_posts()){
-									$mappedPartners->the_post();
-									$areas = get_field('areas');
-									foreach ($areas as $area){
-										echo '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
-										$programAreas[] = $area['area']['address'];
-									}
-								}
-								wp_reset_postdata();
-							?>
-							</div>
-						</div>
-						<div class="c-program__meta">
-							<div class="u-half">
-								<span class="u-uppercase">Focus</span>
-								<span class="u-uppercase">Partners</span>
-							</div>
-							<div class="u-half">
+					<?php if($mappedPartners->have_posts()){?>
+						<section class="u-pl-l">
+							<div class="c-program__map">
+								<div class="o-map">
 								<?php
-									$groupList  = array();
-									$groups = wp_get_post_terms($post->ID, 'group');
-									foreach ($groups as $group) {
-										$groupList[] = $group->name;
+									while($mappedPartners->have_posts()){
+										$mappedPartners->the_post();
+										$areas = get_field('areas');
+										foreach ($areas as $area){
+											echo '<div class="marker" data-lat="'.$area['area']['lat'].'" data-lng="'.$area['area']['lng'].'"></div>';
+											$programAreas[] = $area['area']['address'];
+										}
 									}
+									wp_reset_postdata();
 								?>
-								<span><?php echo implode(', ', $groupList); ?></span>
-								<span><a href="#program-partners" class="u-link"><?php echo $programPartners->post_count; ?></a></span>
+								</div>
 							</div>
-						</div>
-					</section>
+							<div class="c-program__meta">
+								<div class="u-half">
+									<span class="u-uppercase">Focus</span>
+									<span class="u-uppercase">Partners</span>
+								</div>
+								<div class="u-half">
+									<?php
+										$groupList  = array();
+										$groups = wp_get_post_terms($post->ID, 'group');
+										foreach ($groups as $group) {
+											$groupList[] = $group->name;
+										}
+									?>
+									<span><?php echo implode(', ', $groupList); ?></span>
+									<span><a href="#program-partners" class="u-link"><?php echo $programPartners->post_count; ?></a></span>
+								</div>
+							</div>
+						</section>
+					<?php } ?>
 				</div>
 			</div>
 		</div>

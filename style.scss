@@ -626,6 +626,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.s--single{padding:4em 0 6em; font-size: em(20); font-weight: 300;
     p{line-height:1.8}
   }
+  a{color: $redB}
   &.s--map{padding-top:0; padding-bottom:0;
     .o-map{height:em(360)}
   }
@@ -743,7 +744,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-byline{font-size:0.75em; display: block; opacity:0.5; padding:0.5em 0}
 .o-input{position: relative; margin-bottom:em(26);overflow: hidden;
   input,textarea,select{padding:em(12) 0 em(18);font-family: "acumin-pro",sans-serif; width: 100%;}
-  select{color: lighten(grey, 3%)}
+  select{color: lighten(grey, 3%); @include image('dropdown.svg'); background-position:right center; background-repeat: no-repeat; background-size:em(24);}
   span{@include box(100%, 2px); @include bkg($redA); display: block; bottom: 0; position: absolute; left:0; z-index:2}
   &:after{@include box(em(16), em(16)); content: ""; position: absolute; top: 0; left: 0; border:solid 2px $redB; @include prefix((transform: translate(0%, -120%) rotate(45deg))); @include txnTransform(0.3, $easeOutBack)}
   &.is-active{
@@ -1096,7 +1097,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
   @include device(xs){padding-top: 3em;
     h4{position: static;}
-    ul{position: relative; left: em(18)}
+    ul{list-style:inside circle}
     .u-fifth{width: auto}
   }
 }
@@ -1437,6 +1438,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   .js-video{filter: grayscale(100%)}
 }
 .c-libary__vault{display: none}
+.c-404{background-color: grey; height: 60%; 
+  figure{display: block; @include center; @include box(90px, 90px); @include cover; @include image('404.png'); margin-bottom:2em}
+}
 
 /*hooks*/
 #barba-wrapper{@include box(100%, 100%)}
