@@ -172,7 +172,7 @@
 					$albumSlides = '';
 
 					foreach ($albumPhotos as $albumPhoto) {
-						$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['url'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
+						$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['sizes']['large'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
 					}
 			 ?>
 			<div class="u-half">
