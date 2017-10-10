@@ -79,7 +79,7 @@
 	function getYoutubeMeta($yt_id){
 		$yt_apikey = 'AIzaSyCuQTR5LVpmHgs2EPrhBVbAGjmHunxTmMk';
 		$yt_query = wp_remote_get('https://www.googleapis.com/youtube/v3/videos?id='.$yt_id.'&key='.$yt_apikey.'&fields=items(snippet(title,description,publishedAt,thumbnails(maxres,high)),statistics(viewCount))&part=snippet,statistics');
-		$yt_response = json_decode($yt_query);
+		$yt_response = json_decode($yt_query['body']);
 		$yt_meta['yt_date'] = $yt_response->items[0]->snippet->publishedAt;
         $yt_meta['yt_title'] = $yt_response->items[0]->snippet->title;
 		$yt_meta['yt_desc'] = $yt_response->items[0]->snippet->description;
