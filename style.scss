@@ -512,13 +512,13 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-splash__tint{@include absolute; @include canvas; z-index:2; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000); text-align:center; }
 .o-splash__content{position: absolute; bottom: 5%; width: 100%; z-index: 3; text-align: center;
   h2{color: inherit}
-  blockquote{width: 70%; margin-bottom: em(24); @include center; padding:10em 0;
+  blockquote{width: 70%; margin-bottom: em(24); @include center; padding:0 8em;
     p{font-size: 1.25em; font-weight:400; line-height: 1.5;}
     .o-line{margin-top: em(24)}
   }
   .o-author{text-align: left}
   @include device(sm){
-    blockquote{width:85%;
+    blockquote{width:90%;
       p{font-size: em(16)}
     }
   }
@@ -715,7 +715,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain;
     #networks &{padding-bottom: 70%}
   }
-  span{display: block; height:em(72); overflow: hidden;
+  span{display: block; height:auto; overflow: hidden;
     &.s--inline{height: auto;}
   }
   &.s--third{
@@ -1195,7 +1195,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .ua-microsoft &{border-radius: 50%}
   }
   .o-rhombus__pattern{width: 17em; height: 17em; z-index:-10}
-  .s--one{top: -5%; right:-30%}
+  .s--one{top: -5%; right:-15%}
   .s--two{top: 30%; left:-15%;
     .u-half{float:none;}
     .o-rhombus{margin-left:0;}
@@ -1354,13 +1354,17 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-implementers{@include image('ea-map.png'); height: 705px; @include contain;
   &.s--programs{height: 600px}
 }
-.c-team{text-align:center; padding-bottom: 0;
+.c-team{text-align:center; padding-bottom:4em;
   header{width: 50%; @include center; padding-bottom: 4em}
   ul{@include clear; text-align: left}
   figure{width: em(96); height: em(96)}
   section{top: em(36)}
   .o-author{padding-bottom:1em}
 
+  @include device(md){
+    section{width: 50%; top: em(20); line-height:1.3}
+    .o-author{padding-bottom: 2em}
+  }
   @include device(sm){
     .u-third{width: 50%}
     header{width: 75%}

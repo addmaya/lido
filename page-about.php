@@ -241,7 +241,45 @@
 			</li>
 			<?php endwhile; wp_reset_postdata(); ?>
 		</ul>
-		<div class="o-line s--divider"></div>
+	</div>
+</section>
+<section class="o-section s--med c-docs s--cover" id="documents">
+	<figure class="o-section__cover" data-aos="fade-up"></figure>
+	<div class="o-box">
+		<div class="o-crumb s--updates">
+			<div class="o-crumb__title">Annual Reports</div>
+			<div class="o-crumb__line"></div>
+			<div class="o-crumb__circle"></div>
+		</div>
+		<div class="u-clear">
+			<?php 
+				$documents = new WP_Query(array(
+					'post_type'=>'document',
+					'posts_per_page'=>-1,
+					'tax_query'=> array(
+						'relation'=>'AND',
+						array(
+							'taxonomy'=>'collection',
+							'field'=>'slug',
+							'terms'=>'annual'
+						)
+					  )
+					)
+				);
+				$aosDelay = 0;
+				while ($documents->have_posts()) : $documents->the_post();
+					$documentFile = get_field('file');
+					$documentCover ='';
+				?>
+					<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php the_title(); ?>" href="<?php echo $documentFile; ?>" target="_blank" class="o-doc u-fourth no-barba">
+						<section>
+							<i class="o-icon"></i>
+							<span><?php the_title(); ?></span>
+							<p><?php echo get_the_date(); ?></p>
+						</section>
+					</a>
+			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
+		</div>
 	</div>
 </section>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

@@ -192,7 +192,6 @@
 	</div>
 </section>
 
-
 <section class="o-section s--med c-docs s--cover" id="documents">
 	<figure class="o-section__cover" data-aos="fade-up"></figure>
 	<div class="o-box">
@@ -206,6 +205,15 @@
 				$documents = new WP_Query(array(
 					'post_type'=>'document',
 					'posts_per_page'=>-1,
+					'tax_query'=> array(
+						'relation'=>'AND',
+						array(
+							'taxonomy'=>'collection',
+							'field'=>'slug',
+							'terms'=>'annual',
+							'operator'=>'NOT IN'
+						)
+					)
 					)
 				);
 				$aosDelay = 0;
