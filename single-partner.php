@@ -54,7 +54,7 @@
 		<p><?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $partnerSummary); ?></p>
 		<span class="o-line"></span>
 		<?php if ($programs->have_posts()): ?>
-			<h3 class="u-pt-m">Programs Supported</h3>
+			<h3 class="u-pt-m">Programs Implemented</h3>
 			<div>
 				<?php while($programs->have_posts()):$programs->the_post();
 					echo renderCircularButton(get_permalink(), get_the_title(), get_field('photo'));

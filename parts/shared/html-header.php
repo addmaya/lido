@@ -36,11 +36,22 @@
 			$seoImage = get_field('photo');
 			if($seoImage){
 				echo $seoImage;
+				$seoImageID = getImageID($seoImage);
+				$seoImageMeta = wp_get_attachment_metadata($seoImageID);
+				$seoImageWidth = $seoImageMeta['width'];
+				$seoImageHeight = $seoImageMeta['height'];
 			}
 			else {
+				$seoImageWidth = 960;
+				$seoImageHeight = 640;
 				echo get_stylesheet_directory_uri().'/images/dummy-2.jpg';
 			}
 			?>"/>
+		<?php if ($seoImageWidth && $seoImageHeight): ?>
+			<meta property="og:image:width" content="<?php echo $seoImageWidth; ?>">
+			<meta property="og:image:height" content="<?php echo $seoImageHeight; ?>">
+		<?php endif ?>
+		
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon_.ico"/>
 		<link href="<?php echo get_stylesheet_directory_uri(); ?>/style.css" rel="stylesheet">
 		

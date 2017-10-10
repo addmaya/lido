@@ -106,7 +106,7 @@
 					</div>
 				</section>
 				<div class="u-pt-l">
-					<?php echo renderButton(home_url().'/about', 'See our Poverty Interventions'); ?>
+					<?php echo renderButton(home_url().'/about', 'See our Interventions'); ?>
 				</div>
 			</section>
 		</div>

@@ -1,4 +1,11 @@
 <?php
+
+	function getImageID($image_url) {
+	    global $wpdb;
+	    $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url )); 
+	        return $attachment[0]; 
+	}
+
 	require_once( 'external/starkers-utilities.php' );
 	
 	function getArticleClass($articleCount){
@@ -25,7 +32,7 @@
 	//add_theme_support('post-thumbnails');	
 	function get_custom_feeds($feed_query) {
 		if (isset($feed_query['feed']) && !isset($feed_query['post_type']))
-			$feed_query['post_type'] = array('story', 'post', 'album', 'video');
+			$feed_query['post_type'] = array('story', 'post', 'album');
 		return $feed_query;
 	}
 	add_filter('request', 'get_custom_feeds');
