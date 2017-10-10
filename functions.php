@@ -78,7 +78,7 @@
 
 	function getYoutubeMeta($yt_id){
 		$yt_apikey = 'AIzaSyCuQTR5LVpmHgs2EPrhBVbAGjmHunxTmMk';
-		$yt_query = file_get_contents('https://www.googleapis.com/youtube/v3/videos?id='.$yt_id.'&key='.$yt_apikey.'&fields=items(snippet(title,description,publishedAt,thumbnails(maxres,high)),statistics(viewCount))&part=snippet,statistics');
+		$yt_query = wp_remote_get('https://www.googleapis.com/youtube/v3/videos?id='.$yt_id.'&key='.$yt_apikey.'&fields=items(snippet(title,description,publishedAt,thumbnails(maxres,high)),statistics(viewCount))&part=snippet,statistics');
 		$yt_response = json_decode($yt_query);
 		$yt_meta['yt_date'] = $yt_response->items[0]->snippet->publishedAt;
         $yt_meta['yt_title'] = $yt_response->items[0]->snippet->title;
@@ -124,13 +124,12 @@
 				$userMessage = trim($_POST['userMessage']);
 				if(!strstr($userMessage, 'http://')){
 					$messageBody = 'Email: '.$userEmail."\n".'Name: '.$userName."\n".'Phone Number: '.$userTelephone."\n".'Message: '.$userMessage;
-					wp_mail('ask@addmaya.com', 'SF Website Inquiry'.$userSubject, $messageBody, $messageHeader);
-					echo $userSubject;
+					wp_mail('sfeastafrica@stromme.org', 'SFEA Website: '.$userSubject, $messageBody, $messageHeader);
 				}
-				else {exit; echo 'error';}
+				else {exit;}
 			}
 		}
-		else {exit; echo 'fup';}	
+		else {exit;}	
 	}
 
 
