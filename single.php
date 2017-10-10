@@ -66,13 +66,18 @@
 	<div class="c-cta">
 		<div class="u-third">
 			<section>
-				<h3>Let the world know.<br/>Share this page.</h3>
+				<h3>Let the world know.<br/>Share this page.</h3>		
+				<?php
+					$postTitle = get_the_title();
+					$postPermalink = get_permalink();
+					$postID = get_the_id();
+				?>
 				<ul class="o-networks">
-					<li><a href=""><i class="c-fb"></i></a></li>
-					<li><a href=""><i class="c-tw"></i></a></li>
-					<li><a href=""><i class="c-gplus"></i></a></li>
-					<li><a href=""><i class="c-pin"></i></a></li>
-					<li><a href=""><i class="c-wa"></i></a></li>
+					<li><a href="mailto:?&subject=<?php echo $postTitle;?>&body=<?php echo $postPermalink; ?>"><i class="c-mail"></i></a></li>
+					<li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postPermalink; ?>"><i class="c-fb"></i></a></li>
+					<li><a href="https://twitter.com/home?status=<?php echo $postPermalink; ?>"><i class="c-tw"></i></a></li>
+					<li><a href="https://plus.google.com/share?url=<?php echo $postPermalink; ?>"><i class="c-gplus"></i></a></li>
+					<li><a href="whatsapp://send?text=<?php echo $postPermalink; ?>"><i class="c-wa"></i></a></li>
 				</ul>
 			</section>
 		</div>

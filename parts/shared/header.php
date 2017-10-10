@@ -57,73 +57,53 @@
 	<div>
 		<ul>
 			<li class="c-menu-secondary__item">
+				<a href="<?php echo home_url(); ?>/about">
+					<span>About</span>
+					<figure></figure>
+				</a>
+			</li>
+			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/programs">
 					<span>Programs</span>
-					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 10); ?>"></figure>
+					<figure></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/change-stories">
 					<span>Change Stories</span>
-					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 22); ?>"></figure>
+					<figure></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
 				<a href="<?php echo home_url(); ?>/partners">
 					<span>Partners</span>
-					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 41); ?>"></figure>
+					<figure></figure>
 				</a>
 			</li>
 			<li class="c-menu-secondary__item">
-				<a href="<?php echo home_url(); ?>/about">
-					<span>About</span>
-					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
-				</a>
-			</li>
-			<li class="c-menu-secondary__item u-hide">
 				<a href="<?php echo home_url(); ?>/newsroom">
 					<span>Newsroom</span>
-					<figure class="js-defer" data-image-url="<?php echo get_field('photo', 24); ?>"></figure>
+					<figure></figure>
 				</a>
 			</li>
 		</ul>
 		<div class="u-clear u-pt-m">
-			<div class="u-half">
-				<section class="u-wrap">
-					<h3>About</h3>
-					<p>Stromme Foundation is a Norwegian based international development organization that has, since 1976, worked to help people in Asia, South America, West and Eastern Africa get out of poverty</p>
-					<?php echo renderButton(home_url().'/about', 'Learn More'); ?>
-				</section>
-			</div>
-			<div class="u-half">
-				<section class="u-wrap">
-					<h3>Get in Touch</h3>
-					<?php
-						$contactInfo = get_field('contacts',18);
-						$contactTel = $contactInfo[0]['telephone'];
-						$contactAddress = $contactInfo[0]['address'];
-						$contactEmail = $contactInfo[0]['email'];
-						$fb = esc_url(get_field('facebook',18));
-						$tw = esc_url(get_field('twitter',18));
-					?>
-					<p>Address: <?php echo $contactAddress; ?></p>
-					<p>Telephone: <?php echo $contactTel; ?></p>
-					<p>Mail: <a href="mailto:<?php echo $contactEmail; ?>"><?php echo $contactEmail; ?></a></p>
-					<ul class="o-networks u-pt-m">
-						<li>
-							<a href="<?php echo $fb; ?>">
-								<i class="c-fb"></i>
-							</a>
-						</li>
-						<li>
-							<a href="<?php echo $tw; ?>">
-								<i class="c-tw"></i>
-							</a>
-						</li>
-					</ul>
-					<div class="u-pt-m"><?php echo renderButton(home_url().'/contact', 'Get in Touch'); ?></div>
-				</section>
-			</div>
+			<section class="u-wrap">
+				<h3>Get in Touch</h3>
+				<?php
+					$contactInfo = get_field('contacts',18);
+					$contactTel = $contactInfo[0]['telephone'];
+					$contactAddress = $contactInfo[0]['address'];
+					$contactEmail = $contactInfo[0]['email'];
+					$fb = esc_url(get_field('facebook',18));
+					$tw = esc_url(get_field('twitter',18));
+				?>
+				<p>Address: <?php echo $contactAddress; ?></p>
+				<p>Telephone: <?php echo $contactTel; ?></p>
+				<p>Mail: <a href="mailto:<?php echo $contactEmail; ?>"><?php echo $contactEmail; ?></a></p>
+				
+				<div class="u-pt-m"><?php echo renderButton(home_url().'/contact', 'Get in Touch'); ?></div>
+			</section>
 		</div>
 	</div>
 </div>

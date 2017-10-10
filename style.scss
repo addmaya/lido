@@ -241,9 +241,19 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .o-table{display: table; width: 100%; height: 100%}
 .o-table__cell{display: table-cell; vertical-align: middle}
-.o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center;
+.o-icon{width: em(24); height: em(24); display: inline-block; background-size: contain; background-repeat: no-repeat; background-position:center; 
   &.s--play{@include image('play.svg')}
   &.s--camera{@include image('camera.svg')}
+
+  &.s--website{@include image('/social-white/web.svg')}
+  &.s--facebook{@include image('/social-white/facebook.svg')}
+  &.s--twitter{@include image('/social-white/twitter.svg')}
+  &.s--instagram{@include image('/social-white/instagram.svg')}
+  &.s--youtube{@include image('/social-white/youtube.svg')}
+  &.s--google_plus{@include image('/social-white/gplus.svg')}
+  &.s--linkedin{@include image('/social-white/linkedin.svg')}
+  &.s--wikipedia{@include image('/social-white/wikipedia.svg')}
+  &.s--snapchat{@include image('/social-white/snapchat.svg')}
 }
 .o-circle{width:em(40); height:em(40); fill:transparent;  stroke-width: 1; stroke: $redA;
   circle{stroke-dasharray:70}
@@ -587,6 +597,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .c-gplus{@include image('social/gplus.svg')}
   .c-pin{@include image('social/pinterest.svg')}
   .c-wa{@include image('social/whatsapp.svg')}
+  .c-mail{@include image('social/mail.svg')}
 
   &.t-light{
     .c-fb{@include image('social-white/facebook.svg')}
@@ -626,6 +637,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   &.s--single{padding:4em 0 6em; font-size: em(20); font-weight: 300;
     p{line-height:1.8}
   }
+  &.s--partner__section{padding-bottom:3em}
   a{color: $redB}
   &.s--map{padding-top:0; padding-bottom:0;
     .o-map{height:em(360)}
@@ -715,7 +727,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{@include canvas; padding-bottom: 40%; @include txnTransform(0.4, ease); @include contain;
     #networks &{padding-bottom: 70%}
   }
-  span{display: block; height:auto; overflow: hidden;
+  span{display: block; height:5em; overflow: hidden;
     &.s--inline{height: auto;}
   }
   &.s--third{
@@ -1105,7 +1117,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   h1{padding-bottom: em(16)}
   .u-half{height: 100%; position: relative; overflow: hidden;}
   .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat;}
-  
+  .o-networks{padding-top:em(12)}
   &.s--bkg{
     &:after{content:""; @include canvas; top:0; left:0; z-index: -2; position: absolute;}
   }
@@ -1338,7 +1350,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(xs){width: 100%}
 }
 .c-menu-secondary__item{border-bottom:solid 1px #353233;
-  a{display: block; padding: em(26) 0 em(26) 1em; position: relative; overflow: hidden;
+  a{display: block; padding: em(20) 0 em(20) 1em; position: relative; overflow: hidden;
     &:hover{
       figure{@include translateY(0)}
       span{@include translateY(em(12))}
@@ -1346,7 +1358,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     @include device(xs){padding: em(20) em(12);}
   }
   span{position: relative; z-index: 2; display: block; @include txnTransform(0.3, ease)}
-  figure{@include canvas; position: absolute; background-color: red; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6; filter: grayscale(100%);}
+  figure{@include canvas; position: absolute; background-color: $redB; top: 0; left: 0; @include txnTransform(0.5, cubic-bezier(0.6,-0.01, 0.2, 0.99)); @include translateY(-100%); z-index: 0; @include cover; opacity: 0.6;}
   @include device(md){
     &.u-hide{display: block;}
   }
@@ -1379,14 +1391,16 @@ em{font-family: 'Georgia'; font-style: italic;}
 
 .c-preloader{position: fixed; top:0; left:0; @include canvas; z-index: 120; color: #8D5669; visibility: hidden; @include txnTransform(0.5, ease); overflow: hidden; color: #8d5769;
   .o-table{position: absolute; z-index: 2}
-  .o-line{position: absolute; top:4em; background-color: #8d5669; width: 0%; height: 4px; left: 7%; z-index: 2; @include resetPivot}
+  .o-line{position: absolute; top:4em; background-color: #8d5669; width: 85%; height: 4px; left: 7%; z-index: 2; @include resetPivot; @include scale2D(0,1)}
   &.is-appearing{visibility: visible;
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
     .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
     .c-preloader__title{@include animation(slideInLeft, 0.9, 0, $easeOutQuart, both)}
-    .o-line{@include animation(scaleInLeft, 0.5, 0.3, $easeOutQuart, both)}
+    .o-line{@include animation(scaleInLeft, 3, 0.5, linear, both)}
   }
-  &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both)}
+  &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both);
+    .o-line{@include scale2D(1,1)}
+  }
 }
 
 @keyframes globe{
@@ -1446,6 +1460,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-libary__vault{display: none}
 .c-404{background-color: grey; height: 60%; 
   figure{display: block; @include center; @include box(90px, 90px); @include cover; @include image('404.png'); margin-bottom:2em}
+}
+.c-partner__contacts{
+  p{padding-bottom: em(12)}
 }
 
 /*hooks*/

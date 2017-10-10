@@ -30,6 +30,22 @@
 					<ul class="o-article__meta">
 						<li><a href="#">/ Partner Since: <?php echo $partnerYear; ?></a></li>
 					</ul>
+
+					<ul class="o-networks t-light">
+						<?php 
+							$networks = acf_get_fields('255');
+							if ($networks){
+								foreach ($networks as $network) {
+									$networkName = $network['name'];
+									$networkField = get_field($networkName, get_the_ID());
+									if($networkField){
+									echo '<li><a target="_blank" href="'.$networkField.'"><i class="o-icon s--'.$networkName.'"></i></a></li>';
+									}
+								}
+							}
+						 ?>
+					</ul>
+
 					<span class="o-line"></span>
 				</section>
 			</div>
@@ -49,7 +65,7 @@
 		<?php } ?>
 	</div>
 </div>
-<div class="o-story s--single" style="padding-bottom: 3em">
+<div class="o-story s--single s--partner__section">
 	<div class="o-box">
 		<p><?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $partnerSummary); ?></p>
 		<span class="o-line"></span>
@@ -76,4 +92,38 @@
 		<?php endif ?>
 	</div>
 </div>
+<?php 
+	if (have_rows('contacts')){
+?>
+	<div class="o-story s--single s--partner__section">
+		<div class="o-box">
+			<h3>Contact Partner</h3>
+			<?php 
+				while(have_rows('contacts')): the_row();
+					$office = get_sub_field('office');
+					$telephone = get_sub_field('telephone');
+					$fax = get_sub_field('fax');
+					$email = get_sub_field('email');
+					$address = get_sub_field('address');
+			 ?>
+				<section class="c-partner__contacts">
+					<?php if ($address): ?>
+						<p><?php echo $address; ?></p>
+					<?php endif ?>
+					<?php if ($telephone): ?>
+						<p>Telephone: <?php echo $telephone; ?></p>
+					<?php endif ?>
+					<?php if ($fax): ?>
+						<p>Fax: <?php echo $fax; ?></p>
+					<?php endif ?>
+					<?php if ($email): ?>
+						<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+					<?php endif ?>
+					
+				</section>
+			
+			<?php endwhile; ?>				
+		</div>
+	</div>
+<?php } ?>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

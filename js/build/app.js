@@ -594,31 +594,31 @@ jQuery(document).ready(function($) {
 
     });
 
-    Barba.Dispatcher.on("newPageProgress", function(url) {
-        function getRandomInt(min, max) {
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          return Math.floor(Math.random() * (max - min)) + min;
-        }
+    // Barba.Dispatcher.on("newPageProgress", function(url) {
+    //     function getRandomInt(min, max) {
+    //       min = Math.ceil(min);
+    //       max = Math.floor(max);
+    //       return Math.floor(Math.random() * (max - min)) + min;
+    //     }
 
-       var req = new XMLHttpRequest();
-       var preloaderLine = $('.c-preloader .o-line');
-       var progress = 0;
+    //    var req = new XMLHttpRequest();
+    //    var preloaderLine = $('.c-preloader .o-line');
+    //    var progress = 0;
 
-       req.open('POST', url);
-       req.send();
+    //    req.open('POST', url);
+    //    req.send();
 
-       req.onprogress = function (e) {
-           progress = progress + 20;
+    //    req.onprogress = function (e) {
+    //        progress = progress + 20;
            
-           if(progress >= 100){
-               progress = 75;
-           }
-           preloaderLine.css({
-               width: progress+'%'
-           });
-       }
-    });
+    //        if(progress >= 100){
+    //            progress = 75;
+    //        }
+    //        preloaderLine.css({
+    //            width: progress+'%'
+    //        });
+    //    }
+    // });
 
     //boot system
 	pageLoad();
