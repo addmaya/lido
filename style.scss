@@ -1127,7 +1127,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .c-cover{height: em(768); position: relative; z-index:1;
   h1{padding-bottom: em(16)}
   .u-half{height: 100%; position: relative; overflow: hidden;}
-  .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat;}
+  .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat}
   .o-networks{padding-top:em(12)}
   &.s--bkg{
     &:after{content:""; @include canvas; top:0; left:0; z-index: -2; position: absolute;}
