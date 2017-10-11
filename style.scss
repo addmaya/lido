@@ -491,7 +491,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-crumb__circle{@include box(4px,4px); border:solid 1px; border-radius:50%; @include relative; top:6px}
 
 .o-author{@include clear; display: inline-block;
-  figure{@include box(56px, 56px); border-radius: 50%; @include bkg($blackA); float: left; @include cover;}
+  figure{@include box(56px, 56px); border-radius: 50%; float: left; @include cover;}
   section{float: left; padding-left: em(12); @include relative; top: 10px}
   strong{display: block; padding-bottom: em(6)}
   em{display: block; font-size: 75%}
@@ -877,7 +877,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-cap{color: #903; float: left; font-size: em(84); line-height: 60px; padding: em(1) em(2) em(3) 0;background: url('images/pattern-2.png') repeat; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size:10%; font-weight:bold}
 
 /*components*/
-.c-page__wrap{width:em(1400); min-height: 100%; margin: em(30) auto; position: relative; overflow:hidden;
+.c-page__wrap{width:em(1400); min-height: 100%; margin: em(30) auto; position: relative;
   &:after{
     content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
   }

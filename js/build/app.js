@@ -593,6 +593,8 @@ jQuery(document).ready(function($) {
             height: deviceHeight
         });
 
+        menu.find('.is-active').removeClass('is-active');
+
         preloaderIcon.removeClass();
 
         function setPreloaderIcon(c){
