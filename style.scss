@@ -563,6 +563,9 @@ em{font-family: 'Georgia'; font-style: italic;}
 }
 .o-image__cover{display: block; @include canvas; background-color:#161420; z-index:3; position: absolute; left:0; top:0}
 
+.o-doc__box{text-align: center; padding:1.5em 0 1em; background-color: #f2f2f2;
+  .o-doc{float: none; display: inline-block}
+}
 .o-doc{position: relative; margin:em(56) 0 em(144); display: block; margin: auto; padding:2em 0;
   span{font-size: em(18); padding-right:em(0); color: $redA; display: block}
   
@@ -1573,6 +1576,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .c-cta{font-size:0.8em}
   }
 }
+#story-cta{padding-top: 4em}
 #sadolinplascon{width: 100%; height: 200px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
 .barba-container{@include box(100%, 100%); position: relative}
 .size-full-wrap{width: 120%; position: relative; left: -10%;

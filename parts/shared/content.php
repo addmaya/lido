@@ -67,7 +67,7 @@
 				$quoteAuthorName = $quoteAuthor['name'];
 				$quoteAuthorTitle = $quoteAuthor['title'];
 				$quoteAuthorPhoto = $quoteAuthor['photo'];
-				
+
 				$quoteStaffID = get_sub_field('staff')[0];
 			?>
 			<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $quotePhoto; ?>">
@@ -203,24 +203,22 @@
 		<?php if(get_row_layout() == 'document'):
 			$docsTitle = get_sub_field('title');
 			$docsBrief = get_sub_field('description');
-			$docs = get_sub_field('documents');
+			
 		?>
-			<section class="o-section">
+			<section class="o-section o-doc__box">
 				<div class="o-box">
 					<div class="u-clear">
-						<?php foreach ($docs as $doc) {?>
-							<a href="<?php echo $doc['file']; ?>" target="_blank" class="o-doc u-third s--doc">
-								<div class="u-clear">
-									<div class="u-half">
+						<?php 
+							$docs = get_sub_field('documents');
+							$aosDelay = 0;
+							foreach ($docs as $doc) {?>
+								<a data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>" title="<?php echo $doc['label']; ?>" href="<?php echo $doc['file']; ?>" target="_blank" class="o-doc u-fourth no-barba">
+									<section>
 										<i class="o-icon"></i>
 										<span><?php echo $doc['label']; ?></span>
-									</div>
-									<div class="u-half">
-										<figure></figure>
-									</div>
-								</div>
-							</a>
-						<?php } ?>
+									</section>
+								</a>
+						<?php } $aosDelay = $aosDelay + 50; ?>
 					</div>
 				</div>
 			</section>
