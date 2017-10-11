@@ -584,6 +584,10 @@ em{font-family: 'Georgia'; font-style: italic;}
     section{padding-bottom: em(36);}
   }
 }
+.o-photo{margin-bottom: 2.5em;
+  figure{padding-bottom:56%; @include cover; margin-bottom: em(12)}
+  span{@extend em; font-size:0.75em; padding: 0 1.5em; display: block; line-height:1.5}
+}
 
 .o-networks{
   li{display: inline-block}

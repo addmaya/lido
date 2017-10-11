@@ -53,11 +53,17 @@
 
 	function rss_content( $content ) {
 	    global $post;
-	    $postSummary = get_field('summary', $post->ID);
-	    $postPhoto = get_field('photo', $post->ID);
+	    $storyID = $post->ID;
+	    $postSummary = get_field('summary', $storyID);
+	    $postPhoto = get_field('photo', $storyID);
+
+	    if (get_post_type($storyID) == 'album') {
+	    	$storyPhotos = get_field('photos', $storyID);
+	    	$postPhoto = $storyPhotos[0]['sizes']['large'];
+	    }
 
 	    if ($postPhoto) {	
-	    	$content = '<p><a href="'.get_permalink().'"><img src="' .$postPhoto.'" /></a>'. $postSummary . '</p>' . $content;
+	    	$content = '<p><a href="'.get_permalink($storyID).'"><img src="' .$postPhoto.'" /></a>'. $postSummary . '</p>' . $content;
 	    }
 	    return $content;
 	}
