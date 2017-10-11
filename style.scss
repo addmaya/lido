@@ -1124,7 +1124,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .u-fifth{width: auto}
   }
 }
-.c-cover{height: em(768); position: relative; z-index:1;
+.c-cover{height: em(768); position: relative; z-index:1; overflow: hidden; 
   h1{padding-bottom: em(16)}
   .u-half{height: 100%; position: relative; overflow: hidden;}
   .o-table{background-position: right top; background-size: 100%; background-repeat: no-repeat}
