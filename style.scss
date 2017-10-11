@@ -877,7 +877,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 .o-cap{color: #903; float: left; font-size: em(84); line-height: 60px; padding: em(1) em(2) em(3) 0;background: url('images/pattern-2.png') repeat; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size:10%; font-weight:bold}
 
 /*components*/
-.c-page__wrap{width:em(1400); min-height: 100%; margin: em(30) auto; position: relative; 
+.c-page__wrap{width:em(1400); min-height: 100%; margin: em(30) auto; position: relative; overflow:hidden;
   &:after{
     content: ""; position: absolute; top: 0; left: 0; @include canvas; background-color: #fff; z-index: -500;
   }
@@ -1407,7 +1407,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .c-preloader__bkg{@include animation(slideInLeft, 0.8, 0, $easeOutQuart, both)}
     .c-preloader__count{@include animation(fadeInLeft, 1, 0, $easeOutQuart, both)}
     .c-preloader__title{@include animation(slideInLeft, 0.9, 0, $easeOutQuart, both)}
-    .o-line{@include animation(scaleInLeft, 3, 0.5, linear, both)}
+    .o-line{@include animation(scaleInLeft, 2, 0.2, linear, both)}
   }
   &.is-exiting{visibility: visible; @include animation(slideOutRight, 0.5, 0, ease, both);
     .o-line{@include scale2D(1,1)}

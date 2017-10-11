@@ -211,7 +211,6 @@
 
 				<?php } else {?>
 					<div class="o-author">
-						<figure></figure>
 						<section>
 							<strong><?php echo $featuredAuthorName; ?></strong>
 							<em><?php echo $featuredAuthorTitle; ?></em>
