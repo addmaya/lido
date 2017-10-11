@@ -82,7 +82,7 @@
 <?php if ($programBackground): ?>
 	<section class="o-section s--cover" id="program-background">
 		<?php if (!($mappedPartners->have_posts())): ?>
-			<figure class="o-section__cover js-defer" data-image-url="<?php echo get_field('3d_illustration'); ?>" data-aos="fade-up" ></figure>
+			<figure class="o-section__cover js-defer" data-image-url="<?php echo get_field('3d_illustration'); ?>" data-aos="fade-up" style="background-size:cover"></figure>
 		<?php endif ?>
 		<div class="o-box">
 			<div class="u-clear">
