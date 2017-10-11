@@ -1319,7 +1319,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.c-hamburger{top:40%; right:20%; width: em(56); height: em(56); z-index: 10; position: fixed; border:solid 2px $redA; margin-bottom: em(9); overflow: hidden; border-radius: 50%;  visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
+.c-hamburger{top:40%; right:1.5em; width: em(56); height: em(56); z-index: 10; position: fixed; border:solid 2px $redA; margin-bottom: em(9); overflow: hidden; border-radius: 50%;  visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s;
   
   svg{@include box(em(48), em(48)); fill:none; stroke: $redA; stroke-width:1; position: relative; z-index: 1; @include txnTransform(0.3, ease); display: block; @include center; top: 2px;}
   line{stroke-dasharray: 15; @include prefix((transition: stroke-dashoffset 0.3s))}
@@ -1334,8 +1334,6 @@ em{font-family: 'Georgia'; font-style: italic;}
       &:last-child{stroke-dashoffset: 10;}
     }
   }
-
-  @include device(lg){right: 1.5em;}
 
   @include device(xs){top:0; right: 0; visibility: visible; opacity: 1; @include scale2D(0.65,0.65); border-width: 4px; border-color: $white;
     svg{stroke: $white}
