@@ -497,7 +497,10 @@ jQuery(document).ready(function($) {
         body.on('click', '.js-photo', function(e) {
             e.preventDefault();
             var me = $(this);
-            var parent = me.parent();
+            var parent = me.closest('.u-half');
+
+            console.log(parent);
+
             var albumPop = $('#albumPop');
             var albumPhotos = parent.find('.c-libary__vault').html();
             var albumShare = parent.find('.c-library__networks').html();
