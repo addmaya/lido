@@ -62,8 +62,12 @@
 			<?php
 				$quote = get_sub_field('quote');
 				$quotePhoto = get_sub_field('photo');
-				$quoteAuthorName = get_sub_field('author_name');
-				$quoteAuthorTitle = get_sub_field('author_title');
+
+				$quoteAuthor = get_sub_field('author');
+				$quoteAuthorName = $quoteAuthor['name'];
+				$quoteAuthorTitle = $quoteAuthor['title'];
+				$quoteAuthorPhoto = $quoteAuthor['photo'];
+				
 				$quoteStaffID = get_sub_field('staff')[0];
 			?>
 			<figure class="o-splash__figure js-bkg o-image" data-image-url="<?php echo $quotePhoto; ?>">
@@ -96,9 +100,10 @@
 
 						<?php } else {?>
 							<div class="o-author">
+								<figure class="js-bkg" data-image-url="<?php echo $quoteAuthorPhoto; ?>"></figure>
 								<section>
 									<strong><?php echo $quoteAuthorName; ?></strong>
-									<em><?php echo $quoteAuthorTitle; ?></em>
+									<em><?php echo $quoteAuthorTitle; ?>, SFEA</em>
 								</section>
 							</div>
 						<?php } ?>

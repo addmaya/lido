@@ -588,6 +588,9 @@ em{font-family: 'Georgia'; font-style: italic;}
   figure{padding-bottom:56%; @include cover; margin-bottom: em(12)}
   span{@extend em; font-size:0.75em; padding: 0 1.5em; display: block; line-height:1.5}
 }
+.o-tweet{@include image('twitter.svg'); background-repeat: no-repeat; background-position: right center; display: block; background-size: 24px; padding-right:24px; color: inherit !important;
+  &:hover{color: #76a8ea !important}
+}
 
 .o-networks{
   li{display: inline-block}
@@ -613,7 +616,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   }
 }
 
-.o-story__header{background-color: $redC; color: $white;position: absolute; top:0; z-index: -2; float: left; height: 80%; width: 50%;
+.o-story__header{background-color: $redC; color: $white;position: absolute; top:0; z-index: 0; float: left; height: 80%; width: 50%;
   .o-table__cell{vertical-align: bottom; padding-bottom: 2em}
   section{padding-left: 6em; padding-right:1.5em}
   &.s--partner{background-color: white}

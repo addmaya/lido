@@ -268,6 +268,19 @@ jQuery(document).ready(function($) {
             $(this).parent().addClass('float-wrap');
         });
 
+        $('.o-story blockquote p').each(function() {
+            var me = $(this);
+            var quoteContent = me.html();
+            var url = location.href;
+
+            var tweetContent = url+' '+quoteContent;
+
+
+            console.log(location.href);
+            me.html('<a target="_blank" href="https://twitter.com/home?status='+tweetContent.substring(0, 140)+'" class="o-tweet">'+quoteContent+'</a>')
+        });
+
+
 
     	//render dropped caps
     	if($('.o-story.s--single p').length){

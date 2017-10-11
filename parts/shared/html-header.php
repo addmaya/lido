@@ -34,6 +34,12 @@
 			?>"/>
 		<meta property="og:image" content="<?php
 			$seoImage = get_field('photo');
+			
+			if(get_post_type() == 'album'){
+				$storyPhotos = get_field('photos');
+				$seoImage = $storyPhotos[0]['url'];
+			}
+			
 			if($seoImage){
 				echo $seoImage;
 				$seoImageID = getImageID($seoImage);
