@@ -33,6 +33,7 @@
 								<h2></h2>
 								<em></em>
 								<span class="o-line"></span>
+								<div class="c-networks u-pt-m"></div>
 							</section>
 						</div>
 					</div>
@@ -170,13 +171,15 @@
 					$albumPhotos = get_field('photos');
 					$albumCover = $albumPhotos[0]['sizes']['large'];
 					$albumSlides = '';
+					$albumDate = get_field('date');
+					$albumLocation = get_field('location');
 
 					foreach ($albumPhotos as $albumPhoto) {
 						$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['sizes']['large'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
 					}
 			 ?>
 			<div class="u-half">
-				<?php echo renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo').'<div class="c-libary__vault">'.$albumSlides.'</div>'; ?>
+				<?php echo renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo').'<div class="c-libary__vault u-hide">'.$albumSlides.'</div><div class="c-library__networks u-hide">'.renderNetworks($albumTitle, $albumLink).'</div><div class="u-hide c-library__meta"><ul class="o-article__meta"><li>'.$albumDate.'</li><li>'.$albumLocation.'</li></ul></div>'; ?>
 			</div>
 			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
 		</div>

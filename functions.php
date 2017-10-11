@@ -29,6 +29,20 @@
 		return $articleClass;
 	}
 
+	function renderNetworks($albumTitle, $albumLink, $theme='t-light'){
+		$html = '';
+
+		$html .= '<ul class="o-networks '.$theme.'">';
+		$html .= '<li><a href="mailto:?&subject='.$albumTitle.'&body='.$albumLink.'"><i class="c-mail"></i></a></li>';
+		$html .= '<li><a href="https://www.facebook.com/sharer/sharer.php?u='.$albumLink.'"><i class="c-fb"></i></a></li>';
+		$html .= '<li><a href="https://twitter.com/home?status='.$albumLink.'"><i class="c-tw"></i></a></li>';
+		$html .= '<li><a href="https://plus.google.com/share?url='.$albumLink.'"><i class="c-gplus"></i></a></li>';
+		$html .= '<li><a href="whatsapp://send?text='.$albumLink.'"><i class="c-wa"></i></a></li>';
+		$html .= '</ul>';
+
+		return $html;
+	}
+
 	//add_theme_support('post-thumbnails');	
 	function get_custom_feeds($feed_query) {
 		if (isset($feed_query['feed']) && !isset($feed_query['post_type']))

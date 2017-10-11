@@ -251,7 +251,21 @@ jQuery(document).ready(function($) {
 
         //resize full images
         $('.o-story.s--single .size-full').each(function() {
-            $(this).parent().addClass('size-full-wrap');
+            var me = $(this);
+            if(!(me.hasClass('alignleft'))){
+                me.parent().addClass('size-full-wrap');
+            }
+            else {
+                me.parent().addClass('float-wrap');
+            }
+        });
+
+        $('.o-story.s--single .alignleft').each(function() {
+            $(this).parent().addClass('float-wrap');
+        });
+
+        $('.o-story.s--single .alignright').each(function() {
+            $(this).parent().addClass('float-wrap');
         });
 
 
@@ -413,6 +427,9 @@ jQuery(document).ready(function($) {
             $('#videoPop .o-player').html('');
             
             albumSwiper.removeAllSlides();
+
+            var albumPop = $('#albumPop');
+            albumPop.find('.o-article__meta').remove();
         }
 
         $('body').on('click', '.c-pop .o-button__close', function(e) {
@@ -467,8 +484,11 @@ jQuery(document).ready(function($) {
         body.on('click', '.js-photo', function(e) {
             e.preventDefault();
             var me = $(this);
+            var parent = me.parent();
             var albumPop = $('#albumPop');
-            var albumPhotos = me.next().html();
+            var albumPhotos = parent.find('.c-libary__vault').html();
+            var albumShare = parent.find('.c-library__networks').html();
+            var albumMeta = parent.find('.c-library__meta').html();
             var albumTitle = me.find('h2').html();
 
             if (albumPhotos) {
@@ -484,6 +504,8 @@ jQuery(document).ready(function($) {
                 }
                 
                 albumPop.find('h2').html(albumTitle);
+                albumPop.find('h2').after(albumMeta);
+                albumPop.find('.c-networks').html(albumShare);
                 albumSwiper.appendSlide(albumPhotos);
                 albumSwiper.update();
                 albumSwiper.updateContainerSize();

@@ -18,7 +18,8 @@
 		?>
 			<div class="o-story s--single">
 				<div class="o-box">
-					<?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $textBlockContent); ?>
+					<?php echo $textBlockContent; ?>
+					<!-- <?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $textBlockContent); ?> -->
 				</div>
 			</div>		
 		<?php endif; ?>

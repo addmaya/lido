@@ -70,7 +70,6 @@
 				<?php
 					$postTitle = get_the_title();
 					$postPermalink = get_permalink();
-					$postID = get_the_id();
 				?>
 				<ul class="o-networks">
 					<li><a href="mailto:?&subject=<?php echo $postTitle;?>&body=<?php echo $postPermalink; ?>"><i class="c-mail"></i></a></li>

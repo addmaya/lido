@@ -632,7 +632,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   ol,ul{font-size: em(14); line-height: 1.8; width: 70%; padding: em(20) em(12)}
   ul{list-style:circle inside;}
   img{max-width:100%; height: auto; margin: em(24) 0}
-  blockquote{font-weight:bold; font-size:1.25em; width: 75%; margin: 0 auto; padding:em(24) 0; margin-bottom:em(24)}
+  blockquote{font-weight:bold; font-size:1.25em; width: 75%; padding:em(30) 0; margin:em(24) auto}
   ol{list-style: decimal inside}
   &.s--single{padding:4em 0 6em; font-size: em(20); font-weight: 300;
     p{line-height:1.8}
@@ -679,6 +679,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .u-threefourth{background-color:#E5E5E5}
   .u-fourth{background-color:#D8D8D8;}
   .o-line{display: block; margin-top: 2em}
+  .o-article__meta{position: relative; top: -2em}
   em{font-size: em(14); line-height: 1.5}
   h2{padding-bottom: em(24); color: $white; word-wrap: break-word; text-align: left}
 
@@ -1441,7 +1442,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     .o-button__close{right:0; top: -56px}
   }
 }
-.c-pop__box{background-color: #6d6d6d; width: 960px; height: 540px; margin: 0 auto; position: relative; text-align: center;
+.c-pop__box{background-color: #6d6d6d; width: 960px; height: 540px; margin: 0 auto; position: relative;
   @include device(sm){width:90%; height: auto}
 }
 .c-pop__close{width: 2em;height: 2em; background-position:center; background-repeat: no-repeat;; background-size: contain; @include image('btn-close.svg'); display: inline-block; position: absolute; top: -36px; right: 0; transition:opacity 0.3s ease;
@@ -1457,7 +1458,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   .o-splash{margin: em(12)}
   .js-video{filter: grayscale(100%)}
 }
-.c-libary__vault{display: none}
+.c-networks{font-size:0.8em; text-align: left}
 .c-404{background-color: grey; height: 60%; 
   figure{display: block; @include center; @include box(90px, 90px); @include cover; @include image('404.png'); margin-bottom:2em}
 }
@@ -1572,5 +1573,9 @@ em{font-family: 'Georgia'; font-style: italic;}
     width: auto; left: auto;
   }
 }
+.alignleft{float: left; margin: 0 1.5em 1.5em 0 !important; max-width:50% !important;}
+.alignright{float: right; margin: 0 0 1.5em 1.5em !important; max-width:50% !important;}
+p.float-wrap{padding-bottom:0}
+
 .is-invisible{opacity: 0; visibility: hidden;}
 
