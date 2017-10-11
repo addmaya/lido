@@ -543,6 +543,14 @@ jQuery(document).ready(function($) {
     		  	prevButton: '.swiper-button-prev'
     		  });
     	}
+
+        //fetch preloaders
+        $('.c-page__footer').bind('inview', function (event, isInView) {
+          if (isInView) {
+            $('.js-preloaders').removeClass('u-hide');
+            loadBkg($('.js-preloaders .js-bkg'))
+          }
+        });
     }
 
 	//page transition
@@ -586,6 +594,8 @@ jQuery(document).ready(function($) {
         var origin = location.origin;
         var href = HTMLElement.href;
         var destination = href.substring(origin.length);
+
+        console.log(destination);
         var preloaderIcon = $('.c-preloader__title figure');
 
         var deviceHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
@@ -601,14 +611,16 @@ jQuery(document).ready(function($) {
             preloaderIcon.addClass(c);
         }
 
+        console.log(destination.includes('change-stories'));
+
         switch (true){
-            case destination.includes('stories'):
-                setPreloaderIcon('s--globe');
-                break;
             case destination.includes('partner'):
                 setPreloaderIcon('s--handshake');
                 break;
-            case destination.includes('change'):
+            case destination.includes('stories'):
+                setPreloaderIcon('s--book');
+                break;
+            case destination.includes('story'):
                 setPreloaderIcon('s--book');
                 break;
             case destination.includes('newsroom'):

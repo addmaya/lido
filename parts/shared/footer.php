@@ -189,6 +189,14 @@
 			</div>
 			
 		</footer>
+		<div class="js-preloaders u-hide">
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/book.png"></span>
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/handshake.png"></span>
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/media.png"></span>
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/telephone.png"></span>
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/globe-bw.png"></span>
+			<span class="js-bkg" data-image-url="<?php echo get_stylesheet_directory_uri(); ?>/images/sequences/globe-color.png"></span>
+		</div>
 		<!-- <div id="sadolinplascon"></div> -->
 	</div>
 </div>
