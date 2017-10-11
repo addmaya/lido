@@ -337,7 +337,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     &:before{@include prefix((transform: rotate(45deg) translate(-58%, 58%)))}
   }
 }
-.o-rhombus{@include rhombus; background-color: $blackC; display: block; @include txnTransform(0.5, ease);
+.o-rhombus{@include rhombus; background-color: $redC; display: block; @include txnTransform(0.5, ease);
   &.s--xlarge{@include box(85%, auto)}
   &.s--large{@include box(em(360), em(360))}
   &.s--medium{@include box(em(240), em(240))}
@@ -353,7 +353,7 @@ em{font-family: 'Georgia'; font-style: italic;}
     }
   }
 }
-.o-rhombus__image{padding-bottom: 100%;background-position: center;background-size: cover; background-repeat: no-repeat; @include txnTransform(0.5, ease); position: relative;
+.o-rhombus__image{padding-bottom: 100%;background-position: center;background-size: cover; background-repeat: no-repeat; @include txnTransform(0.5, ease); position: relative; overflow:hidden;
   &:before{content:""; @include canvas; top: 0; left:0; position: absolute; z-index:1; background-color:$redC; @include prefix((transform: rotate(45deg) translate(-85%, 85%))); @include txnTransform(0.3, ease)}
   &:after{content: ""; position: absolute; left: 0; top: 50%; z-index:2; width:30%; height: 2px; background-color: $white; @include resetPivot; @include txnTransform(0.5, $easeOutExpo); @include scale2D(0,1)}
 }
