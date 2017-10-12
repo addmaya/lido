@@ -63,7 +63,7 @@
 	    }
 
 	    if ($postPhoto) {	
-	    	$content = '<p><a href="'.get_permalink($storyID).'"><img src="' .$postPhoto.'" /></a>'. $postSummary . '</p>';
+	    	$content = '<p><a href="'.get_permalink($storyID).'"><img src="' .$postPhoto.'" /><br/><br/></a>'. $postSummary . '</p>';
 	    }
 	    return $content;
 	}
