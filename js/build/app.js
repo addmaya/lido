@@ -250,6 +250,12 @@ jQuery(document).ready(function($) {
     	});
 
         //resize full images
+        $('.o-story.s--single p').each(function() {
+            var $this = $(this);
+            if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+                $this.remove();
+        });
+
         $('.o-story.s--single .size-full').each(function() {
             var me = $(this);
             if(!(me.hasClass('alignleft'))){
