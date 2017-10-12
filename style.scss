@@ -537,7 +537,7 @@ em{font-family: 'Georgia'; font-style: italic;}
       figure{margin: 0 auto; float: none}
       section{float: none; position: static; padding: em(12) 0 em(24)}
     }
-    blockquote{width: auto; margin-bottom: 0;
+    blockquote{width: auto; margin-bottom: 0; padding:0;
       p{font-size: 1em}
     }
   }
@@ -592,7 +592,7 @@ em{font-family: 'Georgia'; font-style: italic;}
   span{@extend em; font-size:0.75em; padding: 0 1.5em; display: block; line-height:1.5}
 }
 .o-tweet{@include image('twitter.svg'); background-repeat: no-repeat; background-position: right center; display: block; background-size: 24px; padding-right:24px; color: inherit !important;
-  &:hover{color: #76a8ea !important}
+  &:hover{color: $redB !important}
 }
 
 .o-networks{
@@ -1577,7 +1577,7 @@ em{font-family: 'Georgia'; font-style: italic;}
 #story-cta{padding-top: 4em}
 #sadolinplascon{width: 100%; height: 200px; position: absolute; bottom:0; z-index: -10; background-color: #9e0059}
 .barba-container{@include box(100%, 100%); position: relative}
-.size-full-wrap{width: 120%; position: relative; left: -10%;
+.size-full-wrap{width: 120%; position: relative; left: -10%; display: block;
   @include device(xs){
     width: auto; left: auto;
   }
