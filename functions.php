@@ -261,7 +261,7 @@
 		return substr(get_field('excerpt'), 0, $charlength).'...';
 	}
 
-	function renderMedia($aosDelay, $albumTitle, $albumCover, $type, $videoID = ''){
+	function renderMedia($aosDelay, $albumTitle, $albumCover, $type, $videoID = '', $parentID=0){
 		if($type == 'js-video'){
 			$icon = 's--play';
 			$label = 'Video';
@@ -273,7 +273,7 @@
 
 		$html = '';
 
-		$html .= '<a class="o-splash s--video '.$type.'" href="#" data-video-id="'.$videoID.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'">';
+		$html .= '<a class="o-splash s--video '.$type.'" href="#" data-video-id="'.$videoID.'" data-aos="fade-up" data-aos-delay="'.$aosDelay.'" data-parent="'.$parentID.'">';
 		$html .= '<figure class="o-splash__figure js-defer" data-image-url="'.$albumCover.'">';
 		$html .= '<div class="o-splash__tint">';
 		$html .= '<div class="o-table">';

@@ -494,17 +494,18 @@ jQuery(document).ready(function($) {
             }
         });
 
-        body.on('click', '.js-photo', function(e) {
+        $('.js-photo').click(function(e){
             e.preventDefault();
             var me = $(this);
-            var parent = me.closest('.u-half');
+            var albumID = 'album-'+me.data('parent');
+            var albumWrap = $('#'+albumID);
 
-            console.log(parent);
+            console.log(albumWrap);
 
             var albumPop = $('#albumPop');
-            var albumPhotos = parent.find('.c-libary__vault').html();
-            var albumShare = parent.find('.c-library__networks').html();
-            var albumMeta = parent.find('.c-library__meta').html();
+            var albumPhotos = albumWrap.find('.c-libary__vault').html();
+            var albumShare = albumWrap.find('.c-library__networks').html();
+            var albumMeta = albumWrap.find('.c-library__meta').html();
             var albumTitle = me.find('h2').html();
 
             if (albumPhotos) {

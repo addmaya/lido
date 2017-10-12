@@ -178,8 +178,8 @@
 						$albumSlides .= '<div class="swiper-slide"><figure style="background-image:url('.$albumPhoto['sizes']['large'].')"></figure><span>'.$albumPhoto['caption'].'</span></div>';
 					}
 			 ?>
-			<div class="u-half">
-				<?php echo renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo').'<div class="c-libary__vault u-hide">'.$albumSlides.'</div><div class="c-library__networks u-hide">'.renderNetworks($albumTitle, $albumLink).'</div><div class="u-hide c-library__meta"><ul class="o-article__meta"><li>'.$albumDate.'</li><li>'.$albumLocation.'</li></ul></div>'; ?>
+			<div class="u-half" id="album-<?php echo get_the_ID(); ?>">
+				<?php echo renderMedia($aosDelay, $albumTitle, $albumCover, 'js-photo',' ', get_the_ID()).'<div class="c-libary__vault u-hide">'.$albumSlides.'</div><div class="c-library__networks u-hide">'.renderNetworks($albumTitle, $albumLink).'</div><div class="u-hide c-library__meta"><ul class="o-article__meta"><li>'.$albumDate.'</li><li>'.$albumLocation.'</li></ul></div>'; ?>
 			</div>
 			<?php $aosDelay = $aosDelay + 50; endwhile; wp_reset_postdata(); ?>
 		</div>
