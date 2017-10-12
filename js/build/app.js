@@ -293,9 +293,13 @@ jQuery(document).ready(function($) {
     		var firstChild = $('.o-story.s--single p').first();
     		var firstChildHTML = firstChild.html();
     		var firstChar = firstChildHTML.charAt(0);
-    		var cap = '<span class="o-cap">'+firstChar+'</span>';
+            var cap = '';
 
-    		firstChild.html(cap+ firstChildHTML.substring(1));
+            if (firstChar != '<') {
+                cap = '<span class="o-cap">'+firstChar+'</span>';
+                firstChild.html(cap+ firstChildHTML.substring(1));
+            }
+    		
     	}
 
     	//render image sliders
