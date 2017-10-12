@@ -4,9 +4,8 @@
 	?>
 	<div class="o-story s--single">
 		<div class="o-box">
-			<?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', get_the_content()); ?>
-<!-- 			<?php echo apply_filters('the_content', get_the_content()); ?>
- -->		</div>
+			<?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', the_content()); ?>
+		</div>
 	</div>
 	<?php } ?>
 <?php endwhile; ?>
@@ -19,7 +18,6 @@
 		?>
 			<div class="o-story s--single">
 				<div class="o-box">
-					<!-- <?php echo $textBlockContent; ?> -->
 					<?php echo preg_replace('/(<[^>]+) style=".*?"/i', '$1', $textBlockContent); ?>
 				</div>
 			</div>		
