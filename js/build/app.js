@@ -206,12 +206,6 @@ jQuery(document).ready(function($) {
     	//start AOS
     	AOS.init({duration: aosDuration});
 
-    	//primary menu
-    	menu.find('a').click(function() {
-    		menu.find('.is-active').removeClass('is-active');
-    		$(this).addClass('is-active');
-    	});
-
     	//secondary menu
     	menuSecondary.find('a').click(function() {
     		menuSecondary.removeClass('is-visible');
@@ -281,8 +275,6 @@ jQuery(document).ready(function($) {
 
             var tweetContent = url+' '+quoteContent;
 
-
-            console.log(location.href);
             me.html('<a target="_blank" href="https://twitter.com/home?status='+tweetContent.substring(0, 140)+'" class="o-tweet">'+quoteContent+'</a>')
         });
 
@@ -510,8 +502,6 @@ jQuery(document).ready(function($) {
             var albumID = 'album-'+me.data('parent');
             var albumWrap = $('#'+albumID);
 
-            console.log(albumWrap);
-
             var albumPop = $('#albumPop');
             var albumPhotos = albumWrap.find('.c-libary__vault').html();
             var albumShare = albumWrap.find('.c-library__networks').html();
@@ -609,7 +599,6 @@ jQuery(document).ready(function($) {
         var href = HTMLElement.href;
         var destination = href.substring(origin.length);
 
-        console.log(destination);
         var preloaderIcon = $('.c-preloader__title figure');
 
         var deviceHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
@@ -618,14 +607,34 @@ jQuery(document).ready(function($) {
         });
 
         menu.find('.is-active').removeClass('is-active');
-
         preloaderIcon.removeClass();
 
         function setPreloaderIcon(c){
             preloaderIcon.addClass(c);
         }
 
-        console.log(destination.includes('change-stories'));
+        switch (true){
+            case destination.includes('about'):
+                $('#menu-about').addClass('is-active');
+                break;
+            case destination.includes('program'):
+                $('#menu-programs').addClass('is-active');
+                break;
+            case destination.includes('change-stories'):
+                $('#menu-stories').addClass('is-active');
+                break;
+            case destination.includes('story'):
+                $('#menu-stories').addClass('is-active');
+                break;
+            case destination.includes('newsroom'):
+                $('#menu-news').addClass('is-active');
+                break;
+            case destination.includes('partner'):
+                $('#menu-partner').addClass('is-active');
+                break;
+            default: 
+                 break;
+        }
 
         switch (true){
             case destination.includes('partner'):

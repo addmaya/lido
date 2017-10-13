@@ -97,7 +97,6 @@
 ?>
 	<div class="o-story s--single s--partner__section">
 		<div class="o-box">
-			<h3>Contact Partner</h3>
 			<?php 
 				while(have_rows('contacts')): the_row();
 					$office = get_sub_field('office');
@@ -108,16 +107,16 @@
 			 ?>
 				<section class="c-partner__contacts">
 					<?php if ($address): ?>
-						<p><?php echo $address; ?></p>
+						<p><strong>Address</strong><br/><?php echo $address; ?></p>
 					<?php endif ?>
 					<?php if ($telephone): ?>
-						<p>Telephone: <?php echo $telephone; ?></p>
+						<p><strong>Telephone:</strong> <?php echo $telephone; ?></p>
 					<?php endif ?>
 					<?php if ($fax): ?>
-						<p>Fax: <?php echo $fax; ?></p>
+						<p><strong>Fax:</strong> <?php echo $fax; ?></p>
 					<?php endif ?>
 					<?php if ($email): ?>
-						<p>Email <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
+						<p><strong>Email:</strong> <a href="mailto:<?php echo $email?>"><?php echo $email?></a></p>
 					<?php endif ?>
 					
 				</section>

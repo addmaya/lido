@@ -1,14 +1,4 @@
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
-<div class="c-pop" id="videoPop">
-	<div class="o-table" >
-		<div class="o-table__cell">
-			<div class="c-pop__box">
-				<a href="#" class="o-button__close"></a>
-				<div class="o-player"></div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="c-pop" id="albumPop">
 	<div class="o-table" >
 		<div class="o-table__cell">

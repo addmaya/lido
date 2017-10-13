@@ -33,7 +33,7 @@
 								$sliderImages = get_sub_field('images');
 								foreach ($sliderImages as $slideImage) { ?>
 									<div class="swiper-slide">
-										<figure style="background-image:url('<?php echo $slideImage['url']; ?>')"></figure>
+										<figure style="background-image:url('<?php echo $slideImage['sizes']['large']; ?>')"></figure>
 										<span><?php echo $slideImage['caption']; ?></span>
 									</div>
 							<?php } ?>
@@ -164,37 +164,9 @@
 				$videoThumb = $videoThumbHigh;
 			}
 		?>
-			<section class="o-section s--med" data-aos="fade-up">
+			<section class="o-section s--med">
 				<div class="o-box">
-					<section class="o-splash s--video">
-						<figure class="o-splash__figure js-bkg" data-image-url="<?php echo $videoThumb; ?>">
-							<div class="o-splash__player">
-								<a class="o-button__close o-player__close" href="#"></a>
-								<div class="o-player">
-										
-								</div>
-							</div>
-							<div class="o-splash__tint">
-								<div class="o-table">
-									<div class="o-table__cell">
-										<a class="o-icon s--play" href="#" data-video-id="<?php echo $videoID; ?>"></a>
-									</div>
-								</div>
-							</div>
-							<section class="o-splash__content">
-								<div class="o-box">
-									<span class="o-line"></span>
-									<h2>Video: <?php echo $videoTitle; ?></h2>
-									<?php if ($videoSummary): ?>
-										<p>
-											<em><?php echo $videoSummary; ?></em>
-										</p>
-									<?php endif ?>
-									
-								</div>
-							</section>
-						</figure>
-					</section>
+					<?php echo renderMedia($aosDelay, $videoTitle, $videoThumb, 'js-video', $videoID); ?>
 				</div>
 			</section>
 		<?php endif; ?>

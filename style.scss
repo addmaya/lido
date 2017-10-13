@@ -498,8 +498,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(xs){padding: em(30) 0 0;}
 }
 
-.o-splash{@include relative; color: $white; padding-bottom: 54.25%;
-  &.s--video{
+.o-splash{@include relative; color: $white; padding-bottom: 54.25%; display: block; 
+  &.s--video{filter: grayscale(100%); 
     .o-box{width: 90%}
     .o-splash__content{text-align: left}
     h2{margin: em(18) 0;}
@@ -1461,10 +1461,8 @@ em{font-family: 'Georgia'; font-style: italic;}
   @include device(xs){width: 100%}
 }
 .c-library{
-  a{display: block}
   .u-half:first-child{width:100%}
   .o-splash{margin: em(12)}
-  .js-video{filter: grayscale(100%)}
 }
 .c-networks{font-size:0.8em; text-align: left}
 .c-404{background-color: grey; height: 60%; 

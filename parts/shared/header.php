@@ -1,3 +1,13 @@
+<div class="c-pop" id="videoPop">
+	<div class="o-table" >
+		<div class="o-table__cell">
+			<div class="c-pop__box">
+				<a href="#" class="o-button__close"></a>
+				<div class="o-player"></div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="c-splash__preloader">
 	<div class="o-table">
 		<div class="o-table__cell">
@@ -23,22 +33,22 @@
 			<nav class="c-menu-primary">
 				<ul>
 					<li>
-						<a href="<?php echo home_url(); ?>/about">About</a>
+						<a id="menu-about" class="<?php if(is_page('about')){echo 'is-active';} ?>" href="<?php echo home_url(); ?>/about">About</a>
 					</li>
 					<li>
-						<a href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
+						<a id="menu-program" class="<?php if(is_page('programs') || is_singular('program')){echo 'is-active';} ?>" href="<?php echo home_url(); ?>/programs">Programs <span><?php echo wp_count_posts('program')->publish; ?></span></a>
 					</li>
 					<li>
-						<a href="<?php echo home_url(); ?>/change-stories">Change Stories <span><?php echo wp_count_posts('story')->publish; ?></span></a>
+						<a id="menu-stories" class="<?php if(is_page('change-stories') || is_singular('story')){echo 'is-active';} ?>" href="<?php echo home_url(); ?>/change-stories">Change Stories <span><?php echo wp_count_posts('story')->publish; ?></span></a>
 					</li>
 					<li>
-						<a href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
+						<a id="menu-partner" class="<?php if(is_page('partners') || is_singular('partner')){echo 'is-active';} ?>" href="<?php echo home_url(); ?>/partners">Partners <span><?php echo wp_count_posts('partner')->publish; ?></span></a>
 					</li>
 					<!-- <li>
 						<a href="<?php echo home_url(); ?>/contact">Contact</a>
 					</li> -->
 					<li>
-						<a href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
+						<a id="menu-news" class="<?php if(is_page('newsroom')){echo 'is-active';} ?>" href="<?php echo home_url(); ?>/newsroom">Newsroom</a>
 					</li>
 				</ul>
 			</nav>

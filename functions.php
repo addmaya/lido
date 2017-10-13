@@ -221,10 +221,6 @@
 	}
 	add_action( 'admin_menu', 'remove_menus' );
 
-	function admin_default_page() {
-	  return 'wp-admin/edit.php?post_type=story';
-	}
-
 	function renderButton($link, $title, $style = 'anchor', $class=''){
 		$svg = '<svg class="o-circle" viewBox="0 0 24 24"><circle class="o-circle__inner" cx="12.1" cy="12.1" r="11.1"/><circle class="o-circle__outer" cx="12.1" cy="12.1" r="11.1"/><g><line x1="5.1" y1="11.8" x2="17.6" y2="11.8"/><polyline points="14.8,8.4 18.2,11.8 14.8,15.2 "/></g></svg>';
 		if($style != 'div'){
@@ -437,5 +433,9 @@
 	add_action('acf/init', 'my_acf_init');
 
 	//remove_filter('the_content', 'wpautop');
-	//add_filter('login_redirect', 'admin_default_page');
+	
+	function admin_default_page() {
+	  return 'wp-admin/edit.php?post_type=story';
+	}
+	add_filter('login_redirect', 'admin_default_page');
 ?>

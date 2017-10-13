@@ -171,8 +171,7 @@
 				<h1><?php echo $sectionAreasTitle; ?></h1>
 				<p><?php echo $sectionAreasSummary; ?></p>
 				<div class="u-pt-l">
-					<?php echo renderCircularButton('#', 'Funding Partners', get_field('photo',10)); ?>
-					<?php echo renderCircularButton('#', 'Implementing Partners', get_field('photo',41)); ?>
+					<?php echo renderCircularButton(home_url().'/partners', 'See our Partners', get_field('photo',10)); ?>
 				</div>
 			</section>
 		</div>
