@@ -1,5 +1,13 @@
 <?php
 
+	add_filter( 'tiny_mce_before_init', 'my_format_TinyMCE' );
+
+	function my_format_TinyMCE( $in ) {
+		//$in['paste_remove_styles'] = true;
+		$in['paste_as_text'] = true;
+		return $in;
+	}
+
 	function getImageID($image_url) {
 	    global $wpdb;
 	    $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url )); 

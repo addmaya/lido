@@ -304,7 +304,7 @@ jQuery(document).ready(function($) {
     	    $(".slide-"+index).find(".s--next").addClass("btn-next-" + index);
     	    swiperInstances[index] = new Swiper(".instance-" + index, {
     	        loop: true,
-    	        speed: 800,
+    	        speed: albumSwiperSpeed,
     	        autoplayDisableOnInteraction:false,
     	        pagination: '.swiper-pagination',
     	        paginationClickable: true,
